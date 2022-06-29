@@ -1,12 +1,13 @@
 require('dotenv').config();
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+require('dotenv').config();
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 module.exports = {
-    mode: 'development',
+    mode: process.env.NODE_ENV,
     entry: {
-        bundle: path.resolve(__dirname, 'index.js')
+        bundle: path.resolve(__dirname, 'client/index.js')
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -21,19 +22,15 @@ module.exports = {
     devtool: 'source-map',
     devServer: {
         static: {
-            directory: path.resolve(__dirname, 'dist')
+          publicPath: '/',
+          directory: path.join(__dirname, 'dist'),
         },
-        port: 3000,
-        open: true,
-        hot: true,
-        compress: true,
         historyApiFallback: true,
+        hot: true,
         proxy: {
-            '/': {
-                target: 'http://localhost:5000/', //To do, where to setup server?
-                secure: false,
-            },
-        },
+          '*': 'http://localhost:3000',
+          secure: false,
+        }
     },
     module: {
         rules: [
@@ -42,12 +39,12 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.js$/,
+                test: /\.jsx$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env', '@babel/preset-react']
                     }
                 }
             },
@@ -60,9 +57,7 @@ module.exports = {
     plugins: [
         new HtmlWebpackPlugin({
             title: 'Scratch',
-            filename: 'index.html',
-            template: 'template.html'
+            template: 'client/index.html'
         }),
-        // new BundleAnalyzerPlugin(),
     ],
 }
