@@ -8,6 +8,7 @@ import {
   } from "react-router-dom";
 import './stylesheets/styles.css'
 import Login from "./components/login.jsx"
+import Signup from "./components/signup.jsx"
 
 // function appTheme () {
 //     const pageStyle = {
@@ -18,7 +19,7 @@ import Login from "./components/login.jsx"
 const App = () => {
     return (
         <div id="header">
-            <Login />
+            <Signup />
         </div>
     );
 }
