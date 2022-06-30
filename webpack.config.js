@@ -25,6 +25,7 @@ module.exports = {
           publicPath: '/',
           directory: path.join(__dirname, 'dist'),
         },
+        port: 8080,
         historyApiFallback: true,
         hot: true,
         proxy: {
@@ -39,7 +40,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader', 'sass-loader'],
             },
             {
-                test: /\.jsx$/,
+                test: /\.js$|jsx/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
