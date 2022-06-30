@@ -6,11 +6,19 @@ import {
     Link,
     Navigate
   } from "react-router-dom";
+import './stylesheets/styles.css'
+import Login from "./components/login"
 
-  const App = () => {
+function appTheme () {
+    const pageStyle = {
+        color: 'white' 
+    }
+}
+
+const App = () => {
     return (
         <div id="header">
-            <h1>Our Scratch</h1>
+            <Login />
         </div>
     );
 }
