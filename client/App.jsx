@@ -19,7 +19,7 @@ import Signup from "./components/signup.jsx"
 const App = () => {
     return (
         <div id="header">
-            <Signup />
+            <Login />
         </div>
     );
 }
