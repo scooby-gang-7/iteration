@@ -7,13 +7,14 @@ import {
     Navigate
   } from "react-router-dom";
 import './stylesheets/styles.css'
-import Login from "./components/login"
+import Login from "./components/login.jsx"
+import Signup from "./components/signup.jsx"
 
-function appTheme () {
-    const pageStyle = {
-        color: 'white' 
-    }
-}
+// function appTheme () {
+//     const pageStyle = {
+//         color: 'white' 
+//     }
+// }
 
 const App = () => {
     return (
