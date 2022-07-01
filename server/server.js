@@ -30,9 +30,9 @@ app.use('/assets', express.static('./client/assets'));
 
 
 //get request to the app page, serve the index.html
-app.get('/', (req, res) => {
+app.get('/map', (req, res) => {
     //condition on ENV, if production, serve build/index.html
-    res.sendFile(path.resolve(__dirname, '/client/index.html'));
+    res.sendFile(path.resolve(__dirname, '../client/script.js'));
 });
 
 //create global error handler
