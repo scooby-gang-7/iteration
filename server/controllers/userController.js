@@ -30,7 +30,7 @@ userController.createUser = (req, res, next) => {
         // password = hash;
         // console.log(password);
         const queryText = `INSERT INTO users (email, name_first, name_last, password)
-         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}') RETURNING *;`;
+         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}');`;
         
         db
         .query(queryText)
@@ -44,6 +44,37 @@ userController.createUser = (req, res, next) => {
         })
     })
 }
+
+userController.verifyUser = (req, res, next) => {
+    const { email, password } = req.body;
+    const queryText = `SELECT * FROM users
+         WHERE email='${email}';`;
+        
+    db
+        .query(queryText)
+        .then(data => {
+            console.log(data);
+            if (data.rows.length ==0) {
+                res.locals.data = {message: 'user does not exit'}; //to do throw error
+                return next();
+            }
+            else {
+                bcrypt.compare(password, data.rows[0].password)
+                .then(result => {
+                    if(!result) {
+                        res.locals.data = {message: 'wrong passord'}; //todo throw error
+                        return next();
+                    } else {
+                        res.locals.data = data.rows[0];
+                        return next();
+                    }
+                })
+            }
+        })
+        .catch(err => {
+            if (err) throw err;
+        })
+};
 
 
 module.exports = userController;

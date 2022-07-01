@@ -46,6 +46,11 @@ app.post('/user', userController.createUser, sessionController.startSession, (re
   res.status(200).send(res.locals.data);
 })
 
+//testing for verifyUser
+app.post('/userlogin', userController.verifyUser, (req, res) => {
+  res.status(200).send(res.locals.data);
+})
+
 //create global error handler
 app.use((err, req, res, next) => {
     const defaultErr = {
