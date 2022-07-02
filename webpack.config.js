@@ -15,11 +15,16 @@ module.exports = {
         clean: true,
         assetModuleFilename: '[name][ext]'
     },
+    performance: {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+    },
     resolve: {
         // Enable importing JS / JSX files without specifying their extension
         extensions: ['.js', '.jsx'],
       },
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     devServer: {
         static: {
           publicPath: '/',

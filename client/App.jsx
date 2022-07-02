@@ -9,6 +9,7 @@ import {
 import './stylesheets/styles.css'
 import Login from "./components/login.jsx"
 import Signup from "./components/signup.jsx"
+import Map from "./components/map.js"
 
 // function appTheme () {
 //     const pageStyle = {
@@ -19,7 +20,7 @@ import Signup from "./components/signup.jsx"
 const App = () => {
     return (
         <div id="header">
-            <Login />
+            <Map />
         </div>
     );
 }
