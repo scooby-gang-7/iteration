@@ -4,7 +4,6 @@ import {
     Routes,
     Route,
     Link,
-    Switch,
     Navigate
   } from "react-router-dom";
 import './stylesheets/styles.css'
@@ -14,6 +13,7 @@ import Map from "./components/map.js"
 import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
+import AddTrip from "./components/AddTrip.jsx"
 
 // import {
 //     Login,
@@ -22,19 +22,22 @@ import MyTrips from "./components/MyTrips.jsx";
 // } from './components.jsx';
 
 const App = () => {
+  
+  const [userInfo, setUserInfo] = useState("");
+  console.log('User Info --> ', userInfo);
+  
     return (
-    // <Router>
-        <div className="App">
+      <div className="App">
         <Nav />
-          <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/mytrips" element={<MyTrips />} />
+        <Routes>
+            <Route path="/" element={<Login setUserInfo={setUserInfo}/>} />
+            <Route path="/about" element={<About/>} />
+            <Route path="/signup" element={<Signup/>} />
+            <Route path="/mytrips" element={<MyTrips userinfo={userInfo}/>} />
+            <Route path="/addtrip" element={<AddTrip userinfo={userInfo}/>} />
             <Route path="/map" element={<Map />} />
-          </Routes>
-        </div>
-/* </Router> */
+        </Routes>
+      </div>
     );
 }
 

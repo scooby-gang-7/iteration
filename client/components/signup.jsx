@@ -20,10 +20,6 @@ function Signup() {
                     <input type="text" placeholder='email address' name='email' />
                 </div>
                 <div>
-                    <label>Username:  </label>
-                    <input type="text" placeholder='username' name='username'/>
-                </div>
-                <div>
                     <label>Password:  </label>
                     <input type="password" placeholder='password' name='password'/>
                 </div>

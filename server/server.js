@@ -53,12 +53,12 @@ app.post('/user', userController.createUser, (req, res) => {
 })
 
 //testing for verifyUser
-app.post('/userlogin', userController.verifyUser, (req, res) => {
+app.post('/login', userController.verifyUser, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
 //testing for createTrip
-app.post('/createtrip', tripController.createTrip, (req, res) => {
+app.post('/addtrip', tripController.createTrip, (req, res) => {
   res.status(200).send(res.locals.trip);
 })
 
