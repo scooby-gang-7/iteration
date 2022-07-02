@@ -47,7 +47,7 @@ app.post('/user', userController.createUser, sessionController.startSession, (re
 })
 
 //testing for verifyUser
-app.post('/userlogin', userController.verifyUser, (req, res) => {
+app.post('/userlogin', userController.verifyUser, sessionController.startSession, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
