@@ -6,8 +6,8 @@ const SALT_WORK_FACTOR = 5;
 const sessionController = {};
 
 sessionController.startSession = (req, res, next) => {
-    console.log('res.locals.data[0].user_id --> ',res.locals.data[0].user_id)
-    const user_id = toString(res.locals.data[0].user_id)
+    console.log('res.locals.data[0].user_id --> ',res.locals.data.user_id)
+    const user_id = toString(res.locals.data.user_id)
     const date = new Date();
     const dateStr =
       ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
@@ -22,6 +22,7 @@ sessionController.startSession = (req, res, next) => {
         if (err) return next({log: err, message: {err: 'err in startSession bcrypt.hash'}});
         console.log('hash --> ',hash)
         console.log('date --> ',dateStr)
+        res.locals.sessionId = hash;
 
         // try to insert new session, if session ID already exists then updated timestamp
         const text = `INSERT INTO sessions (session_id, created_at) 
@@ -32,7 +33,6 @@ sessionController.startSession = (req, res, next) => {
         .query(text)
         .then(data => {
             console.log ('DATA --> ', data)
-              Window.localStorage.setItem('SESSION', `${hash}`)
               res.locals.sessionInfo = data.rows;
               return next();
             })

@@ -22,17 +22,18 @@ import MyTrips from "./components/MyTrips.jsx";
 
 const App = () => {
     return (
-    <Router>
+    // <Router>
         <div className="App">
         <Nav />
-          <Switch>
-            <Route path="/" exact component={Login} />
-            <Route path="/about" exact component={About} />
-            <Route path="/signup" exact component={Signup} />
-            <Route path="/mytrips" component={MyTrips} />
-          </Switch>
+          <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/mytrips" element={<MyTrips />} />
+          </Routes>
         </div>
-    </Router>
+
     );
 }
 

@@ -37,8 +37,8 @@ userController.createUser = (req, res, next) => {
         if (err) return next(err);
         // password = hash;
         // console.log(password);
-        const queryText = `INSERT INTO users (email, name_first, name_last, password)
-         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}') RETURNING *;`;
+        const queryText = `INSERT INTO users (email, name_first, name_last, password, created_at)
+         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}', '${dateStr}') RETURNING *;`;
         
         db
         .query(queryText)

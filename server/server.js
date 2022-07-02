@@ -8,14 +8,16 @@ require('dotenv').config();
 const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController')
 const tripController = require('./controllers/tripController');
+const cookieController = require('./controllers/cookieController');
 
 
 //create app instance and other const variables
-const app = express();
 const PORT = process.env.PORT;
 
 //connect to the DB
-
+const app = express(),
+  DIST_DIR = path.join(__dirname, '../dist/')
+  HTML_FILE = path.join(DIST_DIR, 'index.html')
 
 //use cors
 app.use(cors());
@@ -28,13 +30,22 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 // handle requests for static files
-app.use('/assets', express.static('./client/assets'));
-
+app.use(express.static(DIST_DIR));
+app.use(express.static('client'));
+// app.use('/assets', express.static('./client/assets'));
 
 //get request to the app page, serve the index.html
 app.get('/', (req, res) => {
-    //condition on ENV, if production, serve build/index.html
-    res.sendFile(path.resolve(__dirname, '../client/index.html'));
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
+
+app.get('/signup', (req, res) => {
+  //condition on ENV, if production, serve build/index.html
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
 //testing for get all user
@@ -43,12 +54,12 @@ app.get('/user', userController.getAllUsers, (req, res) => {
 })
 
 //testing for createUser
-app.post('/user', userController.createUser, sessionController.startSession, (req, res) => {
+app.post('/signup', userController.createUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
 //testing for verifyUser
-app.post('/userlogin', userController.verifyUser, sessionController.startSession, (req, res) => {
+app.post('/login', userController.verifyUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
