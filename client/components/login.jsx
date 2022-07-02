@@ -11,6 +11,7 @@ function Login({setUserInfo, setUser}) {
   const [password, setPassword] = useState("");
 
   const handleSubmitlogin = (e) => {
+    console.log("In handle sumbit")
     //email, password --> server
     fetch('http://localhost:3000/login', {
       method: 'POST',

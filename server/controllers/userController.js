@@ -64,6 +64,7 @@ userController.verifyUser = (req, res, next) => {
             console.log(data);
             if (data.rows.length ==0) {
                 res.locals.data = {message: 'user does not exit'}; //to do throw error
+                //we want a nice popup to prompt re-login
                 return next();
             }
             else {
@@ -71,7 +72,8 @@ userController.verifyUser = (req, res, next) => {
                 .then(result => {
                     if(!result) {
                         res.locals.data = {message: 'wrong passord'}; //todo throw error
-                        return next();
+                        //we want a nice popup to prompt re-login
+                        return next((err));
                     } else {
                         res.locals.data = data.rows[0];
                         return next();
