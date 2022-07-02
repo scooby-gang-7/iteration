@@ -1,6 +1,7 @@
 import React from 'react';
+import '../stylesheets/styles.css'
 
-const signup = () => {
+function Signup() {
     return (
         <div id='signup-parent'>
             <h1>Travel Pal</h1>
@@ -34,4 +35,4 @@ const signup = () => {
 }
 
 
-export default signup; 
+export default Signup; 

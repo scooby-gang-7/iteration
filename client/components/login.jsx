@@ -1,13 +1,14 @@
 import React from "react";
+import '../stylesheets/styles.css'
 
-function login() {
+function Login() {
   return (
     <div id="login-parent">
       <form action='#' method= 'post' onSubmit={console.log('hello')}>
         <h3>Login</h3>
         <div className=''>
           <label>Username:  </label>
-          <input type='text' placeholder='username' name='userName' />
+          <input type='text' placeholder='username' name='username' />
         </div>
         <div className=''>
           <label>Password:  </label>
@@ -21,4 +22,4 @@ function login() {
   )
 };
 
-export default login;
+export default Login;
