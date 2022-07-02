@@ -2,3 +2,22 @@
     width: 600px;
     height: 600px;
 }
+
+nav{
+    font-family: Helvetica;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 10vh;
+    background: rgb(94, 81, 68);
+    color: rgb(210, 192, 174);
+
+}
+
+.nav-links{
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+}

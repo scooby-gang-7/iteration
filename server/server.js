@@ -5,11 +5,14 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 //require controller
-
+const userController = require('./controllers/userController');
+const tripController = require('./controllers/tripController');
 
 
 //create app instance and other const variables
-const app = express();
+const app = express(), 
+DIST_DIR = path.join(__dirname, '../dist/')
+HTML_FILE = path.join(DIST_DIR, 'index.html');
 const PORT = process.env.PORT;
 
 //connect to the DB
@@ -26,19 +29,53 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 // handle requests for static files
-app.use('/assets', express.static('./client/assets'));
+app.use(express.static(DIST_DIR));
+app.use(express.static('client'));
+
 
 
 //get request to the app page, serve the index.html
-app.get('/map', (req, res) => {
+app.get('/*', (req, res) => {
     //condition on ENV, if production, serve build/index.html
-    res.sendFile(path.resolve(__dirname, '../client/script.js'));
+    console.log('i am here')
+    // return res.status(200)
+    res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
+
+//testing for get all user
+app.get('/user', userController.getAllUsers, (req, res) => {
+  res.status(200).send(res.locals.data);
+})
+
+//testing for createUser
+app.post('/user', userController.createUser, (req, res) => {
+  res.status(200).send(res.locals.data);
+})
+
+//testing for verifyUser
+app.post('/userlogin', userController.verifyUser, (req, res) => {
+  res.status(200).send(res.locals.data);
+})
+
+//testing for createTrip
+app.post('/createtrip', tripController.createTrip, (req, res) => {
+  res.status(200).send(res.locals.trip);
+})
+
+//testing for addtripbuddy
+app.post('/addbuddy', tripController.addTripbuddy, (req, res) => {
+  res.status(200).send(res.locals.members);
+})
+
+//fetch for getall trips for user
+app.post('/gettrips', tripController.getAlltrips, (req, res) => {
+  res.status(200).send(res.locals.trips);
+})
 
 //create global error handler
 app.use((err, req, res, next) => {
     const defaultErr = {
-      log: 'Caught unkonwn middleware error',
+      log: 'Caught unknown middleware error',
       staus: 500,
       message: {err: 'An error occured'}
     };
