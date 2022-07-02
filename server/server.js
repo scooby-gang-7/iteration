@@ -12,12 +12,12 @@ const cookieController = require('./controllers/cookieController');
 
 
 //create app instance and other const variables
+const app = express(), 
+DIST_DIR = path.join(__dirname, '../dist/')
+HTML_FILE = path.join(DIST_DIR, 'index.html');
 const PORT = process.env.PORT;
 
 //connect to the DB
-const app = express(),
-  DIST_DIR = path.join(__dirname, '../dist/')
-  HTML_FILE = path.join(DIST_DIR, 'index.html')
 
 //use cors
 app.use(cors());
