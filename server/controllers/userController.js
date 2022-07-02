@@ -30,13 +30,14 @@ userController.createUser = (req, res, next) => {
         // password = hash;
         // console.log(password);
         const queryText = `INSERT INTO users (email, name_first, name_last, password)
-         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}');`;
+         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}')
+         RETURNING user_id;`;
         
         db
         .query(queryText)
         .then(data => {
             console.log(data);
-            res.locals.data = data.rows;
+            res.locals.data = data.rows[0];
             return next();
         })
         .catch(err => {
