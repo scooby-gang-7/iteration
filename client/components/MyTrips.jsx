@@ -4,6 +4,9 @@ import AddTrip from './AddTrip'
 import {Link} from 'react-router-dom';
 import Trip from './Trip'
 
+// INCLUDE MAP API
+
+
 function MyTrips () {
     return (
         <div>

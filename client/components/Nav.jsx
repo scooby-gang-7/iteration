@@ -1,6 +1,6 @@
 import React from 'react';
 import '../stylesheets/styles.css'
-import {Link} from 'react-router-dom'
+import {Link, Outlet} from 'react-router-dom'
 
 
 function Nav()  {
@@ -19,6 +19,7 @@ function Nav()  {
                   <li>About</li>
                 </Link>
             </ul>
+            <Outlet />
         </nav>
     );
 }
