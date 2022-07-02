@@ -30,11 +30,11 @@ const App = () => {
       <div className="App">
         <Nav />
         <Routes>
-            <Route path="/" element={<Login setUserInfo={setUserInfo}/>} />
+            <Route path="/" element={<Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup/>} />
-            <Route path="/mytrips" element={<MyTrips userinfo={userInfo}/>} />
-            <Route path="/addtrip" element={<AddTrip userinfo={userInfo}/>} />
+            <Route path="/mytrips" element={<MyTrips userInfo={userInfo}/>} />
+            <Route path="/addtrip" element={<AddTrip userInfo={userInfo}/>} />
             <Route path="/map" element={<Map />} />
         </Routes>
       </div>

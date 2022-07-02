@@ -24,7 +24,9 @@ function Signup() {
                     <input type="password" placeholder='password' name='password'/>
                 </div>
                 <br />
-                <button className=''>Submit</button>
+                <Link>
+                    <button className=''>Submit</button>
+                </Link>
             </form>
         </div>
     )
