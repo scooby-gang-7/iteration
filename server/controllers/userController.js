@@ -44,7 +44,7 @@ userController.createUser = (req, res, next) => {
         .query(queryText)
         .then(data => {
             console.log(data);
-            res.locals.data = data.rows;
+            res.locals.data = data.rows[0];
             return next();
         })
         .catch(err => {

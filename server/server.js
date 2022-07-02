@@ -7,6 +7,7 @@ require('dotenv').config();
 //require controller
 const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController')
+const tripController = require('./controllers/tripController');
 
 
 //create app instance and other const variables
@@ -49,6 +50,21 @@ app.post('/user', userController.createUser, sessionController.startSession, (re
 //testing for verifyUser
 app.post('/userlogin', userController.verifyUser, sessionController.startSession, (req, res) => {
   res.status(200).send(res.locals.data);
+})
+
+//testing for createTrip
+app.post('/createtrip', tripController.createTrip, (req, res) => {
+  res.status(200).send(res.locals.trip);
+})
+
+//testing for addtripbuddy
+app.post('/addbuddy', tripController.addTripbuddy, (req, res) => {
+  res.status(200).send(res.locals.members);
+})
+
+//fetch for getall trips for user
+app.post('/gettrips', tripController.getAlltrips, (req, res) => {
+  res.status(200).send(res.locals.trips);
 })
 
 //create global error handler
