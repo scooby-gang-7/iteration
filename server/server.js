@@ -64,7 +64,7 @@ app.post('/login', userController.verifyUser, sessionController.startSession, co
 })
 
 //testing for createTrip
-app.post('/createtrip', tripController.createTrip, (req, res) => {
+app.post('/addtrip', tripController.createTrip, (req, res) => {
   res.status(200).send(res.locals.trip);
 })
 
