@@ -55,7 +55,7 @@ app.get('/user', userController.getAllUsers, (req, res) => {
 
 //testing for createUser
 app.post('/signup', userController.createUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
-  res.status(200).send(res.locals.data);
+  res.status(200).sendFile(path.resolve(__dirname, HTML_FILE));
 })
 
 //testing for verifyUser
