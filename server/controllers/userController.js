@@ -24,14 +24,21 @@ userController.getAllUsers = (req, res, next) => {
 
 userController.createUser = (req, res, next) => {
     const { name_first, name_last, email, password } = req.body;
-    const created_at = Date.parse(Date.now());
+    const date = new Date();
+    const dateStr =
+      ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+      ("00" + date.getDate()).slice(-2) + "/" +
+      date.getFullYear() + " " +
+      ("00" + date.getHours()).slice(-2) + ":" +
+      ("00" + date.getMinutes()).slice(-2) + ":" +
+      ("00" + date.getSeconds()).slice(-2);
+
     bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
         if (err) return next(err);
         // password = hash;
         // console.log(password);
-        const queryText = `INSERT INTO users (email, name_first, name_last, password)
-         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}')
-         RETURNING user_id;`;
+        const queryText = `INSERT INTO users (email, name_first, name_last, password, created_at)
+         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}', '${dateStr}') RETURNING *;`;
         
         db
         .query(queryText)
