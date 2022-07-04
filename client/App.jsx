@@ -17,11 +17,14 @@ import MyTrips from "./components/MyTrips.jsx";
 import AddTrip from "./components/AddTrip.jsx"
 import 'react-toastify/dist/ReactToastify.css';
 
+
+//apparently we can create a separate page where we can export an entire object of our pages rather than what we have, but it's unnecessary 
+
 // import {
 //     Login,
 //     Signup,
 //     Nav
-// } from './components/';
+// } from './components/'; 
 
 const App = () => {
   
