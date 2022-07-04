@@ -57,14 +57,13 @@ userController.verifyUser = (req, res, next) => {
     const { email, password } = req.body;
     const queryText = `SELECT * FROM users
          WHERE email='${email}';`;
-        
     db
         .query(queryText)
         .then(data => {
-            if (data.rows.length ==0) {
+            if (data.rows.length == 0) {
                 res.locals.data = {message: 'user does not exit'}; //to do throw error
                 //we want a nice popup to prompt re-login
-                return next();
+                return next((err));
             }
             else {
                 bcrypt.compare(password, data.rows[0].password)
