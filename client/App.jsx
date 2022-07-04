@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
 import {
     BrowserRouter as Router,
     Routes,
@@ -14,21 +15,32 @@ import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
 import AddTrip from "./components/AddTrip.jsx"
+import 'react-toastify/dist/ReactToastify.css';
 
 // import {
 //     Login,
 //     Signup,
 //     Nav
-// } from './components.jsx';
+// } from './components/';
 
 const App = () => {
   
   const [userInfo, setUserInfo] = useState("");
-  console.log('User Info --> ', userInfo);
   
     return (
       <div className="App">
         <Nav />
+        <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
         <Routes>
             <Route path="/" element={<Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
@@ -40,11 +52,5 @@ const App = () => {
       </div>
     );
 }
-
-// const Home = () =>  {
-//     <div>
-//         <h1>Home Page</h1>
-//     </div>
-// }
 
 export default App;

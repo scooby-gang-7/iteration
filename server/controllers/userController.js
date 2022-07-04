@@ -61,7 +61,6 @@ userController.verifyUser = (req, res, next) => {
     db
         .query(queryText)
         .then(data => {
-            console.log(data);
             if (data.rows.length ==0) {
                 res.locals.data = {message: 'user does not exit'}; //to do throw error
                 //we want a nice popup to prompt re-login
