@@ -33,7 +33,7 @@ function Login({setUserInfo, setUser}) {
       .then(data => {
         setUserInfo({data});
         //if valid user/password --> route to MyTrips page
-        // navigate('/mytrips', { replace: true});
+        navigate('/mytrips', { replace: true});
         //possibly add loading state since it takes a few seconds
         console.log(data);
       }).catch((e) => { //error catch
