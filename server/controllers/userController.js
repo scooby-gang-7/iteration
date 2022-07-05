@@ -48,7 +48,7 @@ userController.createUser = (req, res, next) => {
             return next();
         })
         .catch(err => {
-            if (err) throw err;
+            return next({log: err, message: {err: 'catch in createUser'}});
         })
     })
 }
@@ -61,15 +61,23 @@ userController.verifyUser = (req, res, next) => {
         .query(queryText)
         .then(data => {
             if (data.rows.length == 0) {
-                res.locals.data = {message: 'user does not exit'}; //to do throw error
-                return next("Error");
+                // res.locals.data = {message: 'user does not exist'}; //to do throw error
+                return next(createErr({
+                    method:'verifyUser',
+                    type: 'user does not exist',
+                    err: 'User does not exist'
+                }));
             }
             else {
                 bcrypt.compare(password, data.rows[0].password)
                 .then(result => {
                     if(!result) {
-                        res.locals.data = {message: 'wrong passord'}; //todo throw error
-                        return next("Error");
+                        // res.locals.data = {message: 'wrong passord'}; //todo throw error
+                        return next(createErr({
+                            method:'verifyUser',
+                            type: 'wrong password',
+                            err: 'Wrong password'
+                        }));
                     } else {
                         res.locals.data = data.rows[0];
                         return next();
@@ -78,9 +86,22 @@ userController.verifyUser = (req, res, next) => {
             }
         })
         .catch(err => {
-            if (err) throw err;
+            return next({log: err, message: {err: 'catch in verifyUser'}});
         })
 };
+
+//Error Creator
+const createErr = (errInfo) => {
+    const { method, type, err } = errInfo;
+    return {
+        log: `userController.${method} ${type}: ERROR: ${
+            typeof err === 'object' ? JSON.stringify(err) : err
+            }`,
+        message: {
+            err: `Error occurred in userController.${method}. Check server logs for more details.`,
+        },
+    };
+}
 
 
 module.exports = userController;

@@ -28,7 +28,8 @@ sessionController.startSession = (req, res, next) => {
         const text = `INSERT INTO sessions (session_id, created_at) 
         VALUES('${hash}', '${dateStr}')
         ON CONFLICT ON CONSTRAINT U_session_id
-        DO UPDATE SET created_at = '${dateStr}'`
+        DO UPDATE SET created_at = '${dateStr}'
+        RETURNING *;`;
         db
         .query(text)
         .then(data => {

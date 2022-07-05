@@ -8,7 +8,9 @@ import {
 
 // CHECK WITH JOY ON CONNECTING GOOGLE API MAPS WITH DESTINATION FORM
 
-function AddTrip({setTripInfo, tripInfo}) {
+function AddTrip(props) {
+
+    const { userInfo } = props;
 
     //react hooks to save trip info
     const [trip_name, setTripName] = useState("");
@@ -30,15 +32,15 @@ function AddTrip({setTripInfo, tripInfo}) {
                 description,
                 destination,
                 date_start,
-                date_end
+                date_end,
+                user_id: userInfo.user_id
             })
             })
             .then(data => data.json())
             .then(data => {
-                console.log('in success state')
-                setTripInfo({data});
+                console.log('in success state');
                 toast.success('Trip added successfully');
-                // navigate('/mytrips', { replace: true});
+                navigate('/mytrips', { replace: true});
                 console.log(data);
             }).catch((e) => {
                 //pop-up error handling instance 
