@@ -8,6 +8,7 @@ import Trip from './Trip'
 
 
 function MyTrips () {
+
     return (
         <div>
             <h1>My Trips</h1>

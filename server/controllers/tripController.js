@@ -28,14 +28,13 @@ tripController.createTrip = async (req, res, next) => {
          VALUES ('${trip_name}', '${description}', '${destination}', '${date_start}', '${date_end}')
          RETURNING *;`;
     const tripdata = await db.query(queryText);
-    console.log(tripdata);
-
+    // console.log(tripdata);
     const queryText2 = `INSERT INTO user_trip_rel (user_id, trip_id, owner)
     VALUES ('${user_id}', '${tripdata.rows[0].trip_id}', '${true}')
     RETURNING *;`;
 
     const reldata = await db.query(queryText2);
-    console.log(reldata)
+    // console.log(reldata)
 
     res.locals.trip = tripdata.rows[0];
     return next();
