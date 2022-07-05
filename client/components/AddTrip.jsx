@@ -16,6 +16,7 @@ function AddTrip({setTripInfo, tripInfo}) {
     const [destination, setDestination] = useState("");
     const [date_start, setDateStart] = useState("");
     const [date_end, setDateEnd] = useState("");
+    const [user_id, setUserId] = useState("");
     const navigate = useNavigate();
 
     const handleSubmitAddTrip = (e) => {
@@ -30,7 +31,8 @@ function AddTrip({setTripInfo, tripInfo}) {
                 description,
                 destination,
                 date_start,
-                date_end
+                date_end,
+                user_id
             })
             })
             .then(data => data.json())
@@ -38,7 +40,7 @@ function AddTrip({setTripInfo, tripInfo}) {
                 console.log('in success state')
                 setTripInfo({data});
                 toast.success('Trip added successfully');
-                // navigate('/mytrips', { replace: true});
+                navigate('/mytrips', { replace: true});
                 console.log(data);
             }).catch((e) => {
                 //pop-up error handling instance 
