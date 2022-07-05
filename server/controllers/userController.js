@@ -62,16 +62,14 @@ userController.verifyUser = (req, res, next) => {
         .then(data => {
             if (data.rows.length == 0) {
                 res.locals.data = {message: 'user does not exit'}; //to do throw error
-                //we want a nice popup to prompt re-login
-                return next((err));
+                return next("Error");
             }
             else {
                 bcrypt.compare(password, data.rows[0].password)
                 .then(result => {
                     if(!result) {
                         res.locals.data = {message: 'wrong passord'}; //todo throw error
-                        //we want a nice popup to prompt re-login
-                        return next((err));
+                        return next("Error");
                     } else {
                         res.locals.data = data.rows[0];
                         return next();

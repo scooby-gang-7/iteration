@@ -18,7 +18,6 @@ function Login({setUserInfo, setUser}) {
   const handleSubmitlogin = (e) => {
     // to prevent rerender
     e.preventDefault();
-    console.log('email in handle submit -->', email, 'password in handle submit --> ', password)
     fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
@@ -34,12 +33,10 @@ function Login({setUserInfo, setUser}) {
         setUserInfo({data});
         //if valid user/password --> route to MyTrips page
         navigate('/mytrips', { replace: true});
-        //possibly add loading state since it takes a few seconds
         console.log(data);
-      }).catch((e) => { //error catch
-        //add popup alert message here
-        //use react-toastify alert message
-        toast.error('Error: Invalid email or password.');
+      }).catch((e) => {
+        //pop-up error handling instance 
+        toast.error('Invalid email or password.');
         console.log({e})
       })
 
