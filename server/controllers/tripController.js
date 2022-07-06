@@ -10,7 +10,7 @@ tripController.getAlltrips = async (req, res, next) => {
     FROM user_trip_rel as R
     JOIN trips as t
     ON R.trip_id = t.trip_id
-    WHERE R.user_id = '${user_id}';`;
+    WHERE R.user_id = ${user_id};`;
     
     const tripsdata = await db.query(queryText);
     console.log(tripsdata);
@@ -23,9 +23,16 @@ tripController.getAlltrips = async (req, res, next) => {
 //done
 tripController.createTrip = async (req, res, next) => {
     const { trip_name, description, destination, date_start, date_end, user_id } = req.body;
-    const created_at = Date.toString(Date.now());
-    const queryText = `INSERT INTO trips (trip_name, description, destination, date_start, date_end)
-         VALUES ('${trip_name}', '${description}', '${destination}', '${date_start}', '${date_end}')
+    const date = new Date();
+    const dateStr =
+      ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+      ("00" + date.getDate()).slice(-2) + "/" +
+      date.getFullYear() + " " +
+      ("00" + date.getHours()).slice(-2) + ":" +
+      ("00" + date.getMinutes()).slice(-2) + ":" +
+      ("00" + date.getSeconds()).slice(-2);
+    const queryText = `INSERT INTO trips (trip_name, description, destination, date_start, date_end, created_at)
+         VALUES ('${trip_name}', '${description}', '${destination}', '${date_start}', '${date_end}', '${dateStr}')
          RETURNING *;`;
     const tripdata = await db.query(queryText);
     // console.log(tripdata);
