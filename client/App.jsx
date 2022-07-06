@@ -7,24 +7,15 @@ import {
     Link,
     Navigate
   } from "react-router-dom";
-import './stylesheets/styles.css'
-import Login from "./components/Login.jsx"
-import Signup from "./components/Signup.jsx"
-import Map from "./components/map.js"
+import './stylesheets/styles.css';
+import Login from "./components/Login.jsx";
+import Signup from "./components/Signup.jsx";
+import Map from "./components/map.js";
 import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
-import AddTrip from "./components/AddTrip.jsx"
+import AddTrip from "./components/AddTrip.jsx";
 import 'react-toastify/dist/ReactToastify.css';
-
-
-//apparently we can create a separate page where we can export an entire object of our pages rather than what we have, but it's unnecessary 
-
-// import {
-//     Login,
-//     Signup,
-//     Nav
-// } from './components/'; 
 
 const App = () => {
   
@@ -44,12 +35,11 @@ const App = () => {
           rtl={false}
           pauseOnFocusLoss
           draggable
-          pauseOnHover
-        />
+          pauseOnHover />
         <Routes>
             <Route path="/" element={<Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
-            <Route path="/signup" element={<Signup/>} />
+            <Route path="/signup" element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />} />
             <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />
             <Route path="/addtrip" element={<AddTrip userInfo={userInfo} /> } />
             <Route path="/map" element={<Map />} />
