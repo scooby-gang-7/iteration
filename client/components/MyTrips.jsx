@@ -7,7 +7,28 @@ import Trip from './Trip'
 // INCLUDE MAP API
 
 
-function MyTrips () {
+function MyTrips (props) {
+
+    // console.log('My trip user_id ->', props.userInfo.user_id);
+    console.log('My trip info ->', props.tripInfo);
+
+    //on loading, fetch request to get all the trips info for the user
+    useEffect(() => {
+        fetch('http://localhost:3000/gettrips/', {
+            method: 'POST',
+            headers: {
+                "COntent-Type": "application/json",
+            },
+            body: JSON.stringify({
+                user_id: props.userInfo.user_id
+            })
+        })
+            .then(triplist => triplist.json())
+            .then(triplist => {
+                // console.log('here is the trips', triplist);
+                props.setTripInfo(triplist);
+            });
+    }, []);
 
     return (
         <div>
