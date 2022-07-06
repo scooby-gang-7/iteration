@@ -18,6 +18,7 @@ function AddTrip(props) {
     const [destination, setDestination] = useState("");
     const [date_start, setDateStart] = useState("");
     const [date_end, setDateEnd] = useState("");
+    const [user_id, setUserId] = useState("");
     const navigate = useNavigate();
 
     const handleSubmitAddTrip = (e) => {
