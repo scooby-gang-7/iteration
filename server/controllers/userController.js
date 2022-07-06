@@ -57,21 +57,19 @@ userController.verifyUser = (req, res, next) => {
     const { email, password } = req.body;
     const queryText = `SELECT * FROM users
          WHERE email='${email}';`;
-        
     db
         .query(queryText)
         .then(data => {
-            console.log(data);
-            if (data.rows.length ==0) {
+            if (data.rows.length == 0) {
                 res.locals.data = {message: 'user does not exit'}; //to do throw error
-                return next();
+                return next("Error");
             }
             else {
                 bcrypt.compare(password, data.rows[0].password)
                 .then(result => {
                     if(!result) {
                         res.locals.data = {message: 'wrong passord'}; //todo throw error
-                        return next();
+                        return next("Error");
                     } else {
                         res.locals.data = data.rows[0];
                         return next();
