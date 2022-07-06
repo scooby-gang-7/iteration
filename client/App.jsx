@@ -19,8 +19,9 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   
-  const [userInfo, setUserInfo] = useState("");
+  const [userInfo, setUserInfo] = useState({user_id:null});
   const [tripInfo, setTripInfo] = useState([]);
+
   
     return (
       <div className="App">

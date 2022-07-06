@@ -7,7 +7,8 @@ import Trip from './Trip'
 // INCLUDE MAP API
 function MyTrips (props) {
 
-    // console.log('My trip user_id ->', props.userInfo.user_id);
+
+    console.log('My trip user_id ->', props);
     console.log('My trip info ->', props.tripInfo);
 
     //on loading, fetch request to get all the trips info for the user

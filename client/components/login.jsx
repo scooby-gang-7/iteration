@@ -7,7 +7,11 @@ import {
   useNavigate
 } from 'react-router-dom';
 
-function Login({setUserInfo, userInfo}) {
+
+
+function Login(props) {
+
+  const {setUserInfo, userInfo} = props;
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,10 +33,12 @@ function Login({setUserInfo, userInfo}) {
       .then(data => data.json())
       .then(data => {
         setUserInfo(data);
-        //if valid user/password --> route to MyTrips page
-        navigate('/mytrips', { replace: true });
-        console.log(data);
-      }).catch((err) => {
+        //if valid user/password --> route to MyTrips page 
+        window.localStorage.setItem('session_id', JSON.stringify(data.session_id));
+        console.log('data passed into setUserInfo -->', data);
+        navigate('/mytrips', { replace: true});
+      })
+      .catch((e) => {
         //pop-up error handling instance
         console.log(err);
         toast.error('Invalid email or password.');
