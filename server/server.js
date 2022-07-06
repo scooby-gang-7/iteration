@@ -48,6 +48,11 @@ app.get('/signup', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
+//fetch with session_id to get user_id
+app.get('/session', sessionController.verifySession, (req, res) => {
+  res.status(200).send(res.locals.sessionInfo);
+})
+
 //testing for get all user
 app.get('/user', userController.getAllUsers, (req, res) => {
   res.status(200).send(res.locals.data);
@@ -76,6 +81,11 @@ app.post('/addbuddy', tripController.addTripbuddy, (req, res) => {
 //fetch for getall trips for user
 app.post('/gettrips', tripController.getAlltrips, (req, res) => {
   res.status(200).send(res.locals.trips);
+})
+
+
+app.get('/*', (req, res) => {
+  res.redirect('/');
 })
 
 //create global error handler
