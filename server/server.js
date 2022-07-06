@@ -60,7 +60,7 @@ app.post('/signup', userController.createUser, sessionController.startSession, c
 
 //testing for verifyUser
 app.post('/login', userController.verifyUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
-  res.status(200).send(res.locals.data);
+  res.status(200).send(res.locals.sessionInfo);
 })
 
 //testing for createTrip
