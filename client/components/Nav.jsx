@@ -9,7 +9,7 @@ function Nav()  {
         <nav>
             <h1>Logo</h1> 
             <ul className='nav-links'>
-                <Link to="/login">
+                <Link to="/">
                   <li>Login</li>
                 </Link>
                 <Link to="/mytrips">

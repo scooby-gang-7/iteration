@@ -1,18 +1,23 @@
 import React, { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
 import '../stylesheets/styles.css'
 import SignUp from './Signup'
-import {Link} from 'react-router-dom';
+import {
+  Link,
+  useNavigate
+} from 'react-router-dom';
 
 
 
-function Login(props) {
+function Login({setUserInfo, setUser}) {
 
-  const setUserInfo = props.setUserInfo;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmitlogin = (e) => {
-    //email, password --> server
+    // to prevent rerender
+    e.preventDefault();
     fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: {
@@ -26,13 +31,20 @@ function Login(props) {
       .then(data => data.json())
       .then(data => {
         setUserInfo({data});
+        //if valid user/password --> route to MyTrips page
+        navigate('/mytrips', { replace: true});
         console.log(data);
+      }).catch((e) => {
+        //pop-up error handling instance 
+        toast.error('Invalid email or password.');
+        console.log({e})
       })
+
   }
   
   return (
     <div id="login-parent">
-      <form action='#' method= 'post' onSubmit={console.log('hello')}>
+      <form action='#'>
         <h3>Login</h3>
         <div className=''>
           <label>Email Address:  </label>
@@ -42,9 +54,7 @@ function Login(props) {
           <label>Password:  </label>
           <input type='password' placeholder='password' name='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <Link to="/mytrips">
-          <button className='' onClick={handleSubmitlogin}>Login</button>
-        </Link>
+        <button className='' onClick={handleSubmitlogin}>Login</button>
       </form>
       <br />
       <Link to="/signup">

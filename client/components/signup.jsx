@@ -1,11 +1,12 @@
 import React from 'react';
 import '../stylesheets/styles.css'
+import { Link } from 'react-router-dom'; 
 
 function Signup() {
     return (
         <div id='signup-parent'>
             <h1>Travel Pal</h1>
-            <form action="#" method='POST' onSubmit={console.log('signed-in')}>
+            <form action="#">
                 <h3>Sign Up</h3>
                 <div>
                     <label>First Name:  </label>
@@ -24,7 +25,9 @@ function Signup() {
                     <input type="password" placeholder='password' name='password'/>
                 </div>
                 <br />
-                <button className=''>Submit</button>
+                <Link to='/mytrips'>
+                    <button className=''>Submit</button>
+                </Link>
             </form>
         </div>
     )

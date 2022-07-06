@@ -6,7 +6,9 @@ require('dotenv').config();
 
 //require controller
 const userController = require('./controllers/userController');
+const sessionController = require('./controllers/sessionController')
 const tripController = require('./controllers/tripController');
+const cookieController = require('./controllers/cookieController');
 
 
 //create app instance and other const variables
@@ -16,7 +18,6 @@ HTML_FILE = path.join(DIST_DIR, 'index.html');
 const PORT = process.env.PORT;
 
 //connect to the DB
-
 
 //use cors
 app.use(cors());
@@ -31,15 +32,20 @@ app.use(cookieParser());
 // handle requests for static files
 app.use(express.static(DIST_DIR));
 app.use(express.static('client'));
-
-
+// app.use('/assets', express.static('./client/assets'));
 
 //get request to the app page, serve the index.html
-app.get('/*', (req, res) => {
-    //condition on ENV, if production, serve build/index.html
-    console.log('i am here')
-    // return res.status(200)
-    res.sendFile(path.resolve(__dirname, HTML_FILE));
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
+
+app.get('/about', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
+
+app.get('/signup', (req, res) => {
+  //condition on ENV, if production, serve build/index.html
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
 //testing for get all user
@@ -48,12 +54,12 @@ app.get('/user', userController.getAllUsers, (req, res) => {
 })
 
 //testing for createUser
-app.post('/user', userController.createUser, (req, res) => {
-  res.status(200).send(res.locals.data);
+app.post('/signup', userController.createUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
+  res.status(200).sendFile(path.resolve(__dirname, HTML_FILE));
 })
 
 //testing for verifyUser
-app.post('/login', userController.verifyUser, (req, res) => {
+app.post('/login', userController.verifyUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
