@@ -9,7 +9,7 @@ import {
 
 
 
-function Login({setUserInfo, setUser}) {
+function Login({setUserInfo, userInfo}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -30,14 +30,15 @@ function Login({setUserInfo, setUser}) {
     })
       .then(data => data.json())
       .then(data => {
-        setUserInfo({data});
+        setUserInfo(data);
         //if valid user/password --> route to MyTrips page
         navigate('/mytrips', { replace: true});
         console.log(data);
       }).catch((e) => {
-        //pop-up error handling instance 
+        //pop-up error handling instance
+        console.log(e);
         toast.error('Invalid email or password.');
-        console.log({e})
+        console.log({e});
       })
 
   }

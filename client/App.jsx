@@ -29,7 +29,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   
   const [userInfo, setUserInfo] = useState("");
-  const [tripInfo, setTripInfo] = useState("");
+  const [tripInfo, setTripInfo] = useState([]);
   
     return (
       <div className="App">
@@ -49,8 +49,8 @@ const App = () => {
             <Route path="/" element={<Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup/>} />
-            <Route path="/mytrips" element={<MyTrips userInfo={userInfo}/>} />
-            <Route path="/addtrip" element={<AddTrip userInfo={userInfo} tripInfo={tripInfo}/> } />
+            <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />
+            <Route path="/addtrip" element={<AddTrip userInfo={userInfo} /> } />
             <Route path="/map" element={<Map />} />
         </Routes>
       </div>
