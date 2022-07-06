@@ -18,7 +18,7 @@ function MyTrips () {
             </Link>
         </div>
              
-          
+
     );
 }
 
