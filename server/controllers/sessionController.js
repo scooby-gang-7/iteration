@@ -34,7 +34,7 @@ sessionController.startSession = (req, res, next) => {
         .query(text)
         .then(data => {
             console.log ('DATA --> ', data)
-              res.locals.sessionInfo = data.rows;
+              res.locals.sessionInfo = data.rows[0];
               return next();
             })
         .catch(err => next({log: err, message: {err: 'catch in startSession'}}))

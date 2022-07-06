@@ -34,7 +34,7 @@ function Signup({setUserInfo, userInfo}) {
                 setUserInfo(data);
                 toast.success('Signup successful!');
                 navigate('/mytrips', { replace: true});
-                console.log('DATA -->', data);
+                console.log('FRONTEND DATA -->', data);
             }).catch((e) => {
                 //pop-up error handling instance 
                 toast.error('Signup unsuccessful');
