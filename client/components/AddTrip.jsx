@@ -22,7 +22,7 @@ function AddTrip(props) {
     const navigate = useNavigate();
 
     const handleSubmitAddTrip = (e) => {
-        e.preventDefault(); //prevents re-render --> do we need this?
+        e.preventDefault();
         fetch('http://localhost:3000/addtrip', {
             method: 'POST',
             headers: {

@@ -5,11 +5,11 @@ import {Link} from 'react-router-dom';
 
 
 
-// trip name should pull in from DB trip_name - need to get syntax for this from SQL table
+// Trip Details is the overarching pop-up window that includes ALL the trip info / suggestions. UPVOTE and DOWNVOTE functionality.
 
 
 
-function Trip () {
+function Trip (props) {
     return (
         <div>
             <Link to="/addtrip">      

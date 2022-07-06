@@ -7,8 +7,6 @@ import {
   useNavigate
 } from 'react-router-dom';
 
-
-
 function Login({setUserInfo, userInfo}) {
 
   const [email, setEmail] = useState("");
@@ -32,13 +30,13 @@ function Login({setUserInfo, userInfo}) {
       .then(data => {
         setUserInfo(data);
         //if valid user/password --> route to MyTrips page
-        navigate('/mytrips', { replace: true});
+        navigate('/mytrips', { replace: true });
         console.log(data);
-      }).catch((e) => {
+      }).catch((err) => {
         //pop-up error handling instance
-        console.log(e);
+        console.log(err);
         toast.error('Invalid email or password.');
-        console.log({e});
+        console.log({err});
       })
 
   }
