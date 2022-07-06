@@ -26,8 +26,8 @@ sessionController.startSession = (req, res, next) => {
         res.locals.sessionId = hash;
 
         // try to insert new session, if session ID already exists then updated timestamp
-        const text = `INSERT INTO sessions (session_id, created_at) 
-        VALUES('${hash}', '${dateStr}')
+        const text = `INSERT INTO sessions (session_id, created_at, user_id) 
+        VALUES('${hash}', '${dateStr}', '${res.locals.data.user_id}')
         ON CONFLICT ON CONSTRAINT U_session_id
         DO UPDATE SET created_at = '${dateStr}'
         RETURNING *;`;
@@ -35,7 +35,7 @@ sessionController.startSession = (req, res, next) => {
           .query(text)
           .then(data => {
               console.log ('DATA --> ', data)
-                res.locals.sessionInfo = data.rows;
+                res.locals.sessionInfo = data.rows[0];
                 return next();
               })
           .catch(err => next({log: err, message: {err: 'catch in startSession'}}))
