@@ -38,7 +38,7 @@ const App = () => {
       setUserInfo(data);
     })
     .catch(err => {
-      console.log(err);
+      console.log({err});
     })
   }, [userInfo])
 

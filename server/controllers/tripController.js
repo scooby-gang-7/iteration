@@ -24,6 +24,7 @@ tripController.getAlltrips = async (req, res, next) => {
 tripController.createTrip = async (req, res, next) => {
     const { trip_name, description, destination, date_start, date_end, user_id } = req.body;
     const date = new Date();
+    // convert date to MM/DD/YYYY HH:MM:SS
     const dateStr =
       ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
       ("00" + date.getDate()).slice(-2) + "/" +
