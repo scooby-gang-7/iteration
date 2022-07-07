@@ -43,8 +43,9 @@ sessionController.startSession = (req, res, next) => {
 };
 
 sessionController.verifySession = (req, res, next) => {
-  console.log(req.cookies.ssid)
   
+  console.log(req.query.session_id);
+  const session_id = req.query.session_id;
   const currDate = new Date();
   // convert date to MM/DD/YYYY HH:MM:SS
   const currDateStr =
@@ -57,7 +58,7 @@ sessionController.verifySession = (req, res, next) => {
 
   const expireDays = 1;
   const text = `SELECT * FROM sessions
-  WHERE session_id = '${req.cookies.ssid}'
+  WHERE session_id = '${session_id}'
   AND DATE_PART('day', '${currDateStr}'::timestamp - created_at::timestamp) <= ${expireDays}`
   
   db
@@ -68,11 +69,13 @@ sessionController.verifySession = (req, res, next) => {
         return res.status(500)
       }
       else {
-
+        res.locals.sessionInfo = data.rows[0];
         return next();
       }
     })
     .catch(err => next({log: err, message: {err: 'catch in verifySession'}}))
 }
+
+
 
 module.exports = sessionController;
