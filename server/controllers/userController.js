@@ -25,6 +25,7 @@ userController.getAllUsers = (req, res, next) => {
 userController.createUser = (req, res, next) => {
     const { name_first, name_last, email, password } = req.body;
     const date = new Date();
+    // convert date to MM/DD/YYYY HH:MM:SS
     const dateStr =
       ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
       ("00" + date.getDate()).slice(-2) + "/" +
