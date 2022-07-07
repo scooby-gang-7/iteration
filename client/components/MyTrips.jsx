@@ -7,11 +7,9 @@ import Trip from './Trip'
 // INCLUDE MAP API
 function MyTrips (props) {
 
-
     console.log('My trip user_id ->', props);
     console.log('My trip info ->', props.tripInfo);
     
-
     //on loading, fetch request to get all the trips info for the user
     useEffect(() => {
         fetch('http://localhost:3000/gettrips/', {
@@ -25,28 +23,22 @@ function MyTrips (props) {
         })
             .then(triplist => triplist.json())
             .then(triplist => {
-                // console.log('here is the trips', triplist);
                 props.setTripInfo(triplist);
             });
     }, []);
-
-
-// Loop over the trip list in the DB
-// Render the child components in boxes for each trip --> only includes trip_name, destination, date_start to date_end, ((MAYBE WHO COMES WITH))
-
 
     return (
         <div>
             <h1>My Trips</h1>
             <br />
-            <Trip /> 
+            {props.tripInfo.map((trip) => {
+                return <Trip key={trip.trip_id} name={trip.trip_name} destination={trip.destination} start={trip.date_start} end={trip.date_end}/>
+            })}
             <br />
             <Link to="/addtrip">
-            <button className='addTripButton'>Add Trip</button>
+                <button className='addTripButton'>Add Trip</button>
             </Link>
-        </div>
-             
-          
+        </div> 
     );
 }
 
