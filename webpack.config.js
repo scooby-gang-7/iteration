@@ -24,7 +24,7 @@ module.exports = {
         // Enable importing JS / JSX files without specifying their extension
         extensions: ['.js', '.jsx'],
       },
-    devtool: 'inline-source-map',
+    // devtool: 'inline-source-map',
     devServer: {
         static: {
           publicPath: '/',
