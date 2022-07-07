@@ -16,6 +16,8 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css"
 
+// const google = window.google;
+
 function mapp(props) {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
@@ -30,32 +32,45 @@ function mapp(props) {
     </div>
   )
 }
+
 const center = { lat: 44, lng: -80 }
-// const markers = [{ lat: 44, lng: -80 }, { lat: 45, lng: -79 }]
-// ^^ const center and marker is placeholder for state
+// center is a placeholder for state
+const url =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+// const scaledSize = new google.maps.Size(38, 31)
+
 function Map() {
-  // console.log('selected here!!!!!')
-  // const pins = markers.map((pin, i) => <MapItem position={pin} key={i} />)
-  const [selected, setSelected] = useState(null)
-  console.log(selected, 'this is selected')
+  const [selected, setSelected] = useState([])
+  const centerCity = <MapItem
+    position={center}
+    key={center}
+    icon={url}
+    title={'Where it will all go down!'}
+    animation={google.maps.Animation.DROP}
+  />
+  const pins = selected.map((pin, i) => <MapItem
+    position={pin}
+    key={i}
+    animation={google.maps.Animation.DROP}
+  />)
   return (
     <>
       <div className="places-container">
         <PlacesAutoComplete setSelected={setSelected} />
       </div>
       <GoogleMap
-        zoom={7}
+        zoom={6}
         center={center}
         mapContainerClassName="map-container"
       >
-        {selected && <Marker position={selected} />}
-        {/* {pins} */}
+        {centerCity}
+        {selected && pins}
       </GoogleMap>
     </>
   )
 }
-const PlacesAutoComplete = ({ selected, setSelected }) => {
- 
+const PlacesAutoComplete = ({ setSelected }) => {
+
   const {
     ready,
     value,
@@ -69,11 +84,9 @@ const PlacesAutoComplete = ({ selected, setSelected }) => {
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    const {lat, lng} = await getLatLng(results[0]);
-    // setSelected([...selected, results])
-    
-    setSelected({ lat, lng })
-   
+    const { lat, lng } = await getLatLng(results[0]);
+    console.log(typeof (lat), 'lat')
+    setSelected(selected => [...selected, { lat, lng }])
   }
 
   return (

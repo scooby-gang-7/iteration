@@ -13,7 +13,7 @@ tripController.getAlltrips = async (req, res, next) => {
     WHERE R.user_id = ${user_id};`;
     
     const tripsdata = await db.query(queryText);
-    console.log(tripsdata);
+    // console.log(tripsdata);
 
     res.locals.trips = tripsdata.rows;
     return next();
@@ -55,7 +55,7 @@ tripController.addTripbuddy = async (req, res, next) => {
     RETURNING *;`;
     
     const reldata = await db.query(queryText);
-    console.log(reldata);
+    // console.log(reldata);
     //do a query, get the members of the trip.
     const queryText2 = `SELECT R.user_trip_id, R.trip_id, R.user_id, R.owner, u.name_first 
     FROM user_trip_rel as R
@@ -64,7 +64,7 @@ tripController.addTripbuddy = async (req, res, next) => {
     WHERE R.trip_id = '${trip_id}';`;
 
     const memberdata = await db.query(queryText2);
-    console.log(memberdata);
+    // console.log(memberdata);
     res.locals.members = memberdata.rows;
 
     return next();
