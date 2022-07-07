@@ -6,7 +6,7 @@ const SALT_WORK_FACTOR = 5;
 const sessionController = {};
 
 sessionController.startSession = (req, res, next) => {
-    console.log('res.locals.data[0].user_id --> ',res.locals.data.user_id)
+    console.log('res.locals.data.user_id --> ',res.locals.data.user_id)
     const user_id = toString(res.locals.data.user_id)
     const date = new Date();
     // convert date to MM/DD/YYYY HH:MM:SS

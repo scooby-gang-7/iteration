@@ -9,6 +9,7 @@ const userController = require('./controllers/userController');
 const sessionController = require('./controllers/sessionController')
 const tripController = require('./controllers/tripController');
 const cookieController = require('./controllers/cookieController');
+const placesController = require('./controllers/placesController')
 
 
 //create app instance and other const variables
@@ -35,10 +36,7 @@ app.use(express.static('client'));
 // app.use('/assets', express.static('./client/assets'));
 
 
-//get request to the app page, serve the index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
-});
+
 
 // app.get('/map', (req, res) => {
 //   res.sendFile(path.resolve(__dirname, HTML_FILE));
@@ -88,10 +86,22 @@ app.post('/gettrips', tripController.getAlltrips, (req, res) => {
   res.status(200).send(res.locals.trips);
 })
 
-
-app.get('/*', (req, res) => {
-  res.redirect('/');
+app.post('/addplace', placesController.addPlace, (req, res) => {
+  res.status(200).send(res.locals.place);
 })
+
+app.post('/vote', placesController.updateVote, (req, res) => {
+  res.status(200).send(res.locals.place);
+})
+
+app.post('/deleteplace', placesController.deletePlace, (req, res) => {
+  res.status(200).send(res.locals.place);
+});
+
+//get request to the app page, serve the index.html
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
 
 //create global error handler
 app.use((err, req, res, next) => {
