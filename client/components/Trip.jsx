@@ -1,28 +1,26 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
 import AddTrip from './AddTrip'
-import {Link} from 'react-router-dom';
-
-// child component in boxes for each trip --> only includes trip_name, destination, date_start to date_end, ((MAYBE WHO COMES WITH))
+import {
+    Link, 
+    useNavigate
+} from 'react-router-dom';
 
 function Trip (props) {
 
-    console.log('My trip info ->', props.triplist);
-
-    //trip_name={trip_name} destination={destination} date_start={date_start} date_end={date_end}
+    function handleSubmit() {
+        const navigate = useNavigate();
+        navigate('/tripdetails', {replace: true});
+    }
     
     return (
-        <div>
-            <Link to="/addtrip">      
-            <button className='addTripButton'>
-                <h1>{/* name of trip*/ /*this.state.trip_name*/}TRIP NAME</h1>
-                <h3>{/* name of trip*/ /*this.state.trip_location*/}LOCATION</h3>
-                <h3>{/* name of trip*/ /*this.state.trip_date, this.state.trip_date*/}START DATE - END DATE</h3>
+        <div>     
+            <button className='addTripButton' onClick={handleSubmit}>
+                <h1>Trip Name: {props.name}</h1>
+                <h3>Location: {props.destination}</h3>
+                <h3>Date: {props.start} - {props.end}</h3>
             </button>
-            </Link>
         </div>
-             
-          
     );
 }
 

@@ -36,9 +36,18 @@ app.use(express.static('client'));
 // app.use('/assets', express.static('./client/assets'));
 
 //get request to the app page, serve the index.html
-app.get('*', (req, res) => {
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
+
+app.get('/*', (req, res) => {
+  res.redirect('/');
+})
+
+//fetch with session_id to get user_id
+app.get('/session', sessionController.verifySession, (req, res) => {
+  res.status(200).send(res.locals.sessionInfo);
+})
 
 //testing for get all user
 app.get('/user', userController.getAllUsers, (req, res) => {
@@ -80,7 +89,7 @@ app.post('/vote', placesController.updateVote, (req, res) => {
 
 app.post('/deleteplace', placesController.deletePlace, (req, res) => {
   res.status(200).send(res.locals.place);
-})
+});
 
 //create global error handler
 app.use((err, req, res, next) => {
