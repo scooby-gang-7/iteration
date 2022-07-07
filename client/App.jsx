@@ -1,4 +1,5 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import {
     BrowserRouter as Router,
@@ -22,6 +23,25 @@ const App = () => {
   const [userInfo, setUserInfo] = useState({user_id:null});
   const [tripInfo, setTripInfo] = useState([]);
 
+  //conditional check on localstorage to grab user_id;
+  const session_id = JSON.parse(localStorage.getItem('session_id'));
+
+  //fetch to update userInfo on start
+  useEffect (() => {
+    axios.get('http://localhost:3000/session', {
+      params: {
+        session_id
+      }
+    })
+    .then(data => data.json())
+    .then(data => {
+      setUserInfo(data);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, [userInfo])
+
   
     return (
       <div className="App">
@@ -37,7 +57,7 @@ const App = () => {
           draggable
           pauseOnHover />
         <Routes>
-            <Route path="/" element={<Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
+            <Route path="/" element={session_id ? <Navigate to='/mytrips'/> : <Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />} />
             <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />

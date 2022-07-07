@@ -24,33 +24,41 @@ userController.getAllUsers = (req, res, next) => {
 
 userController.createUser = (req, res, next) => {
     const { name_first, name_last, email, password } = req.body;
-    const date = new Date();
-    const dateStr =
-      ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
-      ("00" + date.getDate()).slice(-2) + "/" +
-      date.getFullYear() + " " +
-      ("00" + date.getHours()).slice(-2) + ":" +
-      ("00" + date.getMinutes()).slice(-2) + ":" +
-      ("00" + date.getSeconds()).slice(-2);
-
-    bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
-        if (err) return next(err);
-        // password = hash;
-        // console.log(password);
-        const queryText = `INSERT INTO users (email, name_first, name_last, password, created_at)
-         VALUES ('${email}', '${name_first}', '${name_last}', '${hash}', '${dateStr}') RETURNING *;`;
-        
-        db
-        .query(queryText)
-        .then(data => {
-            console.log(data);
-            res.locals.data = data.rows[0];
-            return next();
+    if (name_first == '' || name_last == '' || email == '' || password =='') {
+        return next(createErr({
+            method:'createUser',
+            type: 'missing info',
+            err: 'Missing Info'
+        }));
+    } else {
+        const date = new Date();
+        const dateStr =
+          ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+          ("00" + date.getDate()).slice(-2) + "/" +
+          date.getFullYear() + " " +
+          ("00" + date.getHours()).slice(-2) + ":" +
+          ("00" + date.getMinutes()).slice(-2) + ":" +
+          ("00" + date.getSeconds()).slice(-2);
+    
+        bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
+            if (err) return next(err);
+            // password = hash;
+            // console.log(password);
+            const queryText = `INSERT INTO users (email, name_first, name_last, password, created_at)
+             VALUES ('${email}', '${name_first}', '${name_last}', '${hash}', '${dateStr}') RETURNING *;`;
+            
+            db
+            .query(queryText)
+            .then(data => {
+                console.log(data);
+                res.locals.data = data.rows[0];
+                return next();
+            })
+            .catch(err => {
+                return next({log: err, message: {err: 'catch in createUser'}});
+            })
         })
-        .catch(err => {
-            return next({log: err, message: {err: 'catch in createUser'}});
-        })
-    })
+    }
 }
 
 userController.verifyUser = (req, res, next) => {

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 
 function Trip (props) {
 
-    console.log('My trip info ->', props.triplist);
+    console.log('Trip info ->', props.triplist);
 
     //trip_name={trip_name} destination={destination} date_start={date_start} date_end={date_end}
     
