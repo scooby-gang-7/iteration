@@ -6,7 +6,7 @@ const SALT_WORK_FACTOR = 5;
 const sessionController = {};
 
 sessionController.startSession = (req, res, next) => {
-    console.log('res.locals.data[0].user_id --> ',res.locals.data.user_id)
+    console.log('res.locals.data.user_id --> ',res.locals.data.user_id)
     const user_id = toString(res.locals.data.user_id)
     const date = new Date();
     // convert date to MM/DD/YYYY HH:MM:SS
@@ -43,7 +43,8 @@ sessionController.startSession = (req, res, next) => {
 };
 
 sessionController.verifySession = (req, res, next) => {
-  console.log(req.cookies.ssid)
+  // no longer using cookies... req will need to include session_id from localstorage
+  console.log(req.body.session_id)
   
   const currDate = new Date();
   // convert date to MM/DD/YYYY HH:MM:SS
@@ -57,7 +58,7 @@ sessionController.verifySession = (req, res, next) => {
 
   const expireDays = 1;
   const text = `SELECT * FROM sessions
-  WHERE session_id = '${req.cookies.ssid}'
+  WHERE session_id = '${req.body.session_id}'
   AND DATE_PART('day', '${currDateStr}'::timestamp - created_at::timestamp) <= ${expireDays}`
   
   db
