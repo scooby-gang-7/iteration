@@ -3,13 +3,14 @@ import '../stylesheets/styles.css'
 import AddTrip from './AddTrip'
 import {Link} from 'react-router-dom';
 
+// child component in boxes for each trip --> only includes trip_name, destination, date_start to date_end, ((MAYBE WHO COMES WITH))
 
+function Trip (props) {
 
-// trip name should pull in from DB trip_name - need to get syntax for this from SQL table
+    console.log('My trip info ->', props.triplist);
 
-
-
-function Trip () {
+    //trip_name={trip_name} destination={destination} date_start={date_start} date_end={date_end}
+    
     return (
         <div>
             <Link to="/addtrip">      
