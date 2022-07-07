@@ -11,7 +11,7 @@ import {
 import './stylesheets/styles.css';
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
-import Map from "./components/map.js";
+import Map from "./components/map.jsx";
 import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
