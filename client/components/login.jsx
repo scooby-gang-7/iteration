@@ -42,9 +42,8 @@ function Login(props) {
       })
       .catch((e) => {
         //pop-up error handling instance
-        console.log(err);
+        console.log(e);
         toast.error('Invalid email or password.');
-        console.log({err});
       })
 
   }
