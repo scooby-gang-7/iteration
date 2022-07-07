@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
 import AddTrip from './AddTrip'
+import TripDetails from './TripDetails';
 import {
     Link, 
     useNavigate
@@ -8,10 +9,12 @@ import {
 
 function Trip (props) {
 
-    function handleSubmit() {
-        const navigate = useNavigate();
-        navigate('/tripdetails', {replace: true});
-    }
+    //I DONT THINK WE CAN HAVE ANOTHER COMPONENT RENDER WITHIN THIS CODEBLOCK
+    // function handleSubmit(props) {
+    //     return (
+    //         <TripDetails key={props.key} name={props.name} destination={props.destination} start={props.start} end={props.end}/>
+    //     )
+    // }
     
     return (
         <div>     

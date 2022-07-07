@@ -1,23 +1,23 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
 import AddTrip from './AddTrip'
+import Trip from './Trip'
 import {Link} from 'react-router-dom';
 
 
 // Trip Details is the overarching pop-up window that includes ALL the trip info / suggestions. UPVOTE and DOWNVOTE functionality.
 
-
-
-function Trip (props) {
+function TripDetails (props) {
 
     return (
-        <div>
-            <Link to="/addtrip">      
-            <button className='addTripButton'>
-                <h1>{/* name of trip*/ /*this.state.trip_name*/}TRIP NAME</h1>
-                <h3>{/* name of trip*/ /*this.state.trip_location*/}LOCATION</h3>
-                <h3>{/* name of trip*/ /*this.state.trip_date, this.state.trip_date*/}START DATE - END DATE</h3>
-            </button>
+        <div>     
+            <div className='tripDetails'>
+                <h1>{props.name}</h1>
+                <h2>{props.destination}</h2>
+                <h2>{props.start} - {props.end}</h2>
+            </div>
+            <Link to="/mytrips">
+                <button>My Trips</button>
             </Link> 
         </div>
              
