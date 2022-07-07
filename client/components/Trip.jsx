@@ -5,14 +5,29 @@ import {
     Link, 
     useNavigate
 } from 'react-router-dom';
+import axios from 'axios';
 
 function Trip (props) {
     console.log('trip props:', props);
     
     const [showDetail, setShowDetail] = useState(false);
+    const [center, setMapCenter] = useState(null);
+    console.log(center);
 
     function handleSubmit() {
-        setShowDetail(showDetail ? false : true);
+        let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
+        let query = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + props.destination + '&key=' + apikey;
+        axios.get(query)
+        .then(res => {
+            console.log(res.data);
+            if (res.data.status == 'OK') {
+                console.log(res.data.results[0]);
+                setMapCenter(res.data.results[0].geometry.location);
+                setShowDetail(showDetail ? false : true);
+            }
+        }).catch(e => {
+            console.log(e);
+        })
     }
     
     return (
@@ -22,7 +37,7 @@ function Trip (props) {
                 <h3>Location: {props.destination}</h3>
                 <h3>Date: {props.start} - {props.end}</h3>
             </button>
-            {showDetail ? <Mapp destination={props.destination}/> : <div></div>}
+            {showDetail ? <Mapp destination={props.destination} center={center}/> : <div></div>}
         </div>
     );
 }
