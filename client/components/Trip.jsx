@@ -1,16 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
-import AddTrip from './AddTrip'
+import Mapp from './map'
 import {
     Link, 
     useNavigate
 } from 'react-router-dom';
 
 function Trip (props) {
+    console.log('trip props:', props);
+    
+    const [showDetail, setShowDetail] = useState(false);
 
     function handleSubmit() {
-        const navigate = useNavigate();
-        navigate('/tripdetails', {replace: true});
+        setShowDetail(showDetail ? false : true);
     }
     
     return (
@@ -20,6 +22,7 @@ function Trip (props) {
                 <h3>Location: {props.destination}</h3>
                 <h3>Date: {props.start} - {props.end}</h3>
             </button>
+            {showDetail ? <Mapp destination={props.destination}/> : <div></div>}
         </div>
     );
 }
