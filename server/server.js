@@ -33,14 +33,16 @@ app.use(cookieParser());
 app.use(express.static(DIST_DIR));
 app.use(express.static('client'));
 // app.use('/assets', express.static('./client/assets'));
-app.get('/map', (req, res) => {
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
-});
+
 
 //get request to the app page, serve the index.html
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
+
+// app.get('/map', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, HTML_FILE));
+// });
 
 app.get('/about', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));

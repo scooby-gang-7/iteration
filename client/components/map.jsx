@@ -2,17 +2,17 @@ import React, { useState, useMemo } from 'react'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import MapItem from './mapItem';
 
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng
-// } from 'use-places-autocomplete';
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng
+} from 'use-places-autocomplete';
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@fdefelici/react-bootstrap-combobox";
 // import "@reach/combobox/styles.css"
 
 function mapp(props) {
@@ -33,9 +33,10 @@ const center = { lat: 44, lng: -80 }
 const markers = [{ lat: 44, lng: -80 }, { lat: 45, lng: -79 }]
 // ^^ const center and marker is placeholder for state
 function Map() {
+  console.log('selected here!!!!!')
   const pins = markers.map((pin, i) => <MapItem position={pin} key={i} />)
   const [selected, setSelected] = useState(null)
-  console.log('selected')
+  
   return (
     <>
     
