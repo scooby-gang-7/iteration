@@ -3,22 +3,23 @@ import '../stylesheets/styles.css'
 import AddTrip from './AddTrip'
 import {
     Link, 
-    useNavigate
+    useNavigate,
+    useParams
 } from 'react-router-dom';
 
-function Trip (props) {
 
-    function handleSubmit() {
-        const navigate = useNavigate();
-        navigate('/tripdetails', {replace: true});
-    }
-    
+
+
+
+function Trip (props) {
     return (
-        <div>     
-            <button className='addTripButton' onClick={handleSubmit}>
+         <div className='myTripBox'>
+            <button>
+            <Link to={`/mytrips/${props.trip_id}`}>
                 <h1>Trip Name: {props.name}</h1>
                 <h3>Location: {props.destination}</h3>
                 <h3>Date: {props.start} - {props.end}</h3>
+            </Link>  
             </button>
         </div>
     );

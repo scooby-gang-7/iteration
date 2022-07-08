@@ -36,7 +36,7 @@ function MyTrips (props) {
             <h1>My Trips</h1>
             <br />
             {props.tripInfo.map((trip) => {
-                return <Trip key={trip.trip_id} name={trip.trip_name} destination={trip.destination} start={trip.date_start} end={trip.date_end}/>
+                return <Trip key={trip.trip_id} trip_id={trip.trip_id} name={trip.trip_name} destination={trip.destination} start={trip.date_start} end={trip.date_end}/>
             })}
             <br />
             <Link to="/addtrip">

@@ -6,7 +6,8 @@ import {
     Routes,
     Route,
     Link,
-    Navigate
+    Navigate,
+    useParams
   } from "react-router-dom";
 import './stylesheets/styles.css';
 import Login from "./components/Login.jsx";
@@ -16,12 +17,14 @@ import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
 import AddTrip from "./components/AddTrip.jsx";
+import TripDetails from "./components/TripDetails.jsx"
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   
   const [userInfo, setUserInfo] = useState({user_id:null});
   const [tripInfo, setTripInfo] = useState([]);
+  const [currentTripInfo, setCurrentTripInfo] = useState({});
 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
@@ -70,7 +73,7 @@ const App = () => {
             <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />} />
             <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />
-            <Route path="/addtrip" element={<AddTrip userInfo={userInfo} /> } />
+              <Route path="/mytrips/:id" element={<TripDetails currentTripInfo={currentTripInfo} setCurrentTripInfo={setCurrentTripInfo} />} />
             <Route path="/map" element={<Map />} />
         </Routes>
       </div>

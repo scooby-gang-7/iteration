@@ -52,6 +52,10 @@ app.get('/user', userController.getAllUsers, (req, res) => {
   res.status(200).send(res.locals.data);
 })
 
+app.post('/getTrip', tripController.getOneTrip, (req, res) => {
+  res.status(200).send(res.locals.trip);
+})
+
 //testing for createUser
 app.post('/signup', userController.createUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
   res.status(200).send(res.locals.sessionInfo);
