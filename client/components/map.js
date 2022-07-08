@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import MapItem from './mapItem';
 import axios from 'axios';
 
@@ -19,11 +19,9 @@ function Mapp(props) {
   )
 }
 
-// ^^ const center and marker is placeholder for state
 function Map(props) {
   console.log('map props', props);
 
-  // const center = { lat: 44, lng: -80 }
   const markers = [{lat: 44, lng: -80}, {lat: 45, lng: -79}];
 
   const pins = markers.map((pin, i) => <MapItem position={pin} key={i} />)
@@ -32,7 +30,7 @@ function Map(props) {
     center={props.center}
     mapContainerClassName="map-container"
   >
-    {/* <Marker position = {center} /> */}
+    <Marker position = {props.center} />
     {/* {pins} */}
   </GoogleMap>
 }
