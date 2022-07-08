@@ -17,7 +17,23 @@ placesController.addPlace = (req, res, next) => {
         .catch(err => {
             return next({log: err, message: {err: 'catch in addPlace'}});
         })
-}
+};
+
+
+//logic for getAllplaces
+placesController.getAllplaces = (req, res, next) => {
+    const trip_id = req.query.trip_id;
+    const text = `SELECT * FROM places
+    WHERE trip_id='${trip_id}';`;
+    db.query(text)
+        .then(data => {
+            res.locals.places = data.rows;
+            return next();
+        })
+        .catch(err => {
+            return next({log: err, message: {err: 'catch in getAllplaces'}})
+        });
+};
 
 placesController.updateVote = (req, res, next) => {
     const { place_id, up_vote, down_vote } = req.body;

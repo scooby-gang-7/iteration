@@ -31,25 +31,21 @@ app.use(express.urlencoded({ extended: true}));
 app.use(cookieParser());
 
 // handle requests for static files
-app.use(express.static(DIST_DIR));
-app.use(express.static('client'));
-// app.use('/assets', express.static('./client/assets'));
+// app.use(express.static(DIST_DIR));
+// app.use(express.static('client'));
+app.use('/assets', express.static('./client/assets'));
 
 
 
 
-// app.get('/map', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, HTML_FILE));
-// });
+app.get('/', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
 
 app.get('/about', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
-app.get('/signup', (req, res) => {
-  //condition on ENV, if production, serve build/index.html
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
-});
 
 //fetch with session_id to get user_id
 app.get('/session', sessionController.verifySession, (req, res) => {
@@ -86,6 +82,12 @@ app.post('/gettrips', tripController.getAlltrips, (req, res) => {
   res.status(200).send(res.locals.trips);
 })
 
+//fetch to get all places for a particular trip_id
+app.get('/places', placesController.getAllplaces, (req, res) => {
+  res.status(200).send(res.locals.places);
+})
+
+
 app.post('/addplace', placesController.addPlace, (req, res) => {
   res.status(200).send(res.locals.place);
 })
@@ -98,10 +100,10 @@ app.post('/deleteplace', placesController.deletePlace, (req, res) => {
   res.status(200).send(res.locals.place);
 });
 
-//get request to the app page, serve the index.html
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
-});
+//redirect on other request
+app.get('/*', (req, res) => {
+  res.redirect('/');
+})
 
 //create global error handler
 app.use((err, req, res, next) => {

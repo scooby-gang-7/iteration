@@ -1,6 +1,7 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import MapItem from './mapItem';
+import axios from 'axios';
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -16,9 +17,7 @@ import {
 } from "@reach/combobox";
 import "@reach/combobox/styles.css"
 
-// const google = window.google;
-
-function mapp(props) {
+function Mapp(props) {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
     googleMapsApiKey: 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78',
@@ -28,48 +27,60 @@ function mapp(props) {
   if (!isLoaded) return <div>Loading...</div>
   return (
     <div>
-      <Map />
+      <Map destination={props.destination} center={props.center} trip_id={props.trip_id} />
     </div>
   )
 }
-
-const center = { lat: 44, lng: -80 }
-// center is a placeholder for state
 const url =
   "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
-// const scaledSize = new google.maps.Size(38, 31)
 
-function Map() {
-  const [selected, setSelected] = useState([])
-  const centerCity = <MapItem
-    position={center}
-    key={center}
-    icon={url}
-    title={'Where it will all go down!'}
-    animation={google.maps.Animation.DROP}
-  />
+function Map(props) {
+  const [selected, setSelected] = useState([]);
   const pins = selected.map((pin, i) => <MapItem
     position={pin}
     key={i}
     animation={google.maps.Animation.DROP}
   />)
+
+  const { trip_id } = props;
+
+  const [places, setPlaces] = useState(null);
+  //on render, fetch to get all the stops for the trip
+  useEffect(() => {
+    axios.get('http://localhost:3000/places', {
+      params: {
+        trip_id
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        setPlaces(response.data);
+        console.log('data from trip_id', response.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  //todo use places to get another set of pins
+
   return (
     <>
       <div className="places-container">
-        <PlacesAutoComplete setSelected={setSelected} />
+        <PlacesAutoComplete setSelected={setSelected} trip_id={trip_id} />
       </div>
       <GoogleMap
         zoom={6}
-        center={center}
+        center={props.center}
         mapContainerClassName="map-container"
       >
-        {centerCity}
+        <Marker position={props.center} icon={url} />
         {selected && pins}
       </GoogleMap>
     </>
   )
 }
-const PlacesAutoComplete = ({ setSelected }) => {
+const PlacesAutoComplete = ({ setSelected, trip_id }) => {
 
   const {
     ready,
@@ -84,22 +95,52 @@ const PlacesAutoComplete = ({ setSelected }) => {
     clearSuggestions();
 
     const results = await getGeocode({ address });
+    console.log('find data here to save to database', results);
+
     const { lat, lng } = await getLatLng(results[0]);
-    console.log(typeof (lat), 'lat')
-    setSelected(selected => [...selected, { lat, lng }])
-  }
+    setSelected(selected => [...selected, { lat, lng }]);
+
+    // console.log("geometry   ", results[0].geometry.location.lat);
+
+    const newplace = {
+      trip_id,
+      google_place_id: results[0].place_id,
+      name: 'test',
+      address: results[0].formatted_address,
+      type: "hotel",
+      lat: lat,
+      long: lng
+    };
+    console.log('new place', newplace);
+
+    fetch('http://localhost:3000/addplace', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newplace)
+    })
+      .then(data => data.json())
+        .then(data => {
+          console.log('fetched data!', data);
+        })
+        .catch(e => {
+          console.log(e);
+        })
+  };
+
+  //construct the place object here
+  //We have to construct this newplace object and send as the body for post. Those keys are required for database. we should find the value for the keys from results object from Geocode.
+
 
   return (
     <Combobox onSelect={handleSelect}>
-      {/* <p> */}
-        {/* <label for="enteringStops">Add to map here! ---{'>'} </label> */}
-        <ComboboxInput
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          disabled={!ready}
-          className="combobox-input"
-          placeholder="Search Location" />
-      {/* </p> */}
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        className="combobox-input"
+        placeholder="Search Location" />
       <ComboboxPopover>
         <ComboboxList>
           {status === "OK" && data.map(({ place_id, description }) => (
@@ -111,6 +152,4 @@ const PlacesAutoComplete = ({ setSelected }) => {
   )
 };
 
-
-
-export default mapp
+export default Mapp
