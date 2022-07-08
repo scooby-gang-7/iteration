@@ -38,8 +38,8 @@ function Places(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.currentPlacesInfo.map((place) => {
-                        return <Row key={place.place_id} place_id={place.place_id} name={place.name} address={place.address} up_vote={place.up_vote} down_vote={place.down_vote}/>
+                    {props.currentPlacesInfo.sort((a,b) => (a.name > b.name) ? 1 : -1).map((place) => {
+                        return <Row key={place.place_id} place_id={place.place_id} name={place.name} address={place.address} up_vote={place.up_vote} down_vote={place.down_vote} currentPlacesInfo={props.currentPlacesInfo} setCurrentPlacesInfo={props.setCurrentPlacesInfo}/>
                     })}
                 </tbody>
             </table>

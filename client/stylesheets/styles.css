@@ -34,3 +34,14 @@ nav ul {
     display: flexbox;
     
 }
+
+.placeDetails{
+    border: 1px solid black;
+    padding: 5px;
+    width: 80vw;
+}
+
+.placeDetails td{
+    padding-left: 5px;
+    padding-right: 5px;
+}
