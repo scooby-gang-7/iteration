@@ -38,7 +38,7 @@ placesController.updateVote = (req, res, next) => {
     const text = `UPDATE places
     SET up_vote = up_vote + '${up_vote}',
         down_vote = down_vote + '${down_vote}'
-    WHERE place_id = '${place_id}' RETURNING * FROM places WHERE place_id = ${place_id}`;
+    WHERE place_id = '${place_id}' RETURNING *`;
 
     db.
         query(text)

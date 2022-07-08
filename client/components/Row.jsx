@@ -24,8 +24,16 @@ function Row(props) {
             },
             body: JSON.stringify(body)
         })
-            .then(data => data.json())
-            .then(data => console.log(data))
+            .then(placesDetail => placesDetail.json())
+            .then(placesDetails => {
+                // console.log('props.currentPlacesInfo --> ',props.currentPlacesInfo)
+                const newPlacesInfo = props.currentPlacesInfo.map((obj) => {
+                    if (obj.place_id === props.place_id) return placesDetails;
+                    return obj;
+                })
+                // console.log('newPlacesInfo --> ',newPlacesInfo)
+                props.setCurrentPlacesInfo(newPlacesInfo)
+            })
             .catch(e => {
                 console.log(e)
             })
@@ -33,16 +41,22 @@ function Row(props) {
 
     return (
         <tr>
-            {/* <div>
-                <th>{props.name}</th>
-            </div> */}
-            <div>
-            {props.name}
-               <img onClick={handleClick} id="upVote" src={thumbsUp} />
-                <img id="downVote" src={thumbsDown} onClick={handleClick}/>
-                <p className="count">{props.up_vote}</p>
-                <p className="count">{props.down_vote}</p>
-            </div>
+            <td>
+                <table className="placeDetails">
+                    <tbody>
+                        <tr>
+                            <td width="80%"><b>{props.name}</b></td>
+                            <td width="10%"><img onClick={handleClick} id="upVote" src={thumbsUp} /></td>
+                            <td width="10%"><img id="downVote" src={thumbsDown} onClick={handleClick}/></td>
+                        </tr>
+                        <tr>
+                            <td width="80%">Address: {props.address}</td>
+                            <td width="10%"><p className="count">{props.up_vote}</p></td>
+                            <td width="10%"><p className="count">{props.down_vote}</p></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
         </tr>
     )
 
