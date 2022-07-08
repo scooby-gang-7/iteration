@@ -6,10 +6,8 @@ import Trip from './Trip'
 
 // INCLUDE MAP API
 function MyTrips (props) {
-
-
-    console.log('My trip props ->', props);
-    console.log('My trip info ->', props.tripInfo);
+    // console.log('My trip props ->', props);
+    // console.log('My trip info ->', props.tripInfo);
     
     //on loading, fetch request to get all the trips info for the user
     useEffect(() => {

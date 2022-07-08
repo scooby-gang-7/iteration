@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
-import AddTrip from './AddTrip'
+import AddTrip from './AddTrip';
+import Places from "./Places.jsx";
+import Row from "./Row.jsx"
+import Map from "./map.jsx"
 import {
     Link, 
     useParams
@@ -12,6 +15,7 @@ function TripDetail (props) {
 
     const {id} = useParams();
 
+    // fetching all places for the selected trip and storing them to currentTripInfo in state
     useEffect(() => {
         fetch('http://localhost:3000/getTrip/', {
             method: 'POST',
@@ -31,8 +35,6 @@ function TripDetail (props) {
                 console.log(e);
             })
     }, []);
-
-
     
     return (
         <div> 
@@ -44,23 +46,9 @@ function TripDetail (props) {
             </div>          
             
             <div id='mapDiv'>
-                <h2>MAP</h2>
+                <Map />
             </div>
-            
-            <div id='placesDiv'>
-                <table id='placesTable'>
-                    <thead>
-                        <tr>
-                            <th>Restaurants</th>
-                            <th>Activities</th>
-                            <th>Sightseeing</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-            </div>
-            
+            <Places trip_id={id}/>
         </div>
         
     );

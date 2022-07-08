@@ -68,4 +68,4 @@ function Map() {
 
 
 
-export default mapp
+export default mapp;

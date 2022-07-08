@@ -2,6 +2,20 @@ const db = require('../models/userTripModels');
 
 const placesController = {};
 
+placesController.getAllPlaces = (req, res, next) => {
+    const { trip_id } = req.body;
+    const text = `SELECT * FROM places WHERE trip_id = '${trip_id}'`
+
+    db.query(text)
+        .then(data => {
+            res.locals.places = data.rows;
+            return next;
+        })
+        .catch(err => {
+            return next({log: err, message: {err: 'catch in getAllPlaces'}});
+        })
+}
+
 placesController.addPlace = (req, res, next) => {
     const { trip_id, google_place_id, name, address, type, lat, long } = req.body;
     const text = `INSERT INTO places

@@ -81,6 +81,10 @@ app.post('/gettrips', tripController.getAlltrips, (req, res) => {
   res.status(200).send(res.locals.trips);
 })
 
+app.post('/getPlaces', placesController.getAllPlaces, (req, res) => {
+  res.status(200).send(res.locals.places);
+})
+
 app.post('/addplace', placesController.addPlace, (req, res) => {
   res.status(200).send(res.locals.place);
 })

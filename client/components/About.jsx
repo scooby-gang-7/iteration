@@ -5,7 +5,19 @@ function About()  {
 
     return (
         <div>
-            <h1>About Page</h1>
+            <h1>Scratch Project</h1>
+            <div>
+                <h3>Problem/Solution</h3>
+                <p></p>
+            </div>
+            <div>
+                <h3>Challenges</h3>
+                <p></p>
+            </div>
+            <div>
+                <h3>Stretch Goals</h3>
+                <p></p>
+            </div>
         </div>
     );
 }
