@@ -2,6 +2,20 @@ const db = require('../models/userTripModels');
 
 const placesController = {};
 
+placesController.getAllPlaces = (req, res, next) => {
+    const { trip_id } = req.body;
+    const text = `SELECT * FROM places WHERE trip_id = '${trip_id}'`
+
+    db.query(text)
+        .then(data => {
+            res.locals.places = data.rows;
+            return next();
+        })
+        .catch(err => {
+            return next({log: err, message: {err: 'catch in getAllPlaces'}});
+        })
+}
+
 placesController.addPlace = (req, res, next) => {
     const { trip_id, google_place_id, name, address, type, lat, long } = req.body;
     const text = `INSERT INTO places
@@ -24,7 +38,7 @@ placesController.updateVote = (req, res, next) => {
     const text = `UPDATE places
     SET up_vote = up_vote + '${up_vote}',
         down_vote = down_vote + '${down_vote}'
-    WHERE place_id = '${place_id}' RETURNING *`;
+    WHERE place_id = '${place_id}' RETURNING * FROM places WHERE place_id = ${place_id}`;
 
     db.
         query(text)

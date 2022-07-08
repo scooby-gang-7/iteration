@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
-import Mapp from './map'
+import AddTrip from './AddTrip'
+import TripDetails from './TripDetails';
+import Map from './map'
 import {
     Link, 
     useNavigate,
