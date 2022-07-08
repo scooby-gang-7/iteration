@@ -1,6 +1,6 @@
 .map-container {
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 400px;
 }
 
 nav{
@@ -20,4 +20,9 @@ nav{
     justify-content: space-around;
     align-items: center;
     list-style: none;
+}
+
+.combobox-input {
+    /* height: 100px; */
+    text-align: left;
 }

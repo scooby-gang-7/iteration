@@ -91,12 +91,15 @@ const PlacesAutoComplete = ({ setSelected }) => {
 
   return (
     <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className="combobox-input"
-        placeholder="Search Location" />
+      {/* <p> */}
+        {/* <label for="enteringStops">Add to map here! ---{'>'} </label> */}
+        <ComboboxInput
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+          className="combobox-input"
+          placeholder="Search Location" />
+      {/* </p> */}
       <ComboboxPopover>
         <ComboboxList>
           {status === "OK" && data.map(({ place_id, description }) => (
