@@ -48,7 +48,7 @@ function TripDetail (props) {
             <div id='mapDiv'>
                 <Map />
             </div>
-            <Places trip_id={id}/>
+            <Places trip_id={id} currentPlacesInfo={props.currentPlacesInfo} setCurrentPlacesInfo={props.setCurrentPlacesInfo}/>
         </div>
         
     );

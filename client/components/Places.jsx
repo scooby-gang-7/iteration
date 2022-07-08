@@ -7,6 +7,7 @@ function Places(props) {
 
     // fetching all places for the current trip and storing them to currentPlacesInfo in state
     useEffect(() => {
+        console.log('props.trip_id --> ', props.trip_id)
         fetch('http://localhost:3000/getPlaces', {
             method: 'POST',
             headers: {
@@ -18,13 +19,14 @@ function Places(props) {
         })
             .then(placesDetails => placesDetails.json())
             .then(placesDetails => {
+                console.log('this happened!')
                 console.log('placesDetails from Fetch --> ', placesDetails)
                 props.setCurrentPlacesInfo(placesDetails);
             })
             .catch(e => {
                 console.log(e);
             })
-    });
+    }, []);
 
 
     return (
@@ -36,8 +38,8 @@ function Places(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.placesDetails.map((place) => {
-                        return <Row key={props.place_id} name={props.name} address={props.address} upvote={props.up_vote} downvote={props.down_vote}/>
+                    {props.currentPlacesInfo.map((place) => {
+                        return <Row key={place.place_id} place_id={place.place_id} name={place.name} address={place.address} up_vote={place.up_vote} down_vote={place.down_vote}/>
                     })}
                 </tbody>
             </table>

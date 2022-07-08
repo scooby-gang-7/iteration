@@ -9,7 +9,7 @@ placesController.getAllPlaces = (req, res, next) => {
     db.query(text)
         .then(data => {
             res.locals.places = data.rows;
-            return next;
+            return next();
         })
         .catch(err => {
             return next({log: err, message: {err: 'catch in getAllPlaces'}});
@@ -38,7 +38,7 @@ placesController.updateVote = (req, res, next) => {
     const text = `UPDATE places
     SET up_vote = up_vote + '${up_vote}',
         down_vote = down_vote + '${down_vote}'
-    WHERE place_id = '${place_id}' RETURNING *`;
+    WHERE place_id = '${place_id}' RETURNING * FROM places WHERE place_id = ${place_id}`;
 
     db.
         query(text)
