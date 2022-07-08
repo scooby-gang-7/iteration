@@ -19,11 +19,22 @@ tripController.getAlltrips = async (req, res, next) => {
     return next();
 };
 
+tripController.getOneTrip = async (req, res, next) => {
+    const { trip_id } = req.body;
+    const queryText = `SELECT * 
+    FROM trips
+    WHERE trip_id = '${ trip_id }'`;
 
+    const tripData = await db.query(queryText);
+    console.log('tripData from getOneTrip after query -->', tripData)
+    res.locals.trip = tripData.rows[0];
+    next();
+}
 //done
 tripController.createTrip = async (req, res, next) => {
     const { trip_name, description, destination, date_start, date_end, user_id } = req.body;
     const date = new Date();
+    // convert date to MM/DD/YYYY HH:MM:SS
     const dateStr =
       ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
       ("00" + date.getDate()).slice(-2) + "/" +
