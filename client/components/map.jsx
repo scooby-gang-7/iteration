@@ -2,18 +2,18 @@ import React, { useState, useMemo } from 'react'
 import { GoogleMap, useLoadScript } from '@react-google-maps/api'
 import MapItem from './mapItem';
 
-import usePlacesAutocomplete, {
-  getGeocode,
-  getLatLng
-} from 'use-places-autocomplete';
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
-import "@reach/combobox/styles.css"
+// import usePlacesAutocomplete, {
+//   getGeocode,
+//   getLatLng
+// } from 'use-places-autocomplete';
+// import {
+//   Combobox,
+//   ComboboxInput,
+//   ComboboxPopover,
+//   ComboboxList,
+//   ComboboxOption,
+// } from "@reach/combobox";
+// import "@reach/combobox/styles.css"
 
 function mapp(props) {
   const { isLoaded } = useLoadScript({
@@ -40,7 +40,7 @@ function Map() {
     <>
     
       <div className="places-container">
-        <PlacesAutoComplete setSelected={setSelected} />
+        {/* <PlacesAutoComplete setSelected={setSelected} /> */}
       </div>
       <GoogleMap
         zoom={7}
@@ -52,20 +52,20 @@ function Map() {
     </>
   )
 }
-const PlacesAutoComplete = ({ setSelected }) => {
-  const {
-      ready,
-      value,
-      setValue,
-      suggestions: {status, data},
-      clearSuggestions
-  } = usePlacesAutocomplete();
+// const PlacesAutoComplete = ({ setSelected }) => {
+//   const {
+//       ready,
+//       value,
+//       setValue,
+//       suggestions: {status, data},
+//       clearSuggestions
+//   } = usePlacesAutocomplete();
 
-  return <Combobox>
-    <ComboboxInput value = {value}/>
-  </Combobox>
-};
+//   return <Combobox>
+//     <ComboboxInput value = {value}/>
+//   </Combobox>
+// };
 
 
 
-export default mapp
+export default mapp;

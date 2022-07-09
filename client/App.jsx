@@ -6,28 +6,32 @@ import {
     Routes,
     Route,
     Link,
-    Navigate
+    Navigate,
+    useParams
   } from "react-router-dom";
 import './stylesheets/styles.css';
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
-import Map from "./components/map.js";
+import Map from "./components/map.jsx";
 import Nav from "./components/Nav.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
 import AddTrip from "./components/AddTrip.jsx";
+import TripDetails from "./components/TripDetails.jsx"
 import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   
   const [userInfo, setUserInfo] = useState({user_id:null});
   const [tripInfo, setTripInfo] = useState([]);
+  const [currentTripInfo, setCurrentTripInfo] = useState({});
+  const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
   const isInitialMount = useRef(true);
 
-  console.log('app props userInfo', userInfo);
+  // console.log('app props userInfo', userInfo);
 
   //fetch to update userInfo on start
   useEffect (() => {
@@ -51,7 +55,6 @@ const App = () => {
   }
 );
 
-  
     return (
       <div className="App">
         <Nav />
@@ -69,8 +72,9 @@ const App = () => {
             <Route path="/" element={userInfo.user_id ? <Navigate to='/mytrips'/> : <Login setUserInfo={setUserInfo} userInfo={userInfo}/>} />
             <Route path="/about" element={<About/>} />
             <Route path="/signup" element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />} />
+            <Route path="/addtrip" element={<AddTrip userInfo={userInfo} setTripInfo={setTripInfo} />}/>
             <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />
-            <Route path="/addtrip" element={<AddTrip userInfo={userInfo} /> } />
+            <Route path="/mytrips/:id" element={<TripDetails currentTripInfo={currentTripInfo} setCurrentTripInfo={setCurrentTripInfo} currentPlacesInfo={currentPlacesInfo} setCurrentPlacesInfo={setCurrentPlacesInfo} />} />
             <Route path="/map" element={<Map />} />
         </Routes>
       </div>
