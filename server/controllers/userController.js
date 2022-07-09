@@ -51,7 +51,7 @@ userController.createUser = (req, res, next) => {
             db
             .query(queryText)
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 res.locals.data = data.rows[0];
                 return next();
             })

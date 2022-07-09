@@ -13,7 +13,7 @@ tripController.getAlltrips = async (req, res, next) => {
     WHERE R.user_id = ${user_id};`;
     
     const tripsdata = await db.query(queryText);
-    console.log(tripsdata);
+    // console.log(tripsdata);
 
     res.locals.trips = tripsdata.rows;
     return next();
@@ -58,15 +58,37 @@ tripController.createTrip = async (req, res, next) => {
     return next();
 };
 
+tripController.getTripbuddy = async (req, res, next) => {
+    const { trip_id } = req.body;
+    const queryText = `SELECT R.user_trip_id, R.trip_id, R.user_id, R.owner, u.name_first 
+    FROM user_trip_rel as R
+    JOIN users as u
+    ON R.user_id = u.user_id
+    WHERE R.trip_id = '${trip_id}';`;
+
+    const memberdata = await db.query(queryText);
+    console.log(memberdata);
+    res.locals.members = memberdata.rows;
+    return next();
+};
+
 
 tripController.addTripbuddy = async (req, res, next) => {
-    const { trip_id, buddy_id } = req.body;
+    const { trip_id, buddy_email } = req.body;
+
+    const queryText1 = `SELECT user_id from users
+    WHERE email='${buddy_email}'`;
+    
+    const buddy_info = await db.query(queryText1);
+    const buddy_id = buddy_info.rows[0].user_id;
+    console.log('buddy info:', buddy_info);
+
     const queryText = `INSERT INTO user_trip_rel (user_id, trip_id, owner)
     VALUES ('${buddy_id}', '${trip_id}', '${false}')
     RETURNING *;`;
     
     const reldata = await db.query(queryText);
-    console.log(reldata);
+    // console.log(reldata);
     //do a query, get the members of the trip.
     const queryText2 = `SELECT R.user_trip_id, R.trip_id, R.user_id, R.owner, u.name_first 
     FROM user_trip_rel as R
@@ -75,7 +97,7 @@ tripController.addTripbuddy = async (req, res, next) => {
     WHERE R.trip_id = '${trip_id}';`;
 
     const memberdata = await db.query(queryText2);
-    console.log(memberdata);
+    // console.log(memberdata);
     res.locals.members = memberdata.rows;
 
     return next();

@@ -35,11 +35,16 @@ app.use(cookieParser());
 // app.use(express.static('client'));
 app.use('/assets', express.static('./client/assets'));
 
-//get request to the app page, serve the index.html
+
+
+
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
+app.get('/about', (req, res) => {
+  res.sendFile(path.resolve(__dirname, HTML_FILE));
+});
 
 
 //fetch with session_id to get user_id
@@ -77,6 +82,11 @@ app.post('/addtrip', tripController.createTrip, (req, res) => {
 
 //testing for addtripbuddy
 app.post('/addbuddy', tripController.addTripbuddy, (req, res) => {
+  res.status(200).send(res.locals.members);
+})
+
+//fetch for gettripbuddy
+app.post('/getbuddy', tripController.getTripbuddy, (req, res) => {
   res.status(200).send(res.locals.members);
 })
 
