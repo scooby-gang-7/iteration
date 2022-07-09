@@ -75,22 +75,15 @@ nav{
     color: #e05637;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> dev
 .nav-links a:link {
     text-decoration: none;
     color: white
 }
 
-<<<<<<< HEAD
-=======
 nav h1 {
     margin-left: 20px;
 }
 
->>>>>>> dev
 .myTripBox{
     font-family: 'Abril Fatface', cursive;    
 }
@@ -121,7 +114,6 @@ nav h1 {
     color: black;
 }
 
-<<<<<<< HEAD
 #signout {
     color: white
 }
@@ -129,7 +121,7 @@ nav h1 {
 #signout:hover {
     cursor: pointer;
 }
-=======
+
 #myTrips h1 {
     color: #e05637;
     text-align: center;
@@ -143,4 +135,3 @@ nav h1 {
     width: 100px;
 }
 
->>>>>>> dev
