@@ -32,7 +32,7 @@ function MyTrips (props) {
     const today = new Date()
 
     return (
-        <div>
+        <div id="myTrips">
             <br />
                 <Link to="/addtrip">
                     <button className='addTripButton'>Add New Trip</button>

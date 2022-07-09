@@ -1,8 +1,12 @@
 #root {
-    background-color: rgb(233, 119, 58);;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-color: rgb(26, 24, 24);
+    margin: 0;
+}
+
+.App {
+    display: grid;
+    grid-template-rows: 80px 80px 1fr 80px;
+    grid-template-columns: 1fr 1fr 1fr;
 }
 
 .map-container {
@@ -11,17 +15,24 @@
 }
 
 #login-parent {
-    background-color: rgb(233, 151, 107);
+    background-color: #2e2c2c;
     font-family: 'Abril Fatface', cursive;
     border-radius: 10px;
     width: 300px;
     text-align: center;
     margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+}
+
+#login-parent h3 {
+    font-size:x-large
 }
 
 #btn-login {
     margin-left: 20px;
-    background-color: #e9976b;
+    background-color: #e05637;
     border-radius: 7px;
     border: 1px solid;
     padding: 3px;
@@ -30,8 +41,7 @@
 
 #btn-signup {
     margin-right: 20px;
-    color: black; 
-    background-color: #F6E0DB;
+    background-color: #e05637;;
     border-radius: 7px;
     border: 1px solid;
     padding: 3px;
@@ -40,25 +50,39 @@
 
 
 nav{
-    font-family: Helvetica;
+    font-family: 'Montserrat', sans-serif;
     align-items: center;
     min-height: 10vh;
-    background: rgb(94, 81, 68);
-    color: rgb(210, 192, 174);
-
+    background: rgb(26, 24, 24);
+    color: #e05637;
+    grid-row-start: 1;
+    grid-column: 1 / span 3;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    list-style: none;
 }
 
 .nav-links{
-    width: 50%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
     list-style: none;
+    flex-direction: row;
+    text-align: center;
+    margin-right: 20px;
+    color: #e05637;
 }
+
+
+.nav-links a:link {
+    text-decoration: none;
+    color: white
+}
+
+nav h1 {
+    margin-left: 20px;
+}
+
 .myTripBox{
-    font-Family: Helvetica;
-    display: flexbox;
-    
+    font-family: 'Abril Fatface', cursive;    
 }
 
 .placeDetails{
@@ -78,9 +102,23 @@ nav{
 
 .myTripBox button {
     width: 600px;
+    border-radius: 10px;
 }
 
 .myTripBox a {
     text-decoration: none;
     color: black;
 }
+
+#myTrips h1 {
+    text-align: center;
+    margin-bottom: -12px;
+}
+
+.addTripButton {
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 3px;
+    width: 100px;
+}
+

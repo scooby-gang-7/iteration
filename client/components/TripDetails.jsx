@@ -2,9 +2,8 @@ import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
 import AddTrip from './AddTrip';
 import Places from "./Places.jsx";
-import Row from "./Row.jsx";
-import Map from "./map.js";
-import AddBuddy from "./AddBuddy.jsx";
+import Row from "./Row.jsx"
+import Map from "./map.jsx"
 import {
     Link, 
     useParams
@@ -37,16 +36,18 @@ function TripDetail (props) {
             })
     }, []);
     
+    const startDate = new Date(props.currentTripInfo.date_start)
+    const startDateDisplay = `${startDate.getMonth()}/${startDate.getDate()}/${startDate.getFullYear()}`
+    const endDate = new Date(props.currentTripInfo.date_end)
+    const endDateDisplay = `${endDate.getMonth()}/${endDate.getDate()}/${endDate.getFullYear()}`
+
     return (
         <div> 
             <div id='detailsDiv'>
                 <h1 className='standardHeader'>{props.currentTripInfo.trip_name}</h1>
-                <h2>{props.currentTripInfo.destination}</h2>
-                <h2>{props.currentTripInfo.description}</h2>
-                <h2>{props.currentTripInfo.start} - {props.currentTripInfo.end}</h2>
-            </div>
-            <div>
-                <AddBuddy trip_id={id} />    
+                <p>{props.currentTripInfo.destination}</p>
+                <p>{props.currentTripInfo.description}</p>
+                <p>{startDateDisplay} - {endDateDisplay}</p>
             </div>          
             
             <div id='mapDiv'>

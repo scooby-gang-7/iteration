@@ -40,7 +40,7 @@ function Trip (props) {
 
     return (
          <div className='myTripBox'>
-            <button>
+            <button class="btn-trip">
             <Link to={`/mytrips/${props.trip_id}`}>
                 <h1>Trip Name: {props.name}</h1>
                 <h3>Location: {props.destination}</h3>
