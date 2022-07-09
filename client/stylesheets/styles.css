@@ -16,6 +16,7 @@
 
 #login-parent {
     background-color: #2e2c2c;
+    color: #e05637;
     font-family: 'Abril Fatface', cursive;
     border-radius: 10px;
     width: 300px;
@@ -27,12 +28,14 @@
 }
 
 #login-parent h3 {
+    
     font-size:x-large
 }
 
 #btn-login {
     margin-left: 20px;
     background-color: #e05637;
+    font-family: 'Montserrat', sans-serif;
     border-radius: 7px;
     border: 1px solid;
     padding: 3px;
@@ -41,7 +44,8 @@
 
 #btn-signup {
     margin-right: 20px;
-    background-color: #e05637;;
+    background-color: #e05637;
+    font-family: 'Montserrat', sans-serif;
     border-radius: 7px;
     border: 1px solid;
     padding: 3px;
@@ -97,6 +101,7 @@ nav h1 {
 }
 
 .myTripBox {
+    background-color: #2e2c2c;
     margin: 10px;
 }
 
@@ -111,6 +116,7 @@ nav h1 {
 }
 
 #myTrips h1 {
+    color: #e05637;
     text-align: center;
     margin-bottom: -12px;
 }
