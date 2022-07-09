@@ -75,9 +75,16 @@ nav{
     color: #e05637;
 }
 
+a:visited {
+    text-decoration: none;
+    color: #e05637;
+    
+}
+
+
 .nav-links a:link {
     text-decoration: none;
-    color: white
+    color: #e05637
 }
 
 nav h1 {
@@ -85,13 +92,20 @@ nav h1 {
 }
 
 .myTripBox{
-    font-family: 'Abril Fatface', cursive;    
+    font-family: 'Abril Fatface', cursive;   
 }
 
 .placeDetails{
     border: 1px solid black;
     padding: 5px;
     width: 80vw;
+    background-color:  #2e2c2c;;
+    border-radius: 10px;
+    color: #e05637;
+}
+
+.placeDetails img:hover {
+    cursor: pointer;
 }
 
 .placeDetails td {
@@ -107,15 +121,17 @@ nav h1 {
 .myTripBox button {
     width: 600px;
     border-radius: 10px;
+    background-color: #443e3e;
+    color: #e05637;
 }
 
 .myTripBox a {
     text-decoration: none;
-    color: black;
+    color: rgb(0, 0, 0);
 }
 
 #signout {
-    color: white
+    color: #e05637;
 }
 
 #signout:hover {
@@ -124,6 +140,7 @@ nav h1 {
 
 #myTrips h1 {
     color: #e05637;
+    font-family: 'Montserrat', sans-serif;
     text-align: center;
     margin-bottom: -12px;
 }
@@ -134,4 +151,69 @@ nav h1 {
     padding: 3px;
     width: 100px;
 }
+#addtrip-parent {
+    background-color: #2e2c2c;
+    color: #e05637;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+}
 
+::placeholder {
+    
+    font-family: 'Montserrat', sans-serif;
+}
+#signup-parent {
+    background-color: #2e2c2c;
+    color: #e05637;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+
+}
+#about-form {
+    background-color: #2e2c2c;
+    color: #e05637;
+    border-radius: 10px;
+    width: 1000px;
+    text-align: center;
+    margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+    
+}
+#detailsDiv {
+    background-color: #2e2c2c;
+    color: #e05637;
+    border-radius: 10px;
+    width: 1000px;
+    text-align: center;
+    margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+    padding: 2px;
+}
+
+
+#addBuddyDiv {
+    background-color: #2e2c2c;
+    color: #e05637;
+    border-radius: 10px;
+    width: 1000px;
+    text-align: center;
+    margin: 10px;
+    grid-row-start: 3;
+    grid-column-start: 2;
+    font-family: 'Montserrat', sans-serif;
+    
+}
