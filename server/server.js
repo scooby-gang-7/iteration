@@ -76,6 +76,11 @@ app.post('/addbuddy', tripController.addTripbuddy, (req, res) => {
   res.status(200).send(res.locals.members);
 })
 
+//fetch for gettripbuddy
+app.post('/getbuddy', tripController.getTripbuddy, (req, res) => {
+  res.status(200).send(res.locals.members);
+})
+
 //fetch for getall trips for user
 app.post('/gettrips', tripController.getAlltrips, (req, res) => {
   res.status(200).send(res.locals.trips);

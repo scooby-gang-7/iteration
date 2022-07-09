@@ -2,8 +2,9 @@ import React, {useState, useEffect} from 'react';
 import '../stylesheets/styles.css'
 import AddTrip from './AddTrip';
 import Places from "./Places.jsx";
-import Row from "./Row.jsx"
-import Map from "./map.jsx"
+import Row from "./Row.jsx";
+import Map from "./map.js";
+import AddBuddy from "./AddBuddy.jsx";
 import {
     Link, 
     useParams
@@ -43,6 +44,9 @@ function TripDetail (props) {
                 <h2>{props.currentTripInfo.destination}</h2>
                 <h2>{props.currentTripInfo.description}</h2>
                 <h2>{props.currentTripInfo.start} - {props.currentTripInfo.end}</h2>
+            </div>
+            <div>
+                <AddBuddy trip_id={id} />    
             </div>          
             
             <div id='mapDiv'>
