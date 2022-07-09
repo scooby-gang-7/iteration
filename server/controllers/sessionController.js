@@ -44,7 +44,7 @@ sessionController.startSession = (req, res, next) => {
 
 sessionController.verifySession = (req, res, next) => {
   
-  console.log(req.query.session_id);
+  // console.log(req.query.session_id);
   const session_id = req.query.session_id;
   const currDate = new Date();
   // convert date to MM/DD/YYYY HH:MM:SS

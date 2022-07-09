@@ -1,6 +1,6 @@
 .map-container {
-    width: 600px;
-    height: 600px;
+    width: 400px;
+    height: 400px;
 }
 
 nav{
@@ -18,9 +18,9 @@ nav h1 {
     color: red;
 }
 
-nav ul {
+/* nav ul {
 
-}
+} */
 
 .nav-links{
     width: 50%;
