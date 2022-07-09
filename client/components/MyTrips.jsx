@@ -75,10 +75,10 @@ function MyTrips(props) {
                     })
                     // sort trips by start date, if start date is the same, sort by end date
                     .sort((a, b) => {
-                        if (a.date_start > b.date_start) return 1
-                        else if (a.date_start < b.date_start) return -1
+                        if (a.date_start < b.date_start) return 1
+                        else if (a.date_start > b.date_start) return -1
                         else if (a.date_start === b.date_start) {
-                            return a.date_end > b.date_end ? 1 : -1
+                            return a.date_end < b.date_end ? 1 : -1
                         }
                     })
                     .map((trip) => {

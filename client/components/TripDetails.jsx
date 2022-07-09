@@ -70,7 +70,7 @@ function TripDetail (props) {
                 <p>{currentTripInfo.description}</p>
                 <p>{startDateDisplay} - {endDateDisplay}</p>
             </div>
-            <div>
+            <div id='addBuddyDiv'>
                 <AddBuddy trip_id={id} />    
             </div>          
             <div id='mapDiv'>

@@ -13,7 +13,7 @@ import './stylesheets/styles.css';
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import Map from "./components/map.jsx";
-import NavSignIn from "./components/Nav-Sign-In.jsx";
+import NavSignIn from "./components/Nav-Signed-Out.jsx";
 import NavSignedIn from "./components/Nav-Signed-In.jsx";
 import NavSignUp from "./components/Nav-Sign-Up.jsx";
 import About from "./components/About.jsx";
