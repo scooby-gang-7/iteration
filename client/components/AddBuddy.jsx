@@ -47,7 +47,7 @@ const Addbuddy = (props) => {
 
     const tripmembers = [<p>Trip members: </p>];
     trip_buddy.forEach(el => {
-        tripmembers.push(<p>{el.name_first}</p>);
+        tripmembers.push(<p key={el.name_first} >{el.name_first}</p>);
     })
 
     return (

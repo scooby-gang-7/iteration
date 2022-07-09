@@ -1,71 +1,172 @@
-import React, { useState, useMemo } from 'react'
-import { GoogleMap, useLoadScript } from '@react-google-maps/api'
+import React, { useState, useMemo, useEffect } from 'react'
+import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api'
 import MapItem from './mapItem';
+import axios from 'axios';
 
-// import usePlacesAutocomplete, {
-//   getGeocode,
-//   getLatLng
-// } from 'use-places-autocomplete';
-// import {
-//   Combobox,
-//   ComboboxInput,
-//   ComboboxPopover,
-//   ComboboxList,
-//   ComboboxOption,
-// } from "@reach/combobox";
-// import "@reach/combobox/styles.css"
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng
+} from 'use-places-autocomplete';
 
-function mapp(props) {
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from "@reach/combobox";
+import "@reach/combobox/styles.css"
+
+function Mapp(props) {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
     googleMapsApiKey: 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78',
-    // libraries: ["places"],
+    libraries: ["places"],
   });
 
   if (!isLoaded) return <div>Loading...</div>
   return (
     <div>
-      <Map />
+      <Map destination={props.destination} center={props.center} trip_id={props.trip_id} />
     </div>
   )
 }
-const center = { lat: 44, lng: -80 }
-const markers = [{ lat: 44, lng: -80 }, { lat: 45, lng: -79 }]
-// ^^ const center and marker is placeholder for state
-function Map() {
-  const pins = markers.map((pin, i) => <MapItem position={pin} key={i} />)
-  const [selected, setSelected] = useState(null)
-  console.log('selected')
+const url =
+  "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+
+function Map(props) {
+  const [selected, setSelected] = useState([]);
+  const pins = selected.map((pin, i) => <MapItem
+    position={pin}
+    key={i}
+    animation={google.maps.Animation.DROP}
+  />)
+
+  const { trip_id } = props;
+
+  const [places, setPlaces] = useState(null);
+  //on render, fetch to get all the stops for the trip
+  useEffect(() => {
+    axios.get('http://localhost:3000/places', {
+      params: {
+        trip_id
+      }
+    })
+      .then((response) => {
+        console.log(response);
+        setPlaces(response.data);
+        console.log('data from trip_id', response.data)
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  //todo use places to get another set of pins
+
   return (
     <>
-    
       <div className="places-container">
-        {/* <PlacesAutoComplete setSelected={setSelected} /> */}
+        <PlacesAutoComplete setSelected={setSelected} trip_id={trip_id} setCurrentPlacesInfo={props.setCurrentPlacesInfo}/>
       </div>
       <GoogleMap
-        zoom={7}
-        center={center}
+        zoom={6}
+        center={props.center}
         mapContainerClassName="map-container"
       >
-        {pins}
+        <Marker position={props.center} icon={url} />
+        {selected && pins}
       </GoogleMap>
     </>
   )
 }
-// const PlacesAutoComplete = ({ setSelected }) => {
-//   const {
-//       ready,
-//       value,
-//       setValue,
-//       suggestions: {status, data},
-//       clearSuggestions
-//   } = usePlacesAutocomplete();
+const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
 
-//   return <Combobox>
-//     <ComboboxInput value = {value}/>
-//   </Combobox>
-// };
+  const {
+    ready,
+    value,
+    setValue,
+    suggestions: { status, data },
+    clearSuggestions
+  } = usePlacesAutocomplete();
+
+  const handleSelect = async (address) => {
+    console.log(address);
+    setValue(address, false);
+    clearSuggestions();
+
+    const results = await getGeocode({ address });
+    console.log('find data here to save to database', results);
+
+    const { lat, lng } = await getLatLng(results[0]);
+    setSelected(selected => [...selected, { lat, lng }]);
+
+    // console.log("geometry   ", results[0].geometry.location.lat);
+
+    const newplace = {
+      trip_id,
+      google_place_id: results[0].place_id,
+      name: address,//todo get the first part of
+      address: results[0].formatted_address,
+      type: "hotel",
+      lat: lat,
+      long: lng
+    };
+    console.log('new place', newplace);
+
+    fetch('http://localhost:3000/addplace', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newplace)
+    })
+      .then(data => data.json())
+        .then(data => {
+          console.log('fetched data!', data);
+          //then do another fetch
+          fetch('http://localhost:3000/getPlaces', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                trip_id: props.trip_id
+            })
+        })
+            .then(placesDetails => placesDetails.json())
+            .then(placesDetails => {
+                console.log('this happened!')
+                console.log('placesDetails from Fetch --> ', placesDetails)
+                props.setCurrentPlacesInfo(placesDetails);
+            })
+            .catch(e => {
+                console.log(e);
+            })
+        })
+        .catch(e => {
+          console.log(e);
+        })
+  };
 
 
+  return (
+    <Combobox onSelect={handleSelect}>
+      <ComboboxInput
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        disabled={!ready}
+        className="combobox-input"
+        placeholder="Search Location" />
+      <ComboboxPopover>
+        <ComboboxList>
+          {status === "OK" && data.map(({ place_id, description }) => (
+            <ComboboxOption key={place_id} value={description} />
+          ))}
+        </ComboboxList>
+      </ComboboxPopover>
+    </Combobox>
+  )
+};
 
-export default mapp;
+export default Mapp
