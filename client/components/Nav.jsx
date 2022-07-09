@@ -6,8 +6,8 @@ import {Link, Outlet} from 'react-router-dom'
 function Nav()  {
 
     return (
-        <nav>
-            <h1>Logo</h1> 
+        <nav id='navBar'>
+            <h1>Travel Pal</h1> 
             <ul className='nav-links'>
                 <Link to="/map">
                   <li>Map</li>

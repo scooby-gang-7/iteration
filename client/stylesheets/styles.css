@@ -14,6 +14,14 @@ nav{
 
 }
 
+nav h1 {
+    color: red;
+}
+
+nav ul {
+
+}
+
 .nav-links{
     width: 50%;
     display: flex;
@@ -21,8 +29,32 @@ nav{
     align-items: center;
     list-style: none;
 }
+.myTripBox{
+    font-Family: Helvetica;
+    display: flexbox;
+    
+}
 
-.combobox-input {
-    /* height: 100px; */
-    text-align: left;
+.placeDetails{
+    border: 1px solid black;
+    padding: 5px;
+    width: 80vw;
+}
+
+.placeDetails td {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.myTripBox {
+    margin: 10px;
+}
+
+.myTripBox button {
+    width: 600px;
+}
+
+.myTripBox a {
+    text-decoration: none;
+    color: black;
 }
