@@ -29,6 +29,12 @@ nav ul {
     align-items: center;
     list-style: none;
 }
+
+.nav-links a:link {
+    text-decoration: none;
+    color: white
+}
+
 .myTripBox{
     font-Family: Helvetica;
     display: flexbox;
@@ -57,4 +63,12 @@ nav ul {
 .myTripBox a {
     text-decoration: none;
     color: black;
+}
+
+#signout {
+    color: white
+}
+
+#signout:hover {
+    cursor: pointer;
 }

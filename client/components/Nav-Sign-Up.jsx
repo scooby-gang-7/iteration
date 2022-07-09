@@ -9,14 +9,11 @@ function Nav()  {
         <nav id='navBar'>
             <h1>Travel Pal</h1> 
             <ul className='nav-links'>
-                <Link to="/map">
-                  <li>Map</li>
-                </Link>
-                <Link to="/mytrips">
-                  <li>My Trips</li>
-                </Link>  
                 <Link to="/about">
                   <li>About</li>
+                </Link>
+                <Link to="/">
+                  <li>Sign In</li>
                 </Link>
             </ul>
             <Outlet />

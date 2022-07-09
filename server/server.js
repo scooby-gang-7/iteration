@@ -61,6 +61,10 @@ app.post('/signup', userController.createUser, sessionController.startSession, c
   res.status(200).send(res.locals.sessionInfo);
 })
 
+app.post('/signout', sessionController.endSession, (req, res) => {
+  res.status(200).send(res.locals.sessionInfo);
+})
+
 //testing for verifyUser
 app.post('/login', userController.verifyUser, sessionController.startSession, cookieController.setCookie, (req, res) => {
   res.status(200).send(res.locals.sessionInfo);

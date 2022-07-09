@@ -34,7 +34,7 @@ function Places(props) {
             <table id='placesTable'>
                 <thead>
                     <tr>
-                        <th>Places</th>
+                        <th>Places to Visit</th>
                     </tr>
                 </thead>
                 <tbody>
