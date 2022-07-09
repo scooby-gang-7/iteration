@@ -57,6 +57,11 @@ function TripDetail (props) {
             })
     }, []);
     
+    const startDate = new Date(props.currentTripInfo.date_start)
+    const startDateDisplay = `${startDate.getMonth()}/${startDate.getDate()}/${startDate.getFullYear()}`
+    const endDate = new Date(props.currentTripInfo.date_end)
+    const endDateDisplay = `${endDate.getMonth()}/${endDate.getDate()}/${endDate.getFullYear()}`
+
     return (
         <div> 
             <div id='detailsDiv'>

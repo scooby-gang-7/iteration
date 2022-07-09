@@ -50,22 +50,25 @@ function Login(props) {
   
   return (
     <div id="login-parent">
-      <form action='#'>
+      <form action='#' class="loginBox">
         <h3>Login</h3>
         <div className=''>
-          <label>Email Address:  </label>
+          <label>Email  </label><br />
           <input type='text' placeholder='email' name='email' onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className=''>
-          <label>Password:  </label>
+          <br />
+          <label>Password  </label><br />
           <input type='password' placeholder='password' name='password' onChange={(e) => setPassword(e.target.value)}/>
         </div>
-        <button className='' onClick={handleSubmitlogin}>Login</button>
+        <br />
+        <Link to="/signup">
+          <button id="btn-signup" className='signUpButton'>Sign Up</button>
+        </Link>
+        <button id="btn-login" className='' onClick={handleSubmitlogin}>Login</button>
+        <br />      
       </form>
       <br />
-      <Link to="/signup">
-      <button className='signUpButton'>Sign Up</button>
-      </Link>
     </div>
   )
 };

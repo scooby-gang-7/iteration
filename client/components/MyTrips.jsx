@@ -32,7 +32,7 @@ function MyTrips(props) {
     const today = new Date()
 
     return (
-        <div>
+        <div id="myTrips">
             <br />
             {/* {props.tripInfo.map((trip) => {
                 return <Trip key={trip.trip_id} trip_id={trip.trip_id} name={trip.trip_name} destination={trip.destination} start={trip.date_start} end={trip.date_end}/>
