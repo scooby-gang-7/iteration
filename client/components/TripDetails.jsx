@@ -58,20 +58,17 @@ function TripDetail (props) {
     }, []);
     
     const startDate = new Date(props.currentTripInfo.date_start)
-    const startDateDisplay = `${startDate.getMonth()}/${startDate.getDate()}/${startDate.getFullYear()}`
+    const startDateDisplay = `${startDate.getMonth()+1}/${startDate.getDate()}/${startDate.getFullYear()}`
     const endDate = new Date(props.currentTripInfo.date_end)
-    const endDateDisplay = `${endDate.getMonth()}/${endDate.getDate()}/${endDate.getFullYear()}`
+    const endDateDisplay = `${endDate.getMonth()+1}/${endDate.getDate()}/${endDate.getFullYear()}`
 
     return (
         <div> 
             <div id='detailsDiv'>
-                <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-                <h2>{currentTripInfo.destination}</h2>
-                <h2>{currentTripInfo.description}</h2>
-                <h2>{currentTripInfo.start} - {currentTripInfo.end}</h2>
-            </div>
-            <div>
-                <AddBuddy trip_id={id} />    
+                <h1 className='standardHeader'>{props.currentTripInfo.trip_name}</h1>
+                <p>{props.currentTripInfo.destination}</p>
+                <p>{props.currentTripInfo.description}</p>
+                <p>{startDateDisplay} - {endDateDisplay}</p>
             </div>          
             
             <div id='mapDiv'>

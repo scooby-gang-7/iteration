@@ -13,7 +13,9 @@ import './stylesheets/styles.css';
 import Login from "./components/Login.jsx";
 import Signup from "./components/Signup.jsx";
 import Map from "./components/map.jsx";
-import Nav from "./components/Nav.jsx";
+import NavSignIn from "./components/Nav-Sign-In.jsx";
+import NavSignedIn from "./components/Nav-Signed-In.jsx";
+import NavSignUp from "./components/Nav-Sign-Up.jsx";
 import About from "./components/About.jsx";
 import MyTrips from "./components/MyTrips.jsx";
 import AddTrip from "./components/AddTrip.jsx";
@@ -35,7 +37,7 @@ const App = () => {
 
   //fetch to update userInfo on start
   useEffect (() => {
-    if (isInitialMount.current) {
+    if (isInitialMount.current && window.localStorage.getItem('session_id')) {
       axios.get('http://localhost:3000/session', {
         params: {
           session_id
@@ -57,7 +59,10 @@ const App = () => {
 
     return (
       <div className="App">
-        <Nav />
+        <Routes>
+          <Route path="/signup" element={userInfo.user_id ? <NavSignedIn setUserInfo={setUserInfo} userInfo={userInfo} /> : <NavSignUp />} />
+          <Route path="/*" element={userInfo.user_id ? <NavSignedIn setUserInfo={setUserInfo} userInfo={userInfo} /> : <NavSignIn />} />
+        </Routes>
         <ToastContainer
           position="top-center"
           autoClose={5000}

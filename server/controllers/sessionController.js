@@ -6,7 +6,6 @@ const SALT_WORK_FACTOR = 5;
 const sessionController = {};
 
 sessionController.startSession = (req, res, next) => {
-    console.log('res.locals.data.user_id --> ',res.locals.data.user_id)
     const user_id = toString(res.locals.data.user_id)
     const date = new Date();
     // convert date to MM/DD/YYYY HH:MM:SS
@@ -44,7 +43,6 @@ sessionController.startSession = (req, res, next) => {
 
 sessionController.verifySession = (req, res, next) => {
   
-  // console.log(req.query.session_id);
   const session_id = req.query.session_id;
   const currDate = new Date();
   // convert date to MM/DD/YYYY HH:MM:SS
@@ -76,6 +74,16 @@ sessionController.verifySession = (req, res, next) => {
     .catch(err => next({log: err, message: {err: 'catch in verifySession'}}))
 }
 
+sessionController.endSession = (req, res, next) => {
+  const { session_id } = req.body;
+  const text = `DELETE FROM sessions WHERE session_id = '${session_id}' RETURNING *`
 
+  db.query(text)
+    .then(data => {
+      res.locals.sessionInfo = data.rows[0]
+      return next();
+    })
+    .catch(err => next({log: err, message: {err: 'catch in endSession'}}))
+}
 
 module.exports = sessionController;
