@@ -67,7 +67,20 @@ nav{
     width: 80vw;
 }
 
-.placeDetails td{
+.placeDetails td {
     padding-left: 5px;
     padding-right: 5px;
+}
+
+.myTripBox {
+    margin: 10px;
+}
+
+.myTripBox button {
+    width: 600px;
+}
+
+.myTripBox a {
+    text-decoration: none;
+    color: black;
 }
