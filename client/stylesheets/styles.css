@@ -1,24 +1,50 @@
+#root {
+    background-color: rgb(233, 119, 58);;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .map-container {
     width: 600px;
     height: 600px;
 }
 
+#login-parent {
+    background-color: rgb(233, 151, 107);
+    font-family: 'Abril Fatface', cursive;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    margin: 10px;
+}
+
+#btn-login {
+    margin-left: 20px;
+    background-color: #e9976b;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 3px;
+    width: 75px;
+}
+
+#btn-signup {
+    margin-right: 20px;
+    color: black; 
+    background-color: #F6E0DB;
+    border-radius: 7px;
+    border: 1px solid;
+    padding: 3px;
+    width: 75px;
+}
+
+
 nav{
     font-family: Helvetica;
-    display: flex;
-    justify-content: space-around;
     align-items: center;
     min-height: 10vh;
     background: rgb(94, 81, 68);
     color: rgb(210, 192, 174);
-
-}
-
-nav h1 {
-    color: red;
-}
-
-nav ul {
 
 }
 
