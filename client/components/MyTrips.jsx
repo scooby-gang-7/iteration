@@ -39,6 +39,9 @@ function MyTrips(props) {
                 <Link to="/addtrip">
                     <button className='addTripButton'>Add New Trip</button>
                 </Link> */}
+            <Link to="/addtrip">
+                <button className='addTripButton'>Add New Trip</button>
+            </Link>
             <h1>Upcoming Trips</h1>
             <br />
                 {

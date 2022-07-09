@@ -14,25 +14,25 @@ import axios from 'axios';
 function Trip(props) {
     console.log('trip props:', props);
 
-    const [showDetail, setShowDetail] = useState(false);
-    const [center, setMapCenter] = useState(null);
-    console.log(center);
+    // const [showDetail, setShowDetail] = useState(false);
+    // const [center, setMapCenter] = useState(null);
+    // console.log(center);
 
-    function handleSubmit() {
-        let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
-        let query = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + props.destination + '&key=' + apikey;
-        axios.get(query)
-            .then(res => {
-                console.log(res.data);
-                if (res.data.status == 'OK') {
-                    console.log(res.data.results[0]);
-                    setMapCenter(res.data.results[0].geometry.location);
-                    setShowDetail(showDetail ? false : true);
-                }
-            }).catch(e => {
-                console.log(e);
-            })
-    }
+    // function handleSubmit() {
+    //     let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
+    //     let query = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + props.destination + '&key=' + apikey;
+    //     axios.get(query)
+    //         .then(res => {
+    //             console.log(res.data);
+    //             if (res.data.status == 'OK') {
+    //                 console.log(res.data.results[0]);
+    //                 setMapCenter(res.data.results[0].geometry.location);
+    //                 setShowDetail(showDetail ? false : true);
+    //             }
+    //         }).catch(e => {
+    //             console.log(e);
+    //         })
+    // }
 
     // return (
     //     <div>
@@ -45,7 +45,7 @@ function Trip(props) {
 
     return (
          <div className='myTripBox'>
-            <button>
+            <button className='addTripButton'>
             <Link to={`/mytrips/${props.trip_id}`}>
                 <h1>Trip Name: {props.name}</h1>
                 <h3>Location: {props.destination}</h3>
@@ -53,7 +53,7 @@ function Trip(props) {
             </Link>  
             </button>
 
-            {showDetail ? <Mapp trip_id={props.trip_id} destination={props.destination} center={center} /> : <div></div>}
+            {/* {showDetail ? <Mapp trip_id={props.trip_id} destination={props.destination} center={center} /> : <div></div>} */}
         </div>
     );
 }

@@ -67,7 +67,7 @@ function Map(props) {
   return (
     <>
       <div className="places-container">
-        <PlacesAutoComplete setSelected={setSelected} trip_id={trip_id} />
+        <PlacesAutoComplete setSelected={setSelected} trip_id={trip_id} setCurrentPlacesInfo={props.setCurrentPlacesInfo}/>
       </div>
       <GoogleMap
         zoom={6}
@@ -80,7 +80,7 @@ function Map(props) {
     </>
   )
 }
-const PlacesAutoComplete = ({ setSelected, trip_id }) => {
+const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
 
   const {
     ready,
@@ -91,6 +91,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id }) => {
   } = usePlacesAutocomplete();
 
   const handleSelect = async (address) => {
+    console.log(address);
     setValue(address, false);
     clearSuggestions();
 
@@ -105,7 +106,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id }) => {
     const newplace = {
       trip_id,
       google_place_id: results[0].place_id,
-      name: 'test',
+      name: address,//todo get the first part of
       address: results[0].formatted_address,
       type: "hotel",
       lat: lat,
@@ -123,14 +124,30 @@ const PlacesAutoComplete = ({ setSelected, trip_id }) => {
       .then(data => data.json())
         .then(data => {
           console.log('fetched data!', data);
+          //then do another fetch
+          fetch('http://localhost:3000/getPlaces', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                trip_id: props.trip_id
+            })
+        })
+            .then(placesDetails => placesDetails.json())
+            .then(placesDetails => {
+                console.log('this happened!')
+                console.log('placesDetails from Fetch --> ', placesDetails)
+                props.setCurrentPlacesInfo(placesDetails);
+            })
+            .catch(e => {
+                console.log(e);
+            })
         })
         .catch(e => {
           console.log(e);
         })
   };
-
-  //construct the place object here
-  //We have to construct this newplace object and send as the body for post. Those keys are required for database. we should find the value for the keys from results object from Geocode.
 
 
   return (

@@ -3,21 +3,29 @@ import '../stylesheets/styles.css'
 import AddTrip from './AddTrip';
 import Places from "./Places.jsx";
 import Row from "./Row.jsx";
-import Map from "./map.js";
+import Map from "./map.jsx";
 import AddBuddy from "./AddBuddy.jsx";
 import {
     Link, 
     useParams
 } from 'react-router-dom';
+import axios from 'axios';
 
 
 
 function TripDetail (props) {
 
+    const [currentTripInfo, setCurrentTripInfo] = useState({});
+    const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
+
+    console.log('tripdetail', props);
+    const [center, setMapCenter] = useState(null);
+
     const {id} = useParams();
 
     // fetching all places for the selected trip and storing them to currentTripInfo in state
     useEffect(() => {
+        
         fetch('http://localhost:3000/getTrip/', {
             method: 'POST',
             headers: {
@@ -30,7 +38,19 @@ function TripDetail (props) {
             .then(tripDetails => tripDetails.json())
             .then(tripDetails => {
                 console.log('tripDetails from Fetch --> ', tripDetails)
-                props.setCurrentTripInfo(tripDetails);
+                setCurrentTripInfo(tripDetails);
+                let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
+                let query = 'https://maps.googleapis.com/maps/api/geocode/json?address=' + tripDetails.destination + '&key=' + apikey;
+                axios.get(query)
+                .then(res => {
+                    console.log(res.data);
+                    if (res.data.status == 'OK') {
+                        console.log(res.data.results[0]);
+                        setMapCenter(res.data.results[0].geometry.location);
+                    }
+                }).catch(e => {
+                    console.log(e);
+                });
             })
             .catch(e => {
                 console.log(e);
@@ -40,19 +60,19 @@ function TripDetail (props) {
     return (
         <div> 
             <div id='detailsDiv'>
-                <h1 className='standardHeader'>{props.currentTripInfo.trip_name}</h1>
-                <h2>{props.currentTripInfo.destination}</h2>
-                <h2>{props.currentTripInfo.description}</h2>
-                <h2>{props.currentTripInfo.start} - {props.currentTripInfo.end}</h2>
+                <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
+                <h2>{currentTripInfo.destination}</h2>
+                <h2>{currentTripInfo.description}</h2>
+                <h2>{currentTripInfo.start} - {currentTripInfo.end}</h2>
             </div>
             <div>
                 <AddBuddy trip_id={id} />    
             </div>          
             
             <div id='mapDiv'>
-                <Map />
+                <Map center={center} trip_id={id} setCurrentPlacesInfo={setCurrentPlacesInfo}/>
             </div>
-            <Places trip_id={id} currentPlacesInfo={props.currentPlacesInfo} setCurrentPlacesInfo={props.setCurrentPlacesInfo}/>
+            <Places trip_id={id} currentPlacesInfo={currentPlacesInfo} setCurrentPlacesInfo={setCurrentPlacesInfo}/>
         </div>
         
     );

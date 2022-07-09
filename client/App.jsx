@@ -24,8 +24,8 @@ const App = () => {
   
   const [userInfo, setUserInfo] = useState({user_id:null});
   const [tripInfo, setTripInfo] = useState([]);
-  const [currentTripInfo, setCurrentTripInfo] = useState({});
-  const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
+
+  
 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
@@ -74,7 +74,7 @@ const App = () => {
             <Route path="/signup" element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />} />
             <Route path="/addtrip" element={<AddTrip userInfo={userInfo} setTripInfo={setTripInfo} />}/>
             <Route path="/mytrips" element={<MyTrips userInfo={userInfo} tripInfo={tripInfo} setTripInfo={setTripInfo}/>} />
-            <Route path="/mytrips/:id" element={<TripDetails currentTripInfo={currentTripInfo} setCurrentTripInfo={setCurrentTripInfo} currentPlacesInfo={currentPlacesInfo} setCurrentPlacesInfo={setCurrentPlacesInfo} />} />
+            <Route path="/mytrips/:id" element={<TripDetails />} />
             <Route path="/map" element={<Map />} />
         </Routes>
       </div>
