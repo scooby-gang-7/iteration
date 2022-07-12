@@ -20,7 +20,7 @@ import "@reach/combobox/styles.css"
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
-    googleMapsApiKey: 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78',
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
     libraries: ["places"],
   });
 
