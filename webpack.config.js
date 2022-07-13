@@ -64,7 +64,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       title: 'Scratch',
       template: './client/index.html',
-      favicon: './client/assets/world.jpeg',
+      favicon: './client/assets/world.png',
     }),
     new Dotenv(),
   ],
