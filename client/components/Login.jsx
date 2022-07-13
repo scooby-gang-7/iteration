@@ -32,7 +32,8 @@ function Login(props) {
         password
       })
     })
-      .then(data => data.json())
+      .then(data => {
+        data.json()})
       .then(data => {
         setUserInfo(data);
         //if valid user/password --> route to MyTrips page 
