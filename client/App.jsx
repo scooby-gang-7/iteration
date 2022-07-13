@@ -36,7 +36,7 @@ const App = () => {
   useEffect(() => {
     if (isInitialMount.current && window.localStorage.getItem('session_id')) {
       axios
-        .get('/session', {
+        .get('/auth/session', {
           params: {
             session_id,
           },
