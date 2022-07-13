@@ -111,10 +111,8 @@ app.post('/deleteplace', placesController.deletePlace, (req, res) => {
   res.status(200).send(res.locals.place);
 });
 
-//redirect on other request
-app.get('/*', (req, res) => {
-  res.redirect('/');
-})
+//404 not found on other request
+app.use("*", (req, res) => res.status(404).send("Not Found"));
 
 //create global error handler
 app.use((err, req, res, next) => {
