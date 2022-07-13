@@ -3,6 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
+console.log('mode is : ', process.env.NODE_ENV);
+
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: {
@@ -10,9 +12,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name][contenthash].js',
-    clean: true,
-    assetModuleFilename: '[name][ext]',
+    filename: 'bundle.js',
   },
   performance: {
     hints: false,
@@ -31,7 +31,6 @@ module.exports = {
     },
     port: 8080,
     historyApiFallback: true,
-    open: true,
     compress: true,
     hot: true,
     proxy: {
@@ -64,7 +63,8 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Scratch',
-      template: 'client/index.html',
+      template: './client/index.html',
+      favicon: './client/assets/world.jpeg',
     }),
     new Dotenv(),
   ],

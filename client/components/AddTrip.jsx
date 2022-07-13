@@ -22,7 +22,7 @@ function AddTrip(props) {
 
     const handleSubmitAddTrip = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/addtrip', {
+        fetch('/addtrip', {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
