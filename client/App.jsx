@@ -13,19 +13,18 @@ import './stylesheets/styles.css';
 import Login from './components/Login.jsx';
 import Signup from './components/Signup.jsx';
 import Map from './components/map.jsx';
-import NavSignIn from './components/Nav-Signed-Out.jsx';
-import NavSignedIn from './components/Nav-Signed-In.jsx';
-import NavSignUp from './components/Nav-Sign-Up.jsx';
 import About from './components/About.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import AddTrip from './components/AddTrip.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import 'react-toastify/dist/ReactToastify.css';
+import NavBar from './components/NavBar';
+
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
   const [tripInfo, setTripInfo] = useState([]);
-
+ 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
   const isInitialMount = useRef(true);
@@ -56,28 +55,8 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Routes>
-        <Route
-          path='/signup'
-          element={
-            userInfo.user_id ? (
-              <NavSignedIn setUserInfo={setUserInfo} userInfo={userInfo} />
-            ) : (
-              <NavSignUp />
-            )
-          }
-        />
-        <Route
-          path='/*'
-          element={
-            userInfo.user_id ? (
-              <NavSignedIn setUserInfo={setUserInfo} userInfo={userInfo} />
-            ) : (
-              <NavSignIn />
-            )
-          }
-        />
-      </Routes>
+      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+
       <ToastContainer
         position='top-center'
         autoClose={5000}
