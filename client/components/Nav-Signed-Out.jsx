@@ -14,7 +14,7 @@ function Nav() {
           <li>Sign Up</li>
         </Link>
       </ul>
-      <Outlet />
+      {/* <Outlet /> */}
     </nav>
   );
 }

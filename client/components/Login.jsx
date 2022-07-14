@@ -47,7 +47,7 @@ function Login(props) {
 
   return (
     <div id='login-parent'>
-      <form action='#' class='loginBox'>
+      <form action='#' className='loginBox'>
         <h3>Login</h3>
         <div className=''>
           <label>Email </label>

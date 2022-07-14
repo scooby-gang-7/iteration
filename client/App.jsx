@@ -21,6 +21,8 @@ import MyTrips from './components/MyTrips.jsx';
 import AddTrip from './components/AddTrip.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import 'react-toastify/dist/ReactToastify.css';
+import NavBar from './components/NavBar';
+
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
@@ -56,7 +58,8 @@ const App = () => {
 
   return (
     <div className='App'>
-      <Routes>
+      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+      {/* <Routes>
         <Route
           path='/signup'
           element={
@@ -77,7 +80,7 @@ const App = () => {
             )
           }
         />
-      </Routes>
+      </Routes> */}
       <ToastContainer
         position='top-center'
         autoClose={5000}
