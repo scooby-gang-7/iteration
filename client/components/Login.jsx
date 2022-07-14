@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
-import '../stylesheets/styles.css';
-import SignUp from './Signup';
 import { Link, useNavigate } from 'react-router-dom';
+import { FormControl, InputLabel, Input} from '@mui/material';
+import axios from 'axios';
+import SignUp from './Signup';
+import '../stylesheets/styles.css';
 
 function Login(props) {
   const { setUserInfo, userInfo } = props;
@@ -47,41 +48,39 @@ function Login(props) {
 
   return (
     <div id='login-parent'>
-      <form action='#' class='loginBox'>
-        <h3>Login</h3>
-        <div className=''>
-          <label>Email </label>
-          <br />
-          <input
-            type='text'
-            placeholder='email'
-            name='email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className=''>
-          <br />
-          <label>Password </label>
-          <br />
-          <input
-            type='password'
-            placeholder='password'
-            name='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <br />
-        <Link to='/signup'>
-          <button id='btn-signup' className='signUpButton'>
-            Sign Up
+          <h3>Login</h3>
+      <FormControl>
+        <form action='#' class='loginBox'>
+        <InputLabel htmlFor='email'>Email</InputLabel>
+            <Input
+              type='text'
+              placeholder='email'
+              name='email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          
+         <InputLabel htmlFor='password'>Password </InputLabel>
+            
+            <Input
+              type='password'
+              placeholder='password'
+              name='password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          
+          
+          <Link to='/signup'>
+            <button id='btn-signup' className='signUpButton'>
+              Sign Up
+            </button>
+          </Link>
+          <button id='btn-login' className='' onClick={handleSubmitlogin}>
+            Login
           </button>
-        </Link>
-        <button id='btn-login' className='' onClick={handleSubmitlogin}>
-          Login
-        </button>
-        <br />
-      </form>
-      <br />
+          
+        </form>
+      </FormControl>
+      
     </div>
   );
 }
