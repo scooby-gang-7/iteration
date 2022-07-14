@@ -27,6 +27,10 @@ function Signup({ setUserInfo, userInfo }) {
       .then((data) => data.json())
       .then((data) => {
         setUserInfo(data);
+        window.localStorage.setItem(
+          'session_id',
+          JSON.stringify(data.session_id)
+        );
         toast.success('Signup successful!');
         navigate('/mytrips', { replace: true });
         console.log('FRONTEND DATA -->', data);
