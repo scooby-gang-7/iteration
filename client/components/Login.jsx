@@ -48,7 +48,7 @@ function Login(props) {
   return (
     <>
       <div id='login-parent'>
-        <form action='#' className='loginBox'>
+        {/* <form action='#' className='loginBox'>
           <h3>Login</h3>
           <div className=''>
             <label>Email </label>
@@ -72,17 +72,13 @@ function Login(props) {
             />
           </div>
           <br />
-          {/* <Link to='/signup'>
-            <button id='btn-signup' className='signUpButton'>
-              Sign Up
-            </button>
-          </Link> */}
+          
           <button id='btn-login' className='' onClick={handleSubmitLogin}>
             Login
           </button>
           <br />
         </form>
-        <br />
+        <br /> */}
 
         <Paper variant='elevation' elevation={2} className='login-background'>
           <Grid item>

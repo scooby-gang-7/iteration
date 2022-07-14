@@ -156,7 +156,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   };
 
   return (
-    <></>
+    <>Map goes here</>
     // <Combobox onSelect={handleSelect}>
     //   <ComboboxInput
     //     value={value}
