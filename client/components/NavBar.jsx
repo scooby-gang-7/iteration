@@ -40,8 +40,15 @@ function handleSignOut (e) {
         <ul className='nav-links'>
 
        
-       {userInfo.user_id ? 
-       <>
+       {window.location.pathname === '/' ?
+        <Link to='/signup'>
+          <li>Sign Up</li>
+        </Link>
+        : window.location.pathname === '/signup' ?
+        <Link to='/'>
+          <li>Log In</li>
+        </Link>
+        :<>
        <Link to='/mytrips'>
           <li>My Trips</li>
         </Link>
@@ -49,24 +56,9 @@ function handleSignOut (e) {
           Signout
         </li>
         </>
-        : 
-        <>
-        <Link to='/signup'>
-          <li>Sign Up</li>
-        </Link>
-        
-        </>
-        }
-
-
-       
+}
         </ul>
-
-            
         </nav>
-
-
-
     );
 }
 
