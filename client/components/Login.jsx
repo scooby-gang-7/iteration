@@ -49,7 +49,7 @@ function Login(props) {
   return (
     <>
     <div id='login-parent'>
-               <form action='#' className='loginBox'>
+      <form action='#' className='loginBox'>
         <h3>Login</h3>
         <div className=''>
           <label>Email </label>
@@ -152,11 +152,6 @@ Forgot Password?
 </Link>
 </Grid>
 </Paper>
-
-
-
-
-    </div>
     </>
   );
 }

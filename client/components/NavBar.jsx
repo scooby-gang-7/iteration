@@ -1,12 +1,13 @@
-import React from 'react';
-import '../stylesheets/styles.css';
+import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-function Nav(props) {
-  const navigate = useNavigate();
-  const { setUserInfo, userInfo } = props;
 
-  function handleClick(e) {
+
+
+function NavBar ({userInfo, setUserInfo}) {
+
+const navigate = useNavigate();
+function handleSignOut (e) {
     const session_id = localStorage.getItem('session_id').replace(/['"]+/g, '');
     console.log('session_id --> ', session_id);
     const body = {
@@ -32,23 +33,33 @@ function Nav(props) {
       });
   }
 
-  return (
-    <nav id='navBar'>
-      <h1>Travel Pal</h1>
-      <ul className='nav-links'>
-        <Link to='/mytrips'>
+    return (
+        <nav id= 'navBar'>
+
+        <h1>Travel Pal</h1>
+        <ul className='nav-links'>
+
+       
+       {window.location.pathname === '/' ?
+        <Link to='/signup'>
+          <li>Sign Up</li>
+        </Link>
+        : window.location.pathname === '/signup' ?
+        <Link to='/'>
+          <li>Log In</li>
+        </Link>
+        :<>
+       <Link to='/mytrips'>
           <li>My Trips</li>
         </Link>
-        <Link to='/about'>
-          <li>About</li>
-        </Link>
-        <li id='signout' onClick={handleClick}>
+        <li id='signout' onClick={handleSignOut}>
           Signout
         </li>
-      </ul>
-      <Outlet />
-    </nav>
-  );
+        </>
+}
+        </ul>
+        </nav>
+    );
 }
 
-export default Nav;
+export default NavBar; 
