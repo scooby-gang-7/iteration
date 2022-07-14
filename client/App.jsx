@@ -27,7 +27,7 @@ import NavBar from './components/NavBar';
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
   const [tripInfo, setTripInfo] = useState([]);
-
+  const [activeComponent, setActiveComponent] = useState ('login')
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
   const isInitialMount = useRef(true);
@@ -58,7 +58,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo} activeComponent = {activeComponent} setActiveComponent={setActiveComponent}/>
       {/* <Routes>
         <Route
           path='/signup'

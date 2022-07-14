@@ -5,27 +5,34 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 function NavBar ({userInfo, setUserInfo}) {
-//use useState to create a variable to holds if the the user is logged In-- already exists in App.jsx --> setUserInfo and userInfo
 
-// const [userInfo, setUserInfo] = useState({user_id: null});
-// let links;
-// let linkLabel;
-// useEffect(()=>{
-  
-//  if (userInfo.user_id) { 
-//       links =  <Link to='/'>
-//           <li>Sign Out</li>
-//         </Link>
-//  } else {
-//     links =   <Link to='/'>
-//           <li>Sign In</li>
-//         </Link>
-//  }
+const navigate = useNavigate();
+function handleSignOut (e) {
+    const session_id = localStorage.getItem('session_id').replace(/['"]+/g, '');
+    console.log('session_id --> ', session_id);
+    const body = {
+      session_id: session_id,
+    };
+    console.log('body --> ', body);
 
-//  console.log('links in useEffect -->', links)
+    fetch('auth/signout', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+      // .then(placesDetail => placesDetail.json())
+      .then((placesDetails) => {
+        setUserInfo({});
+        localStorage.removeItem('session_id');
+        navigate('/', { replace: true });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
 
-// }, [userInfo.user_id])
-//if there is userInfo, then they are logged in, so change the navbar to show the <li>Sign Out</li>
     return (
         <nav id= 'navBar'>
 
@@ -34,13 +41,25 @@ function NavBar ({userInfo, setUserInfo}) {
 
        
        {userInfo.user_id ? 
-       <Link to='/'>
-          <li>Sign Out</li>
-        </Link> : <Link to='/'>
-          <li>Sign In</li>
-        </Link>}
+       <>
+       <Link to='/mytrips'>
+          <li>My Trips</li>
+        </Link>
+        <li id='signout' onClick={handleSignOut}>
+          Signout
+        </li>
+        </>
+        : 
+        <>
+        <Link to='/signup'>
+          <li>Sign Up</li>
+        </Link>
+        
+        </>
+        }
 
-       <li>links go here</li>
+
+       
         </ul>
 
             
