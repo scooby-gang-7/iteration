@@ -27,7 +27,6 @@ function Login(props) {
     })
       .then((data) => {
         return data.json();
-        
       })
       .then((data) => {
         setUserInfo(data);
