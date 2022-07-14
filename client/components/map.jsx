@@ -8,14 +8,14 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from '@reach/combobox';
-import '@reach/combobox/styles.css';
+// import {
+//   Combobox,
+//   ComboboxInput,
+//   ComboboxPopover,
+//   ComboboxList,
+//   ComboboxOption,
+// } from '@reach/combobox';
+// import '@reach/combobox/styles.css';
 
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
@@ -156,23 +156,24 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className='combobox-input'
-        placeholder='Search Location'
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+    <></>
+    // <Combobox onSelect={handleSelect}>
+    //   <ComboboxInput
+    //     value={value}
+    //     onChange={(e) => setValue(e.target.value)}
+    //     disabled={!ready}
+    //     className='combobox-input'
+    //     placeholder='Search Location'
+    //   />
+    //   <ComboboxPopover>
+    //     <ComboboxList>
+    //       {status === 'OK' &&
+    //         data.map(({ place_id, description }) => (
+    //           <ComboboxOption key={place_id} value={description} />
+    //         ))}
+    //     </ComboboxList>
+    //   </ComboboxPopover>
+    // </Combobox>
   );
 };
 

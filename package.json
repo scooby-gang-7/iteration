@@ -23,10 +23,8 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
-    "@fdefelici/react-bootstrap-combobox": "^1.13.0",
     "@googlemaps/js-api-loader": "^1.14.3",
     "@mui/material": "^5.9.0",
-    "@reach/combobox": "^0.17.0",
     "@react-google-maps/api": "^2.12.0",
     "@react-types/combobox": "^3.5.1",
     "@testing-library/jest-dom": "^5.16.4",
