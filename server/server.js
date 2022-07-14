@@ -13,6 +13,7 @@ const placesController = require('./controllers/placesController');
 // Import Routers
 const authRouter = require('./routers/authRouter');
 const tripRouter = require('./routers/tripRouter');
+const mytripsRouter = require('./routers/mytripsRouter')
 
 //create app instance and other const variables
 const app = express();
@@ -34,6 +35,7 @@ app.use('/assets', express.static('./client/assets'));
 // Router paths
 app.use('/auth', authRouter);
 app.use('/trips', tripRouter);
+app.use('/mytrips/trips', mytripsRouter);
 
 // unique paths
 app.get('/about', (req, res) => {

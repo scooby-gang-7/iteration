@@ -22,7 +22,7 @@ function TripDetail(props) {
   
     useEffect(() => {
       console.log("ID->", id)
-      fetch('trips/getTrip/', {
+      fetch('trips/getTrip', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,12 +35,8 @@ function TripDetail(props) {
         .then((tripDetails) => {
           console.log('tripDetails from Fetch --> ', tripDetails);
           setCurrentTripInfo(tripDetails);
-          let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
           let query =
-            'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-            tripDetails.destination +
-            '&key=' +
-            apikey;
+            `https://maps.googleapis.com/maps/api/geocode/json?address=${tripDetails.destination}&key=${process.env.GOOGLE_MAPS_API_KEY}`
           axios
             .get(query)
             .then((res) => {
