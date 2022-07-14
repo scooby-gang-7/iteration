@@ -44,10 +44,8 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
-//redirect on other request
-app.get('*', (req, res) => {
-  res.redirect('/');
-});
+//404 error
+app.use('*', (req, res) => res.status(404).send('Not Found'));
 
 //create global error handler
 app.use((err, req, res, next) => {
