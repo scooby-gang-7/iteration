@@ -19,12 +19,12 @@ import AddTrip from './components/AddTrip.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import 'react-toastify/dist/ReactToastify.css';
 import NavBar from './components/NavBar';
-
+import NavBarMUI from './components/NavBarMUI';
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
   const [tripInfo, setTripInfo] = useState([]);
- 
+
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
   const isInitialMount = useRef(true);
@@ -55,7 +55,8 @@ const App = () => {
 
   return (
     <div className='App'>
-      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
+      {/* <NavBarMUI setUserInfo={setUserInfo} userInfo={userInfo} /> */}
 
       <ToastContainer
         position='top-center'

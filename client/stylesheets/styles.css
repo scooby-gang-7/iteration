@@ -1,8 +1,8 @@
-body,
+/* body,
 #root {
   background-color: rgb(26, 24, 24);
   margin: 0;
-}
+} */
 
 .App {
   display: grid;
@@ -16,8 +16,8 @@ body,
 }
 
 #login-parent {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   font-family: 'Abril Fatface', cursive;
   border-radius: 10px;
   width: 300px;
@@ -26,6 +26,8 @@ body,
   grid-row-start: 3;
   grid-column-start: 2;
   font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
 #login-parent h3 {
@@ -34,7 +36,7 @@ body,
 
 #btn-login {
   margin-left: 20px;
-  background-color: #e05637;
+  /* background-color: #e05637; */
   font-family: 'Montserrat', sans-serif;
   border-radius: 7px;
   border: 1px solid;
@@ -44,7 +46,7 @@ body,
 
 #btn-signup {
   margin-right: 20px;
-  background-color: #e05637;
+  /* background-color: #e05637; */
   font-family: 'Montserrat', sans-serif;
   border-radius: 7px;
   border: 1px solid;
@@ -56,8 +58,8 @@ nav {
   font-family: 'Montserrat', sans-serif;
   align-items: center;
   min-height: 10vh;
-  background: rgb(26, 24, 24);
-  color: #e05637;
+  /* background: rgb(26, 24, 24); */
+  /* color: #e05637; */
   grid-row-start: 1;
   grid-column: 1 / span 3;
   display: flex;
@@ -96,7 +98,7 @@ nav h1 {
   border: 1px solid black;
   padding: 5px;
   width: 80vw;
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   border-radius: 10px;
   color: #e05637;
 }
@@ -111,20 +113,20 @@ nav h1 {
 }
 
 .myTripBox {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   margin: 10px;
 }
 
 .myTripBox button {
   width: 600px;
   border-radius: 10px;
-  background-color: #443e3e;
+  /* background-color: #443e3e; */
   color: #e05637;
 }
 
 .myTripBox a {
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  /* color: rgb(0, 0, 0); */
 }
 
 #signout {
@@ -149,7 +151,7 @@ nav h1 {
   width: 100px;
 }
 #addtrip-parent {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 300px;
@@ -164,7 +166,7 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #signup-parent {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 300px;
@@ -199,7 +201,7 @@ nav h1 {
 }
 
 #addBuddyDiv {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 1000px;

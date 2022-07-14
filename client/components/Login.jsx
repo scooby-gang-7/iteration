@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import { FormControl, InputLabel, Input} from '@mui/material';
-import axios from 'axios';
+import { Button, FormControl, InputLabel, Input, Grid, Paper, TextField, Typography } from '@mui/material';
 import SignUp from './Signup';
 import '../stylesheets/styles.css';
 
@@ -13,7 +12,7 @@ function Login(props) {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmitlogin = (e) => {
+  const handleSubmitLogin = (e) => {
     // to prevent rerender
     e.preventDefault();
     fetch('auth/login', {
@@ -48,110 +47,99 @@ function Login(props) {
 
   return (
     <>
-    <div id='login-parent'>
-      <form action='#' className='loginBox'>
-        <h3>Login</h3>
-        <div className=''>
-          <label>Email </label>
+      <div id='login-parent'>
+        <form action='#' className='loginBox'>
+          <h3>Login</h3>
+          <div className=''>
+            <label>Email </label>
+            <br />
+            <input
+              type='text'
+              placeholder='email'
+              name='email'
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className=''>
+            <br />
+            <label>Password </label>
+            <br />
+            <input
+              type='password'
+              placeholder='password'
+              name='password'
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
           <br />
-          <input
-            type='text'
-            placeholder='email'
-            name='email'
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className=''>
-          <br />
-          <label>Password </label>
-          <br />
-          <input
-            type='password'
-            placeholder='password'
-            name='password'
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <br />
-        <Link to='/signup'>
-          <button id='btn-signup' className='signUpButton'>
-            Sign Up
+          {/* <Link to='/signup'>
+            <button id='btn-signup' className='signUpButton'>
+              Sign Up
+            </button>
+          </Link> */}
+          <button id='btn-login' className='' onClick={handleSubmitLogin}>
+            Login
           </button>
-        </Link>
-        <button id='btn-login' className='' onClick={handleSubmitlogin}>
-          Login
-        </button>
+          <br />
+        </form>
         <br />
-      </form>
-      <br />
-    </div>
-      
 
-      <Paper
-variant="elevation"
-elevation={2}
-className="login-background"
->
-<Grid item>
-<Typography component="h1" variant="h5">
-Sign in
-</Typography>
-</Grid>
-<Grid item>
-<form onSubmit={this.handleSubmit}>
-<Grid container direction="column" spacing={2}>
-<Grid item>
-<TextField
-type="email"
-placeholder="Email"
-fullWidth
-name="username"
-variant="outlined"
-value={this.state.username}
-onChange={(event) =>
-this.setState({
-[event.target.name]: event.target.value,
-})
-}
-required
-autoFocus
-/>
-</Grid>
-<Grid item>
-<TextField
-type="password"
-placeholder="Password"
-fullWidth
-name="password"
-variant="outlined"
-value={this.state.password}
-onChange={(event) =>
-this.setState({
-[event.target.name]: event.target.value,
-})
-}
-required
-/>
-</Grid>
-<Grid item>
-<Button
-variant="contained"
-color="primary"
-type="submit"
-className="button-block"
->
-Submit
-</Button>
-</Grid>
-</Grid>
-</form>
-</Grid>
-<Grid item>
-<Link href="#" variant="body2">
-Forgot Password?
-</Link>
-</Grid>
-</Paper>
+        <Paper variant='elevation' elevation={2} className='login-background'>
+          <Grid item>
+            <Typography component='h1' variant='h5'>
+              Sign in
+            </Typography>
+          </Grid>
+          <Grid item>
+            <form onSubmit={handleSubmitLogin}>
+              <Grid container direction='column' spacing={2}>
+                <Grid item>
+                  <InputLabel>Email</InputLabel>
+                  <TextField
+                    type='email'
+                    placeholder='Email'
+                    fullWidth
+                    name='email'
+                    variant='outlined'
+                    value={email}
+                    onChange={(event) => setEmail}
+                    required
+                    autoFocus
+                  />
+                </Grid>
+                <Grid item>
+                  <InputLabel>Password</InputLabel>
+                  <TextField
+                    type='password'
+                    placeholder='Password'
+                    fullWidth
+                    name='password'
+                    variant='outlined'
+                    value={password}
+                    onChange={(event) => setPassword(password)}
+                    required
+                  />
+                </Grid>
+                <Grid item>
+                  <Button
+                    variant='contained'
+                    color='primary'
+                    type='submit'
+                    className='button-block'
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
+            </form>
+          </Grid>
+          <Grid item>
+            {/* <Link href='#' variant='body2'>
+            Forgot Password?
+          </Link> */}
+          </Grid>
+        </Paper>
+      </div>
     </>
   );
 }
