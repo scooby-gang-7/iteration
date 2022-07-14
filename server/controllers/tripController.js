@@ -20,6 +20,7 @@ tripController.getAlltrips = async (req, res, next) => {
 
 tripController.getOneTrip = async (req, res, next) => {
   const { trip_id } = req.body;
+  console.log("req.body", req.body)
   const queryText = `SELECT * 
     FROM trips
     WHERE trip_id = '${trip_id}'`;

@@ -8,6 +8,7 @@ import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
+
 function TripDetail(props) {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
   const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
@@ -18,43 +19,47 @@ function TripDetail(props) {
   const { id } = useParams();
 
   // fetching all places for the selected trip and storing them to currentTripInfo in state
-  useEffect(() => {
-    fetch('trips/getTrip/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        trip_id: id,
-      }),
-    })
-      .then((tripDetails) => tripDetails.json())
-      .then((tripDetails) => {
-        console.log('tripDetails from Fetch --> ', tripDetails);
-        setCurrentTripInfo(tripDetails);
-        let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
-        let query =
-          'https://maps.googleapis.com/maps/api/geocode/json?address=' +
-          tripDetails.destination +
-          '&key=' +
-          apikey;
-        axios
-          .get(query)
-          .then((res) => {
-            console.log(res.data);
-            if (res.data.status == 'OK') {
-              console.log(res.data.results[0]);
-              setMapCenter(res.data.results[0].geometry.location);
-            }
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+  
+    useEffect(() => {
+      console.log("ID->", id)
+      fetch('trips/getTrip/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          trip_id: id,
+        }),
       })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
+        .then((tripDetails) => tripDetails.json())
+        .then((tripDetails) => {
+          console.log('tripDetails from Fetch --> ', tripDetails);
+          setCurrentTripInfo(tripDetails);
+          let apikey = 'AIzaSyCHiRhiBXEfG9PCnAMeHI6qPuyupL02i78';
+          let query =
+            'https://maps.googleapis.com/maps/api/geocode/json?address=' +
+            tripDetails.destination +
+            '&key=' +
+            apikey;
+          axios
+            .get(query)
+            .then((res) => {
+              console.log(res.data);
+              if (res.data.status == 'OK') {
+                console.log(res.data.results[0]);
+                setMapCenter(res.data.results[0].geometry.location);
+              }
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    }, []);
+  
+
 
   const startDate = new Date(currentTripInfo.date_start);
   const startDateDisplay = `${
@@ -76,7 +81,7 @@ function TripDetail(props) {
         </p>
       </div>
       <div id='addBuddyDiv'>
-        <AddBuddy trip_id={id} />
+        <AddBuddy trip_id={id} /> 
       </div>
       <div id='mapDiv'>
         <Map
