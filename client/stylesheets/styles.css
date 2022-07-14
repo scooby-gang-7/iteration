@@ -1,219 +1,211 @@
+body,
 #root {
-    background-color: rgb(26, 24, 24);
-    margin: 0;
+  background-color: rgb(26, 24, 24);
+  margin: 0;
 }
 
 .App {
-    display: grid;
-    grid-template-rows: 80px 80px 1fr 80px;
-    grid-template-columns: 1fr 1fr 1fr;
+  display: grid;
+  grid-template-rows: 80px 80px 1fr 80px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .map-container {
-    width: 400px;
-    height: 400px;
+  width: 400px;
+  height: 400px;
 }
 
 #login-parent {
-    background-color: #2e2c2c;
-    color: #e05637;
-    font-family: 'Abril Fatface', cursive;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
+  background-color: #2e2c2c;
+  color: #e05637;
+  font-family: 'Abril Fatface', cursive;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
 }
 
 #login-parent h3 {
-    
-    font-size:x-large
+  font-size: x-large;
 }
 
 #btn-login {
-    margin-left: 20px;
-    background-color: #e05637;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 7px;
-    border: 1px solid;
-    padding: 3px;
-    width: 75px;
+  margin-left: 20px;
+  background-color: #e05637;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 7px;
+  border: 1px solid;
+  padding: 3px;
+  width: 75px;
 }
 
 #btn-signup {
-    margin-right: 20px;
-    background-color: #e05637;
-    font-family: 'Montserrat', sans-serif;
-    border-radius: 7px;
-    border: 1px solid;
-    padding: 3px;
-    width: 75px;
+  margin-right: 20px;
+  background-color: #e05637;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 7px;
+  border: 1px solid;
+  padding: 3px;
+  width: 75px;
 }
 
-
-nav{
-    font-family: 'Montserrat', sans-serif;
-    align-items: center;
-    min-height: 10vh;
-    background: rgb(26, 24, 24);
-    color: #e05637;
-    grid-row-start: 1;
-    grid-column: 1 / span 3;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    list-style: none;
+nav {
+  font-family: 'Montserrat', sans-serif;
+  align-items: center;
+  min-height: 10vh;
+  background: rgb(26, 24, 24);
+  color: #e05637;
+  grid-row-start: 1;
+  grid-column: 1 / span 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  list-style: none;
 }
 
-.nav-links{
-    list-style: none;
-    flex-direction: row;
-    text-align: center;
-    margin-right: 20px;
-    color: #e05637;
+.nav-links {
+  list-style: none;
+  flex-direction: row;
+  text-align: center;
+  margin-right: 20px;
+  color: #e05637;
 }
 
 a:visited {
-    text-decoration: none;
-    color: #e05637;
-    
+  text-decoration: none;
+  color: #e05637;
 }
 
-
 .nav-links a:link {
-    text-decoration: none;
-    color: #e05637
+  text-decoration: none;
+  color: #e05637;
 }
 
 nav h1 {
-    margin-left: 20px;
-}
-
-.myTripBox{
-    font-family: 'Abril Fatface', cursive;   
-}
-
-.placeDetails{
-    border: 1px solid black;
-    padding: 5px;
-    width: 80vw;
-    background-color:  #2e2c2c;;
-    border-radius: 10px;
-    color: #e05637;
-}
-
-.placeDetails img:hover {
-    cursor: pointer;
-}
-
-.placeDetails td {
-    padding-left: 5px;
-    padding-right: 5px;
+  margin-left: 20px;
 }
 
 .myTripBox {
-    background-color: #2e2c2c;
-    margin: 10px;
+  font-family: 'Abril Fatface', cursive;
+}
+
+.placeDetails {
+  border: 1px solid black;
+  padding: 5px;
+  width: 80vw;
+  background-color: #2e2c2c;
+  border-radius: 10px;
+  color: #e05637;
+}
+
+.placeDetails img:hover {
+  cursor: pointer;
+}
+
+.placeDetails td {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.myTripBox {
+  background-color: #2e2c2c;
+  margin: 10px;
 }
 
 .myTripBox button {
-    width: 600px;
-    border-radius: 10px;
-    background-color: #443e3e;
-    color: #e05637;
+  width: 600px;
+  border-radius: 10px;
+  background-color: #443e3e;
+  color: #e05637;
 }
 
 .myTripBox a {
-    text-decoration: none;
-    color: rgb(0, 0, 0);
+  text-decoration: none;
+  color: rgb(0, 0, 0);
 }
 
 #signout {
-    color: #e05637;
+  color: #e05637;
 }
 
 #signout:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #myTrips h1 {
-    color: #e05637;
-    font-family: 'Montserrat', sans-serif;
-    text-align: center;
-    margin-bottom: -12px;
+  color: #e05637;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-bottom: -12px;
 }
 
 .addTripButton {
-    border-radius: 7px;
-    border: 1px solid;
-    padding: 3px;
-    width: 100px;
+  border-radius: 7px;
+  border: 1px solid;
+  padding: 3px;
+  width: 100px;
 }
 #addtrip-parent {
-    background-color: #2e2c2c;
-    color: #e05637;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
+  background-color: #2e2c2c;
+  color: #e05637;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
 }
 
 ::placeholder {
-    
-    font-family: 'Montserrat', sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 #signup-parent {
-    background-color: #2e2c2c;
-    color: #e05637;
-    border-radius: 10px;
-    width: 300px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
-
+  background-color: #2e2c2c;
+  color: #e05637;
+  border-radius: 10px;
+  width: 300px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
 }
 #about-form {
-    background-color: #2e2c2c;
-    color: #e05637;
-    border-radius: 10px;
-    width: 1000px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
-    
+  background-color: #2e2c2c;
+  color: #e05637;
+  border-radius: 10px;
+  width: 1000px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
 }
 #detailsDiv {
-    background-color: #2e2c2c;
-    color: #e05637;
-    border-radius: 10px;
-    width: 1000px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
-    padding: 2px;
+  background-color: #2e2c2c;
+  color: #e05637;
+  border-radius: 10px;
+  width: 1000px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
+  padding: 2px;
 }
 
-
 #addBuddyDiv {
-    background-color: #2e2c2c;
-    color: #e05637;
-    border-radius: 10px;
-    width: 1000px;
-    text-align: center;
-    margin: 10px;
-    grid-row-start: 3;
-    grid-column-start: 2;
-    font-family: 'Montserrat', sans-serif;
-    
+  background-color: #2e2c2c;
+  color: #e05637;
+  border-radius: 10px;
+  width: 1000px;
+  text-align: center;
+  margin: 10px;
+  grid-row-start: 3;
+  grid-column-start: 2;
+  font-family: 'Montserrat', sans-serif;
 }
