@@ -22,7 +22,7 @@ function TripDetail(props) {
   
     useEffect(() => {
       console.log("ID->", id)
-      fetch('trips/getTrip/', {
+      fetch('trips/getTrip', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
