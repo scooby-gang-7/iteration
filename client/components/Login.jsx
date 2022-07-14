@@ -47,41 +47,117 @@ function Login(props) {
   };
 
   return (
+    <>
     <div id='login-parent'>
-          <h3>Login</h3>
-      <FormControl>
-        <form action='#' class='loginBox'>
-        <InputLabel htmlFor='email'>Email</InputLabel>
-            <Input
-              type='text'
-              placeholder='email'
-              name='email'
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          
-         <InputLabel htmlFor='password'>Password </InputLabel>
-            
-            <Input
-              type='password'
-              placeholder='password'
-              name='password'
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          
-          
-          <Link to='/signup'>
-            <button id='btn-signup' className='signUpButton'>
-              Sign Up
-            </button>
-          </Link>
-          <button id='btn-login' className='' onClick={handleSubmitlogin}>
-            Login
+               <form action='#' className='loginBox'>
+        <h3>Login</h3>
+        <div className=''>
+          <label>Email </label>
+          <br />
+          <input
+            type='text'
+            placeholder='email'
+            name='email'
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+        <div className=''>
+          <br />
+          <label>Password </label>
+          <br />
+          <input
+            type='password'
+            placeholder='password'
+            name='password'
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <br />
+        <Link to='/signup'>
+          <button id='btn-signup' className='signUpButton'>
+            Sign Up
           </button>
-          
-        </form>
-      </FormControl>
-      
+        </Link>
+        <button id='btn-login' className='' onClick={handleSubmitlogin}>
+          Login
+        </button>
+        <br />
+      </form>
+      <br />
     </div>
+      
+
+      <Paper
+variant="elevation"
+elevation={2}
+className="login-background"
+>
+<Grid item>
+<Typography component="h1" variant="h5">
+Sign in
+</Typography>
+</Grid>
+<Grid item>
+<form onSubmit={this.handleSubmit}>
+<Grid container direction="column" spacing={2}>
+<Grid item>
+<TextField
+type="email"
+placeholder="Email"
+fullWidth
+name="username"
+variant="outlined"
+value={this.state.username}
+onChange={(event) =>
+this.setState({
+[event.target.name]: event.target.value,
+})
+}
+required
+autoFocus
+/>
+</Grid>
+<Grid item>
+<TextField
+type="password"
+placeholder="Password"
+fullWidth
+name="password"
+variant="outlined"
+value={this.state.password}
+onChange={(event) =>
+this.setState({
+[event.target.name]: event.target.value,
+})
+}
+required
+/>
+</Grid>
+<Grid item>
+<Button
+variant="contained"
+color="primary"
+type="submit"
+className="button-block"
+>
+Submit
+</Button>
+</Grid>
+</Grid>
+</form>
+</Grid>
+<Grid item>
+<Link href="#" variant="body2">
+Forgot Password?
+</Link>
+</Grid>
+</Paper>
+
+
+
+
+    </div>
+    </>
   );
 }
 
