@@ -1,6 +1,6 @@
 body,
 #root {
-  background-color: rgb(26, 24, 24);
+  /* background-color: rgb(26, 24, 24); */
   margin: 0;
 }
 
@@ -16,7 +16,7 @@ body,
 }
 
 #login-parent {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   font-family: 'Abril Fatface', cursive;
   border-radius: 10px;
@@ -93,10 +93,10 @@ nav h1 {
 }
 
 .placeDetails {
-  border: 1px solid black;
+  /* border: 1px solid black; */
   padding: 5px;
   width: 80vw;
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   border-radius: 10px;
   color: #e05637;
 }
@@ -111,7 +111,7 @@ nav h1 {
 }
 
 .myTripBox {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   margin: 10px;
 }
 
@@ -149,7 +149,7 @@ nav h1 {
   width: 100px;
 }
 #addtrip-parent {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 300px;
@@ -164,7 +164,7 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #signup-parent {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 300px;
@@ -175,7 +175,7 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #about-form {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 1000px;
@@ -186,7 +186,7 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #detailsDiv {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 1000px;
@@ -199,7 +199,7 @@ nav h1 {
 }
 
 #addBuddyDiv {
-  background-color: #2e2c2c;
+  /* background-color: #2e2c2c; */
   color: #e05637;
   border-radius: 10px;
   width: 1000px;

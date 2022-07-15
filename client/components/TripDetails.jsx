@@ -3,7 +3,7 @@ import '../stylesheets/styles.css';
 import AddTrip from './AddTrip';
 import Places from './PlacesForCurrentTrip.jsx';
 import Row from './VotingForPlaces.jsx';
-import Map from './map.jsx';
+import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';

@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../stylesheets/styles.css';
-import Mapp from './map.jsx';
-import AddTrip from './AddTrip';
-import TripDetails from './TripDetails';
-import Map from './map';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 const Trip = (props) => {
   console.log('trip props:', props);

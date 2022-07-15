@@ -40,15 +40,18 @@
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
     "fs": "^0.0.1-security",
+    "google-map-react": "^2.2.0",
     "pg": "^8.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-places-autocomplete": "^7.3.0",
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "^5.0.1",
     "react-toastify": "^9.0.5",
     "regenerator-runtime": "^0.13.9",
     "sass": "^1.53.0",
+    "styled-components": "^5.3.5",
     "use-places-autocomplete": "^4.0.0"
   },
   "devDependencies": {

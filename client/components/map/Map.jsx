@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import MapItem from './mapItem';
+import MapItem from './MapItem';
+import SearchField from './SearchField'
 import axios from 'axios';
 
 import usePlacesAutocomplete, {
@@ -146,7 +147,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
       });
   };
 
-  return <>display search bar here in map.jsx component</>;
+  return <SearchField />;
 };
 
 export default Mapp;
