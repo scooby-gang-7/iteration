@@ -8,15 +8,6 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from '@reach/combobox';
-import '@reach/combobox/styles.css';
-
 const Mapp = (props) => {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
@@ -34,7 +25,7 @@ const Mapp = (props) => {
       />
     </div>
   );
-}
+};
 const url =
   'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
@@ -155,26 +146,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
       });
   };
 
-  return (
-    
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className='combobox-input'
-        placeholder='Search Location'
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
-  );
+  return <>display search bar here in map.jsx component</>;
 };
 
 export default Mapp;
