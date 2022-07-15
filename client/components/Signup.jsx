@@ -3,7 +3,7 @@ import '../stylesheets/styles.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 
-function Signup({ setUserInfo, userInfo }) {
+const Signup = ({ setUserInfo, userInfo }) => {
   const [name_first, setFirstName] = useState('');
   const [name_last, setLastName] = useState('');
   const [email, setEmail] = useState('');

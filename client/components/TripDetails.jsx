@@ -9,7 +9,7 @@ import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 
-function TripDetail(props) {
+const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
   const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
 
