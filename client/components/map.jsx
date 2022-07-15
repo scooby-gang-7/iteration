@@ -17,7 +17,7 @@ import {
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
 
-function Mapp(props) {
+const Mapp = (props) => {
   const { isLoaded } = useLoadScript({
     // better practice to put API key into ENV!!
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
@@ -156,6 +156,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   };
 
   return (
+    
     <Combobox onSelect={handleSelect}>
       <ComboboxInput
         value={value}

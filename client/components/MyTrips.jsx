@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Trip from './Trip';
 
 // INCLUDE MAP API
-function MyTrips(props) {
+const MyTrips = (props) => {
   // console.log('My trip props ->', props);
   // console.log('My trip info ->', props.tripInfo);
 

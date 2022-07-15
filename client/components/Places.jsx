@@ -3,7 +3,7 @@ import '../stylesheets/styles.css';
 import { Link } from 'react-router-dom';
 import Row from './Row.jsx';
 
-function Places(props) {
+const Places = (props) => {
   // fetching all places for the current trip and storing them to currentPlacesInfo in state
   useEffect(() => {
     console.log('props.trip_id --> ', props.trip_id);
