@@ -4,7 +4,7 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 
-function NavBar ({userInfo, setUserInfo}) {
+const NavBar = ({userInfo, setUserInfo}) => {
 
 const navigate = useNavigate();
 function handleSignOut (e) {

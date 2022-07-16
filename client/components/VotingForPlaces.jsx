@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import thumbsUp from '../assets/thumbsup.png';
 import thumbsDown from '../assets/thumbsdown.png';
 
-function Row(props) {
+const Row = (props) => {
   function handleClick(e) {
     e.preventDefault();
     console.log('e.target --> ', e.target);

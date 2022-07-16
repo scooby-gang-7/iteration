@@ -5,7 +5,7 @@ import '../stylesheets/styles.css';
 import SignUp from './Signup';
 import { Link, useNavigate } from 'react-router-dom';
 
-function Login(props) {
+ const Login = (props) =>{
   const { setUserInfo, userInfo } = props;
 
   const [email, setEmail] = useState('');
