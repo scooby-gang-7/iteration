@@ -21,7 +21,7 @@ userController.getAllUsers = (req, res, next) => {
 };
 
 userController.createUser = (req, res, next) => {
-  console.log('in create user');
+  // console.log('in create user');
   const { name_first, name_last, email, password } = req.body;
   if (name_first == '' || name_last == '' || email == '' || password == '') {
     return next(
@@ -51,10 +51,13 @@ userController.createUser = (req, res, next) => {
       if (err) return next(err);
       // password = hash;
       // console.log(password);
-      const queryText = `INSERT INTO users (email, name_first, name_last, password)
-             VALUES ('${email}', '${name_first}', '${name_last}', '${hash}') RETURNING *;`;
-
-      db.query(queryText)
+      const queryText = `
+        INSERT INTO users(email, name_first, name_last, password)
+        VALUES($1, $2, $3, $4) 
+        RETURNING *;`;
+      
+      const values = [email, name_first, name_last, hash]
+      db.query(queryText, values)
         .then((data) => {
           // console.log(data);
           res.locals.data = data.rows[0];
@@ -69,9 +72,12 @@ userController.createUser = (req, res, next) => {
 
 userController.verifyUser = (req, res, next) => {
   const { email, password } = req.body;
-  const queryText = `SELECT * FROM users
-         WHERE email='${email}';`;
-  db.query(queryText)
+  const values = [ email ]
+  const queryText = `
+    SELECT * FROM users
+    WHERE email=($1);`;
+  
+  db.query(queryText, values)
     .then((data) => {
       if (data.rows.length == 0) {
         // res.locals.data = {message: 'user does not exist'}; //to do throw error
