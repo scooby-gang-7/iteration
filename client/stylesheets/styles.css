@@ -1,13 +1,14 @@
 body,
 #root {
-  background-color: rgb(26, 24, 24);
   margin: 0;
+  color: #5e37e0;
 }
 
 .App {
   display: grid;
   grid-template-rows: 80px 80px 1fr 80px;
   grid-template-columns: 1fr 1fr 1fr;
+  color: #5e37e0;
 }
 
 .map-container {
@@ -16,8 +17,7 @@ body,
 }
 
 #login-parent {
-  background-color: #2e2c2c;
-  color: #e05637;
+  color: #5e37e0;
   font-family: 'Abril Fatface', cursive;
   border-radius: 10px;
   width: 300px;
@@ -56,8 +56,6 @@ nav {
   font-family: 'Montserrat', sans-serif;
   align-items: center;
   min-height: 10vh;
-  background: rgb(26, 24, 24);
-  color: #e05637;
   grid-row-start: 1;
   grid-column: 1 / span 3;
   display: flex;
@@ -71,17 +69,14 @@ nav {
   flex-direction: row;
   text-align: center;
   margin-right: 20px;
-  color: #e05637;
 }
 
 a:visited {
   text-decoration: none;
-  color: #e05637;
 }
 
 .nav-links a:link {
   text-decoration: none;
-  color: #e05637;
 }
 
 nav h1 {
@@ -93,12 +88,10 @@ nav h1 {
 }
 
 .placeDetails {
-  border: 1px solid black;
   padding: 5px;
   width: 80vw;
-  background-color: #2e2c2c;
+
   border-radius: 10px;
-  color: #e05637;
 }
 
 .placeDetails img:hover {
@@ -110,25 +103,14 @@ nav h1 {
   padding-right: 5px;
 }
 
-.myTripBox {
-  background-color: #2e2c2c;
-  margin: 10px;
-}
-
 .myTripBox button {
   width: 600px;
   border-radius: 10px;
-  background-color: #443e3e;
-  color: #e05637;
 }
 
 .myTripBox a {
   text-decoration: none;
-  color: rgb(0, 0, 0);
-}
-
-#signout {
-  color: #e05637;
+  /* color: rgb(0, 0, 0); */
 }
 
 #signout:hover {
@@ -136,7 +118,7 @@ nav h1 {
 }
 
 #myTrips h1 {
-  color: #e05637;
+  /* color: #e05637; */
   font-family: 'Montserrat', sans-serif;
   text-align: center;
   margin-bottom: -12px;
@@ -149,8 +131,8 @@ nav h1 {
   width: 100px;
 }
 #addtrip-parent {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   border-radius: 10px;
   width: 300px;
   text-align: center;
@@ -164,8 +146,8 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #signup-parent {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   border-radius: 10px;
   width: 300px;
   text-align: center;
@@ -175,8 +157,8 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #about-form {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   border-radius: 10px;
   width: 1000px;
   text-align: center;
@@ -186,8 +168,8 @@ nav h1 {
   font-family: 'Montserrat', sans-serif;
 }
 #detailsDiv {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   border-radius: 10px;
   width: 1000px;
   text-align: center;
@@ -199,8 +181,8 @@ nav h1 {
 }
 
 #addBuddyDiv {
-  background-color: #2e2c2c;
-  color: #e05637;
+  /* background-color: #2e2c2c; */
+  /* color: #e05637; */
   border-radius: 10px;
   width: 1000px;
   text-align: center;
