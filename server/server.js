@@ -13,10 +13,19 @@ const placesController = require('./controllers/placesController');
 // Import Routers
 const authRouter = require('./routers/authRouter');
 const tripRouter = require('./routers/tripRouter');
-const mytripsRouter = require('./routers/mytripsRouter')
 
 //create app instance and other const variables
 const app = express();
+const server = require('http').createServer(app)
+
+const io = require('socket.io')(server, {
+  cors: {
+      origin: ["http://localhost:8080"],
+  },
+})
+
+
+
 const DIST_DIR = path.join(__dirname, '../dist/');
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
 const PORT = process.env.PORT;
@@ -35,7 +44,6 @@ app.use('/assets', express.static('./client/assets'));
 // Router paths
 app.use('/auth', authRouter);
 app.use('/trips', tripRouter);
-app.use('/mytrips/trips', mytripsRouter);
 
 // unique paths
 app.get('/about', (req, res) => {
@@ -61,6 +69,36 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => {
-  console.log('listening to Port 3000');
-});
+
+io.on('connection', (socket)=> {
+  console.log(' new user!! ', socket.id)
+  
+  socket.on('send-message', (message, room)=> {
+    console.log(room)
+    console.log(' someone sent something! ', message)
+    if (room){
+      console.log('private!')
+      socket.to(room).emit('receive-message', message)
+    } else {
+      console.log('public, ignoring')
+      // socket.broadcast.emit('receive-message', message)
+    }
+  })
+
+  socket.on('join-room', (room)=>{
+    if (room) {
+      console.log('joining room: ', room)
+      socket.join(room)
+    }
+  })
+})
+
+// currently custom events arent' working (hello) because I can't seem to point
+// to an instance of the socket from the front end
+// need to find out how to properly do it. not trying to start the instance as soon as
+// app starts though, only when component is called.
+// ?
+
+
+server.listen(3000, ()=>{console.log('server is listening on 3000')})
+

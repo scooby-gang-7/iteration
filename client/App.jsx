@@ -8,13 +8,13 @@ import {
 } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
+import CHATROOM from './components/CHATROOM.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
-
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
@@ -66,8 +66,10 @@ const App = () => {
           element={
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
-            ) : (
-              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+            ) : 
+            (
+              <CHATROOM/>
+              /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
             )
           }
         />
