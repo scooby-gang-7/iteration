@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "@mui/material": "^5.9.0",
     "@reach/combobox": "^0.17.0",
     "@react-google-maps/api": "^2.12.0",
     "@testing-library/jest-dom": "^5.16.4",
@@ -38,6 +39,7 @@
     "express": "^4.18.1",
     "express-async-handler": "^1.2.0",
     "fs": "^0.0.1-security",
+    "mui-address-autocomplete": "^2.2.1",
     "pg": "^8.7.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

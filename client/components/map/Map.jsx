@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import MapItem from './mapItem';
 import axios from 'axios';
+import AddressAutocomplete from 'mui-address-autocomplete';
+import { Autocomplete } from '@mui/material';
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -16,6 +18,7 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
+import MuiSearch from './muiSearch';
 
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
@@ -69,6 +72,7 @@ function Map(props) {
 
   return (
     <>
+      {/* <MuiSearch/> */}
       <div className='places-container'>
         <PlacesAutoComplete
           setSelected={setSelected}
@@ -100,6 +104,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
+  // ------handles choosing an address from search dropdown menu------
   const handleSelect = async (address) => {
     console.log('map.jsx line 104 in handleSelect address --->', address);
     setValue(address, false);
@@ -113,6 +118,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
 
     const { lat, lng } = await getLatLng(results[0]);
     setSelected((selected) => [...selected, { lat, lng }]);
+    
 
     // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
 
@@ -125,9 +131,9 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
       lat: lat,
       long: lng,
     };
-    console.log('new place selected (map.jsx line 125)', newplace);
+    console.log('new place selected (map.jsx line 133)', newplace);
 
-    fetch('addplace/', {
+    fetch('trips/addplace', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -136,54 +142,58 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log('fetched data! in add place (map.jsx line 139)-->', data);
+        console.log('fetched data! in add place (map.jsx line 145)-->', data);
         //then do another fetch
-        fetch('getPlaces/', {
+        fetch('trips/getPlaces', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            trip_id: props.trip_id,
+            trip_id,
           }),
         })
           .then((placesDetails) => placesDetails.json())
           .then((placesDetails) => {
             console.log(
-              'placesDetails from Fetch after adding place (map.jsx line 153)--> ',
+              'placesDetails from Fetch after adding place (map.jsx line 159)--> ',
               placesDetails
             );
-            props.setCurrentPlacesInfo(placesDetails);
-          })
+            setCurrentPlacesInfo(placesDetails);
+          })  
           .catch((e) => {
             console.log('error in map.jsx fetch getplaces: ', e);
           });
       })
       .catch((e) => {
-        console.log('error in map.jsx fetch addplace: ',e);
+        console.log('error in map.jsx fetch addplace: ', e);
       });
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
-        className='combobox-input'
-        placeholder='Search Location'
-        style={{ width: 350, height: 30, fontSize: 16 }}
-      />
-      <ComboboxPopover>
-        <ComboboxList>
-          {status === 'OK' &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption key={place_id} value={description} />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+    <>
+      <Combobox onSelect={handleSelect}>
+        <ComboboxInput
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+          className='combobox-input'
+          placeholder='Search Location'
+          style={{ width: 350, height: 30, fontSize: 16 }}
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === 'OK' &&
+              data.map(({ place_id, description }) => (
+                <ComboboxOption key={place_id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+  
+    </>
   );
+
 };
 
 export default Mapp;
