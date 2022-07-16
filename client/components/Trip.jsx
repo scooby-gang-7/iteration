@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/styles.css';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
 const Trip = (props) => {

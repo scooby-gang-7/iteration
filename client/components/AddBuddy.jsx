@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/styles.css';
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
