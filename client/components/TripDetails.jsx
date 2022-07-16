@@ -9,8 +9,6 @@ import axios from 'axios';
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
   const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
-
-  console.log('tripdetail', props);
   const [center, setMapCenter] = useState(null);
 
   const { id } = useParams();
@@ -18,7 +16,6 @@ const TripDetail = (props) => {
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
   useEffect(() => {
-    console.log('ID->', id);
     fetch('trips/getTrip', {
       method: 'POST',
       headers: {
@@ -30,15 +27,21 @@ const TripDetail = (props) => {
     })
       .then((tripDetails) => tripDetails.json())
       .then((tripDetails) => {
-        console.log('tripDetails from Fetch --> ', tripDetails);
+        console.log(
+          'tripDetails from Fetch --> in tripdetails.jsx line 34 --->',
+          tripDetails
+        );
         setCurrentTripInfo(tripDetails);
         let query = `https://maps.googleapis.com/maps/api/geocode/json?address=${tripDetails.destination}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
         axios
           .get(query)
           .then((res) => {
-            console.log(res.data);
+            console.log('in tripdetails.jsx line 42 --->', res.data);
             if (res.data.status == 'OK') {
-              console.log(res.data.results[0]);
+              console.log(
+                'in tripdetails.jsx line 45 --->',
+                res.data.results[0]
+              );
               setMapCenter(res.data.results[0].geometry.location);
             }
           })

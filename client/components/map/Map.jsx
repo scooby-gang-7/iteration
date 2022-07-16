@@ -45,17 +45,18 @@ function Map(props) {
 
   const { trip_id } = props;
 
+  // -------- get places specific for the trip -----------
   const [places, setPlaces] = useState(null);
   //on render, fetch to get all the stops for the trip
   useEffect(() => {
     axios
-      .get('http://localhost:3000/places', {
+      .get('places/', {
         params: {
           trip_id,
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log('fetch places -->', response);
         setPlaces(response.data);
         console.log('data from trip_id', response.data);
       })
@@ -75,6 +76,7 @@ function Map(props) {
           setCurrentPlacesInfo={props.setCurrentPlacesInfo}
         />
       </div>
+      <div id='searchField'></div>
       <GoogleMap
         zoom={6}
         center={props.center}
@@ -86,6 +88,9 @@ function Map(props) {
     </>
   );
 }
+
+// -------------code for autocomplete search field-----------
+
 const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   const {
     ready,
@@ -96,17 +101,20 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   } = usePlacesAutocomplete();
 
   const handleSelect = async (address) => {
-    console.log(address);
+    console.log('map.jsx line 104 in handleSelect address --->', address);
     setValue(address, false);
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    console.log('find data here to save to database', results);
+    console.log(
+      'find data here to save to database (map.jsx line 110) -->',
+      results
+    );
 
     const { lat, lng } = await getLatLng(results[0]);
     setSelected((selected) => [...selected, { lat, lng }]);
 
-    // console.log("geometry   ", results[0].geometry.location.lat);
+    // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
 
     const newplace = {
       trip_id,
@@ -117,9 +125,9 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
       lat: lat,
       long: lng,
     };
-    console.log('new place', newplace);
+    console.log('new place selected (map.jsx line 125)', newplace);
 
-    fetch('http://localhost:3000/addplace', {
+    fetch('addplace/', {
       method: 'POST',
       headers: {
         'Content-type': 'application/json',
@@ -128,9 +136,9 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log('fetched data!', data);
+        console.log('fetched data! in add place (map.jsx line 139)-->', data);
         //then do another fetch
-        fetch('http://localhost:3000/getPlaces', {
+        fetch('getPlaces/', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -141,16 +149,18 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
         })
           .then((placesDetails) => placesDetails.json())
           .then((placesDetails) => {
-            console.log('this happened!');
-            console.log('placesDetails from Fetch --> ', placesDetails);
+            console.log(
+              'placesDetails from Fetch after adding place (map.jsx line 153)--> ',
+              placesDetails
+            );
             props.setCurrentPlacesInfo(placesDetails);
           })
           .catch((e) => {
-            console.log(e);
+            console.log('error in map.jsx fetch getplaces: ', e);
           });
       })
       .catch((e) => {
-        console.log(e);
+        console.log('error in map.jsx fetch addplace: ',e);
       });
   };
 
@@ -162,7 +172,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
         disabled={!ready}
         className='combobox-input'
         placeholder='Search Location'
-        style={{ width: 350 }}
+        style={{ width: 350, height: 30, fontSize: 16 }}
       />
       <ComboboxPopover>
         <ComboboxList>
