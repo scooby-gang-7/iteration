@@ -25,7 +25,7 @@ Missing:
 
 const CHATROOM = (props) => {
   const [isConnected, setIsConnected] = useState(false);
-  const [curSocket, setCurSocket] = useState(false);
+  const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
@@ -36,11 +36,15 @@ const CHATROOM = (props) => {
 
   useEffect(() => {
     // fetch conversation from messages table - dummy data right now
+    axios.post('/getmessages', { roomId: 3 }).then((res) => {
+      console.log(res.data);
+      setMessageList(res.data);
+    });
     setMessageList(['kyle', 'is', 'great!']);
 
     // set up socket
     console.log('installing socket io');
-    const socket = io('http://localhost:3000');
+    const socket = io(`http://localhost:${process.env.PORT}`);
     setCurSocket(socket);
 
     socket.on('connect', () => {
@@ -61,9 +65,11 @@ const CHATROOM = (props) => {
   // when I had this in useeffect, messagelist was only ever
   // what it was initialized as ([])
   if (isConnected) {
-    curSocket.on('receive-message', (msg) => {
+    curSocket.on('receive-message', (msg, fn, time) => {
+      console.log('message received!!!!');
       // console.log('loggin it!');
       // console.log(messageList);
+      console.log(...args);
       setMessageList([...messageList, msg]);
     });
   }
@@ -72,7 +78,7 @@ const CHATROOM = (props) => {
     // console.log(messageList);
     // console.log(room);
     setMessageList([...messageList, message]);
-    curSocket.emit('send-message', message, room);
+    curSocket.emit('send-message', message, Number(room), 'Kyle :)');
 
     // update messages in DB with a fetch
   };
@@ -97,9 +103,13 @@ const CHATROOM = (props) => {
             paddingLeft: '30px',
           }}
         >
-          {messageList.map((msg) => (
-            <div key={msg}>{msg}</div>
-          ))}
+          {messageList.length ? (
+            messageList.map((msg) => (
+              <div key={msg.message_id}>{msg.message}</div>
+            ))
+          ) : (
+            <></>
+          )}
         </div>
         <label>Manually join a room: </label>
         <input value={room} onChange={(e) => setRoom(e.target.value)} />

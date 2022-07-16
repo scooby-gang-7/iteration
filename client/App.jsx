@@ -1,11 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
-import {
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
 import CHATROOM from './components/CHATROOM.jsx';
@@ -19,14 +15,14 @@ import 'react-toastify/dist/ReactToastify.css';
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
   const [tripInfo, setTripInfo] = useState([]);
- 
+
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
 
   //fetch to update userInfo on start
-  //checking if user is already logged in? and if yes, then continue to my trips??? 
+  //checking if user is already logged in? and if yes, then continue to my trips???
   useEffect(() => {
-    if ( window.localStorage.getItem('session_id')) {
+    if (window.localStorage.getItem('session_id')) {
       axios
         .get('/auth/session', {
           params: {
@@ -43,8 +39,7 @@ const App = () => {
     } else {
       return;
     }
-  },[]);
-
+  }, []);
 
   return (
     <div className='App'>
@@ -59,21 +54,20 @@ const App = () => {
         draggable
         pauseOnHover
       />
-      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
       <Routes>
         <Route
           path='/'
           element={
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
-            ) : 
-            (
-              <CHATROOM/>
+            ) : (
+              <CHATROOM />
               /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
             )
           }
         />
-     
+
         <Route
           path='/signup'
           element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />}

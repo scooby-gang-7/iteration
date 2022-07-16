@@ -13,18 +13,19 @@ const placesController = require('./controllers/placesController');
 // Import Routers
 const authRouter = require('./routers/authRouter');
 const tripRouter = require('./routers/tripRouter');
+const socketIoController = require('./controllers/socketIoController');
+// connect to DB
+const db = require('./models/userTripModels');
 
 //create app instance and other const variables
 const app = express();
-const server = require('http').createServer(app)
+const server = require('http').createServer(app);
 
 const io = require('socket.io')(server, {
   cors: {
-      origin: ["http://localhost:8080"],
+    origin: ['http://localhost:8080'],
   },
-})
-
-
+});
 
 const DIST_DIR = path.join(__dirname, '../dist/');
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
@@ -50,6 +51,11 @@ app.get('/about', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
 
+app.post('/getmessages', socketIoController.getMessages, (req, res) => {
+  console.log(res.locals);
+  res.status(200).json(res.locals.chats);
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, HTML_FILE));
 });
@@ -69,29 +75,45 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
+io.on('connection', (socket) => {
+  console.log(' new user!! ', socket.id);
 
-io.on('connection', (socket)=> {
-  console.log(' new user!! ', socket.id)
-  
-  socket.on('send-message', (message, room)=> {
-    console.log(room)
-    console.log(' someone sent something! ', message)
-    if (room){
-      console.log('private!')
-      socket.to(room).emit('receive-message', message)
+  socket.on('send-message', (message, room, firstName) => {
+    console.log(room);
+    console.log(' someone sent something! ', message);
+    if (room) {
+      console.log('private!');
+
+      // make query to get chats
+      const params = [room, firstName, message, 'stringytimestampy'];
+      const queryText = `
+          INSERT INTO messages (trip_id, sender, message, timestamp)
+          VALUES ($1, $2, $3, $4)
+          RETURNING *
+      `;
+      let newTimeStamp;
+      db.query(queryText, params).then((res) => {
+        console.log(res.rows[0]);
+        newTimeStamp = res.rows[0].timestamp;
+
+        console.log('sending back to client?', room);
+        socket
+          .to(room)
+          .emit('receive-message', message, firstName, newTimeStamp);
+      });
     } else {
-      console.log('public, ignoring')
+      console.log('public, ignoring');
       // socket.broadcast.emit('receive-message', message)
     }
-  })
+  });
 
-  socket.on('join-room', (room)=>{
+  socket.on('join-room', (room) => {
     if (room) {
-      console.log('joining room: ', room)
-      socket.join(room)
+      console.log('joining room: ', room);
+      socket.join(room);
     }
-  })
-})
+  });
+});
 
 // currently custom events arent' working (hello) because I can't seem to point
 // to an instance of the socket from the front end
@@ -99,6 +121,6 @@ io.on('connection', (socket)=> {
 // app starts though, only when component is called.
 // ?
 
-
-server.listen(3000, ()=>{console.log('server is listening on 3000')})
-
+server.listen(process.env.PORT, () => {
+  console.log('server is listening on 3000');
+});
