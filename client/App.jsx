@@ -1,25 +1,21 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   Navigate,
-  useParams,
 } from 'react-router-dom';
-import './stylesheets/styles.css';
-import Login from './components/Login.jsx';
-import Signup from './components/Signup.jsx';
-import Map from './components/map.jsx';
-import About from './components/About.jsx';
-import MyTrips from './components/MyTrips.jsx';
 import AddTrip from './components/AddTrip.jsx';
-import TripDetails from './components/TripDetails.jsx';
-import 'react-toastify/dist/ReactToastify.css';
+import Login from './components/Login.jsx';
+import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
-import NavBarMUI from './components/NavBarMUI';
+import Signup from './components/Signup.jsx';
+import TripDetails from './components/TripDetails.jsx';
+import './stylesheets/styles.css';
+import 'react-toastify/dist/ReactToastify.css';
+import './stylesheets/styles.css'
+
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
@@ -27,13 +23,11 @@ const App = () => {
 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
-  const isInitialMount = useRef(true);
-
-  // console.log('app props userInfo', userInfo);
 
   //fetch to update userInfo on start
+  //checking if user is already logged in? and if yes, then continue to my trips??? 
   useEffect(() => {
-    if (isInitialMount.current && window.localStorage.getItem('session_id')) {
+    if ( window.localStorage.getItem('session_id')) {
       axios
         .get('/auth/session', {
           params: {
@@ -42,7 +36,6 @@ const App = () => {
         })
         .then((response) => {
           setUserInfo(response.data);
-          isInitialMount.current = false;
           console.log('data from session_id', response.data);
         })
         .catch((err) => {
@@ -51,13 +44,11 @@ const App = () => {
     } else {
       return;
     }
-  });
+  },[]);
+
 
   return (
     <div className='App'>
-      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
-      {/* <NavBarMUI setUserInfo={setUserInfo} userInfo={userInfo} /> */}
-
       <ToastContainer
         position='top-center'
         autoClose={5000}
@@ -69,6 +60,7 @@ const App = () => {
         draggable
         pauseOnHover
       />
+      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
       <Routes>
         <Route
           path='/'
@@ -80,7 +72,7 @@ const App = () => {
             )
           }
         />
-        <Route path='/about' element={<About />} />
+     
         <Route
           path='/signup'
           element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />}
@@ -100,7 +92,6 @@ const App = () => {
           }
         />
         <Route path='/mytrips/:id' element={<TripDetails />} />
-        <Route path='/map' element={<Map />} />
       </Routes>
     </div>
   );

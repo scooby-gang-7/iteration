@@ -5,7 +5,7 @@ import { Button, FormControl, InputLabel, Input, Grid, Paper, TextField, Typogra
 import SignUp from './Signup';
 import '../stylesheets/styles.css';
 
-function Login(props) {
+ const Login = (props) =>{
   const { setUserInfo, userInfo } = props;
 
   const [email, setEmail] = useState('');
