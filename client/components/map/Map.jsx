@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import MapItem from './mapItem';
 import axios from 'axios';
-import AddressAutocomplete from 'mui-address-autocomplete';
-import { Autocomplete } from '@mui/material';
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -94,6 +92,7 @@ function Map(props) {
 }
 
 // -------------code for autocomplete search field-----------
+// PlasesAutoComplete is specific to exact locations, not generalized like 'restaurants', 'pizza', 'cafe' 
 
 const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   const {
