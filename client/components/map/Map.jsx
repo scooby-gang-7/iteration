@@ -19,7 +19,7 @@ import '@reach/combobox/styles.css';
 
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.GOOGLE_MAP_API_KEY,
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
     libraries: ['places'],
   });
 
@@ -162,6 +162,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
         disabled={!ready}
         className='combobox-input'
         placeholder='Search Location'
+        style={{ width: 350 }}
       />
       <ComboboxPopover>
         <ComboboxList>

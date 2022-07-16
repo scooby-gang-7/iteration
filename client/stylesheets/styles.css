@@ -56,7 +56,7 @@ nav {
   font-family: 'Montserrat', sans-serif;
   align-items: center;
   min-height: 10vh;
-  background: rgb(26, 24, 24);
+  /* background: rgb(26, 24, 24); */
   color: #e05637;
   grid-row-start: 1;
   grid-column: 1 / span 3;
@@ -118,13 +118,13 @@ nav h1 {
 .myTripBox button {
   width: 600px;
   border-radius: 10px;
-  background-color: #443e3e;
+  /* background-color: #443e3e; */
   color: #e05637;
 }
 
 .myTripBox a {
   text-decoration: none;
-  color: rgb(0, 0, 0);
+  /* color: rgb(0, 0, 0); */
 }
 
 #signout {
