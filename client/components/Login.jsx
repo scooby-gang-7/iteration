@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-import { Button, FormControl, InputLabel, Input, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Button, FormControl, IconButton, InputAdornment, InputLabel, Input, Grid, Paper, OutlinedInput, TextField, Typography } from '@mui/material';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import SignUp from './Signup';
 import '../stylesheets/styles.css';
+import { values } from 'regenerator-runtime';
 
  const Login = (props) =>{
   const { setUserInfo, userInfo } = props;
@@ -44,6 +47,13 @@ import '../stylesheets/styles.css';
         console.log({ e });
       });
   };
+
+    const handleClickShowPassword = () => {
+      setValues({
+        ...values,
+        showPassword: !values.showPassword,
+      });
+    };
 
   return (
     <>
@@ -136,6 +146,7 @@ import '../stylesheets/styles.css';
           </Grid>
         </Paper>
       </div>
+      
     </>
   );
 }

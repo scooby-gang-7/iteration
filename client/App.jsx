@@ -15,6 +15,7 @@ import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './stylesheets/styles.css'
+import LoginMUI from './components/LoginMUI.jsx';
 
 
 const App = () => {
@@ -60,7 +61,7 @@ const App = () => {
         draggable
         pauseOnHover
       />
-      <NavBar setUserInfo={setUserInfo} userInfo = {userInfo}/>
+      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
       <Routes>
         <Route
           path='/'
@@ -68,11 +69,11 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+                <LoginMUI setUserInfo={setUserInfo} userInfo={userInfo} />
             )
           }
         />
-     
+
         <Route
           path='/signup'
           element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />}
