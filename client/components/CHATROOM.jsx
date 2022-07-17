@@ -8,18 +8,18 @@ import io from 'socket.io-client';
 HOW TO USE
 
 open up multiple clients (tabs, windows, etc)
-subscribe to a room (any string) with the Join Room button
+activate a common trip for a couple of the clients
 do this for all the clients you want to be grouped together
 now send a message from one! any that weren't grouped
 should not see the message :)
 
-Missing:
-- using tripId for automatic room number
-- styling
-- messages table
-- fetch to update messages table
-- fetch to pull from messages table
-- backend middleware to query the messages table
+To do:
+✔ using tripId for automatic room number
+✔ styling
+✔ messages table
+✔ fetch to update messages table
+✔ fetch to pull from messages table
+✔ backend middleware to query the messages table
 
 */
 
@@ -106,7 +106,7 @@ const CHATROOM = (props) => {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
-            paddingLeft: '30px',
+            minHeight: '50px',
           }}
         >
           {messageList.length ? (
@@ -118,18 +118,44 @@ const CHATROOM = (props) => {
                   key={msg.message_id}
                   style={{
                     display: 'flex',
-                    justifyContent: 'flex-between',
+                    flexDirection: 'column',
+                    alignItems: 'flex-start',
                     width: '100%',
+                    paddingBottom: '5px',
+                    borderBottom: '1px solid gray',
+                    color: 'gray',
                   }}
                 >
-                  <div>{`${msg.sender}:`}</div>
-                  <div>{msg.message}</div>
-                  <div>{`${new Date(msg.timestamp).toLocaleString()}`}</div>
+                  <div
+                    className='msg-details'
+                    style={{
+                      display: 'flex',
+                      width: '100%',
+                      justifyContent: 'space-between',
+                      // paddingLeft: '10px',
+                    }}
+                  >
+                    <div>{`${msg.sender}`}</div>
+                    <div style={{ marginLeft: '0px' }}>{`${new Date(
+                      msg.timestamp
+                    ).toLocaleString('en-US', {
+                      timeStyle: 'short',
+                      dateStyle: 'short',
+                    })}`}</div>
+                  </div>
+                  <div
+                    className='msg-main'
+                    style={{ padding: '10px', paddingLeft: '20px' }}
+                  >
+                    <div style={{ color: 'orangered', fontWeight: '600' }}>
+                      {msg.message}
+                    </div>
+                  </div>
                 </div>
               );
             })
           ) : (
-            <></>
+            <div>No messages. Say something already!</div>
           )}
         </div>
         {/* <label>Manually join a room: </label>
