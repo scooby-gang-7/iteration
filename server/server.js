@@ -52,7 +52,6 @@ app.get('/about', (req, res) => {
 });
 
 app.post('/getmessages', socketIoController.getMessages, (req, res) => {
-  console.log(res.locals);
   res.status(200).json(res.locals.chats);
 });
 
@@ -71,21 +70,14 @@ app.use((err, req, res, next) => {
     message: { err: 'An error occured' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
 io.on('connection', (socket) => {
-  console.log(' new user!! ', socket.id);
-
   socket.on('send-message', (message, room, firstName) => {
-    console.log(room);
-    console.log(' someone sent something! ', message);
     if (room) {
-      console.log('private!');
-
       // make query to get chats
-      const params = [room, firstName, message, 'stringytimestampy'];
+      const params = [Number(room), firstName, message, 'stringytimestampy'];
       const queryText = `
           INSERT INTO messages (trip_id, sender, message, timestamp)
           VALUES ($1, $2, $3, $4)
@@ -95,14 +87,9 @@ io.on('connection', (socket) => {
       db.query(queryText, params).then((res) => {
         console.log(res.rows[0]);
         newTimeStamp = res.rows[0].timestamp;
-
-        console.log('sending back to client?', room);
-        socket
-          .to(room)
-          .emit('receive-message', message, firstName, newTimeStamp);
+        socket.to(room).emit('receive-message', res.rows[0]);
       });
     } else {
-      console.log('public, ignoring');
       // socket.broadcast.emit('receive-message', message)
     }
   });

@@ -13,8 +13,24 @@ socketIoController.getMessages = async (req, res, next) => {
     WHERE trip_id = $1
     ORDER BY message_id
 `;
-  const result = await db.query(queryText, params);
-  console.log(result.rows);
+  try {
+    const result = await db.query(queryText, params);
+    res.locals.chats = result.rows;
+    return next();
+  } catch (error) {
+    /* 
+    
+    need to investigate this EAI_AGAIN error coming from elephantSQL.
+    did wilson do anything to DB? everything was working fine
+
+    */
+
+    console.log(
+      '-------------------------------------------------------------3',
+      roomId
+    );
+    return next(error);
+  }
 
   // save query results
   res.locals.chats = result.rows;

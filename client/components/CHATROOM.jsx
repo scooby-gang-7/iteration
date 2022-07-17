@@ -44,7 +44,7 @@ const CHATROOM = (props) => {
 
     // set up socket
     console.log('installing socket io');
-    const socket = io(`http://localhost:${process.env.PORT}`);
+    const socket = io(`http://localhost:${3000}`);
     setCurSocket(socket);
 
     socket.on('connect', () => {
@@ -65,22 +65,26 @@ const CHATROOM = (props) => {
   // when I had this in useeffect, messagelist was only ever
   // what it was initialized as ([])
   if (isConnected) {
-    curSocket.on('receive-message', (msg, fn, time) => {
+    curSocket.emit('join-room', 3);
+    curSocket.on('receive-message', (msg) => {
       console.log('message received!!!!');
       // console.log('loggin it!');
       // console.log(messageList);
-      console.log(...args);
+      console.log('receiving msg --------------------------');
+      console.log(msg);
       setMessageList([...messageList, msg]);
     });
+    console.log('finished setup');
   }
   const sendMessage = () => {
-    // console.log('sending message');
-    // console.log(messageList);
-    // console.log(room);
-    setMessageList([...messageList, message]);
-    curSocket.emit('send-message', message, Number(room), 'Kyle :)');
+    // simulate vars
+    const firstName = 'Kyle :)';
+    const tripId = 3;
 
-    // update messages in DB with a fetch
+    // send msg
+    setMessageList([...messageList, { sender: firstName, message, tripId }]);
+    console.log({ sender: firstName, message, tripId });
+    curSocket.emit('send-message', message, tripId, 'Kyle :)');
   };
 
   const joinRoom = () => {
