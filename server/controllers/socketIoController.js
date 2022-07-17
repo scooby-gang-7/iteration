@@ -3,7 +3,8 @@ const db = require('../models/userTripModels');
 const socketIoController = {};
 
 socketIoController.getMessages = async (req, res, next) => {
-  // get roomId from body
+  // get roomId from cookies (for now just body)
+  //   const roomId = req.cookies.tripId;
   const { roomId } = req.body;
 
   // make query to get chats

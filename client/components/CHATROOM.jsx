@@ -28,6 +28,10 @@ const CHATROOM = (props) => {
   const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
+  const [newMsgId, setNewMsgId] = useState(-1);
+
+  const firstName = 'Kyle =)';
+  const tripId = 1;
 
   // we don't need this in state
   // just need to pass down the tripId as props
@@ -36,11 +40,15 @@ const CHATROOM = (props) => {
 
   useEffect(() => {
     // fetch conversation from messages table - dummy data right now
-    axios.post('/getmessages', { roomId: 3 }).then((res) => {
-      console.log(res.data);
-      setMessageList(res.data);
-    });
-    setMessageList(['kyle', 'is', 'great!']);
+    axios
+      .post('/getmessages', { roomId: tripId })
+      .then((res) => {
+        // after fetching, update message list
+        setMessageList(res.data);
+      })
+      .catch((err) => {
+        console.log('error!!!!!!!', err);
+      });
 
     // set up socket
     console.log('installing socket io');
@@ -61,35 +69,25 @@ const CHATROOM = (props) => {
     };
   }, []);
 
-  // seems the messagelist var needs updated
-  // when I had this in useeffect, messagelist was only ever
-  // what it was initialized as ([])
   if (isConnected) {
-    curSocket.emit('join-room', 3);
+    curSocket.emit('join-room', tripId);
     curSocket.on('receive-message', (msg) => {
-      console.log('message received!!!!');
-      // console.log('loggin it!');
-      // console.log(messageList);
-      console.log('receiving msg --------------------------');
-      console.log(msg);
       setMessageList([...messageList, msg]);
     });
-    console.log('finished setup');
   }
   const sendMessage = () => {
-    // simulate vars
-    const firstName = 'Kyle :)';
-    const tripId = 3;
-
     // send msg
-    setMessageList([...messageList, { sender: firstName, message, tripId }]);
-    console.log({ sender: firstName, message, tripId });
-    curSocket.emit('send-message', message, tripId, 'Kyle :)');
+    setMessageList([
+      ...messageList,
+      { firstName, message, timestamp: 'timeystampy', message_id: newMsgId },
+    ]);
+    setNewMsgId(newMsgId - 1);
+    curSocket.emit('send-message', message, tripId, firstName);
+    setMessage('');
   };
 
   const joinRoom = () => {
-    // console.log(room);
-    curSocket.emit('join-room', room);
+    curSocket.emit('join-room', tripId);
   };
 
   return (
@@ -108,15 +106,16 @@ const CHATROOM = (props) => {
           }}
         >
           {messageList.length ? (
-            messageList.map((msg) => (
-              <div key={msg.message_id}>{msg.message}</div>
-            ))
+            messageList.map((msg) => {
+              console.log(msg);
+              return <div key={msg.message_id}>{msg.message}</div>;
+            })
           ) : (
             <></>
           )}
         </div>
-        <label>Manually join a room: </label>
-        <input value={room} onChange={(e) => setRoom(e.target.value)} />
+        {/* <label>Manually join a room: </label>
+        <input value={room} onChange={(e) => setRoom(e.target.value)} /> */}
         <br />
         <br />
         <label>Message: </label>
@@ -134,7 +133,7 @@ const CHATROOM = (props) => {
         >
           Send Message
         </button>
-        <button
+        {/* <button
           id='roomjoin'
           className=''
           onClick={(e) => {
@@ -143,7 +142,7 @@ const CHATROOM = (props) => {
           }}
         >
           Join room
-        </button>
+        </button> */}
         <br />
       </form>
       <br />
@@ -152,4 +151,3 @@ const CHATROOM = (props) => {
 };
 
 export default CHATROOM;
-//

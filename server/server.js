@@ -77,16 +77,14 @@ io.on('connection', (socket) => {
   socket.on('send-message', (message, room, firstName) => {
     if (room) {
       // make query to get chats
-      const params = [Number(room), firstName, message, 'stringytimestampy'];
+      const params = [Number(room), firstName, message];
       const queryText = `
           INSERT INTO messages (trip_id, sender, message, timestamp)
-          VALUES ($1, $2, $3, $4)
+          VALUES ($1, $2, $3, now())
           RETURNING *
       `;
-      let newTimeStamp;
       db.query(queryText, params).then((res) => {
         console.log(res.rows[0]);
-        newTimeStamp = res.rows[0].timestamp;
         socket.to(room).emit('receive-message', res.rows[0]);
       });
     } else {
