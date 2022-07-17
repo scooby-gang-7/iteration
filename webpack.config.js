@@ -62,10 +62,9 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Scratch',
+      title: 'iteration',
       template: './client/index.html',
       favicon: './client/assets/world.png',
     }),
-    new Dotenv(),
   ],
 };

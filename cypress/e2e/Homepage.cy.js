@@ -1,7 +1,7 @@
 
 describe('Homepage', () => {
   beforeEach(() => {
-    cy.visit(Cypress.env('login_url'))
+    //cy.visit(Cypress.env('login_url'))
   })
 
     it('greets with Login', () => {
