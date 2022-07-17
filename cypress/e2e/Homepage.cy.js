@@ -1,7 +1,7 @@
 
 describe('Homepage', () => {
   beforeEach(() => {
-    //cy.visit(Cypress.env('login_url'))
+    cy.visit(Cypress.env('login_url'))
   })
 
     it('greets with Login', () => {
@@ -19,7 +19,16 @@ describe('Homepage', () => {
     })
 
     it ('requires password', () => {
-      cy.get('[data-test=email]').type('taylor@codesmith.com{enter}')
+      cy.get('[data-test=email]').type('taylor@codesmith.com')
+      cy.get('form').get('[class=loginButton]').click()
+      cy.contains('Invalid email or password.')
+    })
+
+    it('requires valid username and password', () => {
+      cy.get('[data-test=email]').type('taylor@codesmith.com')
+      cy.get('[data-test=password]').type('invalid')
+      cy.get('form').get('[class=loginButton]').click()
+      cy.contains('Invalid email or password.')
     })
 
     it('navigates to /trips on sucessful login', () => {

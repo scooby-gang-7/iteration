@@ -66,5 +66,6 @@ module.exports = {
       template: './client/index.html',
       favicon: './client/assets/world.png',
     }),
+    new Dotenv()
   ],
 };

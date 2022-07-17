@@ -8,9 +8,9 @@ module.exports = defineConfig({
   //       // implement node event listeners here
   //     },
   //},
-//   env: {
-//     login_url: "http://localhost:8080",
-//   },
+  env: {
+    login_url: "http://localhost:8080",
+  },
 
   e2e: {
     setupNodeEvents(on, config) {
