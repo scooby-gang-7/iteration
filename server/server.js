@@ -74,7 +74,7 @@ app.use((err, req, res, next) => {
 });
 
 io.on('connection', (socket) => {
-  socket.on('send-message', (message, room, firstName) => {
+  socket.on('send-message', (message, room, firstName, callback) => {
     if (room) {
       // make query to get chats
       const params = [Number(room), firstName, message];
@@ -85,6 +85,7 @@ io.on('connection', (socket) => {
       `;
       db.query(queryText, params).then((res) => {
         console.log(res.rows[0]);
+        callback(res.rows[0]);
         socket.to(room).emit('receive-message', res.rows[0]);
       });
     } else {

@@ -28,7 +28,6 @@ const CHATROOM = (props) => {
   const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
-  const [newMsgId, setNewMsgId] = useState(-1);
 
   const firstName = 'Kyle =)';
   const tripId = 1;
@@ -72,17 +71,22 @@ const CHATROOM = (props) => {
   if (isConnected) {
     curSocket.emit('join-room', tripId);
     curSocket.on('receive-message', (msg) => {
+      console.log(' youve received a message!');
       setMessageList([...messageList, msg]);
     });
   }
   const sendMessage = () => {
     // send msg
-    setMessageList([
-      ...messageList,
-      { firstName, message, timestamp: 'timeystampy', message_id: newMsgId },
-    ]);
-    setNewMsgId(newMsgId - 1);
-    curSocket.emit('send-message', message, tripId, firstName);
+    console.log('fn', firstName);
+    curSocket.emit(
+      'send-message',
+      message,
+      tripId,
+      firstName,
+      (objFromSrvr) => {
+        setMessageList([...messageList, objFromSrvr]);
+      }
+    );
     setMessage('');
   };
 
@@ -91,7 +95,7 @@ const CHATROOM = (props) => {
   };
 
   return (
-    <div id='login-parent'>
+    <div id='login-parent' style={{ margin: '-50px', width: '150%' }}>
       <form action='#' className='loginBox'>
         <h3>CHAT ROOM BABYYY</h3>
 
@@ -107,8 +111,22 @@ const CHATROOM = (props) => {
         >
           {messageList.length ? (
             messageList.map((msg) => {
-              console.log(msg);
-              return <div key={msg.message_id}>{msg.message}</div>;
+              // console.log(msg.timestamp);
+              console.log(new Date(msg.timestamp).toLocaleString());
+              return (
+                <div
+                  key={msg.message_id}
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'flex-between',
+                    width: '100%',
+                  }}
+                >
+                  <div>{`${msg.sender}:`}</div>
+                  <div>{msg.message}</div>
+                  <div>{`${new Date(msg.timestamp).toLocaleString()}`}</div>
+                </div>
+              );
             })
           ) : (
             <></>
