@@ -1,16 +1,27 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import MapItem from './mapItem';
 import axios from 'axios';
+import AddressAutocomplete from 'mui-address-autocomplete';
+import { Autocomplete } from '@mui/material';
 
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
 
-const Mapp = (props) => {
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxPopover,
+  ComboboxList,
+  ComboboxOption,
+} from '@reach/combobox';
+import '@reach/combobox/styles.css';
+import MuiSearch from './muiSearch';
+
+function Mapp(props) {
   const { isLoaded } = useLoadScript({
-    // better practice to put API key into ENV!!
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
     libraries: ['places'],
   });
@@ -25,7 +36,7 @@ const Mapp = (props) => {
       />
     </div>
   );
-};
+}
 const url =
   'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
 
@@ -37,17 +48,18 @@ function Map(props) {
 
   const { trip_id } = props;
 
+  // -------- get places specific for the trip -----------
   const [places, setPlaces] = useState(null);
   //on render, fetch to get all the stops for the trip
   useEffect(() => {
     axios
-      .get('trips/places', {
+      .get('places/', {
         params: {
           trip_id,
         },
       })
       .then((response) => {
-        console.log(response);
+        console.log('fetch places -->', response);
         setPlaces(response.data);
         console.log('data from trip_id', response.data);
       })
@@ -60,6 +72,7 @@ function Map(props) {
 
   return (
     <>
+      {/* <MuiSearch/> */}
       <div className='places-container'>
         <PlacesAutoComplete
           setSelected={setSelected}
@@ -67,6 +80,7 @@ function Map(props) {
           setCurrentPlacesInfo={props.setCurrentPlacesInfo}
         />
       </div>
+      <div id='searchField'></div>
       <GoogleMap
         zoom={6}
         center={props.center}
@@ -78,6 +92,9 @@ function Map(props) {
     </>
   );
 }
+
+// -------------code for autocomplete search field-----------
+
 const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
   const {
     ready,
@@ -87,18 +104,23 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
     clearSuggestions,
   } = usePlacesAutocomplete();
 
+  // ------handles choosing an address from search dropdown menu------
   const handleSelect = async (address) => {
-    console.log(address);
+    console.log('map.jsx line 104 in handleSelect address --->', address);
     setValue(address, false);
     clearSuggestions();
 
     const results = await getGeocode({ address });
-    console.log('find data here to save to database', results);
+    console.log(
+      'find data here to save to database (map.jsx line 110) -->',
+      results
+    );
 
     const { lat, lng } = await getLatLng(results[0]);
     setSelected((selected) => [...selected, { lat, lng }]);
+    
 
-    // console.log("geometry   ", results[0].geometry.location.lat);
+    // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
 
     const newplace = {
       trip_id,
@@ -109,7 +131,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
       lat: lat,
       long: lng,
     };
-    console.log('new place', newplace);
+    console.log('new place selected (map.jsx line 133)', newplace);
 
     fetch('trips/addplace', {
       method: 'POST',
@@ -120,7 +142,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log('fetched data!', data);
+        console.log('fetched data! in add place (map.jsx line 145)-->', data);
         //then do another fetch
         fetch('trips/getPlaces', {
           method: 'POST',
@@ -128,25 +150,50 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            trip_id: props.trip_id,
+            trip_id,
           }),
         })
           .then((placesDetails) => placesDetails.json())
           .then((placesDetails) => {
-            console.log('this happened!');
-            console.log('placesDetails from Fetch --> ', placesDetails);
-            props.setCurrentPlacesInfo(placesDetails);
-          })
+            console.log(
+              'placesDetails from Fetch after adding place (map.jsx line 159)--> ',
+              placesDetails
+            );
+            setCurrentPlacesInfo(placesDetails);
+          })  
           .catch((e) => {
-            console.log(e);
+            console.log('error in map.jsx fetch getplaces: ', e);
           });
       })
       .catch((e) => {
-        console.log(e);
+        console.log('error in map.jsx fetch addplace: ', e);
       });
   };
 
-  return <>display search bar here in map.jsx component</>;
+  return (
+    <>
+      <Combobox onSelect={handleSelect}>
+        <ComboboxInput
+          value={value}
+          onChange={(e) => setValue(e.target.value)}
+          disabled={!ready}
+          className='combobox-input'
+          placeholder='Search Location'
+          style={{ width: 350, height: 30, fontSize: 16 }}
+        />
+        <ComboboxPopover>
+          <ComboboxList>
+            {status === 'OK' &&
+              data.map(({ place_id, description }) => (
+                <ComboboxOption key={place_id} value={description} />
+              ))}
+          </ComboboxList>
+        </ComboboxPopover>
+      </Combobox>
+  
+    </>
+  );
+
 };
 
 export default Mapp;

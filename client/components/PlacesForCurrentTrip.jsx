@@ -25,7 +25,8 @@ const Places = (props) => {
       .catch((e) => {
         console.log(e);
       });
-  }, []);
+  }, [props.currentPlacesInfo]);
+
 
   return (
     <div id='placesDiv'>
