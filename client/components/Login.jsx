@@ -49,7 +49,7 @@ import { Link, useNavigate } from 'react-router-dom';
     <div id='login-parent'>
       <form action='#' className='loginBox'>
         <h3>Login</h3>
-        <div className=''>
+        <div className='' data-test='email'>
           <label>Email </label>
           <br />
           <input
@@ -72,11 +72,11 @@ import { Link, useNavigate } from 'react-router-dom';
         </div>
         <br />
         <Link to='/signup'>
-          <button id='btn-signup' className='signUpButton'>
+          <button id='btn-signup' className='signUpButton' data-cy="Sign Up">
             Sign Up
           </button>
         </Link>
-        <button id='btn-login' className='' onClick={handleSubmitlogin}>
+        <button id='btn-login' className='loginButton' onClick={handleSubmitlogin}>
           Login
         </button>
         <br />
