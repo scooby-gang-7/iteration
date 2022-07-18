@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Card } from '@mui/material';
 import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
@@ -64,6 +65,7 @@ const TripDetail = (props) => {
 
   return (
     <div>
+        <Card  elevation={2}>
       <div id='detailsDiv'>
         <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
         <p>{currentTripInfo.destination}</p>
@@ -72,9 +74,13 @@ const TripDetail = (props) => {
           {startDateDisplay} - {endDateDisplay}
         </p>
       </div>
+        </Card>
       <div id='addBuddyDiv'>
+          <Card  elevation={2}>
         <AddBuddy trip_id={id} />
+          </Card>
       </div>
+        <Card  elevation={2} >
       <div id='mapDiv'>
         <Map
           center={center}
@@ -82,11 +88,14 @@ const TripDetail = (props) => {
           setCurrentPlacesInfo={setCurrentPlacesInfo}
         />
       </div>
+       </Card>
+        <Card  elevation={2} >
       <Places
         trip_id={id}
         currentPlacesInfo={currentPlacesInfo}
         setCurrentPlacesInfo={setCurrentPlacesInfo}
       />
+       </Card>
     </div>
   );
 };

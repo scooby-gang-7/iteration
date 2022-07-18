@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Card } from '@mui/material'
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -52,7 +53,8 @@ const Addbuddy = (props) => {
   });
 
   return (
-    <div id='addbuddy_container'>
+
+   <div id='addbuddy_container'>
       <div id='mytrip buddy'>{tripmembers}</div>
       <div>
         <input

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/styles.css';
+import { Card } from '@mui/material';
 import AddTrip from './AddTrip';
 import { Link } from 'react-router-dom';
 import Trip from './Trip';
@@ -60,14 +60,16 @@ const MyTrips = (props) => {
         })
         .map((trip) => {
           return (
-            <Trip
-              key={trip.trip_id}
-              trip_id={trip.trip_id}
-              name={trip.trip_name}
-              destination={trip.destination}
-              start={trip.date_start}
-              end={trip.date_end}
-            />
+            <Card>
+              <Trip
+                key={trip.trip_id}
+                trip_id={trip.trip_id}
+                name={trip.trip_name}
+                destination={trip.destination}
+                start={trip.date_start}
+                end={trip.date_end}
+              />
+            </Card>
           );
         })}
       <br />
