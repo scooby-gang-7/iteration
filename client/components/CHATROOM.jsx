@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../stylesheets/styles.css';
 import io from 'socket.io-client';
-
+import CHATMESSAGE from './CHATMESSAGE.jsx';
 /*
 
 HOW TO USE
@@ -29,7 +29,8 @@ const CHATROOM = (props) => {
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
 
-  const firstName = 'Kyle =)';
+  const [firstName, setFirstName] = useState('');
+  // const firstName = 'Kyle =)';
   const tripId = 1;
 
   // we don't need this in state
@@ -107,59 +108,32 @@ const CHATROOM = (props) => {
             flexDirection: 'column',
             alignItems: 'flex-start',
             minHeight: '50px',
+            width: '100%',
           }}
         >
           {messageList.length ? (
-            messageList.map((msg) => {
-              // console.log(msg.timestamp);
-              console.log(new Date(msg.timestamp).toLocaleString());
-              return (
-                <div
-                  key={msg.message_id}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    width: '100%',
-                    paddingBottom: '5px',
-                    borderBottom: '1px solid gray',
-                    color: 'gray',
-                  }}
-                >
-                  <div
-                    className='msg-details'
-                    style={{
-                      display: 'flex',
-                      width: '100%',
-                      justifyContent: 'space-between',
-                      // paddingLeft: '10px',
-                    }}
-                  >
-                    <div>{`${msg.sender}`}</div>
-                    <div style={{ marginLeft: '0px' }}>{`${new Date(
-                      msg.timestamp
-                    ).toLocaleString('en-US', {
-                      timeStyle: 'short',
-                      dateStyle: 'short',
-                    })}`}</div>
-                  </div>
-                  <div
-                    className='msg-main'
-                    style={{ padding: '10px', paddingLeft: '20px' }}
-                  >
-                    <div style={{ color: 'orangered', fontWeight: '600' }}>
-                      {msg.message}
-                    </div>
-                  </div>
-                </div>
-              );
-            })
+            messageList.map((msg) => (
+              <CHATMESSAGE
+                user={firstName}
+                key={msg.message_id}
+                message_id={msg.message_id}
+                sender={msg.sender}
+                message={msg.message}
+                timestamp={msg.timestamp}
+              />
+            ))
           ) : (
             <div>No messages. Say something already!</div>
           )}
         </div>
-        {/* <label>Manually join a room: </label>
-        <input value={room} onChange={(e) => setRoom(e.target.value)} /> */}
+        <br />
+        <br />
+        <label>Sender: </label>
+        <br />
+        <input
+          value={firstName}
+          onChange={(e) => setFirstName(e.target.value)}
+        />
         <br />
         <br />
         <label>Message: </label>
