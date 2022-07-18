@@ -6,6 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import BannerImg from '../assets/sunmoonlake.jpeg'
 
 export default function ButtonAppBar({ userInfo, setUserInfo }) {
   const navigate = useNavigate();
@@ -37,17 +38,13 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
+      <Box sx={{ objectFit:'contain' }}>
+        <img src={BannerImg} width='900px' max-height={300}/>
+      </Box>
+      {/* <AppBar position='static'>
         <Toolbar>
-          <IconButton
-            size='large'
-            edge='start'
-            color='inherit'
-            aria-label='menu'
-            sx={{ mr: 2 }}
-          ></IconButton>
           <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
+            Travel Pal
           </Typography>
           {window.location.pathname === '/' ? (
             <Button
@@ -74,7 +71,7 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
             </>
           )}
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
     </Box>
   );
 }

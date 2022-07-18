@@ -16,6 +16,7 @@ import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './stylesheets/styles.css'
 import LoginMUI from './components/LoginMUI.jsx';
+import NavBarMUI from './components/NavBarMUI'
 
 
 const App = () => {
@@ -49,6 +50,7 @@ const App = () => {
 
 
   return (
+    
     <div className='App'>
       <ToastContainer
         position='top-center'
@@ -61,7 +63,7 @@ const App = () => {
         draggable
         pauseOnHover
       />
-      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
+      {/* <NavBar setUserInfo={setUserInfo} userInfo={userInfo} /> */}
       <Routes>
         <Route
           path='/'
@@ -69,7 +71,10 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
+              <>
+              
                 <LoginMUI setUserInfo={setUserInfo} userInfo={userInfo} />
+              </>
             )
           }
         />

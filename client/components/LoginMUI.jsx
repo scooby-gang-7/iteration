@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
@@ -12,11 +12,13 @@ import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import TextField from '@mui/material/TextField';
 import { ToastContainer, toast } from 'react-toastify';
-import { Button, Paper, Typography } from '@mui/material';
+import { Button, Container, Paper, Typography } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { textAlign } from '@mui/system';
-import Signup from './Signup';
+import SignInModal from './SignInModal.jsx'
+import NavBarMUI from './NavBarMUI'
+
 
 export default function LoginMUI({ setUserInfo, userInfo }) {
   const [values, setValues] = React.useState({
@@ -28,42 +30,42 @@ export default function LoginMUI({ setUserInfo, userInfo }) {
   });
 
   const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-const handleSubmitLogin = (e) => {
-  // to prevent rerender
-  e.preventDefault();
-  fetch('auth/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  })
-    .then((data) => {
-      return data.json();
+  const handleSubmitLogin = (e) => {
+    // to prevent rerender
+    e.preventDefault();
+    fetch('auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
     })
-    .then((data) => {
-      setUserInfo(data);
-      //if valid user/password --> route to MyTrips page
-      window.localStorage.setItem(
-        'session_id',
-        JSON.stringify(data.session_id)
-      );
-      console.log('data passed into setUserInfo -->', data);
-      navigate('/mytrips', { replace: true });
-    })
-    .catch((e) => {
-      //pop-up error handling instance
-      toast.error('Invalid email or password.');
-      console.log({ e });
-    });
-};
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        setUserInfo(data);
+        //if valid user/password --> route to MyTrips page
+        window.localStorage.setItem(
+          'session_id',
+          JSON.stringify(data.session_id)
+        );
+        console.log('data passed into setUserInfo -->', data);
+        navigate('/mytrips', { replace: true });
+      })
+      .catch((e) => {
+        //pop-up error handling instance
+        toast.error('Invalid email or password.');
+        console.log({ e });
+      });
+  };
 
   const handleClickShowPassword = () => {
     setValues({
@@ -73,21 +75,45 @@ const handleSubmitLogin = (e) => {
   };
 
   return (
-    <div>
-      <Paper elevation={3} sx={{ m: 1, p: 2 }}>
-        <Box
+    <Paper elevation={4} sx={{ paddingBottom: '40px' }}>
+      <NavBarMUI />
+      <Container
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      >
+        <Typography variant='h1' sx={{ mt: 1 }}>
+          Travel Pal
+        </Typography>
+        <Typography variant='h5' sx={{ mb: 2 }}>
+          Don't miss out, make group trips happen with Travel Pal
+        </Typography>
+        <Paper
+          elevation={3}
           sx={{
+            m: 1,
+            p: 2,
+            bgcolor: '#E4DCE7',
+            maxWidth: 400,
             display: 'flex',
-            flexWrap: 'wrap',
-            textAlign: 'center',
-            m: '40',
+            flexDirection: 'column',
+            justifyContent: 'center',
           }}
         >
-          <div>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              textAlign: 'center',
+              m: '40',
+            }}
+          >
             <Typography component='h1' variant='h5'>
               Sign in
             </Typography>
-            <FormControl sx={{ m: 1, width: '30ch' }} variant='outlined'>
+            <FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
               <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
               <OutlinedInput
                 id='outlined-adornment-email'
@@ -103,7 +129,10 @@ const handleSubmitLogin = (e) => {
                 label='email'
               />
             </FormControl>
-            <FormControl sx={{ m: 1, width: '30ch' }} variant='outlined'>
+            <FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
               <InputLabel htmlFor='outlined-adornment-password'>
                 Password
               </InputLabel>
@@ -129,6 +158,7 @@ const handleSubmitLogin = (e) => {
               />
             </FormControl>
             <Button
+              sx={{ m: 1 }}
               variant='contained'
               color='primary'
               type='submit'
@@ -137,10 +167,10 @@ const handleSubmitLogin = (e) => {
             >
               Submit
             </Button>
-          </div>
-        </Box>
-      </Paper>
-      <Signup/>
-    </div>
+          </Box>
+        </Paper>
+        <SignInModal />
+      </Container>
+    </Paper>
   );
 }
