@@ -38,6 +38,12 @@ const CHATROOM = (props) => {
   // this is used to specify what "chat room" to send to
   const [room, setRoom] = useState('');
 
+  // on update of the messagelist, move scrollbar to bottom
+  useEffect(() => {
+    const el = document.querySelector('#messagesContainer');
+    el.scrollTop = el.scrollHeight;
+  }, [messageList]);
+
   useEffect(() => {
     // fetch conversation from messages table - dummy data right now
     axios
@@ -96,19 +102,23 @@ const CHATROOM = (props) => {
   };
 
   return (
-    <div id='login-parent' style={{ margin: '-50px', width: '150%' }}>
+    <div
+      id='login-parent'
+      style={{ margin: '-50px', width: '150%', textAlign: 'left' }}
+    >
       <form action='#' className='loginBox'>
         <h3>CHAT ROOM BABYYY</h3>
-
-        <label>Messages: </label>
         <div
+          id='messagesContainer'
           style={{
             backgroundColor: 'white',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'flex-start',
             minHeight: '50px',
+            maxHeight: '350px',
             width: '100%',
+            overflowY: 'scroll',
           }}
         >
           {messageList.length ? (
@@ -127,6 +137,14 @@ const CHATROOM = (props) => {
           )}
         </div>
         <br />
+        <label>Message: </label>
+        <textarea
+          placeholder='Type your message here...'
+          style={{ width: '90%', minHeight: '50px' }}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+        />
+        <br />
         <br />
         <label>Sender: </label>
         <br />
@@ -134,11 +152,6 @@ const CHATROOM = (props) => {
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-        <br />
-        <br />
-        <label>Message: </label>
-        <br />
-        <input value={message} onChange={(e) => setMessage(e.target.value)} />
         <br />
         <br />
         <button
