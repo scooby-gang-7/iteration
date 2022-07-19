@@ -4,7 +4,6 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
-import CHATROOM from './components/CHATROOM.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup.jsx';
@@ -63,8 +62,8 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              <CHATROOM />
-              /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
+              
+              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
             )
           }
         />
@@ -87,7 +86,7 @@ const App = () => {
             />
           }
         />
-        <Route path='/mytrips/:id' element={<TripDetails />} />
+        <Route path='/mytrips/:id' element={<TripDetails userInfo = {userInfo}/>} />
       </Routes>
     </div>
   );

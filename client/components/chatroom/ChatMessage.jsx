@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/styles.css';
 
-const CHATMESSAGE = (props) => {
+
+const ChatMessage= (props) => {
   console.log(props);
 
   const bubblePadding = '10px';
@@ -70,4 +70,4 @@ const CHATMESSAGE = (props) => {
     </div>
   );
 };
-export default CHATMESSAGE;
+export default ChatMessage;
