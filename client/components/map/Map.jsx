@@ -33,6 +33,7 @@ function Mapp(props) {
         destination={props.destination}
         center={props.center}
         trip_id={props.trip_id}
+        setCurrentPlacesInfo={props.setCurrentPlacesInfo}
       />
     </div>
   );
@@ -68,6 +69,104 @@ function Map(props) {
       });
   }, []);
 
+  const PlacesAutoComplete = (props) => {
+    console.log(props);
+    const {
+      ready,
+      value,
+      setValue,
+      suggestions: { status, data },
+      clearSuggestions,
+    } = usePlacesAutocomplete();
+
+    // ------handles choosing an address from search dropdown menu------
+    const handleSelect = async (address) => {
+      console.log('map.jsx line 104 in handleSelect address --->', address);
+      setValue(address, false);
+      clearSuggestions();
+
+      const results = await getGeocode({ address });
+      console.log(
+        'find data here to save to database (map.jsx line 110) -->',
+        results
+      );
+
+      const { lat, lng } = await getLatLng(results[0]);
+      setSelected((selected) => [...selected, { lat, lng }]);
+
+      // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
+
+      const newplace = {
+        trip_id,
+        google_place_id: results[0].place_id,
+        name: address, //todo get the first part of
+        address: results[0].formatted_address,
+        type: 'hotel',
+        lat: lat,
+        long: lng,
+      };
+      console.log('new place selected (map.jsx line 133)', newplace);
+
+      fetch('trips/addplace', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        body: JSON.stringify(newplace),
+      })
+        .then((data) => data.json())
+        .then((data) => {
+          console.log('fetched data! in add place (map.jsx line 145)-->', data);
+          //then do another fetch
+          fetch('trips/getPlaces', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              trip_id: props.trip_id,
+            }),
+          })
+            .then((placesDetails) => placesDetails.json())
+            .then((placesDetails) => {
+              console.log(
+                'placesDetails from Fetch after adding place (map.jsx line 159)--> ',
+                placesDetails
+              );
+              props.setCurrentPlacesInfo(placesDetails);
+            })
+            .catch((e) => {
+              console.log('error in map.jsx fetch getplaces: ', e);
+            });
+        })
+        .catch((e) => {
+          console.log('error in map.jsx fetch addplace: ', e);
+        });
+    };
+
+    return (
+      <>
+        <Combobox onSelect={handleSelect}>
+          <ComboboxInput
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+            disabled={!ready}
+            className='combobox-input'
+            placeholder='Search Location'
+            style={{ width: 350, height: 30, fontSize: 16 }}
+          />
+          <ComboboxPopover>
+            <ComboboxList>
+              {status === 'OK' &&
+                data.map(({ place_id, description }) => (
+                  <ComboboxOption key={place_id} value={description} />
+                ))}
+            </ComboboxList>
+          </ComboboxPopover>
+        </Combobox>
+      </>
+    );
+  };
   //todo use places to get another set of pins
 
   return (
@@ -94,103 +193,5 @@ function Map(props) {
 }
 
 // -------------code for autocomplete search field-----------
-
-const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
-  const {
-    ready,
-    value,
-    setValue,
-    suggestions: { status, data },
-    clearSuggestions,
-  } = usePlacesAutocomplete();
-
-  // ------handles choosing an address from search dropdown menu------
-  const handleSelect = async (address) => {
-    console.log('map.jsx line 104 in handleSelect address --->', address);
-    setValue(address, false);
-    clearSuggestions();
-
-    const results = await getGeocode({ address });
-    console.log(
-      'find data here to save to database (map.jsx line 110) -->',
-      results
-    );
-
-    const { lat, lng } = await getLatLng(results[0]);
-    setSelected((selected) => [...selected, { lat, lng }]);
-
-    // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
-
-    const newplace = {
-      trip_id,
-      google_place_id: results[0].place_id,
-      name: address, //todo get the first part of
-      address: results[0].formatted_address,
-      type: 'hotel',
-      lat: lat,
-      long: lng,
-    };
-    console.log('new place selected (map.jsx line 133)', newplace);
-
-    fetch('trips/addplace', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-      },
-      body: JSON.stringify(newplace),
-    })
-      .then((data) => data.json())
-      .then((data) => {
-        console.log('fetched data! in add place (map.jsx line 145)-->', data);
-        //then do another fetch
-        fetch('trips/getPlaces', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            trip_id,
-          }),
-        })
-          .then((placesDetails) => placesDetails.json())
-          .then((placesDetails) => {
-            console.log(
-              'placesDetails from Fetch after adding place (map.jsx line 159)--> ',
-              placesDetails
-            );
-            setCurrentPlacesInfo(placesDetails);
-          })
-          .catch((e) => {
-            console.log('error in map.jsx fetch getplaces: ', e);
-          });
-      })
-      .catch((e) => {
-        console.log('error in map.jsx fetch addplace: ', e);
-      });
-  };
-
-  return (
-    <>
-      <Combobox onSelect={handleSelect}>
-        <ComboboxInput
-          value={value}
-          onChange={(e) => setValue(e.target.value)}
-          disabled={!ready}
-          className='combobox-input'
-          placeholder='Search Location'
-          style={{ width: 350, height: 30, fontSize: 16 }}
-        />
-        <ComboboxPopover>
-          <ComboboxList>
-            {status === 'OK' &&
-              data.map(({ place_id, description }) => (
-                <ComboboxOption key={place_id} value={description} />
-              ))}
-          </ComboboxList>
-        </ComboboxPopover>
-      </Combobox>
-    </>
-  );
-};
 
 export default Mapp;

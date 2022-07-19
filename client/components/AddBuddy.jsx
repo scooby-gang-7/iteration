@@ -39,6 +39,7 @@ const Addbuddy = (props) => {
     })
       .then((data) => data.json())
       .then((data) => {
+        console.log(data);
         setTripbuddy(data);
       })
       .catch((e) => {

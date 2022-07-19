@@ -12,9 +12,45 @@ const TripDetail = (props) => {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    console.log(currentTripInfo);
+  }, [currentTripInfo]);
+
+  useEffect(() => {
+    console.log(currentPlacesInfo);
+  }, [currentPlacesInfo]);
+
+  useEffect(() => {
+    console.log(center);
+  }, [center]);
+
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
   useEffect(() => {
+    fetch('trips/getPlaces', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trip_id: id,
+      }),
+    })
+      .then((placesDetails) => placesDetails.json())
+      .then((placesDetails) => {
+        console.log('this happened!');
+        console.log('placesDetails from Fetch --> ', placesDetails);
+        setCurrentPlacesInfo(placesDetails);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(
+      'tripdetails is remounting -------------------------------------'
+    );
     fetch('trips/getTrip', {
       method: 'POST',
       headers: {
@@ -80,6 +116,7 @@ const TripDetail = (props) => {
           center={center}
           trip_id={id}
           setCurrentPlacesInfo={setCurrentPlacesInfo}
+          testProp={'this is the test prop'}
         />
       </div>
       <Places
