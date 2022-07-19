@@ -21,7 +21,7 @@ import MuiSearch from './muiSearch';
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    // libraries: ['places']
   });
 
   if (!isLoaded) return <div>Loading...</div>;

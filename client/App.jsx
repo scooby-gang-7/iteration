@@ -63,8 +63,9 @@ const App = () => {
         draggable
         pauseOnHover
       />
-      {/* <NavBar setUserInfo={setUserInfo} userInfo={userInfo} /> */}
+      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
       <Routes>
+        
         <Route
           path='/'
           element={
