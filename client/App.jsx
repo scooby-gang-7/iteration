@@ -5,6 +5,7 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
+import ChatRoom from './components/ChatRoom.jsx';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
