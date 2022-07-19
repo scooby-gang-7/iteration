@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
-import MapItem from './mapItem';
+import MapItem from './MapItem';
 import axios from 'axios';
 import AddressAutocomplete from 'mui-address-autocomplete';
 import { Autocomplete } from '@mui/material';
@@ -18,7 +18,7 @@ import {
   ComboboxOption,
 } from '@reach/combobox';
 import '@reach/combobox/styles.css';
-import MuiSearch from './muiSearch';
+import MuiSearch from './MuiSearch';
 
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
@@ -118,7 +118,6 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
 
     const { lat, lng } = await getLatLng(results[0]);
     setSelected((selected) => [...selected, { lat, lng }]);
-    
 
     // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
 
@@ -160,7 +159,7 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
               placesDetails
             );
             setCurrentPlacesInfo(placesDetails);
-          })  
+          })
           .catch((e) => {
             console.log('error in map.jsx fetch getplaces: ', e);
           });
@@ -190,10 +189,8 @@ const PlacesAutoComplete = ({ setSelected, trip_id, setCurrentPlacesInfo }) => {
           </ComboboxList>
         </ComboboxPopover>
       </Combobox>
-  
     </>
   );
-
 };
 
 export default Mapp;
