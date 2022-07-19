@@ -3,12 +3,12 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from './components/Login.jsx';
-import AddTrip from './components/AddTrip.jsx';
-import LoginMUI from './components/LoginMUI.jsx';
+import AddTrip from './components/addTrip/AddTrip.jsx';
+import LoginMUI from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import NavBarMUI from './components/NavBarMUI'
-import Signup from './components/Signup.jsx';
+import Signup from './components/signUp/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -69,23 +69,9 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              <>
-              
-                <LoginMUI setUserInfo={setUserInfo} userInfo={userInfo} />
-              
-              </>
-              /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
+                <Login setUserInfo={setUserInfo} userInfo={userInfo} />
             )
           }
-        />
-
-        <Route
-          path='/signup'
-          element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />}
-        />
-        <Route
-          path='/addtrip'
-          element={<AddTrip userInfo={userInfo} setTripInfo={setTripInfo} />}
         />
         <Route
           path='/mytrips'

@@ -1,17 +1,13 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
 import { Global } from '@emotion/react';
-import { styled } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import { grey } from '@mui/material/colors';
-import Button from '@mui/material/Button';
+import { IconButton } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Skeleton from '@mui/material/Skeleton';
-import Typography from '@mui/material/Typography';
+import ChatIcon from '@mui/icons-material/Chat';
+import CssBaseline from '@mui/material/CssBaseline';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import ChatRoom from './ChatRoom.jsx';
-import ChatIcon from '@mui/icons-material/Chat';
-import { IconButton } from '@mui/material';
 
 const drawerBleeding = 56;
 
@@ -22,20 +18,6 @@ const Root = styled('div')(({ theme }) => ({
       ? grey[100]
       : theme.palette.background.default,
 }));
-
-// const StyledBox = styled(Box)(({ theme }) => ({
-//   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
-// }));
-
-// const Puller = styled(Box)(({ theme }) => ({
-//   width: 30,
-//   height: 6,
-//   backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
-//   borderRadius: 3,
-//   position: 'absolute',
-//   top: 8,
-//   left: 'calc(50% - 15px)',
-// }));
 
 function ChatroomContainer(props) {
   const { window } = props;

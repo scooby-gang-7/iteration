@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Grid } from '@mui/material';
-import AddTrip from './AddTrip';
-import { Link } from 'react-router-dom';
+import AddTripModal from './addTrip/AddTripModal';
 import Trip from './Trip';
 
-// INCLUDE MAP API
+
 const MyTrips = (props) => {
-  // console.log('My trip props ->', props);
-  // console.log('My trip info ->', props.tripInfo);
+  const [upcomingTrips, setUpcomingTrips] = useState([]);
+  const [pastTrips, setPastTrips] = useState([]);
 
   //on loading, fetch request to get all the trips info for the user
   useEffect(() => {
@@ -22,7 +21,8 @@ const MyTrips = (props) => {
     })
       .then((triplist) => triplist.json())
       .then((triplist) => {
-        props.setTripInfo(triplist);
+        // props.setTripInfo(triplist);
+        handleAllTrips(triplist);
       })
       .catch((e) => {
         console.log(e);
@@ -31,35 +31,44 @@ const MyTrips = (props) => {
 
   const today = new Date();
 
+  const handleAllTrips = (tripList) => {
+    const today = new Date();
+    tripList
+      // sort trips by date within the past and upcoming arrays
+
+      .sort((a, b)=> {
+        if (a.date_start > b.date_start) return 1;
+        else if (a.date_start < b.date_start) return -1;
+        else if (a.date_start === b.date_start) {
+          return a.date_end > b.date_end ? 1 : -1;
+        }
+      })
+
+      //check the start date. if the start date is today or future, push trip to tempUpcomingTrips, else push trip to tempPastTrips
+      .forEach((trip) => {
+        const tripStart = new Date(`${trip.date_start}`);
+        if (tripStart.getTime() >= today.getTime()) {
+          setUpcomingTrips([...upcomingTrips, trip])
+        } else {
+          setPastTrips([...pastTrips, trip]);
+        }
+      })
+    }
+      
+
+    console.log('upcoming trips with hooks---', upcomingTrips);
+    console.log('past trips with hooks---', pastTrips);
+   
+ 
+  
+
   return (
-    <Grid container spacing={2}>
-      <div id='myTrips'>
-        <br />
-        {/* {props.tripInfo.map((trip) => {
-                return <Trip key={trip.trip_id} trip_id={trip.trip_id} name={trip.trip_name} destination={trip.destination} start={trip.date_start} end={trip.date_end}/>
-                <Link to="/addtrip">
-                    <button className='addTripButton'>Add New Trip</button>
-                </Link> */}
-        <Link to='/addtrip'>
-          <button className='addTripButton'>Add New Trip</button>
-        </Link>
+    <>
+      <AddTripModal userInfo={props.userInfo} setTripInfo={props.setTripInfo} />
+      <div id='upcomingTrips'>
         <h1>Upcoming Trips</h1>
-        <br />
-        {props.tripInfo
-          // filter out past trips
-          .filter((trip) => {
-            const tripStart = new Date(`${trip.date_start}`);
-            return tripStart.getTime() >= today.getTime();
-          })
-          // sort trips by start date, if start date is the same, sort by end date
-          .sort((a, b) => {
-            if (a.date_start > b.date_start) return 1;
-            else if (a.date_start < b.date_start) return -1;
-            else if (a.date_start === b.date_start) {
-              return a.date_end > b.date_end ? 1 : -1;
-            }
-          })
-          .map((trip) => {
+        {upcomingTrips.length >= 1 ? (
+          upcomingTrips.map((trip) => {
             return (
               <Card>
                 <Trip
@@ -72,40 +81,37 @@ const MyTrips = (props) => {
                 />
               </Card>
             );
-          })}
-        <br />
-        <h1>Past Trips</h1>
-        <br />
-        {props.tripInfo
-          // filter out current and future trips
-          .filter((trip) => {
-            const tripStart = new Date(`${trip.date_start}`);
-            return tripStart.getTime() < today.getTime();
           })
-          // sort trips by start date, if start date is the same, sort by end date
-          .sort((a, b) => {
-            if (a.date_start < b.date_start) return 1;
-            else if (a.date_start > b.date_start) return -1;
-            else if (a.date_start === b.date_start) {
-              return a.date_end < b.date_end ? 1 : -1;
-            }
-          })
-          .map((trip) => {
-            return (
-              <Trip
-                key={trip.trip_id}
-                trip_id={trip.trip_id}
-                name={trip.trip_name}
-                destination={trip.destination}
-                start={trip.date_start}
-                end={trip.date_end}
-              />
-            );
-          })}
-        <br />
+        ) : (
+          <div> you have no upcoming trips </div>
+        )}
       </div>
-    </Grid>
+      <div id='pastTrips'>
+        <h1>Past Trips</h1>
+        {pastTrips.length >= 1 ? (
+          pastTrips.map((trip) => {
+            return (
+              <Card>
+                <Trip
+                  key={trip.trip_id}
+                  trip_id={trip.trip_id}
+                  name={trip.trip_name}
+                  destination={trip.destination}
+                  start={trip.date_start}
+                  end={trip.date_end}
+                />
+              </Card>
+            );
+          })
+        ) : (
+          <div>
+            Looks like you don't have any trip history. It's time to start
+            planning!
+          </div>
+        )}
+      </div>
+    </>
   );
-}
+ };
 
 export default MyTrips;

@@ -5,8 +5,7 @@ import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Signup from './Signup';
-
+import AddTrip from './AddTrip';
 
 const style = {
   position: 'absolute',
@@ -21,14 +20,14 @@ const style = {
   p: 4,
 };
 
-export default function SignInModal() {
+export default function AddTripModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
     <div>
-      <Button onClick={handleOpen}>Ready to Travel? Sign Up</Button>
+      <Button onClick={handleOpen}>Add a new trip</Button>
       <Modal
         aria-labelledby='transition-modal-title'
         aria-describedby='transition-modal-description'
@@ -42,7 +41,7 @@ export default function SignInModal() {
       >
         <Fade in={open}>
           <Box sx={style}>
-            <Signup/>
+            <AddTrip userInfo={props.userInfo} setTripInfo={props.setTripInfo} />
           </Box>
         </Fade>
       </Modal>
