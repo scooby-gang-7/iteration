@@ -59,11 +59,12 @@ import { Link, useNavigate } from 'react-router-dom';
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className=''>
+        <div className='' >
           <br />
           <label>Password </label>
           <br />
           <input
+          data-test='password'
             type='password'
             placeholder='password'
             name='password'

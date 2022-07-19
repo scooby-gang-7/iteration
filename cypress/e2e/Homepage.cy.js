@@ -32,7 +32,10 @@ describe('Homepage', () => {
     })
 
     it('navigates to /trips on sucessful login', () => {
-      
+      cy.get('[data-test=email]').type('taylor@codesmith.com')
+      cy.get('[data-test=password]').type('codesmith')
+      cy.get('form').get('[class=loginButton]').click()
+      cy.url().should('include', '/mytrips')
     })
    
 })
