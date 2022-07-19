@@ -38,21 +38,6 @@ placesController.addPlace = (req, res, next) => {
     });
 };
 
-//logic for getAllplaces
-placesController.getAllplaces = (req, res, next) => {
-  const trip_id = req.query.trip_id;
-  const text = `SELECT * FROM places
-    WHERE trip_id='${trip_id}';`;
-  db.query(text)
-    .then((data) => {
-      res.locals.places = data.rows;
-      return next();
-    })
-    .catch((err) => {
-      return next({ log: err, message: { err: 'catch in getAllplaces' } });
-    });
-};
-
 placesController.updateVote = (req, res, next) => {
   const { place_id, up_vote, down_vote } = req.body;
   const values = [place_id, up_vote, down_vote];
@@ -90,7 +75,7 @@ placesController.deletePlace = (req, res, next) => {
     DELETE FROM places 
     WHERE place_id = ($1) RETURNING *`;
 
-  db.query(text)
+  db.query(text, values)
     .then((data) => {
       if (data.rows.length == 0) {
         // res.locals.data = {message: 'user does not exist'}; //to do throw error

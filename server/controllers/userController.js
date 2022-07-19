@@ -32,21 +32,6 @@ userController.createUser = (req, res, next) => {
       })
     );
   } else {
-    const date = new Date();
-    // convert date to MM/DD/YYYY HH:MM:SS
-    const dateStr =
-      ('00' + (date.getMonth() + 1)).slice(-2) +
-      '/' +
-      ('00' + date.getDate()).slice(-2) +
-      '/' +
-      date.getFullYear() +
-      ' ' +
-      ('00' + date.getHours()).slice(-2) +
-      ':' +
-      ('00' + date.getMinutes()).slice(-2) +
-      ':' +
-      ('00' + date.getSeconds()).slice(-2);
-
     bcrypt.hash(password, SALT_WORK_FACTOR, (err, hash) => {
       if (err) return next(err);
       // password = hash;
