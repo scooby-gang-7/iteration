@@ -5,27 +5,6 @@ import Row from './VotingForPlaces.jsx';
 
 const Places = (props) => {
   // fetching all places for the current trip and storing them to currentPlacesInfo in state
-  useEffect(() => {
-    console.log('props.trip_id --> ', props.trip_id);
-    fetch('trips/getPlaces', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        trip_id: props.trip_id,
-      }),
-    })
-      .then((placesDetails) => placesDetails.json())
-      .then((placesDetails) => {
-        console.log('this happened!');
-        console.log('placesDetails from Fetch --> ', placesDetails);
-        props.setCurrentPlacesInfo(placesDetails);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }, []);
 
   return (
     <div id='placesDiv'>
@@ -56,6 +35,6 @@ const Places = (props) => {
       </table>
     </div>
   );
-}
+};
 
 export default Places;

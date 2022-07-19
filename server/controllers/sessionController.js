@@ -34,12 +34,14 @@ sessionController.startSession = (req, res, next) => {
     res.locals.sessionId = hash;
 
     // try to insert new session, if session ID already exists then updated timestamp
-    const text = `INSERT INTO sessions (session_id, created_at, user_id) 
-        VALUES('${hash}', '${dateStr}', '${res.locals.data.user_id}')
-        -- ON CONFLICT 
-        -- DO UPDATE SET created_at = '${dateStr}'
-        RETURNING *;`;
-    db.query(text)
+    const text = `
+      INSERT INTO sessions (session_id, created_at, user_id) 
+      VALUES($1, $2, $3)
+      -- ON CONFLICT 
+      -- DO UPDATE SET created_at = ($2)
+      RETURNING *;`;
+    const values = [hash, dateStr, res.locals.data.user_id]
+    db.query(text, values)
       .then((data) => {
         console.log('DATA --> ', data);
         res.locals.sessionInfo = data.rows[0];
@@ -69,11 +71,13 @@ sessionController.verifySession = (req, res, next) => {
     ('00' + currDate.getSeconds()).slice(-2);
 
   const expireDays = 1;
-  const text = `SELECT * FROM sessions
-  WHERE session_id = '${session_id}'
-  AND DATE_PART('day', '${currDateStr}'::timestamp - created_at::timestamp) <= ${expireDays}`;
+  const values = [session_id, currDateStr, expireDays];
+  const text = `
+    SELECT * FROM sessions
+    WHERE session_id = ($1)
+    AND DATE_PART('day', ($2)::timestamp - created_at::timestamp) <= ($3)`;
 
-  db.query(text)
+  db.query(text, values)
     .then((data) => {
       console.log('DATA --> ', data);
       if (data.rows.length === 0) {
@@ -90,9 +94,13 @@ sessionController.verifySession = (req, res, next) => {
 
 sessionController.endSession = (req, res, next) => {
   const { session_id } = req.body;
-  const text = `DELETE FROM sessions WHERE session_id = '${session_id}' RETURNING *`;
+  const values = [session_id];
+  const text = `
+    DELETE FROM sessions 
+    WHERE session_id = ($1)
+    RETURNING *`;
 
-  db.query(text)
+  db.query(text, values)
     .then((data) => {
       res.locals.sessionInfo = data.rows[0];
       return next();

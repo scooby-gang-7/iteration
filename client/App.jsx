@@ -11,6 +11,7 @@ import Signup from './components/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
+import './stylesheets/styles.css';
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
