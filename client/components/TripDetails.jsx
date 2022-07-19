@@ -4,8 +4,8 @@ import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
+import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import axios from 'axios';
-import CHATROOM from './CHATROOM';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -98,7 +98,7 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-    <>
+  
     <Grid container spacing={2} columns={12}>
       <Card elevation={2}>
         <div id='detailsDiv'>
@@ -115,29 +115,36 @@ const TripDetail = (props) => {
           <AddBuddy trip_id={id} />
         </Card>
       </div>
-      <Grid item xs={6}>
-        <Card elevation={2}>
-          {/* <div id='mapDiv'> */}
-          <Map
-            center={center}
-            trip_id={id}
-            setCurrentPlacesInfo={setCurrentPlacesInfo}
-          />
-          {/* </div> */}
-        </Card>
-      </Grid>
-      <Grid item>
-        <Card elevation={2}>
-          <Places
-            trip_id={id}
-            currentPlacesInfo={currentPlacesInfo}
-            setCurrentPlacesInfo={setCurrentPlacesInfo}
-          />
-        </Card>
-      </Grid>
+      <div id='mapDiv'>
+        <Map
+          center={center}
+          trip_id={id}
+          setCurrentPlacesInfo={setCurrentPlacesInfo}
+          testProp={'this is the test prop'}
+        />
+      </div>
+      <Places
+        trip_id={id}
+        currentPlacesInfo={currentPlacesInfo}
+        setCurrentPlacesInfo={setCurrentPlacesInfo}
+      />
+      <div
+        className='drawer-preview'
+        style={{
+          // width: 'min-content',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          margin: '20px',
+        }}
+      >
+        <ChatroomContainer
+          className='chatroomContainer'
+          userInfo={props.userInfo}
+          tripId={id}
+        />
+      </div>
     </Grid>
-    <CHATROOM/>
-    </>
   );
 };
 

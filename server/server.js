@@ -66,6 +66,8 @@ app.use('*', (req, res) => res.status(404).send('Not Found'));
 
 //create global error handler
 app.use((err, req, res, next) => {
+  console.log(err);
+  console.log('in global err handler');
   const defaultErr = {
     log: 'Caught unknown middleware error',
     staus: 500,

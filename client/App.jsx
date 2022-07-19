@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import AddTrip from './components/AddTrip.jsx';
+import axios from 'axios';
 import Login from './components/Login.jsx';
-import CHATROOM from './components/CHATROOM.jsx';
+import AddTrip from './components/AddTrip.jsx';
+import LoginMUI from './components/LoginMUI.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
+import NavBarMUI from './components/NavBarMUI'
 import Signup from './components/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import './stylesheets/styles.css'
-import LoginMUI from './components/LoginMUI.jsx';
-import NavBarMUI from './components/NavBarMUI'
 
 
 const App = () => {
@@ -27,6 +26,7 @@ const App = () => {
   //checking if user is already logged in? and if yes, then continue to my trips???
   useEffect(() => {
     if (window.localStorage.getItem('session_id')) {
+      console.log('trying to fetch');
       axios
         .get('/auth/session', {
           params: {
@@ -38,6 +38,7 @@ const App = () => {
           console.log('data from session_id', response.data);
         })
         .catch((err) => {
+          console.log('hit an error');
           console.log(err);
         });
     } else {
@@ -96,7 +97,10 @@ const App = () => {
             />
           }
         />
-        <Route path='/mytrips/:id' element={<TripDetails />} />
+        <Route
+          path='/mytrips/:id'
+          element={<TripDetails userInfo={userInfo} />}
+        />
       </Routes>
     </div>
   );
