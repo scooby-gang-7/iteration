@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
-import {
-  Routes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
+import CHATROOM from './components/CHATROOM.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup.jsx';
@@ -27,9 +24,9 @@ const App = () => {
   const session_id = JSON.parse(localStorage.getItem('session_id'));
 
   //fetch to update userInfo on start
-  //checking if user is already logged in? and if yes, then continue to my trips??? 
+  //checking if user is already logged in? and if yes, then continue to my trips???
   useEffect(() => {
-    if ( window.localStorage.getItem('session_id')) {
+    if (window.localStorage.getItem('session_id')) {
       axios
         .get('/auth/session', {
           params: {
@@ -46,8 +43,7 @@ const App = () => {
     } else {
       return;
     }
-  },[]);
-
+  }, []);
 
   return (
     
@@ -75,7 +71,9 @@ const App = () => {
               <>
               
                 <LoginMUI setUserInfo={setUserInfo} userInfo={userInfo} />
+              <CHATROOM />
               </>
+              /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
             )
           }
         />

@@ -13,7 +13,40 @@ const TripDetail = (props) => {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    console.log(currentTripInfo);
+  }, [currentTripInfo]);
+
+  useEffect(() => {
+    console.log(currentPlacesInfo);
+  }, [currentPlacesInfo]);
+
+  useEffect(() => {
+    console.log(center);
+  }, [center]);
+
   // fetching all places for the selected trip and storing them to currentTripInfo in state
+
+  useEffect(() => {
+    fetch('trips/getPlaces', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trip_id: id,
+      }),
+    })
+      .then((placesDetails) => placesDetails.json())
+      .then((placesDetails) => {
+        console.log('this happened!');
+        console.log('placesDetails from Fetch --> ', placesDetails);
+        setCurrentPlacesInfo(placesDetails);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   useEffect(() => {
     fetch('trips/getTrip', {
@@ -64,44 +97,43 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-    
-      <Grid container spacing={2} columns={12}>
-        <Card elevation={2}>
-          <div id='detailsDiv'>
-            <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-            <p>{currentTripInfo.destination}</p>
-            <p>{currentTripInfo.description}</p>
-            <p>
-              {startDateDisplay} - {endDateDisplay}
-            </p>
-          </div>
-        </Card>
-        <div id='addBuddyDiv'>
-          <Card elevation={2}>
-            <AddBuddy trip_id={id} />
-          </Card>
+    <Grid container spacing={2} columns={12}>
+      <Card elevation={2}>
+        <div id='detailsDiv'>
+          <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
+          <p>{currentTripInfo.destination}</p>
+          <p>{currentTripInfo.description}</p>
+          <p>
+            {startDateDisplay} - {endDateDisplay}
+          </p>
         </div>
-        <Grid item xs={6}>
-          <Card elevation={2}>
-            {/* <div id='mapDiv'> */}
-            <Map
-              center={center}
-              trip_id={id}
-              setCurrentPlacesInfo={setCurrentPlacesInfo}
-            />
-            {/* </div> */}
-          </Card>
-        </Grid>
-        <Grid item>
-          <Card elevation={2}>
-            <Places
-              trip_id={id}
-              currentPlacesInfo={currentPlacesInfo}
-              setCurrentPlacesInfo={setCurrentPlacesInfo}
-            />
-          </Card>
-        </Grid>
+      </Card>
+      <div id='addBuddyDiv'>
+        <Card elevation={2}>
+          <AddBuddy trip_id={id} />
+        </Card>
+      </div>
+      <Grid item xs={6}>
+        <Card elevation={2}>
+          {/* <div id='mapDiv'> */}
+          <Map
+            center={center}
+            trip_id={id}
+            setCurrentPlacesInfo={setCurrentPlacesInfo}
+          />
+          {/* </div> */}
+        </Card>
       </Grid>
+      <Grid item>
+        <Card elevation={2}>
+          <Places
+            trip_id={id}
+            currentPlacesInfo={currentPlacesInfo}
+            setCurrentPlacesInfo={setCurrentPlacesInfo}
+          />
+        </Card>
+      </Grid>
+    </Grid>
   );
 };
 
