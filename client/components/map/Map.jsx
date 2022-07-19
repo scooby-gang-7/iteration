@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
 import MapItem from './MapItem';
 import axios from 'axios';
-import AddressAutocomplete from 'mui-address-autocomplete';
-import { Autocomplete } from '@mui/material';
 
 import usePlacesAutocomplete, {
   getGeocode,
@@ -23,7 +21,7 @@ import MuiSearch from './MuiSearch';
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    // libraries: ['places']
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -191,7 +189,5 @@ function Map(props) {
     </>
   );
 }
-
-// -------------code for autocomplete search field-----------
 
 export default Mapp;

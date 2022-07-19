@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 
-
-
-
 const NavBar = ({userInfo, setUserInfo}) => {
 
 const navigate = useNavigate();

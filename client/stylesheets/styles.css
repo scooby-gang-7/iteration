@@ -1,14 +1,21 @@
 body,
 #root {
-  margin: 0;
-  color: #5e37e0;
+  display:flex;
+  flex-direction: column;
+  color: #3D0240;
+
 }
 
 .App {
-  display: grid;
+max-width: 1000px;
+margin: 0 auto;
+/* border: 1px solid lightslategray; */
+border-radius: 8px;
+padding-bottom: 30px;
+  /* display: grid;
   grid-template-rows: 80px 80px 1fr 80px;
   grid-template-columns: 1fr 1fr 1fr;
-  color: #5e37e0;
+  color: #5e37e0; */
 }
 
 .map-container {
@@ -19,22 +26,24 @@ body,
 #login-parent {
   color: #5e37e0;
   font-family: 'Abril Fatface', cursive;
-  border-radius: 10px;
+  /* border-radius: 10px; */
   width: 300px;
   text-align: center;
   margin: 10px;
   grid-row-start: 3;
   grid-column-start: 2;
   font-family: 'Montserrat', sans-serif;
+  display: flex;
+  flex-direction: column;
 }
 
-#login-parent h3 {
+/* #login-parent h3 {
   font-size: x-large;
-}
+} */
 
 #btn-login {
   margin-left: 20px;
-  background-color: #e05637;
+  /* background-color: #e05637; */
   font-family: 'Montserrat', sans-serif;
   border-radius: 7px;
   border: 1px solid;
@@ -44,7 +53,7 @@ body,
 
 #btn-signup {
   margin-right: 20px;
-  background-color: #e05637;
+  /* background-color: #e05637; */
   font-family: 'Montserrat', sans-serif;
   border-radius: 7px;
   border: 1px solid;
@@ -90,7 +99,6 @@ nav h1 {
 .placeDetails {
   padding: 5px;
   width: 80vw;
-
   border-radius: 10px;
 }
 
