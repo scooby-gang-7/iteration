@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import '../stylesheets/styles.css';
 
-const CHATMESSAGE = (props) => {
+
+const ChatMessage= (props) => {
   console.log(props);
 
   const bubblePadding = '10px';
   const bubbleMargin = '15px';
   console.log(props.user === props.sender, props.user, props.sender);
-  const bubbleColor = props.user === props.sender ? 'rgb(255,150,100)' : 'gray';
+  const bubbleColor = props.user === props.sender ? '#E4DCE7' : '#EFEFEF';
   const bubbleJustify = props.user === props.sender ? 'flex-end' : 'flex-start';
-  const nameColor = props.user === props.sender ? 'white' : 'white';
-  const msgColor = props.user === props.sender ? 'white' : 'white';
+  const nameColor = props.user === props.sender ? 'black' : 'black';
+  const msgColor = props.user === props.sender ? '#137083' : '#137083';
 
   return (
     <div
@@ -70,4 +70,4 @@ const CHATMESSAGE = (props) => {
     </div>
   );
 };
-export default CHATMESSAGE;
+export default ChatMessage;

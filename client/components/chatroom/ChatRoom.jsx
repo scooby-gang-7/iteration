@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../stylesheets/styles.css';
 import io from 'socket.io-client';
-import CHATMESSAGE from './CHATMESSAGE.jsx';
+import ChatMessage from './ChatMessage.jsx';
 /*
 
 HOW TO USE
@@ -23,20 +22,13 @@ To do:
 
 */
 
-const CHATROOM = (props) => {
+const ChatRoom = (props) => {
   const [isConnected, setIsConnected] = useState(false);
   const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
-
-  const [firstName, setFirstName] = useState('');
-  // const firstName = 'Kyle =)';
-  const tripId = 1;
-
-  // we don't need this in state
-  // just need to pass down the tripId as props
-  // this is used to specify what "chat room" to send to
-  const [room, setRoom] = useState('');
+  console.log('props ----', props);
+  // const [firstName, setFirstName] = useState('');
 
   // on update of the messagelist, move scrollbar to bottom
   useEffect(() => {
@@ -47,14 +39,15 @@ const CHATROOM = (props) => {
   useEffect(() => {
     // fetch conversation from messages table - dummy data right now
     axios
-      .post('/getmessages', { roomId: tripId })
+      .post('/getmessages', { roomId: props.tripId })
       .then((res) => {
         // after fetching, update message list
         setMessageList(res.data);
       })
       .catch((err) => {
-        console.log('error!!!!!!!', err);
+        console.log(err);
       });
+    console.log('installing socket io');
 
     // set up socket
     console.log('installing socket io');
@@ -76,7 +69,7 @@ const CHATROOM = (props) => {
   }, []);
 
   if (isConnected) {
-    curSocket.emit('join-room', tripId);
+    curSocket.emit('join-room', props.tripId);
     curSocket.on('receive-message', (msg) => {
       console.log(' youve received a message!');
       setMessageList([...messageList, msg]);
@@ -84,12 +77,12 @@ const CHATROOM = (props) => {
   }
   const sendMessage = () => {
     // send msg
-    console.log('fn', firstName);
+    console.log('fn', props.firstName);
     curSocket.emit(
       'send-message',
       message,
-      tripId,
-      firstName,
+      props.tripId,
+      props.firstName,
       (objFromSrvr) => {
         setMessageList([...messageList, objFromSrvr]);
       }
@@ -98,16 +91,12 @@ const CHATROOM = (props) => {
   };
 
   const joinRoom = () => {
-    curSocket.emit('join-room', tripId);
+    curSocket.emit('join-room', props.tripId);
   };
 
   return (
-    <div
-      id='login-parent'
-      style={{ margin: '-50px', width: '150%', textAlign: 'left' }}
-    >
-      <form action='#' className='loginBox'>
-        <h3>CHAT ROOM BABYYY</h3>
+    <div>
+      <form action='#' style={{ width: '90%', textAlign: 'left' }}>
         <div
           id='messagesContainer'
           style={{
@@ -116,18 +105,16 @@ const CHATROOM = (props) => {
             flexDirection: 'column',
             alignItems: 'flex-start',
             minHeight: '50px',
-            maxHeight: '350px',
             width: '100%',
-            overflowY: 'scroll',
           }}
         >
           {messageList.length ? (
             messageList.map((msg) => (
-              <CHATMESSAGE
-                user={firstName}
+              <ChatMessage
+                user={String(props.firstName)}
                 key={msg.message_id}
                 message_id={msg.message_id}
-                sender={msg.sender}
+                sender={String(msg.sender)}
                 message={msg.message}
                 timestamp={msg.timestamp}
               />
@@ -145,17 +132,8 @@ const CHATROOM = (props) => {
           onChange={(e) => setMessage(e.target.value)}
         />
         <br />
-        <br />
-        <label>Sender: </label>
-        <br />
-        <input
-          value={firstName}
-          onChange={(e) => setFirstName(e.target.value)}
-        />
-        <br />
-        <br />
         <button
-          id='btn-login'
+          // id='btn-login'
           className=''
           onClick={(e) => {
             e.preventDefault();
@@ -164,16 +142,6 @@ const CHATROOM = (props) => {
         >
           Send Message
         </button>
-        {/* <button
-          id='roomjoin'
-          className=''
-          onClick={(e) => {
-            e.preventDefault();
-            joinRoom();
-          }}
-        >
-          Join room
-        </button> */}
         <br />
       </form>
       <br />
@@ -181,4 +149,4 @@ const CHATROOM = (props) => {
   );
 };
 
-export default CHATROOM;
+export default ChatRoom;

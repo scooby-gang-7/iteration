@@ -3,6 +3,7 @@ import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
+import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import axios from 'axios';
 
 const TripDetail = (props) => {
@@ -124,6 +125,22 @@ const TripDetail = (props) => {
         currentPlacesInfo={currentPlacesInfo}
         setCurrentPlacesInfo={setCurrentPlacesInfo}
       />
+      <div
+        className='drawer-preview'
+        style={{
+          // width: 'min-content',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          margin: '20px',
+        }}
+      >
+        <ChatroomContainer
+          className='chatroomContainer'
+          userInfo={props.userInfo}
+          tripId={id}
+        />
+      </div>
     </div>
   );
 };
