@@ -3,12 +3,9 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import Login from './components/Login.jsx';
-import AddTrip from './components/addTrip/AddTrip.jsx';
-import LoginMUI from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import NavBarMUI from './components/NavBarMUI'
-import Signup from './components/signUp/Signup.jsx';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
