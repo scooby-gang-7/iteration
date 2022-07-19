@@ -4,6 +4,7 @@ import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import AddTrip from './components/AddTrip.jsx';
 import Login from './components/Login.jsx';
+import CHATROOM from './components/CHATROOM.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import Signup from './components/Signup.jsx';
@@ -41,8 +42,6 @@ const App = () => {
     }
   }, []);
 
-  console.log('full app is reloading ---------------------------');
-
   return (
     <div className='App'>
       <ToastContainer
@@ -64,7 +63,8 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+              <CHATROOM />
+              /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
             )
           }
         />
