@@ -71,7 +71,7 @@ const App = () => {
               <>
               
                 <LoginMUI setUserInfo={setUserInfo} userInfo={userInfo} />
-              <CHATROOM />
+              
               </>
               /*<Login setUserInfo={setUserInfo} userInfo={userInfo} />*/
             )

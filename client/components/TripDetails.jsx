@@ -5,6 +5,7 @@ import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import CHATROOM from './CHATROOM';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -97,6 +98,7 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
+    <>
     <Grid container spacing={2} columns={12}>
       <Card elevation={2}>
         <div id='detailsDiv'>
@@ -134,6 +136,8 @@ const TripDetail = (props) => {
         </Card>
       </Grid>
     </Grid>
+    <CHATROOM/>
+    </>
   );
 };
 
