@@ -190,7 +190,4 @@ function Map(props) {
   );
 }
 
-// -------------code for autocomplete search field-----------
-// PlasesAutoComplete is specific to exact locations, not generalized like 'restaurants', 'pizza', 'cafe' 
-
 export default Mapp;
