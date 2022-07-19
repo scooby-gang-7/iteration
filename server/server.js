@@ -10,10 +10,11 @@ const sessionController = require('./controllers/sessionController');
 const tripController = require('./controllers/tripController');
 const cookieController = require('./controllers/cookieController');
 const placesController = require('./controllers/placesController');
+const socketIoController = require('./controllers/socketIoController');
 // Import Routers
 const authRouter = require('./routers/authRouter');
 const tripRouter = require('./routers/tripRouter');
-const socketIoController = require('./controllers/socketIoController');
+const mytripsRouter = require('./routers/mytripsRouter');
 // connect to DB
 const db = require('./models/userTripModels');
 
@@ -45,6 +46,7 @@ app.use('/assets', express.static('./client/assets'));
 // Router paths
 app.use('/auth', authRouter);
 app.use('/trips', tripRouter);
+app.use('/mytrips/trips', mytripsRouter);
 
 // unique paths
 app.get('/about', (req, res) => {
