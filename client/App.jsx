@@ -23,6 +23,7 @@ const App = () => {
   //checking if user is already logged in? and if yes, then continue to my trips???
   useEffect(() => {
     if (window.localStorage.getItem('session_id')) {
+      console.log('trying to fetch');
       axios
         .get('/auth/session', {
           params: {
@@ -34,6 +35,7 @@ const App = () => {
           console.log('data from session_id', response.data);
         })
         .catch((err) => {
+          console.log('hit an error');
           console.log(err);
         });
     } else {
@@ -62,7 +64,6 @@ const App = () => {
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              
               <Login setUserInfo={setUserInfo} userInfo={userInfo} />
             )
           }
@@ -86,7 +87,10 @@ const App = () => {
             />
           }
         />
-        <Route path='/mytrips/:id' element={<TripDetails userInfo = {userInfo}/>} />
+        <Route
+          path='/mytrips/:id'
+          element={<TripDetails userInfo={userInfo} />}
+        />
       </Routes>
     </div>
   );

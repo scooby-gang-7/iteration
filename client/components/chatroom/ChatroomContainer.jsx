@@ -9,48 +9,61 @@ import Box from '@mui/material/Box';
 import Skeleton from '@mui/material/Skeleton';
 import Typography from '@mui/material/Typography';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import ChatRoom from './ChatRoom.jsx'
+import ChatRoom from './ChatRoom.jsx';
+import ChatIcon from '@mui/icons-material/Chat';
+import { IconButton } from '@mui/material';
 
 const drawerBleeding = 56;
 
 const Root = styled('div')(({ theme }) => ({
   height: '100%',
   backgroundColor:
-    theme.palette.mode === 'light' ? grey[100] : theme.palette.background.default,
+    theme.palette.mode === 'light'
+      ? grey[100]
+      : theme.palette.background.default,
 }));
 
-const StyledBox = styled(Box)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
-}));
+// const StyledBox = styled(Box)(({ theme }) => ({
+//   backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
+// }));
 
-const Puller = styled(Box)(({ theme }) => ({
-  width: 30,
-  height: 6,
-  backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
-  borderRadius: 3,
-  position: 'absolute',
-  top: 8,
-  left: 'calc(50% - 15px)',
-}));
+// const Puller = styled(Box)(({ theme }) => ({
+//   width: 30,
+//   height: 6,
+//   backgroundColor: theme.palette.mode === 'light' ? grey[300] : grey[900],
+//   borderRadius: 3,
+//   position: 'absolute',
+//   top: 8,
+//   left: 'calc(50% - 15px)',
+// }));
 
 function ChatroomContainer(props) {
   const { window } = props;
   const [open, setOpen] = React.useState(false);
 
-  console.log(props)
+  // console.log(props);
 
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
 
   // This is used only for the example
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Root>
+    <Root
+      className='root'
+      style={{
+        backgroundColor: 'rgb(200,200,200,0)',
+        // borderRadius: '10px',
+        // border: '1px solid gray',
+      }}
+    >
       <CssBaseline />
       <Global
-      id='messagesContainer'
+        className='messagesContainer-global'
+        id='messagesContainer'
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
             height: `calc(50% - ${drawerBleeding}px)`,
@@ -58,33 +71,40 @@ function ChatroomContainer(props) {
           },
         }}
       />
-      <Box sx={{ textAlign: 'center', pt: 1 }}>
-        <Button onClick={toggleDrawer(true)}>Chat Room</Button>
+      <Box className='boxWButton' sx={{ textAlign: 'center', pt: 1 }}>
+        <IconButton aria-label='Chat' onClick={toggleDrawer(true)}>
+          <ChatIcon sx={{ fontSize: 30, color: 'orangered' }} /> Trip Chat
+        </IconButton>
+        {/* <Button onClick={toggleDrawer(true)}>Chat Room</Button> */}
       </Box>
       <SwipeableDrawer
+        className='SwipeDrawer'
         container={container}
-        anchor="bottom"
+        anchor='bottom'
         open={open}
         onClose={toggleDrawer(false)}
         onOpen={toggleDrawer(true)}
         swipeAreaWidth={drawerBleeding}
-        disableSwipeToOpen={false}
+        disableSwipeToOpen={true}
         ModalProps={{
           keepMounted: true,
         }}
       >
-
-        <StyledBox
+        <Box
+          className='swipeBox'
           sx={{
             px: 3,
             pb: 2,
             height: '100%',
             overflow: 'auto',
+            // width: '400px',
           }}
         >
-      
-          <ChatRoom tripId={props.tripId} firstName={props.userInfo.user_id}/>
-        </StyledBox>
+          <ChatRoom
+            tripId={props.tripId}
+            firstName={`${props.userInfo.name_first} ${props.userInfo.name_last}`}
+          />
+        </Box>
       </SwipeableDrawer>
     </Root>
   );

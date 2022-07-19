@@ -27,8 +27,8 @@ const ChatRoom = (props) => {
   const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
-console.log("props ----", props)
-  // const [firstName, setFirstName] = useState('');  
+  console.log('props ----', props);
+  // const [firstName, setFirstName] = useState('');
 
   // on update of the messagelist, move scrollbar to bottom
   useEffect(() => {
@@ -43,8 +43,9 @@ console.log("props ----", props)
       .then((res) => {
         // after fetching, update message list
         setMessageList(res.data);
-      }).catch((err)=>{
-        console.log(err)
+      })
+      .catch((err) => {
+        console.log(err);
       });
     console.log('installing socket io');
 
@@ -52,7 +53,7 @@ console.log("props ----", props)
     console.log('installing socket io');
     const socket = io(`http://localhost:${3000}`);
     setCurSocket(socket);
-   
+
     socket.on('connect', () => {
       console.log('socket is connected!', socket.id);
       setIsConnected(true);
@@ -95,8 +96,7 @@ console.log("props ----", props)
 
   return (
     <div>
-      <form action='#' style={{width: '90%', textAlign: 'left' }}>
-        
+      <form action='#' style={{ width: '90%', textAlign: 'left' }}>
         <div
           id='messagesContainer'
           style={{
@@ -111,10 +111,10 @@ console.log("props ----", props)
           {messageList.length ? (
             messageList.map((msg) => (
               <ChatMessage
-                user={props.firstName}
+                user={String(props.firstName)}
                 key={msg.message_id}
                 message_id={msg.message_id}
-                sender={msg.sender}
+                sender={String(msg.sender)}
                 message={msg.message}
                 timestamp={msg.timestamp}
               />

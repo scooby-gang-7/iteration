@@ -40,7 +40,7 @@ sessionController.startSession = (req, res, next) => {
       -- ON CONFLICT 
       -- DO UPDATE SET created_at = ($2)
       RETURNING *;`;
-    const values = [hash, dateStr, res.locals.data.user_id]
+    const values = [hash, dateStr, res.locals.data.user_id];
     db.query(text, values)
       .then((data) => {
         console.log('DATA --> ', data);
@@ -73,7 +73,7 @@ sessionController.verifySession = (req, res, next) => {
   const expireDays = 1;
   const values = [session_id, currDateStr, expireDays];
   const text = `
-    SELECT * FROM sessions
+    SELECT s.session_id, s.created_at, u.user_id, u.email, u.name_first, u.name_last FROM sessions s LEFT JOIN users u ON s.user_id = u.user_id
     WHERE session_id = ($1)
     AND DATE_PART('day', ($2)::timestamp - created_at::timestamp) <= ($3)`;
 
@@ -87,9 +87,12 @@ sessionController.verifySession = (req, res, next) => {
         return next();
       }
     })
-    .catch((err) =>
-      next({ log: err, message: { err: 'catch in verifySession' } })
-    );
+    .catch((err) => {
+      console.log(
+        '---------------------------------------------------------------------'
+      );
+      return next({ log: err, message: { err: 'catch in verifySession' } });
+    });
 };
 
 sessionController.endSession = (req, res, next) => {
