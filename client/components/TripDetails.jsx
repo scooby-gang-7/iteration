@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Card, Grid } from '@mui/material';
 import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
+import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import axios from 'axios';
 
 const TripDetail = (props) => {
@@ -12,7 +14,40 @@ const TripDetail = (props) => {
 
   const { id } = useParams();
 
+  useEffect(() => {
+    console.log(currentTripInfo);
+  }, [currentTripInfo]);
+
+  useEffect(() => {
+    console.log(currentPlacesInfo);
+  }, [currentPlacesInfo]);
+
+  useEffect(() => {
+    console.log(center);
+  }, [center]);
+
   // fetching all places for the selected trip and storing them to currentTripInfo in state
+
+  useEffect(() => {
+    fetch('trips/getPlaces', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        trip_id: id,
+      }),
+    })
+      .then((placesDetails) => placesDetails.json())
+      .then((placesDetails) => {
+        console.log('this happened!');
+        console.log('placesDetails from Fetch --> ', placesDetails);
+        setCurrentPlacesInfo(placesDetails);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }, []);
 
   useEffect(() => {
     fetch('trips/getTrip', {
@@ -63,23 +98,29 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-    <div>
-      <div id='detailsDiv'>
-        <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-        <p>{currentTripInfo.destination}</p>
-        <p>{currentTripInfo.description}</p>
-        <p>
-          {startDateDisplay} - {endDateDisplay}
-        </p>
-      </div>
+  
+    <Grid container spacing={2} columns={12}>
+      <Card elevation={2}>
+        <div id='detailsDiv'>
+          <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
+          <p>{currentTripInfo.destination}</p>
+          <p>{currentTripInfo.description}</p>
+          <p>
+            {startDateDisplay} - {endDateDisplay}
+          </p>
+        </div>
+      </Card>
       <div id='addBuddyDiv'>
-        <AddBuddy trip_id={id} />
+        <Card elevation={2}>
+          <AddBuddy trip_id={id} />
+        </Card>
       </div>
       <div id='mapDiv'>
         <Map
           center={center}
           trip_id={id}
           setCurrentPlacesInfo={setCurrentPlacesInfo}
+          testProp={'this is the test prop'}
         />
       </div>
       <Places
@@ -87,7 +128,23 @@ const TripDetail = (props) => {
         currentPlacesInfo={currentPlacesInfo}
         setCurrentPlacesInfo={setCurrentPlacesInfo}
       />
-    </div>
+      <div
+        className='drawer-preview'
+        style={{
+          // width: 'min-content',
+          position: 'fixed',
+          bottom: 0,
+          right: 0,
+          margin: '20px',
+        }}
+      >
+        <ChatroomContainer
+          className='chatroomContainer'
+          userInfo={props.userInfo}
+          tripId={id}
+        />
+      </div>
+    </Grid>
   );
 };
 

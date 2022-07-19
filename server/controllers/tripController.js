@@ -122,7 +122,7 @@ tripController.addTripbuddy = async (req, res, next) => {
     FROM user_trip_rel as R
     JOIN users as u
     ON R.user_id = u.user_id
-    WHERE R.trip_id = ($2);`;
+    WHERE R.trip_id = ($1);`;
   const tripVal = [trip_id];
   const memberdata = await db.query(queryText2, tripVal);
   // console.log(memberdata);

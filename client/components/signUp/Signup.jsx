@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../stylesheets/styles.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 

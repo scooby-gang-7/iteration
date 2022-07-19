@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
-import '../stylesheets/styles.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
-
-// CHECK WITH JOY ON CONNECTING GOOGLE API MAPS WITH DESTINATION FORM
 
 function AddTrip(props) {
   const { userInfo } = props;
