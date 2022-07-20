@@ -60,6 +60,8 @@ describe('Signup', () => {
         cy.url().should('include', '/mytrips')
     })
 
+    //this is a specifc route for deleting the user created for testing purposes
+    
     after(() => {
         cy.request({
             url:'/auth/user',
