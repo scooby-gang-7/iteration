@@ -4,7 +4,7 @@ describe('Homepage', () => {
   })
 
     it('greets with Login', () => {
-      cy.contains('Sign In')
+      cy.contains('Login')
     })
 
     it('links to /signup', () => {
@@ -13,29 +13,28 @@ describe('Homepage', () => {
     })
 
     it ('requires email', () => {
-      cy.get('button[type=submit]').click()
+      cy.get('form').get('[class=loginButton]').click()
       cy.contains('Invalid email or password.')
     })
 
     it ('requires password', () => {
       cy.get('[data-test=email]').type('taylor@codesmith.com')
-      cy.get('button[type=submit]').click()
+      cy.get('form').get('[class=loginButton]').click()
       cy.contains('Invalid email or password.')
     })
 
     it('requires valid username and password', () => {
       cy.get('[data-test=email]').type('taylor@codesmith.com')
       cy.get('[data-test=password]').type('invalid')
-      cy.get('button[type=submit]').click()
+      cy.get('form').get('[class=loginButton]').click()
       cy.contains('Invalid email or password.')
     })
 
     it('navigates to /trips on sucessful login', () => {
       cy.get('[data-test=email]').type('taylor@codesmith.com')
       cy.get('[data-test=password]').type('codesmith')
-      cy.get('button[type=submit]').click()
+      cy.get('form').get('[class=loginButton]').click()
       cy.url().should('include', '/mytrips')
     })
    
 })
-
