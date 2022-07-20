@@ -1,17 +1,15 @@
 const Dotenv = require('dotenv-webpack'); // required for accessing .env from front-end. used in plugins.
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 
 console.log('mode is : ', process.env.NODE_ENV);
 
 module.exports = {
   mode: process.env.NODE_ENV,
-  entry: {
-    bundle: path.resolve(__dirname, 'client/index.js'),
-  },
+  entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
   performance: {
@@ -27,11 +25,11 @@ module.exports = {
   devServer: {
     static: {
       publicPath: '/',
-      directory: path.join(__dirname, 'dist'),
+      directory: path.resolve(__dirname, 'dist'),
     },
     port: 8080,
     historyApiFallback: true,
-    compress: true,
+    // compress: true,
     hot: true,
     proxy: {
       '*': 'http://localhost:3000',
@@ -55,14 +53,13 @@ module.exports = {
         },
       },
       {
-        test: /\.(png|svg|jpeg|jpg|gif)$/,
+        test: /\.(png|svg|jpeg|jpg|jpeg|gif)$/,
         type: 'asset/resource',
       },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Scratch',
       template: './client/index.html',
       favicon: './client/assets/world.png',
     }),
