@@ -103,7 +103,7 @@ export default function Login({ setUserInfo, userInfo }) {
             }}
           >
             <Typography component='h1' variant='h5'>
-              Sign in
+              Sign In
             </Typography>
             <FormControl
               sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}

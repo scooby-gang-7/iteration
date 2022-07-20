@@ -60,12 +60,12 @@ app.get('/', (req, res) => {
 });
 
 //404 error
-app.use('/*', (req, res) => {
-  console.log('trying to send back app from 404 route');
-  console.log(req.originalUrl);
-  console.log(req.url);
-  res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
-});
+// app.use('/*', (req, res) => {
+//   console.log('trying to send back app from 404 route');
+//   console.log(req.originalUrl);
+//   console.log(req.url);
+//   res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
+// });
 
 //create global error handler
 app.use((err, req, res, next) => {
