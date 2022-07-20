@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { ToastContainer } from 'react-toastify';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import AddTrip from './components/AddTrip.jsx';
+import axios from 'axios';
 import Login from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
-import Signup from './components/Signup.jsx';
+import NavBarMUI from './components/NavBarMUI'
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
-import './stylesheets/styles.css';
+import './stylesheets/styles.css'
+
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
@@ -44,6 +44,7 @@ const App = () => {
   }, []);
 
   return (
+    
     <div className='App'>
       <ToastContainer
         position='top-center'
@@ -58,24 +59,16 @@ const App = () => {
       />
       <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
       <Routes>
+        
         <Route
           path='/'
           element={
             userInfo.user_id ? (
               <Navigate to='/mytrips' />
             ) : (
-              <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+                <Login setUserInfo={setUserInfo} userInfo={userInfo} />
             )
           }
-        />
-
-        <Route
-          path='/signup'
-          element={<Signup setUserInfo={setUserInfo} userInfo={userInfo} />}
-        />
-        <Route
-          path='/addtrip'
-          element={<AddTrip userInfo={userInfo} setTripInfo={setTripInfo} />}
         />
         <Route
           path='/mytrips'

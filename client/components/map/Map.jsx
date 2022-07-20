@@ -21,7 +21,7 @@ import MuiSearch from './MuiSearch';
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-    libraries: ['places'],
+    // libraries: ['places']
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -189,8 +189,5 @@ function Map(props) {
     </>
   );
 }
-
-// -------------code for autocomplete search field-----------
-// PlasesAutoComplete is specific to exact locations, not generalized like 'restaurants', 'pizza', 'cafe' 
 
 export default Mapp;

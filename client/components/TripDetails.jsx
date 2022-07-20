@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Card, Grid } from '@mui/material';
 import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
@@ -49,9 +50,6 @@ const TripDetail = (props) => {
   }, []);
 
   useEffect(() => {
-    console.log(
-      'tripdetails is remounting -------------------------------------'
-    );
     fetch('trips/getTrip', {
       method: 'POST',
       headers: {
@@ -100,17 +98,22 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-    <div>
-      <div id='detailsDiv'>
-        <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-        <p>{currentTripInfo.destination}</p>
-        <p>{currentTripInfo.description}</p>
-        <p>
-          {startDateDisplay} - {endDateDisplay}
-        </p>
-      </div>
+  
+    <Grid container spacing={2} columns={12}>
+      <Card elevation={2}>
+        <div id='detailsDiv'>
+          <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
+          <p>{currentTripInfo.destination}</p>
+          <p>{currentTripInfo.description}</p>
+          <p>
+            {startDateDisplay} - {endDateDisplay}
+          </p>
+        </div>
+      </Card>
       <div id='addBuddyDiv'>
-        <AddBuddy trip_id={id} />
+        <Card elevation={2}>
+          <AddBuddy trip_id={id} />
+        </Card>
       </div>
       <div id='mapDiv'>
         <Map
@@ -141,7 +144,7 @@ const TripDetail = (props) => {
           tripId={id}
         />
       </div>
-    </div>
+    </Grid>
   );
 };
 
