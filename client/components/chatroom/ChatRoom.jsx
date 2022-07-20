@@ -47,6 +47,7 @@ const ChatRoom = (props) => {
       .catch((err) => {
         console.log(err);
       });
+    console.log('installing socket io');
 
     // set up socket
     console.log('installing socket io');

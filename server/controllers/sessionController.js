@@ -43,7 +43,7 @@ sessionController.startSession = (req, res, next) => {
     const values = [hash, dateStr, res.locals.data.user_id];
     db.query(text, values)
       .then((data) => {
-        // console.log('DATA --> ', data);
+        console.log('DATA --> ', data);
         res.locals.sessionInfo = data.rows[0];
         return next();
       })
@@ -79,7 +79,7 @@ sessionController.verifySession = (req, res, next) => {
 
   db.query(text, values)
     .then((data) => {
-      // console.log('DATA --> ', data);
+      console.log('DATA --> ', data);
       if (data.rows.length === 0) {
         return res.status(500);
       } else {

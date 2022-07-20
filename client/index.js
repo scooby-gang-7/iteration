@@ -1,21 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-
+import { BrowserRouter } from 'react-router-dom';
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import App from './App.jsx';
-import ColorThemeWrapper from './ColorThemeWrapper.jsx';
+import ColorThemeWrapper from './ColorThemeWrapper.jsx'
 
 let theme = createTheme({
-  typography: {
-    h1: { fontSize: 72 },
+  typography:{
+    h1:{fontSize: 72,},
 
-    h2: { fontSize: 48 },
+     h2:{fontSize: 48,},
+  
+     h3:{fontSize: 36,},
+ 
+     h4:{fontSize: 28,},
 
-    h3: { fontSize: 36 },
-
-    h4: { fontSize: 28 },
-
-    h5: { fontSize: 22 },
+     h5:{fontSize: 22,}
   },
   palette: {
     primary: {
@@ -49,14 +49,19 @@ let theme = createTheme({
 
 const darkTheme = createTheme({
   palette: {
-    mode: 'dark',
-  },
+    mode:'dark',
+  }
 });
+
+
+
 
 theme = responsiveFontSizes(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>
+  <BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <App />
+    </ThemeProvider>
+  </BrowserRouter>
 );

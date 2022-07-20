@@ -30,7 +30,7 @@ tripController.getOneTrip = async (req, res, next) => {
     WHERE trip_id = ($1)`;
 
   const tripData = await db.query(queryText, values);
-  // console.log('tripData from getOneTrip after query -->', tripData);
+  console.log('tripData from getOneTrip after query -->', tripData);
   res.locals.trip = tripData.rows[0];
   next();
 };
@@ -93,7 +93,7 @@ tripController.getTripbuddy = async (req, res, next) => {
     WHERE R.trip_id = ($1);`;
 
   const memberdata = await db.query(queryText, values);
-  // console.log(memberdata);
+  console.log(memberdata);
   res.locals.members = memberdata.rows;
   return next();
 };
@@ -107,7 +107,7 @@ tripController.addTripbuddy = async (req, res, next) => {
 
   const buddy_info = await db.query(queryText1, values);
   const buddy_id = buddy_info.rows[0].user_id;
-  // console.log('buddy info:', buddy_info);
+  console.log('buddy info:', buddy_info);
   const buddyVal = [buddy_id, trip_id, false];
   const queryText = `
     INSERT INTO user_trip_rel (user_id, trip_id, owner)

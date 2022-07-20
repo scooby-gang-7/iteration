@@ -3,6 +3,7 @@ import { Card, Grid } from '@mui/material';
 import AddTripModal from './addTrip/AddTripModal';
 import Trip from './Trip';
 
+
 const MyTrips = (props) => {
   const [upcomingTrips, setUpcomingTrips] = useState([]);
   const [pastTrips, setPastTrips] = useState([]);
@@ -21,7 +22,6 @@ const MyTrips = (props) => {
       .then((triplist) => triplist.json())
       .then((triplist) => {
         // props.setTripInfo(triplist);
-        console.log(triplist);
         handleAllTrips(triplist);
       })
       .catch((e) => {
@@ -36,7 +36,7 @@ const MyTrips = (props) => {
     tripList
       // sort trips by date within the past and upcoming arrays
 
-      .sort((a, b) => {
+      .sort((a, b)=> {
         if (a.date_start > b.date_start) return 1;
         else if (a.date_start < b.date_start) return -1;
         else if (a.date_start === b.date_start) {
@@ -48,15 +48,19 @@ const MyTrips = (props) => {
       .forEach((trip) => {
         const tripStart = new Date(`${trip.date_start}`);
         if (tripStart.getTime() >= today.getTime()) {
-          setUpcomingTrips([...upcomingTrips, trip]);
+          setUpcomingTrips([...upcomingTrips, trip])
         } else {
           setPastTrips([...pastTrips, trip]);
         }
-      });
-  };
+      })
+    }
+      
 
-  console.log('upcoming trips with hooks---', upcomingTrips);
-  console.log('past trips with hooks---', pastTrips);
+    console.log('upcoming trips with hooks---', upcomingTrips);
+    console.log('past trips with hooks---', pastTrips);
+   
+ 
+  
 
   return (
     <>
@@ -108,6 +112,6 @@ const MyTrips = (props) => {
       </div>
     </>
   );
-};
+ };
 
 export default MyTrips;
