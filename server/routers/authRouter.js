@@ -38,5 +38,9 @@ router.get('/session', sessionController.verifySession, (req, res) => {
   res.status(200).send(res.locals.sessionInfo);
 });
 
+//testing purposes
+router.post('/user', userController.deleteUser, (req, res) => {
+  res.status(200).send(res.locals)
+})
 // Export router
 module.exports = router;

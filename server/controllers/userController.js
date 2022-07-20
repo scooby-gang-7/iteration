@@ -111,6 +111,36 @@ userController.verifyUser = (req, res, next) => {
     });
 };
 
+//delete user (testing purposes)
+userController.deleteUser = (req, res, next) => {
+  const { email } = req.body;
+  const values = [ email ]
+  const queryText = `DELETE FROM users
+  WHERE email=($1) *`
+
+  db.query(queryText)
+    .then((data) => {
+      if (data.rows.length == 0) {
+        // res.locals.data = {message: 'user does not exist'}; //to do throw error
+        return next(
+          createErr({
+            method: 'deletePlace',
+            type: 'user does not exist',
+            err: 'user does not exist',
+          })
+        );
+      } else {
+        res.locals.place = data.rows[0];
+        return next();
+      }
+    })
+    .catch((err) => {
+      return next({ log: err, message: { err: 'catch in deletePlace' } });
+    });
+};
+
+
+
 //Error Creator
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;

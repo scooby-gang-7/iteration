@@ -103,7 +103,7 @@ export default function Login({ setUserInfo, userInfo }) {
             }}
           >
             <Typography component='h1' variant='h5'>
-              Sign in
+              Sign In
             </Typography>
             <FormControl
               sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
@@ -121,7 +121,7 @@ export default function Login({ setUserInfo, userInfo }) {
                     <AccountCircle edge='end'></AccountCircle>
                   </InputAdornment>
                 }
-                label='email'
+                label='email' data-test='email'
               />
             </FormControl>
             <FormControl
@@ -149,7 +149,7 @@ export default function Login({ setUserInfo, userInfo }) {
                     </IconButton>
                   </InputAdornment>
                 }
-                label='Password'
+                label='Password' data-test='password'
               />
             </FormControl>
             <Button
