@@ -1,4 +1,3 @@
-# scratch
 <h1>Scratch Project</h1>
       <div>
         <h3>Problem/Solution</h3>
