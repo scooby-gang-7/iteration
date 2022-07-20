@@ -6,6 +6,7 @@ import Login from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
 import NavBarMUI from './components/NavBarMUI'
+import { Paper } from '@mui/material';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,48 +45,48 @@ const App = () => {
   }, []);
 
   return (
-    
-    <div className='App'>
-      <ToastContainer
-        position='top-center'
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-      <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
-      <Routes>
-        
-        <Route
-          path='/'
-          element={
-            userInfo.user_id ? (
-              <Navigate to='/mytrips' />
-            ) : (
+    <Paper elevation={3} sx={{ maxWidth:'900px'}}>
+      <div className='App'>
+        <ToastContainer
+          position='top-center'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
+        <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
+        <Routes>
+          <Route
+            path='/'
+            element={
+              userInfo.user_id ? (
+                <Navigate to='/mytrips' />
+              ) : (
                 <Login setUserInfo={setUserInfo} userInfo={userInfo} />
-            )
-          }
-        />
-        <Route
-          path='/mytrips'
-          element={
-            <MyTrips
-              userInfo={userInfo}
-              tripInfo={tripInfo}
-              setTripInfo={setTripInfo}
-            />
-          }
-        />
-        <Route
-          path='/mytrips/:id'
-          element={<TripDetails userInfo={userInfo} />}
-        />
-      </Routes>
-    </div>
+              )
+            }
+          />
+          <Route
+            path='/mytrips'
+            element={
+              <MyTrips
+                userInfo={userInfo}
+                tripInfo={tripInfo}
+                setTripInfo={setTripInfo}
+              />
+            }
+          />
+          <Route
+            path='/mytrips/:id'
+            element={<TripDetails userInfo={userInfo} />}
+          />
+        </Routes>
+      </div>
+    </Paper>
   );
 };
 

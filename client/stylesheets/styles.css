@@ -1,9 +1,15 @@
+a:visited {
+  text-decoration: none;
+}
+a:link {
+  text-decoration: none;
+}
+
 body,
 #root {
   display:flex;
   flex-direction: column;
   color: #3D0240;
-
 }
 
 .App {
@@ -37,30 +43,6 @@ padding-bottom: 30px;
   flex-direction: column;
 }
 
-/* #login-parent h3 {
-  font-size: x-large;
-} */
-
-#btn-login {
-  margin-left: 20px;
-  /* background-color: #e05637; */
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 7px;
-  border: 1px solid;
-  padding: 3px;
-  width: 75px;
-}
-
-#btn-signup {
-  margin-right: 20px;
-  /* background-color: #e05637; */
-  font-family: 'Montserrat', sans-serif;
-  border-radius: 7px;
-  border: 1px solid;
-  padding: 3px;
-  width: 75px;
-}
-
 nav {
   font-family: 'Montserrat', sans-serif;
   align-items: center;
@@ -80,13 +62,6 @@ nav {
   margin-right: 20px;
 }
 
-a:visited {
-  text-decoration: none;
-}
-
-.nav-links a:link {
-  text-decoration: none;
-}
 
 nav h1 {
   margin-left: 20px;
@@ -125,19 +100,6 @@ nav h1 {
   cursor: pointer;
 }
 
-#myTrips h1 {
-  /* color: #e05637; */
-  font-family: 'Montserrat', sans-serif;
-  text-align: center;
-  margin-bottom: -12px;
-}
-
-.addTripButton {
-  border-radius: 7px;
-  border: 1px solid;
-  padding: 3px;
-  width: 100px;
-}
 #addtrip-parent {
   /* background-color: #2e2c2c; */
   /* color: #e05637; */
@@ -164,17 +126,7 @@ nav h1 {
   grid-column-start: 2;
   font-family: 'Montserrat', sans-serif;
 }
-#about-form {
-  /* background-color: #2e2c2c; */
-  /* color: #e05637; */
-  border-radius: 10px;
-  width: 1000px;
-  text-align: center;
-  margin: 10px;
-  grid-row-start: 3;
-  grid-column-start: 2;
-  font-family: 'Montserrat', sans-serif;
-}
+
 #detailsDiv {
   /* background-color: #2e2c2c; */
   /* color: #e05637; */

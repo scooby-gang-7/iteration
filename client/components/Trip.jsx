@@ -1,3 +1,4 @@
+import { Card, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
@@ -38,19 +39,15 @@ const Trip = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-    <div className='myTripBox'>
-      <button className='addTripButton'>
-        <Link to={`/mytrips/${props.trip_id}`}>
-          <h1>{props.name}</h1>
-          <h3>{props.destination}</h3>
-          <h3>
-            {startDateDisplay} - {endDateDisplay}
-          </h3>
-        </Link>
-      </button>
-
-      {/* {showDetail ? <Mapp trip_id={props.trip_id} destination={props.destination} center={center} /> : <div></div>} */}
-    </div>
+    <Card sx={{ p: 2 }}>
+      <Link to={`/mytrips/${props.trip_id}`}>
+        <Typography variant='h3'>{props.name}</Typography>
+        <Typography variant='h5'>{props.destination}</Typography>
+         <Typography variant='h7'>
+          {startDateDisplay} - {endDateDisplay}
+        </Typography>
+      </Link>
+    </Card>
   );
 }
 
