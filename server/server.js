@@ -25,7 +25,6 @@ if (process.env.NODE_ENV === 'production') {
   console.log('working in production');
 
   // // enables handling of req from index.html
-  app.use('/dist', express.static(path.join(__dirname, '../dist')));
 }
 
 //use cors
@@ -37,8 +36,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // handle requests for static files
+app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/assets', express.static('./client/assets'));
-app.use(express.static(__dirname));
+// app.use(express.static(__dirname));
 
 // Router paths
 app.use('/auth', authRouter);

@@ -12,11 +12,7 @@ module.exports = {
     publicPath: '/',
     filename: 'bundle.js',
   },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000,
-  },
+  devtool: 'eval-source-map',
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
     extensions: ['.js', '.jsx'],
@@ -29,6 +25,7 @@ module.exports = {
     },
     port: 8080,
     historyApiFallback: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
     // compress: true,
     hot: true,
     proxy: {

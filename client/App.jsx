@@ -41,7 +41,7 @@ const App = () => {
           console.log(err);
         });
     } else {
-      return;
+      setIsLoaded(true);
     }
   }, []);
 
