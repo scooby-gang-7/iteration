@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
-import Places from './PlacesForCurrentTrip';
-import Map from './map/Map.jsx';
-import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
-import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
-import axios from 'axios';
 import { borderRadius, Container } from '@mui/system';
+import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
+import axios from 'axios';
+import AddBuddy from './AddBuddy.jsx';
+import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
+import Map from './map/Map.jsx';
+import PlacesContainer from './PlacesContainer';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -88,12 +88,14 @@ const TripDetail = (props) => {
     endDate.getMonth() + 1
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
-  return (
-  
-    <Container>
-        <div id='detailsDiv'>
-          <Stack
+  const handleDeletePlace = () => {
+    console.log('clicked delete place button')
+  }
 
+  return (
+    <Container>
+      <div id='detailsDiv'>
+        <Stack
           direction='row'
           spacing={2}
           divider={<Divider orientation='vertical' flexItem />}
@@ -106,23 +108,26 @@ const TripDetail = (props) => {
           <Typography>
             {startDateDisplay} - {endDateDisplay}
           </Typography>
-          </Stack>
-        </div>
-     
-          <AddBuddy trip_id={id} />
-     
-      <div id='mapDiv'>
-        <Map
-          center={center}
-          trip_id={id}
-          setCurrentPlacesInfo={setCurrentPlacesInfo}
-          testProp={'this is the test prop'}
-        />
+        </Stack>
       </div>
-      <Places
+
+      <AddBuddy trip_id={id} />
+
+      <div id='mapDiv'>
+        <Card>
+          <Map
+            center={center}
+            trip_id={id}
+            setCurrentPlacesInfo={setCurrentPlacesInfo}
+            testProp={'this is the test prop'}
+          />
+        </Card>
+      </div>
+      <PlacesContainer
         trip_id={id}
         currentPlacesInfo={currentPlacesInfo}
         setCurrentPlacesInfo={setCurrentPlacesInfo}
+        handleDeletePlace = {handleDeletePlace}
       />
       <div
         className='drawer-preview'
@@ -134,7 +139,7 @@ const TripDetail = (props) => {
           right: 0,
           margin: '20px',
           float: 'right',
-          backgroundColor: 'rgba(0,0,0,0.05)',
+          backgroundColor: 'rgba(0,0,0,0.02)',
           borderRadius: '4px',
         }}
       >

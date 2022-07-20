@@ -7,15 +7,16 @@ import ColorThemeWrapper from './ColorThemeWrapper.jsx'
 
 let theme = createTheme({
   typography:{
-    h1:{fontSize: 72,},
-
-     h2:{fontSize: 48,},
-  
-     h3:{fontSize: 36,},
- 
-     h4:{fontSize: 28,},
-
-     h5:{fontSize: 22,}
+    spacing: 2,
+    h1:{fontSize: '2rem',},
+     h2:{fontSize:'1.5rem',},
+     h3:{fontSize: '1.25rem',},
+     h4:{fontSize: '1.125rem',},
+     h5:{fontSize: '1rem',}
+  },
+  card: {
+    m: 2,
+    p: 2,
   },
   palette: {
     primary: {
