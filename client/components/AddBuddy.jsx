@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from '@mui/material'
+import { Card, Container, Divider, Typography, Stack } from '@mui/material'
+import { textAlign } from '@mui/system';
+
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -48,15 +50,30 @@ const Addbuddy = (props) => {
       });
   };
 
-  const tripmembers = [<p>Trip members: </p>];
+  const tripmembers = [];
   trip_buddy.forEach((el) => {
-    tripmembers.push(<p key={el.name_first}>{el.name_first}</p>);
+    tripmembers.push(<Typography key={el.name_first}>{el.name_first}</Typography>);
   });
 
   return (
-
-   <div id='addbuddy_container'>
-      <div id='mytrip buddy'>{tripmembers}</div>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        textAlign: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Typography>Trip Members</Typography>
+      <div>
+        <Stack
+          direction='row'
+          spacing={3}
+        >
+          {tripmembers}
+        </Stack>
+    </div>
       <div>
         <input
           type='text'
@@ -65,7 +82,7 @@ const Addbuddy = (props) => {
         />
         <button onClick={handleAddBuddy}>AddBuddy</button>
       </div>
-    </div>
+    </Container>
   );
 };
 

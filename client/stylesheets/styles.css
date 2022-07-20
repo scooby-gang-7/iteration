@@ -13,7 +13,7 @@ body,
 }
 
 .App {
-max-width: 1000px;
+max-width: 900px;
 margin: 0 auto;
 /* border: 1px solid lightslategray; */
 border-radius: 8px;
@@ -131,7 +131,6 @@ nav h1 {
   /* background-color: #2e2c2c; */
   /* color: #e05637; */
   border-radius: 10px;
-  width: 1000px;
   text-align: center;
   margin: 10px;
   grid-row-start: 3;

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid } from '@mui/material';
+import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
 import Places from './PlacesForCurrentTrip';
 import Map from './map/Map.jsx';
 import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import axios from 'axios';
+import { borderRadius, Container } from '@mui/system';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -39,11 +40,9 @@ const TripDetail = (props) => {
       }),
     })
       .then((placesDetails) => placesDetails.json())
-      .then((placesDetails) => {
-        console.log('this happened!');
-        console.log('placesDetails from Fetch --> ', placesDetails);
-        setCurrentPlacesInfo(placesDetails);
-      })
+      .then((placesDetails) => 
+        setCurrentPlacesInfo(placesDetails)
+      )
       .catch((e) => {
         console.log(e);
       });
@@ -61,21 +60,13 @@ const TripDetail = (props) => {
     })
       .then((tripDetails) => tripDetails.json())
       .then((tripDetails) => {
-        console.log(
-          'tripDetails from Fetch --> in tripdetails.jsx line 34 --->',
-          tripDetails
-        );
         setCurrentTripInfo(tripDetails);
         let query = `https://maps.googleapis.com/maps/api/geocode/json?address=${tripDetails.destination}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
         axios
           .get(query)
           .then((res) => {
-            console.log('in tripdetails.jsx line 42 --->', res.data);
             if (res.data.status == 'OK') {
-              console.log(
-                'in tripdetails.jsx line 45 --->',
-                res.data.results[0]
-              );
+             
               setMapCenter(res.data.results[0].geometry.location);
             }
           })
@@ -99,22 +90,27 @@ const TripDetail = (props) => {
 
   return (
   
-    <Grid container spacing={2} columns={12}>
-      <Card elevation={2}>
+    <Container>
         <div id='detailsDiv'>
+          <Stack
+
+          direction='row'
+          spacing={2}
+          divider={<Divider orientation='vertical' flexItem />}
+          alignItems='center'
+          justifyContent='space-between'
+        >
           <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-          <p>{currentTripInfo.destination}</p>
-          <p>{currentTripInfo.description}</p>
-          <p>
+          <Typography>{currentTripInfo.destination}</Typography>
+          <Typography>{currentTripInfo.description}</Typography>
+          <Typography>
             {startDateDisplay} - {endDateDisplay}
-          </p>
+          </Typography>
+          </Stack>
         </div>
-      </Card>
-      <div id='addBuddyDiv'>
-        <Card elevation={2}>
+     
           <AddBuddy trip_id={id} />
-        </Card>
-      </div>
+     
       <div id='mapDiv'>
         <Map
           center={center}
@@ -132,10 +128,14 @@ const TripDetail = (props) => {
         className='drawer-preview'
         style={{
           // width: 'min-content',
-          position: 'fixed',
-          bottom: 0,
+          display: 'block',
+          position: 'sticky',
+          bottom: '30px',
           right: 0,
           margin: '20px',
+          float: 'right',
+          backgroundColor: 'rgba(0,0,0,0.05)',
+          borderRadius: '4px',
         }}
       >
         <ChatroomContainer
@@ -144,7 +144,7 @@ const TripDetail = (props) => {
           tripId={id}
         />
       </div>
-    </Grid>
+    </Container>
   );
 };
 

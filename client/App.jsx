@@ -45,8 +45,8 @@ const App = () => {
   }, []);
 
   return (
-    <Paper elevation={3} sx={{ maxWidth:'900px'}}>
-      <div className='App'>
+    <div className='App'>
+        <Paper elevation={3} sx={{ maxWidth:'900px', minWidth:'500px'}}>
         <ToastContainer
           position='top-center'
           autoClose={5000}
@@ -85,8 +85,8 @@ const App = () => {
             element={<TripDetails userInfo={userInfo} />}
           />
         </Routes>
-      </div>
     </Paper>
+      </div>
   );
 };
 
