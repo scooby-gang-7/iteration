@@ -1,7 +1,6 @@
 describe('Signup', () => {
     beforeEach(() => {
         cy.visit(Cypress.env('login_url'))
-
     })
 
     it('Links to /signup from Nav bar', () => {
@@ -58,6 +57,18 @@ describe('Signup', () => {
         cy.get('[test-data=signup_email]').type('katrina@katrina.com')
         cy.get('[test-data=signup_password]').type('test')
         cy.get('[data-test=signup]').click()
-        cy.contains('Signup unsuccessful')
+        cy.url().should('include', '/mytrips')
+    })
+
+    after(() => {
+        cy.request({
+            url:'/auth/user',
+            method: 'POST',
+            body: {
+                email: 'katrina@katrina.com'
+            }
+        })
+        .its('body')
+        .should('deep.contain', {"data":1 })
     })
 })

@@ -116,26 +116,15 @@ userController.deleteUser = (req, res, next) => {
   const { email } = req.body;
   const values = [ email ]
   const queryText = `DELETE FROM users
-  WHERE email=($1) *`
-
+  WHERE email LIKE '%@katrina.com'`
+  
   db.query(queryText)
     .then((data) => {
-      if (data.rows.length == 0) {
-        // res.locals.data = {message: 'user does not exist'}; //to do throw error
-        return next(
-          createErr({
-            method: 'deletePlace',
-            type: 'user does not exist',
-            err: 'user does not exist',
-          })
-        );
-      } else {
-        res.locals.place = data.rows[0];
+        res.locals.data = data.rowCount
         return next();
-      }
     })
     .catch((err) => {
-      return next({ log: err, message: { err: 'catch in deletePlace' } });
+      return next({ log: err, message: { err: 'catch in deleteUser' } });
     });
 };
 
