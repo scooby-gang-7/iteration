@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { Button, Container, Paper, Typography } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+
+
+
 
 const Signup = ({ setUserInfo, userInfo }) => {
   const [name_first, setFirstName] = useState('');
@@ -8,7 +19,15 @@ const Signup = ({ setUserInfo, userInfo }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
+  const [values, setValues] = React.useState({
+      amount: '',
+      password: '',
+      weight: '',
+      weightRange: '',
+      showPassword: false,
+    });
+  
   const handleSubmitSignup = (e) => {
     e.preventDefault();
     fetch('auth/signup', {
@@ -41,57 +60,126 @@ const Signup = ({ setUserInfo, userInfo }) => {
       });
   };
 
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+
   return (
     <div id='signup-parent'>
-      <h1>Travel Pal</h1>
-      <form action='#'>
-        <h3>Sign Up</h3>
-        <div>
-          <label>First Name: </label>
-          <input
-            type='text'
-            placeholder='first name'
-            name='name_first'
-            value={name_first}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Last Name: </label>
-          <input
-            type='text'
-            placeholder='last name'
-            name='name_last'
-            value={name_last}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Email Address: </label>
-          <input
-            type='text'
-            placeholder='email address'
-            name='email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password: </label>
-          <input
-            type='password'
-            placeholder='password'
-            name='password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <br />
-        <button className='' onClick={handleSubmitSignup}>
-          Submit
-        </button>
-      </form>
-    </div>
+<Typography component='h1' variant='h5'>
+Create Travel Account
+</Typography>
+
+
+
+
+{/* FIRST NAME INPUT */}
+<FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
+              <InputLabel htmlFor='outlined-adornment-firstname'>First Name</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-firstname'
+                autoComplete='off'
+                inputProps={{ style: inputStyle }}
+                value={name_first}
+                onChange={(e) => setFirstName(e.target.value)}
+                endAdornment={
+                  <InputAdornment position='end'>
+                 
+                  </InputAdornment>
+                }
+                label='name_first'
+              />
+            </FormControl>
+
+
+{/* LAST NAME INPUT  */}
+<FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
+              <InputLabel htmlFor='outlined-adornment-lastname'>Last Name</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-lastname'
+                autoComplete='off'
+                inputProps={{ style: inputStyle }}
+                value={name_last}
+                onChange={(e) => setLastName(e.target.value)}
+                endAdornment={
+                  <InputAdornment position='end'>
+                  </InputAdornment>
+                }
+                label='name_last'
+              />
+            </FormControl>
+
+{/* EMAIL INPUT */}
+<FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
+              <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-email'
+                autoComplete='off'
+                inputProps={{ style: inputStyle }}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                endAdornment={
+                  <InputAdornment position='end'>
+                  </InputAdornment>
+                }
+                label='email'
+              />
+            </FormControl>
+
+{/* PASSWORD INPUT */}
+
+<FormControl
+              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+              variant='outlined'
+            >
+              <InputLabel htmlFor='outlined-adornment-password'>Password</InputLabel>
+              <OutlinedInput
+                id='outlined-adornment-password'
+                autoComplete='off'
+                type={values.showPassword ? 'text' : 'password'}
+                inputProps={{ style: inputStyle }}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                endAdornment={
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='toggle password visibility'
+                      onClick={handleClickShowPassword}
+                      edge='end'
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }
+                label='password'
+              />
+            </FormControl>
+
+            <Button
+              sx={{ m: 1 }}
+              variant='contained'
+              color='primary'
+              type='submit'
+              className='button-block'
+              onClick={handleSubmitSignup}
+            >
+              Sign Up
+            </Button>
+
+    </div> 
   );
 }
 

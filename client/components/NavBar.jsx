@@ -1,5 +1,8 @@
+import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import SignUpModal from './signUp/SignUpModal.jsx'
+
 
 const NavBar = ({userInfo, setUserInfo}) => {
 
@@ -38,12 +41,12 @@ function handleSignOut (e) {
 
        
        {window.location.pathname === '/' ?
-        <Link to='/signup'>
-          <li>Sign Up</li>
-        </Link>
+        <>
+        
+        </>
         : window.location.pathname === '/signup' ?
         <Link to='/'>
-          <li>Log In</li>
+          <li>Sign In</li>
         </Link>
         :<>
        <Link to='/mytrips'>
