@@ -5,7 +5,7 @@ import axios from 'axios';
 import Login from './components/Login.jsx';
 import MyTrips from './components/MyTrips.jsx';
 import NavBar from './components/NavBar';
-import NavBarMUI from './components/NavBarMUI'
+import NavBarMUI from './components/NavBarMUI';
 import { Paper } from '@mui/material';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
@@ -46,50 +46,53 @@ const App = () => {
     }
   }, []);
 
-  return (
-    <div className='App'>
-        <Paper elevation={3} sx={{ maxWidth:'900px', minWidth:'500px'}}>
-        <ToastContainer
-          position='top-center'
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-        <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
-        <Routes>
-          <Route
-            path='/'
-            element={
-              userInfo.user_id ? (
-                <Navigate to='/mytrips' />
-              ) : (
-                <Login setUserInfo={setUserInfo} userInfo={userInfo} />
-              )
-            }
-          />
-          <Route
-            path='/mytrips'
-            element={
-              <MyTrips
-                userInfo={userInfo}
-                tripInfo={tripInfo}
-                setTripInfo={setTripInfo}
+  if (isLoaded) {
+    return (
+      <div className='App'>
+        <BrowserRouter>
+          <Paper elevation={3} sx={{ maxWidth: '900px', minWidth: '500px' }}>
+            <ToastContainer
+              position='top-center'
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
+            <NavBar setUserInfo={setUserInfo} userInfo={userInfo} />
+            <Routes>
+              <Route
+                path='/'
+                element={
+                  userInfo.user_id ? (
+                    <Navigate to='/mytrips' />
+                  ) : (
+                    <Login setUserInfo={setUserInfo} userInfo={userInfo} />
+                  )
+                }
               />
-            }
-          />
-          <Route
-            path='/mytrips/:id'
-            element={<TripDetails userInfo={userInfo} />}
-          />
-        </Routes>
-    </Paper>
+              <Route
+                path='/mytrips'
+                element={
+                  <MyTrips
+                    userInfo={userInfo}
+                    tripInfo={tripInfo}
+                    setTripInfo={setTripInfo}
+                  />
+                }
+              />
+              <Route
+                path='/mytrips/:id'
+                element={<TripDetails userInfo={userInfo} />}
+              />
+            </Routes>
+          </Paper>
+        </BrowserRouter>
       </div>
-  );
+    );
+  }
 };
-
 export default App;
