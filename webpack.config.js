@@ -9,7 +9,8 @@ module.exports = {
   entry: ['./client/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    // publicPath: '/',
+    publicPath: process.env.NODE_ENV === 'production' ? '/client/assets/' : '/',
     filename: 'bundle.js',
   },
   devtool: 'eval-source-map',
@@ -54,7 +55,16 @@ module.exports = {
       },
       {
         test: /\.(png|svg|jpeg|jpg|jpeg|gif)$/,
-        type: 'asset/resource',
+        use: [
+          {
+            // loads files as base64 encoded data url if image file is less than set limit
+            loader: 'url-loader',
+            options: {
+              // if file is greater than the limit (bytes), file-loader is used as fallback
+              limit: 8192,
+            },
+          },
+        ],
       },
     ],
   },
