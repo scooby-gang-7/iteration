@@ -37,7 +37,7 @@ app.use(cookieParser());
 
 // handle requests for static files
 // app.use('/dist', express.static(path.join(__dirname, '../dist')));
-// app.use('/assets', express.static('./client/assets'));
+app.use('/assets', express.static('./client/assets'));
 // app.use(express.static(__dirname));
 console.log();
 // Router paths
