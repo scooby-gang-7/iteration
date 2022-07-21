@@ -1,17 +1,16 @@
 body,
 #root {
-  display:flex;
+  display: flex;
   flex-direction: column;
-  color: #3D0240;
-
+  color: #3d0240;
 }
 
 .App {
-max-width: 1000px;
-margin: 0 auto;
-/* border: 1px solid lightslategray; */
-border-radius: 8px;
-padding-bottom: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+  /* border: 1px solid lightslategray; */
+  border-radius: 8px;
+  padding-bottom: 30px;
   /* display: grid;
   grid-template-rows: 80px 80px 1fr 80px;
   grid-template-columns: 1fr 1fr 1fr;
@@ -198,4 +197,12 @@ nav h1 {
   grid-row-start: 3;
   grid-column-start: 2;
   font-family: 'Montserrat', sans-serif;
+}
+
+#fof-container {
+  font-family: 'Montserrat', sans-serif;
+  padding-bottom: 50px;
+}
+#fof-container h3 {
+  margin-bottom: 0px;
 }

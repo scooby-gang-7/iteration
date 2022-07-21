@@ -5,19 +5,12 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 require('dotenv').config();
 // Import Controllers
-const userController = require('./controllers/userController');
-const sessionController = require('./controllers/sessionController');
-const tripController = require('./controllers/tripController');
-const cookieController = require('./controllers/cookieController');
-const placesController = require('./controllers/placesController');
 const socketIoController = require('./controllers/socketIoController');
 // Import Routers
 const authRouter = require('./routers/authRouter');
 const tripRouter = require('./routers/tripRouter');
-const mytripsRouter = require('./routers/mytripsRouter');
 // connect to DB
 const db = require('./models/userTripModels');
-
 //create app instance and other const variables
 const app = express();
 const server = require('http').createServer(app);
@@ -28,9 +21,11 @@ const io = require('socket.io')(server, {
   },
 });
 
-const DIST_DIR = path.join(__dirname, '../dist/');
-const HTML_FILE = path.join(DIST_DIR, 'index.html');
-const PORT = process.env.PORT;
+if (process.env.NODE_ENV === 'production') {
+  console.log('working in production');
+
+  // // enables handling of req from index.html
+}
 
 //use cors
 app.use(cors());
@@ -41,12 +36,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // handle requests for static files
+// app.use('/dist', express.static(path.join(__dirname, '../dist')));
 app.use('/assets', express.static('./client/assets'));
+// app.use(express.static(__dirname));
 
 // Router paths
 app.use('/auth', authRouter);
-app.use('/trips', tripRouter);
-app.use('/mytrips/trips', mytripsRouter);
+app.use('/trips', tripRouter); // I don't get why we have 2 routes to the same router but I consolidated them
+app.use('/mytrips/trips', tripRouter);
 
 // unique paths
 app.get('/about', (req, res) => {
@@ -58,11 +55,19 @@ app.post('/getmessages', socketIoController.getMessages, (req, res) => {
 });
 
 app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
+  console.log('trying to send at /');
+  res.sendStatus(200);
+  // res.status(201).sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
 
 //404 error
-app.use('*', (req, res) => res.status(404).send('Not Found'));
+app.use('/*', (req, res) => {
+  console.log('trying to send back app from 404 route');
+  console.log(req.originalUrl);
+  console.log(req.url);
+  res.sendStatus(404);
+  // res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
+});
 
 //create global error handler
 app.use((err, req, res, next) => {
@@ -104,12 +109,6 @@ io.on('connection', (socket) => {
     }
   });
 });
-
-// currently custom events arent' working (hello) because I can't seem to point
-// to an instance of the socket from the front end
-// need to find out how to properly do it. not trying to start the instance as soon as
-// app starts though, only when component is called.
-// ?
 
 server.listen(process.env.PORT, () => {
   console.log('server is listening on 3000');
