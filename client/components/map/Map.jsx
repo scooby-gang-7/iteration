@@ -90,7 +90,7 @@ function Map(props) {
         google_place_id: results[0].place_id,
         name: address, //todo get the first part of
         address: results[0].formatted_address,
-        type: results[0].type,
+        type: 'hotel',
         lat: lat,
         long: lng,
       };

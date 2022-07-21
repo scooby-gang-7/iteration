@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Divider, Typography, Stack } from '@mui/material'
-import { textAlign } from '@mui/system';
+import { Button, Container, FormControl,InputLabel, OutlinedInput, Typography, Stack } from '@mui/material'
 
 
 const Addbuddy = (props) => {
@@ -9,6 +8,7 @@ const Addbuddy = (props) => {
   const [trip_buddy, setTripbuddy] = useState([]);
   console.log(console.log('tripbuddy info', trip_buddy));
 
+    const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
   useEffect(() => {
     fetch('trips/getbuddy', {
       method: 'POST',
@@ -67,20 +67,34 @@ const Addbuddy = (props) => {
     >
       <Typography fontWeight='bold'>Trip Members</Typography>
       <div>
-        <Stack
-          direction='row'
-          spacing={3}
-        >
+        <Stack direction='row' spacing={3}>
           {tripmembers}
         </Stack>
-    </div>
+      </div>
       <div>
-        <input
-          type='text'
-          placeholder={`Enter Your Friend's Email`}
-          onChange={(e) => setBuddyemail(e.target.value)}
-        />
-        <button onClick={handleAddBuddy}>AddBuddy</button>
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-email'>Buddy's Email</InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-email'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
+            // placeholder={`Enter Your Friend's Email`}
+            onChange={(e) => setBuddyemail(e.target.value)}
+            label='email'
+          />
+          <Button
+            sx={{ m: 1 }}
+            variant='contained'
+            color='primary'
+            className='button-block'
+            onClick={handleAddBuddy}
+          >
+            Add Buddy
+          </Button>
+        </FormControl>
       </div>
     </Container>
   );
