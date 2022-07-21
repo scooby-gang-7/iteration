@@ -35,6 +35,35 @@ const PlaceDetails = (props) => {
       });
   }
 
+  const handleDeletePlace = () => {
+    // delete from DB, then update react
+    fetch('api/trips/deleteplace', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        place_id: props.place_id,
+      }),
+    })
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+        if (data) {
+          // if we have a response, proceed with removing from react state
+          // create clone of currentplaces
+          const tempObj = { ...props.currentPlacesInfo };
+          // remove place from currentplaces in temp
+          delete tempObj[props.place_id];
+          // props.setcurrentplaces
+          props.setCurrentPlacesInfo(tempObj);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <ListItem>
       <Stack direction='row' spacing={3} width='100%'>
@@ -68,7 +97,7 @@ const PlaceDetails = (props) => {
           <Chip
             label='Remove'
             variant='outlined'
-            onDelete={props.handleDeletePlace}
+            onDelete={handleDeletePlace}
           />
         </Stack>
       </Stack>

@@ -10,7 +10,7 @@ import PlacesContainer from './PlacesContainer';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
-  const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
+  const [currentPlacesInfo, setCurrentPlacesInfo] = useState({});
   const [center, setMapCenter] = useState(null);
 
   const { id } = useParams();
@@ -28,7 +28,14 @@ const TripDetail = (props) => {
       }),
     })
       .then((placesDetails) => placesDetails.json())
-      .then((placesDetails) => setCurrentPlacesInfo(placesDetails))
+      .then((placesDetails) => {
+        const tempObj = {};
+        for (let place of placesDetails) {
+          tempObj[place.place_id] = place;
+        }
+        console.log(tempObj);
+        setCurrentPlacesInfo(tempObj);
+      })
       .catch((e) => {
         console.log(e);
       });
@@ -72,10 +79,6 @@ const TripDetail = (props) => {
   const endDateDisplay = `${
     endDate.getMonth() + 1
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
-
-  const handleDeletePlace = () => {
-    console.log('clicked delete place button');
-  };
 
   return (
     <div>
@@ -139,7 +142,6 @@ const TripDetail = (props) => {
           trip_id={id}
           currentPlacesInfo={currentPlacesInfo}
           setCurrentPlacesInfo={setCurrentPlacesInfo}
-          handleDeletePlace={handleDeletePlace}
         />
       </Container>
       <div
