@@ -15,13 +15,12 @@ import {
   ComboboxList,
   ComboboxOption,
 } from '@reach/combobox';
-import '@reach/combobox/styles.css';
-import MuiSearch from './MuiSearch';
+import "@reach/combobox/styles.css"
 
 function Mapp(props) {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
-    // libraries: ['places']
+    libraries: ['places']
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -58,9 +57,7 @@ function Map(props) {
         },
       })
       .then((response) => {
-        console.log('fetch places -->', response);
         setPlaces(response.data);
-        console.log('data from trip_id', response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +65,6 @@ function Map(props) {
   }, []);
 
   const PlacesAutoComplete = (props) => {
-    console.log(props);
     const {
       ready,
       value,
@@ -79,27 +75,22 @@ function Map(props) {
 
     // ------handles choosing an address from search dropdown menu------
     const handleSelect = async (address) => {
-      console.log('map.jsx line 104 in handleSelect address --->', address);
       setValue(address, false);
       clearSuggestions();
 
       const results = await getGeocode({ address });
-      console.log(
-        'find data here to save to database (map.jsx line 110) -->',
-        results
-      );
 
       const { lat, lng } = await getLatLng(results[0]);
       setSelected((selected) => [...selected, { lat, lng }]);
 
-      // console.log("geometry (map.jsx line 117 ) ---->", results[0].geometry.location.lat);
-
+      console.log('selected', results[0])
+  
       const newplace = {
         trip_id,
         google_place_id: results[0].place_id,
         name: address, //todo get the first part of
         address: results[0].formatted_address,
-        type: 'hotel',
+        type: results[0].type,
         lat: lat,
         long: lng,
       };
@@ -114,7 +105,6 @@ function Map(props) {
       })
         .then((data) => data.json())
         .then((data) => {
-          console.log('fetched data! in add place (map.jsx line 145)-->', data);
           //then do another fetch
           fetch('trips/getPlaces', {
             method: 'POST',
@@ -127,10 +117,6 @@ function Map(props) {
           })
             .then((placesDetails) => placesDetails.json())
             .then((placesDetails) => {
-              console.log(
-                'placesDetails from Fetch after adding place (map.jsx line 159)--> ',
-                placesDetails
-              );
               props.setCurrentPlacesInfo(placesDetails);
             })
             .catch((e) => {
@@ -151,7 +137,7 @@ function Map(props) {
             disabled={!ready}
             className='combobox-input'
             placeholder='Search Location'
-            style={{ width: 350, height: 30, fontSize: 16 }}
+            style={{ width: '90%', height: 30, fontSize: 16, display: 'block', margin: 'auto'}}
           />
           <ComboboxPopover>
             <ComboboxList>
@@ -169,7 +155,6 @@ function Map(props) {
 
   return (
     <>
-      {/* <MuiSearch/> */}
       <div className='places-container'>
         <PlacesAutoComplete
           setSelected={setSelected}
@@ -179,7 +164,7 @@ function Map(props) {
       </div>
       <div id='searchField'></div>
       <GoogleMap
-        zoom={6}
+        zoom={11}
         center={props.center}
         mapContainerClassName='map-container'
       >

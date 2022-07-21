@@ -65,7 +65,7 @@ const Addbuddy = (props) => {
         alignItems: 'center',
       }}
     >
-      <Typography>Trip Members</Typography>
+      <Typography fontWeight='bold'>Trip Members</Typography>
       <div>
         <Stack
           direction='row'

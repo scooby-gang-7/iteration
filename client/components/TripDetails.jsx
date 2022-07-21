@@ -93,63 +93,91 @@ const TripDetail = (props) => {
   }
 
   return (
-    <Container>
-      <div id='detailsDiv'>
-        <Stack
-          direction='row'
-          spacing={2}
-          divider={<Divider orientation='vertical' flexItem />}
-          alignItems='center'
-          justifyContent='space-between'
+    <div>
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Card
+          elevation={2}
+          sx={{
+            padding: '30px',
+          }}
         >
-          <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-          <Typography>{currentTripInfo.destination}</Typography>
-          <Typography>{currentTripInfo.description}</Typography>
-          <Typography>
-            {startDateDisplay} - {endDateDisplay}
-          </Typography>
-        </Stack>
-      </div>
-
-      <AddBuddy trip_id={id} />
-
-      <div id='mapDiv'>
-        <Card>
+          <Stack
+            direction='row'
+            spacing={2}
+            divider={<Divider orientation='vertical' flexItem />}
+            alignItems='center'
+            justifyContent='space-between'
+          >
+            <Typography variant='h1' width='30%' fontWeight='bold'>
+              {currentTripInfo.trip_name}
+            </Typography>
+            <Typography textAlign='center'>
+              {currentTripInfo.destination}
+            </Typography>
+            <Typography textAlign='center'>
+              {currentTripInfo.description}
+            </Typography>
+            <Typography textAlign='center'>
+              {startDateDisplay} to {endDateDisplay}
+            </Typography>
+          </Stack>
+          <Container
+            sx={{
+              paddingTop: '30px',
+            }}
+          >
+            <AddBuddy trip_id={id} />
+          </Container>
+        </Card>
+        <Card
+          elevation={2}
+          sx={{
+            margin: '30px',
+            padding: '30px',
+            width: '80%',
+            alignItems: 'center',
+          }}
+        >
           <Map
             center={center}
             trip_id={id}
             setCurrentPlacesInfo={setCurrentPlacesInfo}
-            testProp={'this is the test prop'}
           />
         </Card>
-      </div>
-      <PlacesContainer
-        trip_id={id}
-        currentPlacesInfo={currentPlacesInfo}
-        setCurrentPlacesInfo={setCurrentPlacesInfo}
-        handleDeletePlace = {handleDeletePlace}
-      />
-      <div
-        className='drawer-preview'
-        style={{
-          // width: 'min-content',
-          display: 'block',
-          position: 'sticky',
-          bottom: '30px',
-          right: 0,
-          margin: '20px',
-          float: 'right',
-          backgroundColor: 'rgba(0,0,0,0.02)',
-          borderRadius: '4px',
-        }}
-      >
-        <ChatroomContainer
-          className='chatroomContainer'
-          userInfo={props.userInfo}
-          tripId={id}
+        <PlacesContainer
+          trip_id={id}
+          currentPlacesInfo={currentPlacesInfo}
+          setCurrentPlacesInfo={setCurrentPlacesInfo}
+          handleDeletePlace={handleDeletePlace}
         />
-      </div>
-    </Container>
+      </Container>
+        <div
+          className='drawer-preview'
+          style={{
+            // width: 'min-content',
+            display: 'block',
+            position: 'sticky',
+            bottom: '30px',
+            right: 0,
+            margin: '20px',
+            float: 'right',
+            backgroundColor: 'rgba(0,0,0,0.02)',
+            borderRadius: '4px',
+          }}
+        >
+          <ChatroomContainer
+            className='chatroomContainer'
+            userInfo={props.userInfo}
+            tripId={id}
+          />
+        </div>
+    </div>
   );
 };
 

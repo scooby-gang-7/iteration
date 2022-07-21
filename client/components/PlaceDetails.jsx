@@ -24,12 +24,10 @@ const PlaceDetails = (props) => {
     })
       .then((placesDetail) => placesDetail.json())
       .then((placesDetails) => {
-        // console.log('props.currentPlacesInfo --> ',props.currentPlacesInfo)
         const newPlacesInfo = props.currentPlacesInfo.map((obj) => {
           if (obj.place_id === props.place_id) return placesDetails;
           return obj;
         });
-        // console.log('newPlacesInfo --> ',newPlacesInfo)
         props.setCurrentPlacesInfo(newPlacesInfo);
       })
       .catch((e) => {
