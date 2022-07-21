@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Grid } from '@mui/material';
-import Places from './PlacesForCurrentTrip';
-import Map from './map/Map.jsx';
-import AddBuddy from './AddBuddy.jsx';
 import { Link, useParams } from 'react-router-dom';
-import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
+import { borderRadius, Container } from '@mui/system';
+import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
 import axios from 'axios';
+import AddBuddy from './AddBuddy.jsx';
+import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
+import Map from './map/Map.jsx';
+import PlacesContainer from './PlacesContainer';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -13,18 +14,6 @@ const TripDetail = (props) => {
   const [center, setMapCenter] = useState(null);
 
   const { id } = useParams();
-
-  useEffect(() => {
-    console.log(currentTripInfo);
-  }, [currentTripInfo]);
-
-  useEffect(() => {
-    console.log(currentPlacesInfo);
-  }, [currentPlacesInfo]);
-
-  useEffect(() => {
-    console.log(center);
-  }, [center]);
 
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
@@ -39,11 +28,9 @@ const TripDetail = (props) => {
       }),
     })
       .then((placesDetails) => placesDetails.json())
-      .then((placesDetails) => {
-        console.log('this happened!');
-        console.log('placesDetails from Fetch --> ', placesDetails);
-        setCurrentPlacesInfo(placesDetails);
-      })
+      .then((placesDetails) => 
+        setCurrentPlacesInfo(placesDetails)
+      )
       .catch((e) => {
         console.log(e);
       });
@@ -61,21 +48,13 @@ const TripDetail = (props) => {
     })
       .then((tripDetails) => tripDetails.json())
       .then((tripDetails) => {
-        console.log(
-          'tripDetails from Fetch --> in tripdetails.jsx line 34 --->',
-          tripDetails
-        );
         setCurrentTripInfo(tripDetails);
         let query = `https://maps.googleapis.com/maps/api/geocode/json?address=${tripDetails.destination}&key=${process.env.GOOGLE_MAPS_API_KEY}`;
         axios
           .get(query)
           .then((res) => {
-            console.log('in tripdetails.jsx line 42 --->', res.data);
             if (res.data.status == 'OK') {
-              console.log(
-                'in tripdetails.jsx line 45 --->',
-                res.data.results[0]
-              );
+             
               setMapCenter(res.data.results[0].geometry.location);
             }
           })
@@ -97,54 +76,96 @@ const TripDetail = (props) => {
     endDate.getMonth() + 1
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
+  const handleDeletePlace = () => {
+    console.log('clicked delete place button')
+  }
+
   return (
-  
-    <Grid container spacing={2} columns={12}>
-      <Card elevation={2}>
-        <div id='detailsDiv'>
-          <h1 className='standardHeader'>{currentTripInfo.trip_name}</h1>
-          <p>{currentTripInfo.destination}</p>
-          <p>{currentTripInfo.description}</p>
-          <p>
-            {startDateDisplay} - {endDateDisplay}
-          </p>
-        </div>
-      </Card>
-      <div id='addBuddyDiv'>
-        <Card elevation={2}>
-          <AddBuddy trip_id={id} />
-        </Card>
-      </div>
-      <div id='mapDiv'>
-        <Map
-          center={center}
-          trip_id={id}
-          setCurrentPlacesInfo={setCurrentPlacesInfo}
-          testProp={'this is the test prop'}
-        />
-      </div>
-      <Places
-        trip_id={id}
-        currentPlacesInfo={currentPlacesInfo}
-        setCurrentPlacesInfo={setCurrentPlacesInfo}
-      />
-      <div
-        className='drawer-preview'
-        style={{
-          // width: 'min-content',
-          position: 'fixed',
-          bottom: 0,
-          right: 0,
-          margin: '20px',
+    <div>
+      <Container
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
         }}
       >
-        <ChatroomContainer
-          className='chatroomContainer'
-          userInfo={props.userInfo}
-          tripId={id}
+        <Card
+          elevation={2}
+          sx={{
+            padding: '30px',
+          }}
+        >
+          <Stack
+            direction='row'
+            spacing={2}
+            divider={<Divider orientation='vertical' flexItem />}
+            alignItems='center'
+            justifyContent='space-between'
+          >
+            <Typography variant='h1' width='30%' fontWeight='bold'>
+              {currentTripInfo.trip_name}
+            </Typography>
+            <Typography textAlign='center'>
+              {currentTripInfo.destination}
+            </Typography>
+            <Typography textAlign='center'>
+              {currentTripInfo.description}
+            </Typography>
+            <Typography textAlign='center'>
+              {startDateDisplay} to {endDateDisplay}
+            </Typography>
+          </Stack>
+          <Container
+            sx={{
+              paddingTop: '30px',
+            }}
+          >
+            <AddBuddy trip_id={id} />
+          </Container>
+        </Card>
+        <Card
+          elevation={2}
+          sx={{
+            margin: '30px',
+            padding: '30px',
+            width: '80%',
+            alignItems: 'center',
+          }}
+        >
+          <Map
+            center={center}
+            trip_id={id}
+            setCurrentPlacesInfo={setCurrentPlacesInfo}
+          />
+        </Card>
+        <PlacesContainer
+          trip_id={id}
+          currentPlacesInfo={currentPlacesInfo}
+          setCurrentPlacesInfo={setCurrentPlacesInfo}
+          handleDeletePlace={handleDeletePlace}
         />
-      </div>
-    </Grid>
+      </Container>
+        <div
+          className='drawer-preview'
+          style={{
+            // width: 'min-content',
+            display: 'block',
+            position: 'sticky',
+            bottom: '30px',
+            right: 0,
+            margin: '20px',
+            float: 'right',
+            backgroundColor: 'rgba(0,0,0,0.02)',
+            borderRadius: '4px',
+          }}
+        >
+          <ChatroomContainer
+            className='chatroomContainer'
+            userInfo={props.userInfo}
+            tripId={id}
+          />
+        </div>
+    </div>
   );
 };
 

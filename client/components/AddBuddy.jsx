@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from '@mui/material'
+import { Button, Container, FormControl,InputLabel, OutlinedInput, Typography, Stack } from '@mui/material'
+
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -7,6 +8,7 @@ const Addbuddy = (props) => {
   const [trip_buddy, setTripbuddy] = useState([]);
   console.log(console.log('tripbuddy info', trip_buddy));
 
+    const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
   useEffect(() => {
     fetch('trips/getbuddy', {
       method: 'POST',
@@ -48,24 +50,53 @@ const Addbuddy = (props) => {
       });
   };
 
-  const tripmembers = [<p>Trip members: </p>];
+  const tripmembers = [];
   trip_buddy.forEach((el) => {
-    tripmembers.push(<p key={el.name_first}>{el.name_first}</p>);
+    tripmembers.push(<Typography key={el.name_first}>{el.name_first}</Typography>);
   });
 
   return (
-
-   <div id='addbuddy_container'>
-      <div id='mytrip buddy'>{tripmembers}</div>
+    <Container
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        textAlign: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Typography fontWeight='bold'>Trip Members</Typography>
       <div>
-        <input
-          type='text'
-          placeholder={`Enter Your Friend's Email`}
-          onChange={(e) => setBuddyemail(e.target.value)}
-        />
-        <button onClick={handleAddBuddy}>AddBuddy</button>
+        <Stack direction='row' spacing={3}>
+          {tripmembers}
+        </Stack>
       </div>
-    </div>
+      <div>
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-email'>Buddy's Email</InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-email'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
+            // placeholder={`Enter Your Friend's Email`}
+            onChange={(e) => setBuddyemail(e.target.value)}
+            label='email'
+          />
+          <Button
+            sx={{ m: 1 }}
+            variant='contained'
+            color='primary'
+            className='button-block'
+            onClick={handleAddBuddy}
+          >
+            Add Buddy
+          </Button>
+        </FormControl>
+      </div>
+    </Container>
   );
 };
 
