@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card } from '@mui/material'
+import { Card } from '@mui/material';
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -8,7 +8,7 @@ const Addbuddy = (props) => {
   console.log(console.log('tripbuddy info', trip_buddy));
 
   useEffect(() => {
-    fetch('trips/getbuddy', {
+    fetch('api/trips/getbuddy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,7 +28,7 @@ const Addbuddy = (props) => {
 
   const handleAddBuddy = (e) => {
     e.preventDefault();
-    fetch('trips/addbuddy', {
+    fetch('api/trips/addbuddy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,8 +54,7 @@ const Addbuddy = (props) => {
   });
 
   return (
-
-   <div id='addbuddy_container'>
+    <div id='addbuddy_container'>
       <div id='mytrip buddy'>{tripmembers}</div>
       <div>
         <input

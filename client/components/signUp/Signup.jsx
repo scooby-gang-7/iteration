@@ -11,7 +11,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
 
   const handleSubmitSignup = (e) => {
     e.preventDefault();
-    fetch('auth/signup', {
+    fetch('api/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -93,6 +93,6 @@ const Signup = ({ setUserInfo, userInfo }) => {
       </form>
     </div>
   );
-}
+};
 
 export default Signup;

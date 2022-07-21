@@ -29,7 +29,7 @@ const TripDetail = (props) => {
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
   useEffect(() => {
-    fetch('trips/getPlaces', {
+    fetch('api/trips/getPlaces', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -50,7 +50,7 @@ const TripDetail = (props) => {
   }, []);
 
   useEffect(() => {
-    fetch('trips/getTrip', {
+    fetch('api/trips/getTrip', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -98,7 +98,6 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   return (
-  
     <Grid container spacing={2} columns={12}>
       <Card elevation={2}>
         <div id='detailsDiv'>

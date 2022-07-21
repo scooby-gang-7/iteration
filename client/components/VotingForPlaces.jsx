@@ -16,7 +16,7 @@ const Row = (props) => {
 
     e.target.id == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
 
-    fetch('trips/vote', {
+    fetch('api/trips/vote', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -68,6 +68,6 @@ const Row = (props) => {
       </td>
     </tr>
   );
-}
+};
 
 export default Row;

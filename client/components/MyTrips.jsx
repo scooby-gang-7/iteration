@@ -9,7 +9,7 @@ const MyTrips = (props) => {
 
   //on loading, fetch request to get all the trips info for the user
   useEffect(() => {
-    fetch('trips/gettrips/', {
+    fetch('api/trips/gettrips/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

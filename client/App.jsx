@@ -26,7 +26,7 @@ const App = () => {
     if (window.localStorage.getItem('session_id')) {
       console.log('trying to fetch');
       axios
-        .get('/auth/session', {
+        .get('api/auth/session', {
           params: {
             session_id,
           },
@@ -87,7 +87,7 @@ const App = () => {
               path='/mytrips/:id'
               element={<TripDetails userInfo={userInfo} />}
             />
-            <Route path='/:requestedUrl' element={<FourOFour />} />
+            <Route path='*' element={<FourOFour />} />
           </Routes>
         </div>
       </BrowserRouter>

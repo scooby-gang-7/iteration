@@ -21,11 +21,11 @@ const io = require('socket.io')(server, {
   },
 });
 
-if (process.env.NODE_ENV === 'production') {
-  console.log('working in production');
+// if (process.env.NODE_ENV === 'production') {
+//   console.log('working in production');
 
-  // // enables handling of req from index.html
-}
+//   // // enables handling of req from index.html
+// }
 
 //use cors
 app.use(cors());
@@ -36,26 +36,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // handle requests for static files
-app.use('/dist', express.static(path.join(__dirname, '../dist')));
-app.use('/assets', express.static('./client/assets'));
+// app.use('/dist', express.static(path.join(__dirname, '../dist')));
+// app.use('/assets', express.static('./client/assets'));
 // app.use(express.static(__dirname));
-
+console.log();
 // Router paths
-app.use('/auth', authRouter);
-app.use('/trips', tripRouter); // I don't get why we have 2 routes to the same router but I consolidated them
-app.use('/mytrips/trips', tripRouter);
+app.use('*/api/auth', authRouter);
+app.use('*/api/trips', tripRouter); // I don't get why we have 2 routes to the same router but I consolidated them
 
-// unique paths
-app.get('/about', (req, res) => {
-  res.sendFile(path.resolve(__dirname, HTML_FILE));
-});
+// // unique paths
+// app.get('/about', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, HTML_FILE));
+// });
 
-app.post('/getmessages', socketIoController.getMessages, (req, res) => {
+app.post('*/api/getmessages', socketIoController.getMessages, (req, res) => {
+  console.log(
+    '------------------------------------------------------------------------------------------------'
+  );
+  console.log(res.locals.chats);
   res.status(200).json(res.locals.chats);
 });
 
 app.get('/', (req, res) => {
   console.log('trying to send at /');
+  return res.sendStatus(200);
   res.status(201).sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
 
@@ -64,6 +68,7 @@ app.use('/*', (req, res) => {
   console.log('trying to send back app from 404 route');
   console.log(req.originalUrl);
   console.log(req.url);
+  return res.sendStatus(200);
   res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
 
