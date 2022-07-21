@@ -32,28 +32,32 @@ const MyTrips = (props) => {
 
   const handleAllTrips = (tripList) => {
     const today = new Date();
+    const tempUpcomingTrips=[];
+    const tempPastTrips=[];
+    
+    // sort trips by date within the past and upcoming arrays
     tripList
-      // sort trips by date within the past and upcoming arrays
-
-      .sort((a, b) => {
-        if (a.date_start > b.date_start) return 1;
-        else if (a.date_start < b.date_start) return -1;
-        else if (a.date_start === b.date_start) {
-          return a.date_end > b.date_end ? 1 : -1;
-        }
-      })
-
-      //check the start date. if the start date is today or future, push trip to tempUpcomingTrips, else push trip to tempPastTrips
-      .forEach((trip) => {
-        const tripStart = new Date(`${trip.date_start}`);
-        if (tripStart.getTime() >= today.getTime()) {
-          setUpcomingTrips([...upcomingTrips, trip]);
-        } else {
-          setPastTrips([...pastTrips, trip]);
-        }
-      });
-  };
-
+    .sort((a, b) => {
+      if (a.date_start > b.date_start) return 1;
+      else if (a.date_start < b.date_start) return -1;
+      else if (a.date_start === b.date_start) {
+        return a.date_end > b.date_end ? 1 : -1;
+      }
+    })
+    
+    //check the start date. if the start date is today or future, push trip to tempUpcomingTrips, else push trip to tempPastTrips
+    .forEach((trip) => {
+      const tripStart = new Date(`${trip.date_start}`);
+      if (tripStart.getTime() >= today.getTime()) {
+        tempUpcomingTrips.push(trip);
+      } else {
+        tempPastTrips.push(trip);
+      }
+    });
+    setPastTrips(tempPastTrips);
+    setUpcomingTrips(tempUpcomingTrips);
+    };
+    
   return (
     <Container
       sx={{
@@ -74,9 +78,8 @@ const MyTrips = (props) => {
           {upcomingTrips.length >= 1 ? (
             upcomingTrips.map((trip) => {
               return (
-                <Card p={3}>
+                <Card p={3} key={trip.trip_id}>
                   <Trip
-                    key={trip.trip_id}
                     trip_id={trip.trip_id}
                     name={trip.trip_name}
                     destination={trip.destination}
@@ -102,9 +105,8 @@ const MyTrips = (props) => {
           {pastTrips.length >= 1 ? (
             pastTrips.map((trip) => {
               return (
-                <Card p={3}>
+                <Card p={3} key={trip.trip_id}>
                   <Trip
-                    key={trip.trip_id}
                     trip_id={trip.trip_id}
                     name={trip.trip_name}
                     destination={trip.destination}
@@ -115,10 +117,10 @@ const MyTrips = (props) => {
               );
             })
           ) : (
-            <div>
+            <Typography>
               Looks like you don't have any trip history. It's time to start
               planning!
-            </div>
+            </Typography>
           )}
         </Stack>
       </div>

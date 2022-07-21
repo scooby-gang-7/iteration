@@ -15,18 +15,6 @@ const TripDetail = (props) => {
 
   const { id } = useParams();
 
-  useEffect(() => {
-    console.log(currentTripInfo);
-  }, [currentTripInfo]);
-
-  useEffect(() => {
-    console.log(currentPlacesInfo);
-  }, [currentPlacesInfo]);
-
-  useEffect(() => {
-    console.log(center);
-  }, [center]);
-
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
   useEffect(() => {
