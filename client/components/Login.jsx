@@ -11,9 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ToastContainer, toast } from 'react-toastify';
-import SignUpModal from './signUp/SignUpModal.jsx'
-import NavBarMUI from './NavBarMUI'
-
+import SignUpModal from './signUp/SignUpModal.jsx';
+import NavBarMUI from './NavBarMUI';
 
 export default function Login({ setUserInfo, userInfo }) {
   const [values, setValues] = React.useState({
@@ -32,7 +31,7 @@ export default function Login({ setUserInfo, userInfo }) {
   const handleSubmitLogin = (e) => {
     // to prevent rerender
     e.preventDefault();
-    fetch('auth/login', {
+    fetch('api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

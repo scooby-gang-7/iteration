@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import BannerImg from '../assets/sunmoonlake.jpeg'
+import BannerImg from '../assets/sunmoonlake.jpeg';
 
 export default function ButtonAppBar({ userInfo, setUserInfo }) {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
     };
     console.log('body --> ', body);
 
-    fetch('auth/signout', {
+    fetch('api/auth/signout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -38,8 +38,8 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Box sx={{ objectFit:'contain' }}>
-        <img src={BannerImg} width='900px' max-height={300}/>
+      <Box sx={{ objectFit: 'contain' }}>
+        <img src={BannerImg} width='900px' max-height={300} />
       </Box>
       {/* <AppBar position='static'>
         <Toolbar>

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, FormControl,InputLabel, OutlinedInput, Typography, Stack } from '@mui/material'
-
+import {
+  Button,
+  Container,
+  FormControl,
+  InputLabel,
+  OutlinedInput,
+  Typography,
+  Stack,
+} from '@mui/material';
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -8,9 +15,9 @@ const Addbuddy = (props) => {
   const [trip_buddy, setTripbuddy] = useState([]);
   console.log(console.log('tripbuddy info', trip_buddy));
 
-    const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
+  const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
   useEffect(() => {
-    fetch('trips/getbuddy', {
+    fetch('api/trips/getbuddy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -21,6 +28,11 @@ const Addbuddy = (props) => {
     })
       .then((data) => data.json())
       .then((data) => {
+        let permission = false;
+        for (let buddy of data) {
+          if (buddy.user_id === props.userInfo.user_id) permission = true;
+        }
+        if (!permission) window.location.pathname = '/404';
         setTripbuddy(data);
       })
       .catch((e) => {
@@ -30,7 +42,7 @@ const Addbuddy = (props) => {
 
   const handleAddBuddy = (e) => {
     e.preventDefault();
-    fetch('trips/addbuddy', {
+    fetch('api/trips/addbuddy', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +64,9 @@ const Addbuddy = (props) => {
 
   const tripmembers = [];
   trip_buddy.forEach((el) => {
-    tripmembers.push(<Typography key={el.name_first}>{el.name_first}</Typography>);
+    tripmembers.push(
+      <Typography key={el.name_first}>{el.name_first}</Typography>
+    );
   });
 
   return (
@@ -76,7 +90,9 @@ const Addbuddy = (props) => {
           sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
           variant='outlined'
         >
-          <InputLabel htmlFor='outlined-adornment-email'>Buddy's Email</InputLabel>
+          <InputLabel htmlFor='outlined-adornment-email'>
+            Buddy's Email
+          </InputLabel>
           <OutlinedInput
             id='outlined-adornment-email'
             autoComplete='off'

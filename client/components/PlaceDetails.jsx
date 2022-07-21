@@ -1,5 +1,5 @@
-import React, {useState, useEffect}from 'react';
-import { Chip, Divider, ListItem,Stack, Typography } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { Chip, Divider, ListItem, Stack, Typography } from '@mui/material';
 import thumbsUp from '../assets/thumbsup.png';
 import thumbsDown from '../assets/thumbsdown.png';
 
@@ -15,7 +15,7 @@ const PlaceDetails = (props) => {
 
     e.target.id == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
 
-    fetch('trips/vote', {
+    fetch('api/trips/vote', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

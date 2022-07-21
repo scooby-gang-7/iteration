@@ -51,7 +51,7 @@ function Map(props) {
   //on render, fetch to get all the stops for the trip
   useEffect(() => {
     axios
-      .get('places/', {
+      .get('api/places/', {
         params: {
           trip_id,
         },
@@ -96,7 +96,7 @@ function Map(props) {
       };
       console.log('new place selected (map.jsx line 133)', newplace);
 
-      fetch('trips/addplace', {
+      fetch('api/trips/addplace', {
         method: 'POST',
         headers: {
           'Content-type': 'application/json',
@@ -106,7 +106,7 @@ function Map(props) {
         .then((data) => data.json())
         .then((data) => {
           //then do another fetch
-          fetch('trips/getPlaces', {
+          fetch('api/trips/getPlaces', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

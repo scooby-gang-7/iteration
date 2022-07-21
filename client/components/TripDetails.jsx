@@ -18,7 +18,7 @@ const TripDetail = (props) => {
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
   useEffect(() => {
-    fetch('trips/getPlaces', {
+    fetch('api/trips/getPlaces', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -28,16 +28,14 @@ const TripDetail = (props) => {
       }),
     })
       .then((placesDetails) => placesDetails.json())
-      .then((placesDetails) => 
-        setCurrentPlacesInfo(placesDetails)
-      )
+      .then((placesDetails) => setCurrentPlacesInfo(placesDetails))
       .catch((e) => {
         console.log(e);
       });
   }, []);
 
   useEffect(() => {
-    fetch('trips/getTrip', {
+    fetch('api/trips/getTrip', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -54,7 +52,6 @@ const TripDetail = (props) => {
           .get(query)
           .then((res) => {
             if (res.data.status == 'OK') {
-             
               setMapCenter(res.data.results[0].geometry.location);
             }
           })
@@ -63,7 +60,7 @@ const TripDetail = (props) => {
           });
       })
       .catch((e) => {
-        console.log(e);
+        window.location.pathname = '/404';
       });
   }, []);
 
@@ -77,8 +74,8 @@ const TripDetail = (props) => {
   }/${endDate.getDate()}/${endDate.getFullYear()}`;
 
   const handleDeletePlace = () => {
-    console.log('clicked delete place button')
-  }
+    console.log('clicked delete place button');
+  };
 
   return (
     <div>
@@ -120,7 +117,7 @@ const TripDetail = (props) => {
               paddingTop: '30px',
             }}
           >
-            <AddBuddy trip_id={id} />
+            <AddBuddy trip_id={id} userInfo={props.userInfo} />
           </Container>
         </Card>
         <Card
@@ -145,26 +142,26 @@ const TripDetail = (props) => {
           handleDeletePlace={handleDeletePlace}
         />
       </Container>
-        <div
-          className='drawer-preview'
-          style={{
-            // width: 'min-content',
-            display: 'block',
-            position: 'sticky',
-            bottom: '30px',
-            right: 0,
-            margin: '20px',
-            float: 'right',
-            backgroundColor: 'rgba(0,0,0,0.02)',
-            borderRadius: '4px',
-          }}
-        >
-          <ChatroomContainer
-            className='chatroomContainer'
-            userInfo={props.userInfo}
-            tripId={id}
-          />
-        </div>
+      <div
+        className='drawer-preview'
+        style={{
+          // width: 'min-content',
+          display: 'block',
+          position: 'sticky',
+          bottom: '30px',
+          right: 0,
+          margin: '20px',
+          float: 'right',
+          backgroundColor: 'rgba(0,0,0,0.02)',
+          borderRadius: '4px',
+        }}
+      >
+        <ChatroomContainer
+          className='chatroomContainer'
+          userInfo={props.userInfo}
+          tripId={id}
+        />
+      </div>
     </div>
   );
 };

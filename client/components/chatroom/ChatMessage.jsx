@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-
-const ChatMessage= (props) => {
-  console.log(props);
-
+const ChatMessage = (props) => {
   const bubblePadding = '10px';
   const bubbleMargin = '15px';
-  console.log(props.user === props.sender, props.user, props.sender);
   const bubbleColor = props.user === props.sender ? '#E4DCE7' : '#EFEFEF';
   const bubbleJustify = props.user === props.sender ? 'flex-end' : 'flex-start';
   const nameColor = props.user === props.sender ? 'black' : 'black';

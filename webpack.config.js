@@ -29,8 +29,12 @@ module.exports = {
     // compress: true,
     hot: true,
     proxy: {
-      '*': 'http://localhost:3000',
-      secure: false,
+      '**/api/**': {
+        target: 'http://localhost:3000',
+        secure: false,
+        changeOrigin: false,
+        secure: false,
+      },
     },
   },
   module: {
