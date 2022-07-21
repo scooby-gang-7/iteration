@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import App from './App.jsx';
-import ColorThemeWrapper from './ColorThemeWrapper.jsx'
+import ColorThemeWrapper from './ColorThemeWrapper.jsx';
 
 let theme = createTheme({
   typography:{
@@ -50,16 +50,14 @@ let theme = createTheme({
 
 const darkTheme = createTheme({
   palette: {
-    mode:'dark',
-  }
+    mode: 'dark',
+  },
 });
 
 theme = responsiveFontSizes(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
 );

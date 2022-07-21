@@ -10,12 +10,13 @@ import { Paper } from '@mui/material';
 import TripDetails from './components/TripDetails.jsx';
 import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
-import './stylesheets/styles.css'
-
+import { BrowserRouter } from 'react-router-dom';
+import FourOFour from './components/404.jsx';
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
   const [tripInfo, setTripInfo] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   //conditional check on localstorage to grab user_id;
   const session_id = JSON.parse(localStorage.getItem('session_id'));
@@ -33,6 +34,7 @@ const App = () => {
         })
         .then((response) => {
           setUserInfo(response.data);
+          setIsLoaded(true);
           console.log('data from session_id', response.data);
         })
         .catch((err) => {
@@ -40,7 +42,7 @@ const App = () => {
           console.log(err);
         });
     } else {
-      return;
+      setIsLoaded(true);
     }
   }, []);
 

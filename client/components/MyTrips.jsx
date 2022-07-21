@@ -21,6 +21,7 @@ const MyTrips = (props) => {
       .then((triplist) => triplist.json())
       .then((triplist) => {
         // props.setTripInfo(triplist);
+        console.log(triplist);
         handleAllTrips(triplist);
       })
       .catch((e) => {
