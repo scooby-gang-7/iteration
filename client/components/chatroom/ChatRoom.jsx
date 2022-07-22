@@ -27,7 +27,6 @@ const ChatRoom = (props) => {
   const [curSocket, setCurSocket] = useState(null);
   const [message, setMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
-  console.log('props ----', props);
   // const [firstName, setFirstName] = useState('');
 
   // on update of the messagelist, move scrollbar to bottom
@@ -39,15 +38,15 @@ const ChatRoom = (props) => {
   useEffect(() => {
     // fetch conversation from messages table - dummy data right now
     axios
-      .post('/getmessages', { roomId: props.tripId })
+      .post('api/getmessages', { roomId: props.tripId })
       .then((res) => {
         // after fetching, update message list
+        console.log(res.data);
         setMessageList(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-    console.log('installing socket io');
 
     // set up socket
     console.log('installing socket io');

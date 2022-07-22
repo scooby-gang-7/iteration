@@ -59,7 +59,7 @@ function ChatroomContainer(props) {
       />
       <Box className='boxWButton' sx={{ textAlign: 'center', pt: 1 }}>
         <IconButton aria-label='Chat' onClick={toggleDrawer(true)}>
-          <ChatIcon sx={{ fontSize: 30, color: 'purple' }} /> Trip Chat
+          <ChatIcon sx={{ fontSize: 30, color: 'orange' }} /> Trip Chat
         </IconButton>
         {/* <Button onClick={toggleDrawer(true)}>Chat Room</Button> */}
       </Box>

@@ -1,38 +1,39 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
 import App from './App.jsx';
-import ColorThemeWrapper from './ColorThemeWrapper.jsx'
+import ColorThemeWrapper from './ColorThemeWrapper.jsx';
 
 let theme = createTheme({
   typography:{
-    h1:{fontSize: 72,},
-
-     h2:{fontSize: 48,},
-  
-     h3:{fontSize: 36,},
- 
-     h4:{fontSize: 28,},
-
-     h5:{fontSize: 22,}
+    spacing: 2,
+    h1:{fontSize: '2rem',},
+     h2:{fontSize:'1.5rem',},
+     h3:{fontSize: '1.25rem',},
+     h4:{fontSize: '1.125rem',},
+     h5:{fontSize: '1rem',},
+  },
+  card: {
+    m: 2,
+    p: 2,
   },
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
-      main: '#3D0240',
+      main: '#309FC0',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      main: '#E4DCE7',
+      main: '#D4E5F2',
       // dark: will be calculated from palette.secondary.main,
     },
     // Provide every color token (light, main, dark, and contrastText) when using
     // custom colors for props in Material UI's components.
     // Then you will be able to use it like this: `<Button color="custom">`
     custom: {
-      light: '#E4DCE7',
+      light: '#D4E5F2',
       main: '#3D0240',
       dark: '#137083',
       contrastText: '#ffffff',
@@ -47,21 +48,12 @@ let theme = createTheme({
   },
 });
 
-const darkTheme = createTheme({
-  palette: {
-    mode:'dark',
-  }
-});
-
-
 
 
 theme = responsiveFontSizes(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>
+  <ThemeProvider theme={theme}>
+    <App />
+  </ThemeProvider>
 );

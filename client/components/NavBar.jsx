@@ -4,10 +4,9 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import SignUpModal from './signUp/SignUpModal.jsx'
 
 
-const NavBar = ({userInfo, setUserInfo}) => {
-
-const navigate = useNavigate();
-function handleSignOut (e) {
+const NavBar = ({ userInfo, setUserInfo }) => {
+  const navigate = useNavigate();
+  function handleSignOut(e) {
     const session_id = localStorage.getItem('session_id').replace(/['"]+/g, '');
     console.log('session_id --> ', session_id);
     const body = {
@@ -15,7 +14,7 @@ function handleSignOut (e) {
     };
     console.log('body --> ', body);
 
-    fetch('auth/signout', {
+    fetch('api/auth/signout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -33,8 +32,8 @@ function handleSignOut (e) {
       });
   }
 
-    return (
-        <nav id= 'navBar'>
+  return (
+    <nav id='navBar'>
 
         <h1>Travel Pal</h1>
         <ul className='nav-links'>

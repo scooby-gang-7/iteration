@@ -11,9 +11,8 @@ import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { ToastContainer, toast } from 'react-toastify';
-import SignUpModal from './signUp/SignUpModal.jsx'
-import NavBarMUI from './NavBarMUI'
-
+import SignUpModal from './signUp/SignUpModal.jsx';
+import NavBarMUI from './NavBarMUI';
 
 export default function Login({ setUserInfo, userInfo }) {
   const [values, setValues] = React.useState({
@@ -32,7 +31,7 @@ export default function Login({ setUserInfo, userInfo }) {
   const handleSubmitLogin = (e) => {
     // to prevent rerender
     e.preventDefault();
-    fetch('auth/login', {
+    fetch('api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -77,16 +76,18 @@ export default function Login({ setUserInfo, userInfo }) {
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
       
-        <Typography variant='h5' sx={{ mb: 2, paddingTop: '40px' }} >
+        <Typography variant='h1' sx={{ mb: 2, paddingTop: '40px' }} >
 
           Make group trips happen with Travel Pal
         </Typography>
+
+       
         <Paper
           elevation={3}
           sx={{
             m: 1,
             p: 2,
-            bgcolor: '#E4DCE7',
+            bgcolor: '#D4E5F2',
             maxWidth: 400,
             display: 'flex',
             flexDirection: 'column',
@@ -102,7 +103,7 @@ export default function Login({ setUserInfo, userInfo }) {
               m: '40',
             }}
           >
-            <Typography component='h1' variant='h5'>
+            <Typography component='h1' variant='h3'>
               Sign in
             </Typography>
             <FormControl

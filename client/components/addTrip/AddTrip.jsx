@@ -15,7 +15,7 @@ function AddTrip(props) {
 
   const handleSubmitAddTrip = (e) => {
     e.preventDefault();
-    fetch('/trips/addtrip', {
+    fetch('api/trips/addtrip', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

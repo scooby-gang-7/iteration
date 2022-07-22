@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import BannerImg from '../assets/travel.png'
+import BannerImg from '../assets/2.png'
 
 export default function ButtonAppBar({ userInfo, setUserInfo }) {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
     };
     console.log('body --> ', body);
 
-    fetch('auth/signout', {
+    fetch('api/auth/signout', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -79,5 +79,9 @@ export default function ButtonAppBar({ userInfo, setUserInfo }) {
         </Toolbar>
       </AppBar> */
     // </Box>
+
+
+    //BLUE #309FC0
+    //LIGHT BLUE #D4E5F2
   );
 }

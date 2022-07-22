@@ -1,11 +1,12 @@
 import * as React from 'react';
 import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Fade from '@mui/material/Fade';
 import Button from '@mui/material/Button';
+import Fade from '@mui/material/Fade';
+import Modal from '@mui/material/Modal';
 import Typography from '@mui/material/Typography';
 import AddTrip from './AddTrip';
+
 
 const style = {
   position: 'absolute',
@@ -27,24 +28,29 @@ export default function AddTripModal(props) {
 
   return (
     <div>
-      <Button onClick={handleOpen}>Add a new trip</Button>
-      <Modal
-        aria-labelledby='transition-modal-title'
-        aria-describedby='transition-modal-description'
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <Box sx={style}>
-            <AddTrip userInfo={props.userInfo} setTripInfo={props.setTripInfo} />
-          </Box>
-        </Fade>
-      </Modal>
+        <Button variant='contained' onClick={handleOpen} >
+          Add a new trip
+        </Button>
+        <Modal
+          aria-labelledby='transition-modal-title'
+          aria-describedby='transition-modal-description'
+          open={open}
+          onClose={handleClose}
+          closeAfterTransition
+          BackdropComponent={Backdrop}
+          BackdropProps={{
+            timeout: 500,
+          }}
+        >
+          <Fade in={open}>
+            <Box sx={style}>
+              <AddTrip
+                userInfo={props.userInfo}
+                setTripInfo={props.setTripInfo}
+              />
+            </Box>
+          </Fade>
+        </Modal>
     </div>
   );
 }

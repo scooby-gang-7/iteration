@@ -30,7 +30,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
   
   const handleSubmitSignup = (e) => {
     e.preventDefault();
-    fetch('auth/signup', {
+    fetch('api/auth/signup', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -69,8 +69,8 @@ const Signup = ({ setUserInfo, userInfo }) => {
 
 
   return (
-    <div id='signup-parent'>
-<Typography component='h1' variant='h5'>
+   <div id='signup-parent'>
+<Typography component='h1' variant='h3'>
 Create Travel Account
 </Typography>
 
@@ -181,6 +181,6 @@ Create Travel Account
 
     </div> 
   );
-}
+};
 
 export default Signup;
