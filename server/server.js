@@ -57,6 +57,10 @@ app.post('*/api/getmessages', socketIoController.getMessages, (req, res) => {
   res.status(200).json(res.locals.chats);
 });
 
+app.post('*/api/getentries', socketIoController.getEntries, (req, res) => {
+  res.status(200).json(res.locals.entries);
+});
+
 app.get('/', (req, res) => {
   console.log('trying to send at /');
   return res.sendStatus(200);

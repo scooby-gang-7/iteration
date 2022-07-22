@@ -32,14 +32,6 @@ router.post('/vote', placesController.updateVote, (req, res) => {
   res.status(200).send(res.locals.place);
 });
 
-router.post('/getNotes', tripController.getTripNotes, (req, res) => {
-  res.status(200).send(res.locals.tripNotes);
-});
-
-router.post('/addNotes', tripController.addTripNotes, (req, res) => {
-  res.status(200).send(res.locals.tripNotes);
-});
-
 router.post('/deleteplace', placesController.deletePlace, (req, res) => {
   res.status(200).send(res.locals.place);
 });

@@ -7,7 +7,7 @@ import AddBuddy from './AddBuddy.jsx';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import Map from './map/Map.jsx';
 import PlacesContainer from './PlacesContainer';
-import TripNotesContainer from './TripNotesContainer.jsx';
+import TripNotesContainer from './TripNotes/TripNotesContainer.jsx';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});

@@ -9,9 +9,9 @@ const TripNotes = (props) => {
   const handleSubmitNotes = (e) => {
     
     // to prevent rerender
-    console.log('adding notes');
+    console.log('adding notes', notes);
     e.preventDefault();
-    fetch('/api/trips/addNotes', {
+    fetch('api/trips/addNotes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,17 +22,17 @@ const TripNotes = (props) => {
       }),
     })
       .then((data) => {
-        console.log('this is trip notes', data);
+        // console.log('this is trip notes', data);
         return data.json();
       })
       .then((data) => {
         console.log('this is trip notes', data);
-        setNotes(data);
-        // setEdit(false);
+        // setNotes(notes);
+        setEdit(false);
       });
   };
   useEffect(() => {
-    fetch('/api/trips/getNotes', {
+    fetch('api/trips/getNotes', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ const TripNotes = (props) => {
         <TextField
           id="filled-multiline-static"
           multiline
-          rows={4}
+          rows={10}
           defaultValue={notes}
           InputProps={{
             readOnly: true,
@@ -80,7 +80,7 @@ const TripNotes = (props) => {
         <TextField
           id="filled-multiline-static"
           multiline
-          rows={4}
+          rows={10}
           defaultValue={notes}
           variant="filled"
           onChange={(e) => setNotes(e.target.value)}

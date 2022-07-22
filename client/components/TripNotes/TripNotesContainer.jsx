@@ -87,6 +87,7 @@ function TripNotesContainer(props) {
             // width: '400px',
           }}
         >
+          Put your Trip Notes here!
           <TripNotes
             tripId={props.tripId}
           />
