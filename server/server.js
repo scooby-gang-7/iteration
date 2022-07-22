@@ -119,11 +119,29 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('join-room', (room) => {
+  socket.on('join-room', (room, type = 'chat') => {
     if (room) {
       console.log('joining room: ', room);
       socket.join(room);
+      if (type === 'bulletin') {
+        console.log('just joined bulletin!');
+        // emit occupy-check to room
+        socket.to(room).emit('occupy-check');
+      }
     }
+  });
+
+  // on send-update
+  socket.on('send-update', (room, updatedPair) => {
+    console.log('receiving input update');
+    console.log(updatedPair);
+
+    // update DB with new value, return value when complete
+    // {_id: 3, value: 'hello'}
+    const returnedPair = updatedPair
+
+    // emit the update to all in room
+    socket.to(room).emit('receive-update', returnedPair)
   });
 });
 
