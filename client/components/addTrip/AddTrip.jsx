@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 import Box from '@mui/material/Box';
-import { Button, Container, Paper, Typography } from '@mui/material';
+import { Button, Typography, Grid } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
@@ -54,8 +54,13 @@ function AddTrip(props) {
 
   return (
 
-    <div id='addtrip-parent'>
-    <Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }}>
+    <Grid
+    container 
+    justify="center"
+    alignItems="center"
+    direction= "column">
+    
+    <Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }} color= "#154d60">
     Add Trip Details
     </Typography>
     
@@ -176,7 +181,7 @@ function AddTrip(props) {
                 >
                   Submit 
                 </Button>
-                </div>
+                </Grid>
     
   );     
 }
