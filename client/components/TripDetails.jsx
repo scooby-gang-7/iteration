@@ -7,13 +7,15 @@ import AddBuddy from './AddBuddy.jsx';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import Map from './map/Map.jsx';
 import PlacesContainer from './PlacesContainer';
+import TripNotesContainer from './TripNotesContainer.jsx';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
   const [currentPlacesInfo, setCurrentPlacesInfo] = useState([]);
   const [center, setMapCenter] = useState(null);
-
+  
   const { id } = useParams();
+  
 
   // fetching all places for the selected trip and storing them to currentTripInfo in state
 
@@ -159,6 +161,9 @@ const TripDetail = (props) => {
         <ChatroomContainer
           className='chatroomContainer'
           userInfo={props.userInfo}
+          tripId={id}
+        />
+        <TripNotesContainer
           tripId={id}
         />
       </div>

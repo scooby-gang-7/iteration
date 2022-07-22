@@ -131,4 +131,35 @@ tripController.addTripbuddy = async (req, res, next) => {
   return next();
 };
 
+tripController.getTripNotes = async (req, res, next) => {
+  const { tripId } = req.body;
+  const values = [tripId];
+  console.log('here is id and notes', tripId)
+  const queryText1 = `
+    SELECT notes 
+    FROM trips
+    WHERE trip_id = $1;`;
+
+  const notes_info = await db.query(queryText1, values);
+  console.log('notes_info', notes_info.rows[0]);
+  res.locals.tripNotes = notes_info.rows[0];
+  
+  return next();
+};
+tripController.addTripNotes = async (req, res, next) => {
+  const { tripId, notes } = req.body;
+  const values = [tripId, notes];
+  console.log('here is id and notes', tripId, notes)
+  const queryText1 = `
+    UPDATE trips
+    SET notes = $2
+    WHERE trip_id = $1;`;
+
+  const notes_info = await db.query(queryText1, values);
+  console.log('notes_info', notes_info);
+  res.locals.tripNotes = notes_info;
+  
+  return next();
+};
+
 module.exports = tripController;
