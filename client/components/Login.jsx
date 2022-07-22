@@ -70,8 +70,8 @@ export default function Login({ setUserInfo, userInfo }) {
   };
 
   return (
-    
     <Paper elevation={4} sx={{ paddingBottom: '40px' }}>
+
       <NavBarMUI />
       <Container
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}

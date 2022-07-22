@@ -6,7 +6,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import BannerImg from '../assets/1.png'
+import BannerImg from '../assets/travel.png'
 
 export default function ButtonAppBar({ userInfo, setUserInfo }) {
   const navigate = useNavigate();
