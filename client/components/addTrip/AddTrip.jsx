@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
+import Box from '@mui/material/Box';
+import { Button, Container, Paper, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
 
 function AddTrip(props) {
   const { userInfo } = props;
@@ -12,6 +19,8 @@ function AddTrip(props) {
   const [date_start, setDateStart] = useState('');
   const [date_end, setDateEnd] = useState('');
   const navigate = useNavigate();
+
+  const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
 
   const handleSubmitAddTrip = (e) => {
     e.preventDefault();
@@ -44,65 +53,121 @@ function AddTrip(props) {
   };
 
   return (
-    <div id='addtrip-parent'>
-      <form action='#'>
-        <h3>Add Trip Details</h3>
-        <div test-data="trip_name">
-          <label>Trip Name: </label>
-          <input
-            type='text'
-            placeholder='trip name'
-            name='trip_name'
+    <form onSubmit={handleSubmitAddTrip}>
+      <div id='addtrip-parent'>
+        <Typography
+          component='h1'
+          variant='h3'
+          sx={{ mb: 2, paddingBottom: '10px' }}
+        >
+          Add Trip Details
+        </Typography>
+
+        {/* TRIP NAME INPUT */}
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-tripname'>
+            Trip Name
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-tripname'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
             value={trip_name}
             onChange={(e) => setTripName(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='trip_name'
           />
-        </div >
-        <div test-data='description'>
-          <label>Description: </label>
-          <input
-            type='text'
-            placeholder='description'
-            name='description'
+        </FormControl>
+
+        {/* DESCRIPTION INPUT  */}
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-description'>
+            Description
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-description'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
             value={description}
             onChange={(e) => setDescription(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='description'
           />
-        </div>
-        <div test-data='description'>
-          <label>Destination: </label>
-          <input
-            type='text'
-            placeholder='destination'
-            name='destination'
+        </FormControl>
+
+        {/* DESTINATION INPUT */}
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-destination'>
+            Destination
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-destination'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
             value={destination}
             onChange={(e) => setDestination(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='destination'
           />
-        </div>
-        <div test-data='start_date'>
-          <label>Start Date: </label>
-          <input
-            type='date'
-            id='start'
-            name='date_start'
+        </FormControl>
+
+        {/* START DATE INPUT */}
+
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-startdate'>
+            Start Date
+          </InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-startdate'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
             value={date_start}
             onChange={(e) => setDateStart(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='date_start'
           />
-        </div>
-        <div test-data='end_date'>
-          <label>End Date: </label>
-          <input
-            type='date'
-            id='end'
-            name='date_end'
+        </FormControl>
+
+        <FormControl
+          sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+          variant='outlined'
+        >
+          <InputLabel htmlFor='outlined-adornment-enddate'>End Date</InputLabel>
+          <OutlinedInput
+            id='outlined-adornment-enddate'
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
             value={date_end}
             onChange={(e) => setDateEnd(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='date_start'
           />
-        </div>
-        <br />
-        <button className='' test-data='trip_submit' onClick={handleSubmitAddTrip}>
+        </FormControl>
+
+        <Button
+          sx={{ m: 1 }}
+          variant='contained'
+          color='primary'
+          type='submit'
+          className='button-block'
+          onClick={handleSubmitAddTrip}
+        >
           Submit
-        </button>
-      </form>
-    </div>
+        </Button>
+      </div>
+    </form>
   );
 }
 

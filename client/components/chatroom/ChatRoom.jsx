@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import io from 'socket.io-client';
 import ChatMessage from './ChatMessage.jsx';
+import { Box, Button, Card, Input, TextField, Typography } from '@mui/material';
 /*
 
 HOW TO USE
@@ -89,62 +90,91 @@ const ChatRoom = (props) => {
     setMessage('');
   };
 
-  const joinRoom = () => {
-    curSocket.emit('join-room', props.tripId);
-  };
-
   return (
-    <div>
-      <form action='#' style={{ width: '90%', textAlign: 'left' }}>
-        <div
-          id='messagesContainer'
-          style={{
-            backgroundColor: 'white',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-start',
-            minHeight: '50px',
-            width: '100%',
-          }}
-        >
-          {messageList.length ? (
-            messageList.map((msg) => (
-              <ChatMessage
-                user={String(props.firstName)}
-                key={msg.message_id}
-                message_id={msg.message_id}
-                sender={String(msg.sender)}
-                message={msg.message}
-                timestamp={msg.timestamp}
-              />
-            ))
-          ) : (
-            <div>No messages. Say something already!</div>
-          )}
-        </div>
-        <br />
-        <label>Message: </label>
-        <textarea
-          placeholder='Type your message here...'
-          style={{ width: '90%', minHeight: '50px' }}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <br />
-        <button
-          // id='btn-login'
-          className=''
-          onClick={(e) => {
-            e.preventDefault();
-            sendMessage();
-          }}
-        >
-          Send Message
-        </button>
-        <br />
-      </form>
-      <br />
-    </div>
+    <Card
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        verticalAlign: 'center',
+        bgcolor: 'white',
+        borderRadius: '4px',
+        padding: '18px',
+        height: '95%',
+        margin: '20px',
+      }}
+    >
+    
+      <Box
+        id='messagesContainer'
+        style={{
+          backgroundColor: 'white',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          minHeight: '50px',
+          width: '100%',
+          overflow: 'auto',
+          border: '1px solid lightgrey',
+          borderRadius:'4px',
+        }}
+      >
+        {messageList.length ? (
+          messageList.map((msg) => (
+            <ChatMessage
+              user={String(props.firstName)}
+              key={msg.message_id}
+              message_id={msg.message_id}
+              sender={String(msg.sender)}
+              message={msg.message}
+              timestamp={msg.timestamp}
+            />
+          ))
+        ) : (
+          <Typography>No messages. Say something already!</Typography>
+        )}
+      </Box>
+      <Box
+        component='form'
+        sx={{
+          '& .MuiTextField-root': { m: 1, width: '100%' },
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems:'center',
+          width: '100%',
+        }}
+        noValidate
+        autoComplete='off'
+      >
+          <TextField
+            id='outlined-multiline-static'
+            required
+            multiline
+            label='What do want to share?'
+            rows={2}
+            defaultValue="What's on your mind?"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault();
+                sendMessage();
+              }
+            }}
+            style={{ width: '100%' }}
+          />
+          <Button
+            variant='contained'
+            sx={{width:'50%'}}
+            onClick={(e) => {
+              e.preventDefault();
+              sendMessage();
+            }}
+          >
+            Send Message
+          </Button>
+      </Box>
+    </Card>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Chip, Divider, ListItem, Stack, Typography } from '@mui/material';
-import thumbsUp from '../assets/thumbsup.png';
-import thumbsDown from '../assets/thumbsdown.png';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const PlaceDetails = (props) => {
   function handleClick(e) {
@@ -82,21 +82,25 @@ const PlaceDetails = (props) => {
         <Stack direction='row' alignItems='center' spacing={2}>
           <Stack direction='row' spacing={2}>
             <Stack>
-              <img
+              <ThumbUpIcon
                 onClick={handleClick}
                 id='upVote'
-                src={thumbsUp}
                 width='30px'
+                sx={{
+                  color: 'orange',
+                }}
               />
 
               <div>{props.up_vote}</div>
             </Stack>
             <Stack>
-              <img
+              <ThumbDownIcon
                 id='downVote'
-                src={thumbsDown}
                 onClick={handleClick}
                 width='30px'
+                sx={{
+                  color: 'orange',
+                }}
               />
               <div>{props.down_vote}</div>
             </Stack>
