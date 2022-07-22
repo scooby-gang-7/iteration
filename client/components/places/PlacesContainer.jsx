@@ -15,7 +15,7 @@ const PlacesContainer = (props) => {
           pb: '15px',
         }}
       >
-        <Typography variant='h2' fontWeight='bold' position='static'>
+        <Typography variant='h2' fontWeight='bold' position='static' color= "#154d60">
           Places to Visit
         </Typography>
         <Container

@@ -103,17 +103,18 @@ const TripDetail = (props) => {
             divider={<Divider orientation='vertical' flexItem />}
             alignItems='center'
             justifyContent='space-between'
+            sx={{ paddingBottom: '30px' }}
           >
-            <Typography variant='h1' width='30%' fontWeight='bold'>
+            <Typography variant='h1' width='30%' fontWeight='bold' color= "#154d60">
               {currentTripInfo.trip_name}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center'color="#154d60">
               {currentTripInfo.destination}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center' color="#154d60">
               {currentTripInfo.description}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center' color="#154d60">
               {startDateDisplay} to {endDateDisplay}
             </Typography>
           </Stack>

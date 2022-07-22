@@ -52,13 +52,21 @@ function AddTrip(props) {
       });
   };
 
+
   return (
+
+
     <form onSubmit={handleSubmitAddTrip}>
-      <div id='addtrip-parent'>
+      <Grid container justify='center' alignItems='center' direction='column'>
+
+
+
+
         <Typography
           component='h1'
           variant='h3'
           sx={{ mb: 2, paddingBottom: '10px' }}
+          color= '#154d60'
         >
           Add Trip Details
         </Typography>
@@ -166,7 +174,7 @@ function AddTrip(props) {
         >
           Submit
         </Button>
-      </div>
+      </Grid>
     </form>
   );
 }

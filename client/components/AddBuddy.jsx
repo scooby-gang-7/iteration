@@ -65,7 +65,7 @@ const Addbuddy = (props) => {
   const tripmembers = [];
   trip_buddy.forEach((el) => {
     tripmembers.push(
-      <Typography key={el.name_first}>{el.name_first}</Typography>
+      <Typography key={el.name_first}>{el.name_first} </Typography>
     );
   });
 
@@ -79,9 +79,9 @@ const Addbuddy = (props) => {
         alignItems: 'center',
       }}
     >
-      <Typography fontWeight='bold'>Trip Members</Typography>
+      <Typography variant= "h3" fontWeight='bold' color="#154d60" sx={{ paddingBottom: '20px' }}>Trip Members</Typography>
       <div>
-        <Stack direction='row' spacing={3}>
+        <Stack direction='row' spacing={3} sx={{ paddingBottom: '20px' }}>
           {tripmembers}
         </Stack>
       </div>
