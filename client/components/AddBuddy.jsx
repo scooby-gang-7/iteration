@@ -85,7 +85,7 @@ const Addbuddy = (props) => {
           {tripmembers}
         </Stack>
       </div>
-      <div>
+      <form onSubmit={handleAddBuddy}>
         <FormControl
           sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
           variant='outlined'
@@ -95,6 +95,7 @@ const Addbuddy = (props) => {
           </InputLabel>
           <OutlinedInput
             id='outlined-adornment-email'
+            required='true'
             autoComplete='off'
             inputProps={{ style: inputStyle }}
             // placeholder={`Enter Your Friend's Email`}
@@ -111,7 +112,7 @@ const Addbuddy = (props) => {
             Add Buddy
           </Button>
         </FormControl>
-      </div>
+      </form>
     </Container>
   );
 };

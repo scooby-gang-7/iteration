@@ -69,19 +69,15 @@ export default function Login({ setUserInfo, userInfo }) {
   };
 
   return (
-    <Paper  elevation={4} sx={{ paddingBottom: '40px' }}>
-
+    <Paper elevation={4} sx={{ paddingBottom: '40px' }}>
       <NavBarMUI />
       <Container
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-      
-        <Typography variant='h1' sx={{ mb: 2, paddingTop: '40px' }} >
-
+        <Typography variant='h1' sx={{ mb: 2, paddingTop: '40px' }}>
           Make group trips happen with Travel Pal
         </Typography>
 
-       
         <Paper
           elevation={3}
           sx={{
@@ -103,66 +99,78 @@ export default function Login({ setUserInfo, userInfo }) {
               m: '40',
             }}
           >
-            <Typography component='h1' variant='h3'>
-              Sign in
-            </Typography>
-            <FormControl
-              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
-              variant='outlined'
-            >
-              <InputLabel htmlFor='outlined-adornment-email'>Email</InputLabel>
-              <OutlinedInput
-                id='outlined-adornment-email'
-                autoComplete='off'
-                inputProps={{ style: inputStyle }}
-                value={values.email}
-                onChange={(e) => setEmail(e.target.value)}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <AccountCircle edge='end'></AccountCircle>
-                  </InputAdornment>
-                }
-                label='email' data-test="email"
-              />
-            </FormControl>
-            <FormControl
-              sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
-              variant='outlined'
-            >
-              <InputLabel htmlFor='outlined-adornment-password'>
-                Password
-              </InputLabel>
-              <OutlinedInput
-                autoComplete='off'
-                inputProps={{ style: inputStyle }}
-                id='outlined-adornment-password'
-                type={values.showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                endAdornment={
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='toggle password visibility'
-                      onClick={handleClickShowPassword}
-                      edge='end'
-                    >
-                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                    </IconButton>
-                  </InputAdornment>
-                }
-                label='Password' data-test="password"
-              />
-            </FormControl>
-            <Button
-              sx={{ m: 1 }}
-              variant='contained'
-              color='primary'
-              type='submit'
-              className='button-block'
-              onClick={handleSubmitLogin}
-            >
-              Submit
-            </Button>
+            <form onSubmit={handleSubmitLogin}>
+              <Typography component='h1' variant='h3'>
+                Sign in
+              </Typography>
+              <FormControl
+                sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+                variant='outlined'
+              >
+                <InputLabel htmlFor='outlined-adornment-email'>
+                  Email
+                </InputLabel>
+                <OutlinedInput
+                  id='outlined-adornment-email'
+                  autoComplete='off'
+                  required='true'
+                  inputProps={{ style: inputStyle }}
+                  value={values.email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <AccountCircle edge='end'></AccountCircle>
+                    </InputAdornment>
+                  }
+                  label='email'
+                  data-test='email'
+                />
+              </FormControl>
+              <FormControl
+                sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+                variant='outlined'
+              >
+                <InputLabel htmlFor='outlined-adornment-password'>
+                  Password
+                </InputLabel>
+                <OutlinedInput
+                  autoComplete='off'
+                  required='true'
+                  inputProps={{ style: inputStyle }}
+                  id='outlined-adornment-password'
+                  type={values.showPassword ? 'text' : 'password'}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  endAdornment={
+                    <InputAdornment position='end'>
+                      <IconButton
+                        aria-label='toggle password visibility'
+                        onClick={handleClickShowPassword}
+                        edge='end'
+                      >
+                        {values.showPassword ? (
+                          <VisibilityOff />
+                        ) : (
+                          <Visibility />
+                        )}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  label='Password'
+                  data-test='password'
+                />
+              </FormControl>
+              <Button
+                sx={{ m: 1 }}
+                variant='contained'
+                color='primary'
+                type='submit'
+                className='button-block'
+                onClick={handleSubmitLogin}
+              >
+                Submit
+              </Button>
+            </form>
           </Box>
         </Paper>
         <SignUpModal setUserInfo={setUserInfo} userInfo={userInfo} />
