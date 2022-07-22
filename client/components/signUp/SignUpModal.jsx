@@ -19,12 +19,12 @@ const style = {
   left: '50%',
   width: 400,
   transform: 'translate(-50%, -50%)',
-  border: '2px solid #000',
   bgcolor: '#D4E5F2',
   borderRadius: 3,
   boxShadow: 24,
   p: 1,
-  m: '40'
+  m: '40',
+  minHeight: "50vh"
 };
 
 export default function SignUpModal(props) {

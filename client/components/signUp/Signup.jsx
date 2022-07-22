@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import { Button, Container, Paper, Typography } from '@mui/material';
+import { Button, Typography, Grid } from '@mui/material';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
@@ -69,8 +69,13 @@ const Signup = ({ setUserInfo, userInfo }) => {
 
 
   return (
-   <div id='signup-parent'>
-<Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }}>
+   <Grid
+   container 
+   justify="center"
+   alignItems="center"
+   direction= "column">
+
+<Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }} color= "#154d60">
 Create Travel Account
 </Typography>
 
@@ -179,7 +184,7 @@ Create Travel Account
               Sign Up
             </Button>
 
-    </div> 
+    </Grid> 
   );
 };
 

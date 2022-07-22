@@ -33,9 +33,9 @@ let theme = createTheme({
     // custom colors for props in Material UI's components.
     // Then you will be able to use it like this: `<Button color="custom">`
     custom: {
-      light: '#D4E5F2',
-      main: '#3D0240',
-      dark: '#137083',
+      light: '#154d60',
+      main: '#154d60',
+      dark: '#154d60',
       contrastText: '#ffffff',
     },
     // Used by `getContrastText()` to maximize the contrast between
