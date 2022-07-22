@@ -122,7 +122,7 @@ export default function Login({ setUserInfo, userInfo }) {
                     <AccountCircle edge='end'></AccountCircle>
                   </InputAdornment>
                 }
-                label='email'
+                label='email' data-test="email"
               />
             </FormControl>
             <FormControl
@@ -150,7 +150,7 @@ export default function Login({ setUserInfo, userInfo }) {
                     </IconButton>
                   </InputAdornment>
                 }
-                label='Password'
+                label='Password' data-test="password"
               />
             </FormControl>
             <Button

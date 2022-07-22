@@ -88,12 +88,12 @@ placesController.deletePlace = (req, res, next) => {
   const values = [place_id];
   const text = `
     DELETE FROM places 
-    WHERE place_id = ($1) RETURNING *`;
+    WHERE place_id = ($1)
+    RETURNING *`;
 
-  db.query(text)
+  db.query(text, values)
     .then((data) => {
       if (data.rows.length == 0) {
-        // res.locals.data = {message: 'user does not exist'}; //to do throw error
         return next(
           createErr({
             method: 'deletePlace',
