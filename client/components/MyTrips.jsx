@@ -4,6 +4,7 @@ import AddTripModal from './addTrip/AddTripModal';
 import Trip from './Trip';
 import BannerImg from '../assets/lane.png'
 
+
 const MyTrips = (props) => {
   const [upcomingTrips, setUpcomingTrips] = useState([]);
   const [pastTrips, setPastTrips] = useState([]);
@@ -150,6 +151,7 @@ const MyTrips = (props) => {
           </Stack>
           </Container>
     
+          
       </>
     );
   }

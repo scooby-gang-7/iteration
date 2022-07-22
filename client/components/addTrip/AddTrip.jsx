@@ -8,6 +8,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
+import DateInput from './DateInput';
 
 function AddTrip(props) {
   const { userInfo } = props;
@@ -18,6 +19,7 @@ function AddTrip(props) {
   const [destination, setDestination] = useState('');
   const [date_start, setDateStart] = useState('');
   const [date_end, setDateEnd] = useState('');
+  // const [selectedDate, setSelectedDate] = useState ('');
   const navigate = useNavigate();
 
   const inputStyle = { WebkitBoxShadow: '0 0 0 1000px white inset' };
@@ -51,6 +53,14 @@ function AddTrip(props) {
         console.log({ e });
       });
   };
+
+
+  // const handleSelectedDate = () => {
+  //   if (selectedDate) {
+  //     setSelectedDate({...values
+  //   });
+  //   }
+   
 
 
   return (
@@ -134,11 +144,10 @@ function AddTrip(props) {
           sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
           variant='outlined'
         >
-          <InputLabel htmlFor='outlined-adornment-startdate'>
-            Start Date
-          </InputLabel>
-          <OutlinedInput
+        
+          <DateInput
             id='outlined-adornment-startdate'
+            control= {<DateInput/>}
             autoComplete='off'
             inputProps={{ style: inputStyle }}
             value={date_start}
@@ -146,14 +155,25 @@ function AddTrip(props) {
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='date_start'
           />
+          {/* 
+          <OutlinedInput
+            id='outlined-adornment-startdate'
+            control= {<DateInput/>}
+            autoComplete='off'
+            inputProps={{ style: inputStyle }}
+            value={date_start}
+            onChange={(e) => setDateStart(e.target.value)}
+            endAdornment={<InputAdornment position='end'></InputAdornment>}
+            label='date_start'
+          /> */}
         </FormControl>
 
         <FormControl
           sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
           variant='outlined'
         >
-          <InputLabel htmlFor='outlined-adornment-enddate'>End Date</InputLabel>
-          <OutlinedInput
+          {/* <InputLabel htmlFor='outlined-adornment-enddate'>End Date</InputLabel> */}
+          <DateInput
             id='outlined-adornment-enddate'
             autoComplete='off'
             inputProps={{ style: inputStyle }}
@@ -174,6 +194,7 @@ function AddTrip(props) {
         >
           Submit
         </Button>
+       
       </Grid>
     </form>
   );

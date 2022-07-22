@@ -2,8 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { createTheme, responsiveFontSizes, ThemeProvider } from '@mui/material';
+import { CalendarPicker, LocalizationProvider, bgBG } from '@mui/x-date-pickers';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import bgLocale from 'date-fns/locale/bg';
 import App from './App.jsx';
-import ColorThemeWrapper from './ColorThemeWrapper.jsx';
+
+
 
 let theme = createTheme({
   typography:{
@@ -54,6 +58,11 @@ theme = responsiveFontSizes(theme);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <LocalizationProvider
+    dateAdapter={AdapterDateFns}
+    >
+
+  <App />
+  </LocalizationProvider>
   </ThemeProvider>
 );
