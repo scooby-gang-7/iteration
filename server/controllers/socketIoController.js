@@ -19,25 +19,8 @@ socketIoController.getMessages = async (req, res, next) => {
     res.locals.chats = result.rows;
     return next();
   } catch (error) {
-    /* 
-    
-    need to investigate this EAI_AGAIN error coming from elephantSQL.
-    did wilson do anything to DB? everything was working fine
-
-    */
-
-    console.log(
-      '-------------------------------------------------------------3',
-      roomId
-    );
     return next(error);
   }
-
-  // save query results
-  res.locals.chats = result.rows;
-  console.log('chats: ', res.locals.chats);
-
-  return next();
 };
 
 // socketIoController.addChat = async (req, res, next) => {

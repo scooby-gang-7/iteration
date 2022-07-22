@@ -21,11 +21,41 @@ const io = require('socket.io')(server, {
   },
 });
 
-// if (process.env.NODE_ENV === 'production') {
-//   console.log('working in production');
+// run this for all requests, for cleaner log-reading
+app.use((req, res, next) => {
+  console.log(`${'-'.repeat(60)} a request has come in! ${'-'.repeat(60)}`);
+  console.log(`${'-'.repeat(60)} source: ${req.url}`);
+  next();
+});
 
-//   // // enables handling of req from index.html
-// }
+if (process.env.NODE_ENV === 'production') {
+  console.log('working in production');
+
+  // // enables handling of req from index.html
+  app.use('/dist', express.static(path.join(__dirname, '../dist')));
+
+  app.get('/', (req, res) => {
+    console.log('picked up / only');
+    // return res.sendStatus(200);
+    return res
+      .status(203)
+      .sendFile(path.join(__dirname, '../client/index.html'));
+  });
+
+  // for serving static things (doesn't work!)
+  app.use(
+    '/client/assets/',
+    (req, res, next) => {
+      console.log('hit client/assets!!!!!!!!!!!');
+      return next();
+    },
+    (req, res) => {
+      console.log(path.resolve(__dirname, '../client/assets/' + req.url));
+      res.sendFile(path.resolve(__dirname, '../client/assets/' + req.url));
+    },
+    express.static('../client/assets/')
+  );
+}
 
 //use cors
 app.use(cors());
@@ -35,41 +65,25 @@ app.use(express.urlencoded({ extended: true }));
 //handling cookies
 app.use(cookieParser());
 
-// handle requests for static files
-// app.use('/dist', express.static(path.join(__dirname, '../dist')));
-app.use('/assets', express.static('./client/assets'));
-// app.use(express.static(__dirname));
-console.log();
 // Router paths
 app.use('*/api/auth', authRouter);
-app.use('*/api/trips', tripRouter); // I don't get why we have 2 routes to the same router but I consolidated them
-
-// // unique paths
-// app.get('/about', (req, res) => {
-//   res.sendFile(path.resolve(__dirname, HTML_FILE));
-// });
+app.use('*/api/trips', tripRouter);
 
 app.post('*/api/getmessages', socketIoController.getMessages, (req, res) => {
-  console.log(
-    '------------------------------------------------------------------------------------------------'
-  );
-  console.log(res.locals.chats);
   res.status(200).json(res.locals.chats);
 });
 
 app.get('/', (req, res) => {
   console.log('trying to send at /');
   return res.sendStatus(200);
-  res.status(201).sendFile(path.resolve(__dirname, '../dist/index.html'));
+  // res.status(201).sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
 
 //404 error
 app.use('/*', (req, res) => {
   console.log('trying to send back app from 404 route');
-  console.log(req.originalUrl);
-  console.log(req.url);
-  return res.sendStatus(200);
-  res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
+  return res.sendStatus(404);
+  // res.status(206).sendFile(path.resolve(__dirname, '../dist/index.html'));
 });
 
 //create global error handler

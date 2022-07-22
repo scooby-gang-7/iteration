@@ -44,7 +44,7 @@ router.post('/vote', placesController.updateVote, (req, res) => {
 });
 
 router.post('/deleteplace', placesController.deletePlace, (req, res) => {
-  res.status(200).send(res.locals.place);
+  res.status(200).json(res.locals.place);
 });
 
 // Export router
