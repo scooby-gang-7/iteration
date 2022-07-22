@@ -65,7 +65,7 @@ const Addbuddy = (props) => {
   const tripmembers = [];
   trip_buddy.forEach((el) => {
     tripmembers.push(
-      <Typography key={el.name_first}>{el.name_first}</Typography>
+      <Typography key={el.name_first + el.name_last}>{el.name_first}</Typography>
     );
   });
 
