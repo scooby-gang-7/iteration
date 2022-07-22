@@ -46,8 +46,8 @@ const Signup = ({ setUserInfo, userInfo }) => {
       <h1>Travel Pal</h1>
       <form action='#'>
         <h3>Sign Up</h3>
-        <div>
-          <label>First Name: </label>
+        <div test-data='first_name'>
+          <label t>First Name: </label>
           <input
             type='text'
             placeholder='first name'
@@ -56,7 +56,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='last_name'>
           <label>Last Name: </label>
           <input
             type='text'
@@ -66,7 +66,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='signup_email'>
           <label>Email Address: </label>
           <input
             type='text'
@@ -76,7 +76,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='signup_password'>
           <label>Password: </label>
           <input
             type='password'
@@ -87,7 +87,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
           />
         </div>
         <br />
-        <button className='' onClick={handleSubmitSignup}>
+        <button className=''  data-test="signup" onClick={handleSubmitSignup}>
           Submit
         </button>
       </form>
