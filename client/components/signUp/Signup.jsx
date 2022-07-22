@@ -47,7 +47,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
       <form action='#'>
         <h3>Sign Up</h3>
         <div test-data='first_name'>
-          <label t>First Name: </label>
+          <label>First Name: </label>
           <input
             type='text'
             placeholder='first name'
