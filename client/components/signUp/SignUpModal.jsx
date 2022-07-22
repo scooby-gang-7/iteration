@@ -3,22 +3,28 @@ import Backdrop from '@mui/material/Backdrop';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Fade from '@mui/material/Fade';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { Button, Container, Paper, Typography } from '@mui/material';
+import FormControl from '@mui/material/FormControl';
 import Signup from './Signup';
 
 
 const style = {
   position: 'absolute',
+  justifyContent: 'center',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  textAlign: 'center',
   top: '50%',
   left: '50%',
-  transform: 'translate(-50%, -50%)',
   width: 400,
-  bgcolor: 'background.paper',
+  transform: 'translate(-50%, -50%)',
   border: '2px solid #000',
+  bgcolor: '#D4E5F2',
   borderRadius: 3,
   boxShadow: 24,
-  p: 4,
+  p: 1,
+  m: '40'
 };
 
 export default function SignUpModal(props) {
@@ -42,7 +48,15 @@ export default function SignUpModal(props) {
       >
         <Fade in={open}>
           <Box sx={style}>
+
+<FormControl
+sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
+variant='outlined'
+>
+</FormControl>
+
             <Signup setUserInfo={props.setUserInfo} userInfo={props.userInfo} />
+         
           </Box>
         </Fade>
       </Modal>

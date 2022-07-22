@@ -70,22 +70,24 @@ export default function Login({ setUserInfo, userInfo }) {
 
   return (
     <Paper elevation={4} sx={{ paddingBottom: '40px' }}>
+
       <NavBarMUI />
       <Container
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        <Typography variant='h1' sx={{ mt: 1 }}>
-          Travel Pal
+      
+        <Typography variant='h1' sx={{ mb: 2, paddingTop: '40px' }} >
+
+          Make group trips happen with Travel Pal
         </Typography>
-        <Typography variant='h5' sx={{ mb: 2 }}>
-          Don't miss out, make group trips happen with Travel Pal
-        </Typography>
+
+       
         <Paper
           elevation={3}
           sx={{
             m: 1,
             p: 2,
-            bgcolor: '#E4DCE7',
+            bgcolor: '#D4E5F2',
             maxWidth: 400,
             display: 'flex',
             flexDirection: 'column',
@@ -101,7 +103,7 @@ export default function Login({ setUserInfo, userInfo }) {
               m: '40',
             }}
           >
-            <Typography component='h1' variant='h5'>
+            <Typography component='h1' variant='h3'>
               Sign in
             </Typography>
             <FormControl
