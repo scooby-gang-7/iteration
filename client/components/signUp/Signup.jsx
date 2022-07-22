@@ -70,7 +70,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
 
   return (
    <div id='signup-parent'>
-<Typography component='h1' variant='h3'>
+<Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }}>
 Create Travel Account
 </Typography>
 
