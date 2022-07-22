@@ -8,6 +8,8 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
+// import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+// import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 
 function AddTrip(props) {
   const { userInfo } = props;
@@ -53,7 +55,7 @@ function AddTrip(props) {
   };
 
   return (
-
+<form onSubmit={handleSubmitAddTrip}>
     <div id='addtrip-parent'>
     <Typography component='h1' variant='h3' sx={{ mb: 2, paddingBottom: '10px' }}>
     Add Trip Details
@@ -150,6 +152,16 @@ function AddTrip(props) {
                   sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
                   variant='outlined'
                 >
+                  {/* <LocalizationProvider dateAdapter={AdapterDateFns}>
+                     <DesktopDatePicker
+                      label="Date desktop"
+                      required
+                       inputFormat="MM/dd/yyyy"
+                       value={date_end}
+                       onChange={(e) => setDateEnd(e.target.value)}
+                        renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider> */}
                   <InputLabel htmlFor='outlined-adornment-enddate'>End Date</InputLabel>
                   <OutlinedInput
                     id='outlined-adornment-enddate'
@@ -177,7 +189,7 @@ function AddTrip(props) {
                   Submit 
                 </Button>
                 </div>
-    
+    </form>
   );     
 }
 
