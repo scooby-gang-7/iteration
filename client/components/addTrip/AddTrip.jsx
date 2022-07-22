@@ -47,7 +47,7 @@ function AddTrip(props) {
     <div id='addtrip-parent'>
       <form action='#'>
         <h3>Add Trip Details</h3>
-        <div>
+        <div test-data="trip_name">
           <label>Trip Name: </label>
           <input
             type='text'
@@ -56,8 +56,8 @@ function AddTrip(props) {
             value={trip_name}
             onChange={(e) => setTripName(e.target.value)}
           />
-        </div>
-        <div>
+        </div >
+        <div test-data='description'>
           <label>Description: </label>
           <input
             type='text'
@@ -67,7 +67,7 @@ function AddTrip(props) {
             onChange={(e) => setDescription(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='description'>
           <label>Destination: </label>
           <input
             type='text'
@@ -77,7 +77,7 @@ function AddTrip(props) {
             onChange={(e) => setDestination(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='start_date'>
           <label>Start Date: </label>
           <input
             type='date'
@@ -87,7 +87,7 @@ function AddTrip(props) {
             onChange={(e) => setDateStart(e.target.value)}
           />
         </div>
-        <div>
+        <div test-data='end_date'>
           <label>End Date: </label>
           <input
             type='date'
@@ -98,7 +98,7 @@ function AddTrip(props) {
           />
         </div>
         <br />
-        <button className='' onClick={handleSubmitAddTrip}>
+        <button className='' test-data='trip_submit' onClick={handleSubmitAddTrip}>
           Submit
         </button>
       </form>
