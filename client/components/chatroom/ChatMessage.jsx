@@ -1,15 +1,16 @@
+import { Box, Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 
 const ChatMessage = (props) => {
   const bubblePadding = '10px';
   const bubbleMargin = '15px';
-  const bubbleColor = props.user === props.sender ? '#E4DCE7' : '#EFEFEF';
+  const bubbleColor = props.user === props.sender ? '#D4E5F2' : '#EFEFEF';
   const bubbleJustify = props.user === props.sender ? 'flex-end' : 'flex-start';
   const nameColor = props.user === props.sender ? 'black' : 'black';
   const msgColor = props.user === props.sender ? '#137083' : '#137083';
 
   return (
-    <div
+    <Box
       className='messageRow'
       key={props.message_id}
       style={{
@@ -39,7 +40,7 @@ const ChatMessage = (props) => {
           style={{
             backgroundColor: bubbleColor,
             padding: bubblePadding,
-            borderRadius: '20px',
+            borderRadius: '8px',
           }}
         >
           <div
@@ -51,19 +52,19 @@ const ChatMessage = (props) => {
               color: nameColor,
             }}
           >
-            <div>{`${props.sender}`}</div>
+            <Typography>{`${props.sender}`}</Typography>
           </div>
           <div
             className='msg-main'
-            style={{ padding: '10px', paddingLeft: '20px' }}
+            style={{ padding: '4px', paddingLeft: '20px' }}
           >
-            <div style={{ color: msgColor, fontWeight: '600' }}>
+            <Typography style={{ color: msgColor, fontWeight: '500' }}>
               {props.message}
-            </div>
+            </Typography>
           </div>
         </div>
       </div>
-    </div>
+    </Box>
   );
 };
 export default ChatMessage;

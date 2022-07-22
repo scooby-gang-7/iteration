@@ -87,7 +87,7 @@ const PlaceDetails = (props) => {
                 id='upVote'
                 width='30px'
                 sx={{
-                  color: '#CC731C',
+                  color: 'orange',
                 }}
               />
 
@@ -99,7 +99,7 @@ const PlaceDetails = (props) => {
                 onClick={handleClick}
                 width='30px'
                 sx={{
-                  color: '#CC731C',
+                  color: 'orange',
                 }}
               />
               <div>{props.down_vote}</div>
