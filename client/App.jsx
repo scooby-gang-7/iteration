@@ -48,7 +48,7 @@ const App = () => {
 
   if (isLoaded) {
     return (
-      <div className='App'>
+      <div className='App' test-data="App">
         <BrowserRouter>
           <Paper elevation={3} sx={{ maxWidth: '900px', minWidth: '500px' }}>
             <ToastContainer

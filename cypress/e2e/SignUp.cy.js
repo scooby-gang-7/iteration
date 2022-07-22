@@ -3,12 +3,6 @@ describe('Signup', () => {
       cy.visit(Cypress.env('login_url'))
   })
 
-  it('Links to /signup from Nav bar', () => {
-      cy.contains('Sign Up').click()
-      cy.url().should('include', '/signup')
-      cy.get('[data-test=signup]').click()
-      cy.contains('Signup unsuccessful')
-  })
 
   it('requires firstname', () => {
       cy.contains('Ready to Travel? Sign Up').click()

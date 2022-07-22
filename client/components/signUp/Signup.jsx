@@ -97,6 +97,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setFirstName(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='name_first'
+            test-data="first_name"
           />
         </FormControl>
 
@@ -117,6 +118,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setLastName(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='name_last'
+            test-data="last_name"
           />
         </FormControl>
 
@@ -135,6 +137,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             onChange={(e) => setEmail(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='email'
+            test-data='signup_email'
           />
         </FormControl>
 
@@ -148,6 +151,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
             Password
           </InputLabel>
           <OutlinedInput
+            test-data='signup_password'
             id='outlined-adornment-password'
             autoComplete='off'
             required='true'
@@ -177,6 +181,7 @@ const Signup = ({ setUserInfo, userInfo }) => {
           type='submit'
           className='button-block'
           onClick={handleSubmitSignup}
+          data-test='signup'
         >
           Sign Up
         </Button>

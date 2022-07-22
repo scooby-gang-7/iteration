@@ -1,28 +1,30 @@
 describe('My Trips', () => {
-    beforeEach(() => {
+    before(() => {
         cy.visit(Cypress.env('login_url'))
         cy.login()
+       
     })
-
-    it('signs out', () => {
-        cy.contains('Signout').click()
-        cy.contains('Ready to Travel? Sign Up')
-    })
-
+//need to fix re
     it('new trip requires data', () => {
         cy.contains("Add a new trip").click()
         cy.get('[data-test=trip_submit]').click()
         cy.contains('Trip added unsuccessfully')
+        cy.reload()
     })
 
     it('adds new trips', () => {
         cy.contains("Add a new trip").click()
-        cy.get('[data-test=trip_name]').type("Family Visit")
-        cy.get('[data-test=description]').type("Mountain Fun")
-        cy.get('[data-test=destination]').type('Denver')
-        cy.get('[data-type=start_date]').type('08/25/2034')
-        cy.get('[data-type=end_data]').type('09/05/2034')
+        cy.get('[data-test=trip_name]').type("Florida Trip")
+        cy.get('[data-test=description]').type("Fun in Sun")
+        cy.get('[data-test=destination]').type('Orlando')
+        cy.get('[data-test=start_date]').type('08/25/2025')
+        cy.get('[data-test=end_date]').type('09/05/2025')
         cy.get('[data-test=trip_submit]').click()
-        cy.contains('Trip added sucessfully')
+        cy.contains('Trip added successfully')
+    })
+
+    it('signs out', () => {
+        cy.get('Signout').click()
+        cy.contains('Ready to Travel? Sign Up')
     })
 })

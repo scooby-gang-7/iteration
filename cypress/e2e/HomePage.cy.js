@@ -7,11 +7,6 @@ describe('Homepage', () => {
       cy.contains('Sign in')
     })
 
-    it('links to /signup', () => {
-      cy.contains('Sign Up')
-      cy.should('have.attr', 'href', '/signup')
-    })
-
     it ('requires email', () => {
       cy.get('button[type=submit]').click()
       cy.contains('Invalid email or password.')

@@ -51,7 +51,7 @@ const NavBar = ({ userInfo, setUserInfo }) => {
        <Link to='/mytrips'>
           <li>My Trips</li>
         </Link>
-        <li id='signout' onClick={handleSignOut}>
+        <li id='signout' test-data="navbar_signout" onClick={handleSignOut}>
           Signout
         </li>
         </>

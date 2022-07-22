@@ -79,6 +79,7 @@ function AddTrip(props) {
             onChange={(e) => setTripName(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='trip_name'
+            data-test='trip_name'
           />
         </FormControl>
 
@@ -98,6 +99,7 @@ function AddTrip(props) {
             onChange={(e) => setDescription(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='description'
+            data-test='description'
           />
         </FormControl>
 
@@ -117,6 +119,9 @@ function AddTrip(props) {
             onChange={(e) => setDestination(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='destination'
+            data-test='destination'
+          
+
           />
         </FormControl>
 
@@ -137,6 +142,7 @@ function AddTrip(props) {
             onChange={(e) => setDateStart(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='date_start'
+            data-test='start_date'
           />
         </FormControl>
 
@@ -152,7 +158,8 @@ function AddTrip(props) {
             value={date_end}
             onChange={(e) => setDateEnd(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
-            label='date_start'
+            label='date_end'
+            data-test='end_date'
           />
         </FormControl>
 
@@ -163,6 +170,7 @@ function AddTrip(props) {
           type='submit'
           className='button-block'
           onClick={handleSubmitAddTrip}
+          data-test='trip_submit'
         >
           Submit
         </Button>
