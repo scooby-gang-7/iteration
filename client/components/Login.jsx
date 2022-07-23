@@ -69,12 +69,12 @@ export default function Login({ setUserInfo, userInfo }) {
   };
 
   return (
-    <Paper elevation={4} sx={{ paddingBottom: '40px' }}>
+    <Paper elevation={4} sx={{ paddingBottom: '15px' }}>
       <NavBarMUI />
       <Container
         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
       >
-        <Typography variant='h1' sx={{ mb: 2, paddingTop: '40px' }}>
+        <Typography variant='h1' sx={{ mb: 2, paddingTop: '10px' }}>
           Make group trips happen with Travel Pal
         </Typography>
 

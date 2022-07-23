@@ -92,7 +92,7 @@ const Addbuddy = (props) => {
         alignItems: 'center',
       }}
     >
-      <Typography fontWeight='bold'>Trip Members</Typography>
+      <Typography fontWeight='bold' color= '#154d60'>Trip Members</Typography>
       <div
         style={{
           display: 'grid',

@@ -79,8 +79,8 @@ const PlaceDetails = (props) => {
     <ListItem>
       <Stack direction='row' spacing={3} width='100%'>
         <Stack width='75%'>
-          <Typography fontWeight='bold'>{props.name}</Typography>
-          <Typography>{props.address}</Typography>
+          <Typography fontWeight='bold'color= "#154d60">{props.name}</Typography>
+          <Typography color= "#154d60" >{props.address}</Typography>
         </Stack>
 
         <Stack direction='row' alignItems='center' spacing={2}>
@@ -91,7 +91,7 @@ const PlaceDetails = (props) => {
                 id='upVote'
                 width='30px'
                 sx={{
-                  color: 'orange',
+                  color: '#CC731C',
                 }}
               />
 
@@ -103,7 +103,7 @@ const PlaceDetails = (props) => {
                 onClick={()=>handleClick('downVote')}
                 width='30px'
                 sx={{
-                  color: 'orange',
+                  color: '#CC731C',
                 }}
               />
               <div>{props.down_vote}</div>

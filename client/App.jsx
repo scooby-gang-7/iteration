@@ -12,7 +12,8 @@ import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom';
 import FourOFour from './components/404.jsx';
-import BulletinBoard from './components/BulletinBoard.jsx';
+import Bulletin from './components/Bulletin.jsx'
+
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
@@ -49,7 +50,11 @@ const App = () => {
 
   if (isLoaded) {
     return (
+     
+      
+     
       <div className='App'>
+       
         <BrowserRouter>
           <Paper elevation={3} sx={{ maxWidth: '900px', minWidth: '500px' }}>
             <ToastContainer
@@ -89,11 +94,19 @@ const App = () => {
                 path='/mytrips/:id'
                 element={<TripDetails userInfo={userInfo} />}
               />
+              <Route 
+              path= '/mytrips/bulletin'
+              element={<Bulletin userinfo={userInfo}/>}
+              />
               <Route path='*' element={<FourOFour />} />
             </Routes>
           </Paper>
         </BrowserRouter>
+     
+
       </div>
+
+     
     );
   }
 };

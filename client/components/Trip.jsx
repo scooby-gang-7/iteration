@@ -15,8 +15,8 @@ const Trip = (props) => {
   return (
     <Card sx={{ p: 2 }}>
       <Link to={`/mytrips/${props.trip_id}`}>
-        <Typography variant='h1'>{props.name}</Typography>
-        <Typography variant='h3'>{props.destination}</Typography>
+        <Typography variant='h2' color="#CC731C">{props.name}</Typography>
+        <Typography variant='h4' color="#154d60">{props.destination}</Typography>
          <Typography>
           {startDateDisplay} - {endDateDisplay}
         </Typography>

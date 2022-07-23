@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Container, Grid, Stack, Typography } from '@mui/material';
+import { Card, Container, Grid, Stack, Typography,Paper } from '@mui/material';
 import AddTripModal from './addTrip/AddTripModal';
 import Trip from './Trip';
 import BannerImg from '../assets/lane.png'
+
 
 const MyTrips = (props) => {
   const [upcomingTrips, setUpcomingTrips] = useState([]);
@@ -65,7 +66,7 @@ const MyTrips = (props) => {
 
   if (isLoaded) {
     return (
-      
+      <>
       <Container
         sx={{
           p: 4,
@@ -77,17 +78,30 @@ const MyTrips = (props) => {
         }}
       >
 
-          <img src={BannerImg} width='900px' max-height={300}/>
+          <img src={BannerImg} width='900px' max-height={300} class= "padding"/>
         
         <AddTripModal
           userInfo={props.userInfo}
           setTripInfo={props.setTripInfo}
         />
-        <div id='upcomingTrips'>
-          <Typography variant='h3' m={2} mb={1}>
+
+</Container>
+
+<Container
+        sx={{
+          p: 4,
+          display: 'flex',
+          flexDirection: 'grid',
+          justifyContent: 'space-evenly',
+          // alignItems: 'center',
+          textAlign: 'center',
+        }}
+      >
+         
+          <Stack>
+             <Typography variant='h1' m={2} mb={1} sx={{ paddingBottom: '10px' }} color="#154d60">
             Upcoming Trips
           </Typography>
-          <Stack>
             {upcomingTrips.length >= 1 ? (
               upcomingTrips.map((trip) => {
                 return (
@@ -109,10 +123,9 @@ const MyTrips = (props) => {
               </Typography>
             )}
           </Stack>
-        </div>
-        <div id='pastTrips'>
+      
           <Stack>
-            <Typography variant='h3' m={3} mb={1}>
+            <Typography variant='h1' m={2} mb={1} sx={{ paddingBottom: '10px' }} color="#154d60">
               Past Trips
             </Typography>
             {pastTrips.length >= 1 ? (
@@ -136,8 +149,10 @@ const MyTrips = (props) => {
               </Typography>
             )}
           </Stack>
-        </div>
-      </Container>
+          </Container>
+    
+          
+      </>
     );
   }
 };

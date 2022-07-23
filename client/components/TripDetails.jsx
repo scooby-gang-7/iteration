@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { borderRadius, Container } from '@mui/system';
-import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Card, Divider, Grid, Stack, Typography, Button} from '@mui/material';
 import axios from 'axios';
 import AddBuddy from './AddBuddy.jsx';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
@@ -103,18 +103,28 @@ const TripDetail = (props) => {
             divider={<Divider orientation='vertical' flexItem />}
             alignItems='center'
             justifyContent='space-between'
+            sx={{ paddingBottom: '30px' }}
           >
-            <Typography variant='h1' width='30%' fontWeight='bold'>
+            <Typography variant='h1' width='30%' fontWeight='bold' color= "#154d60">
               {currentTripInfo.trip_name}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center'color="#154d60">
               {currentTripInfo.destination}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center' color="#154d60">
               {currentTripInfo.description}
             </Typography>
-            <Typography textAlign='center'>
+            <Typography textAlign='center' color="#154d60">
               {startDateDisplay} to {endDateDisplay}
+            </Typography>
+            <Typography textAlign='center' color="#ffffff">
+            <Button
+                sx={{ m: 1 }}
+                variant='contained'
+                type='submit'
+                className='button-block'
+                component={Link} to = {`/mytrips/bulletin`}
+              > Add Custom Details</Button>
             </Typography>
           </Stack>
           <Container

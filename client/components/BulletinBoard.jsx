@@ -38,10 +38,10 @@ and add the ability to add/delete rows (2 input records at a time)
 -- would need to add new socket events, etc.
 */
 
-const BulletinBoard = () => {
+const BulletinBoard = (props) => {
   const [isConnected, setIsConnected] = useState(false);
   const [curSocket, setCurSocket] = useState(null);
-  const [userId, setUserId] = useState(2);
+  const [userId, setUserId] = useState('2');
   const [tripId, setTripId] = useState(11);
   // const [message, setMessage] = useState('');
   // const [messageList, setMessageList] = useState([]);
@@ -52,6 +52,7 @@ const BulletinBoard = () => {
     4: { _id: '4', value: 'yoo' },
   });
   const [occupiedFields, setOccupiedFields] = useState({});
+
 
   useEffect(() => {
     // fetch input values from entries table
