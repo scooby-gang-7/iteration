@@ -144,16 +144,16 @@ function AddTrip(props) {
           sx={{ m: 1, width: '30ch', bgcolor: '#ffffff' }}
           variant='outlined'
         >
-        
+           
           <DateInput
             id='outlined-adornment-startdate'
-            control= {<DateInput/>}
             autoComplete='off'
             inputProps={{ style: inputStyle }}
             value={date_start}
             onChange={(e) => setDateStart(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}
             label='date_start'
+
           />
           {/* 
           <OutlinedInput
@@ -176,7 +176,6 @@ function AddTrip(props) {
           <DateInput
             id='outlined-adornment-enddate'
             autoComplete='off'
-            inputProps={{ style: inputStyle }}
             value={date_end}
             onChange={(e) => setDateEnd(e.target.value)}
             endAdornment={<InputAdornment position='end'></InputAdornment>}

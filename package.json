@@ -25,6 +25,7 @@
     "@mui/material": "^5.9.0",
     "@mui/system": "^5.9.1",
     "@mui/x-date-pickers": "^5.0.0-beta.2",
+    "@mui/x-date-pickers-pro": "^5.0.0-beta.2",
     "@reach/combobox": "^0.17.0",
     "@react-google-maps/api": "^2.12.0",
     "@testing-library/jest-dom": "^5.16.4",
