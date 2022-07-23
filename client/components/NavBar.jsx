@@ -25,7 +25,7 @@ const NavBar = ({ userInfo, setUserInfo }) => {
       .then((placesDetails) => {
         setUserInfo({});
         localStorage.removeItem('session_id');
-        navigate('/', { replace: true });
+        navigate('/');
       })
       .catch((e) => {
         console.log(e);
@@ -33,7 +33,7 @@ const NavBar = ({ userInfo, setUserInfo }) => {
   }
 
   return (
-    <nav id='navBar'>
+    <nav id='navBar' >
 
         <h1>Travel Pal</h1>
         <ul className='nav-links'>
@@ -51,7 +51,7 @@ const NavBar = ({ userInfo, setUserInfo }) => {
        <Link to='/mytrips'>
           <li>My Trips</li>
         </Link>
-        <li id='signout' test-data="navbar_signout" onClick={handleSignOut}>
+        <li id='signout' test-data="navbar_signout"  onClick={handleSignOut}>
           Signout
         </li>
         </>

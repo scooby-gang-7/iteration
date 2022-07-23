@@ -23,7 +23,6 @@ const MyTrips = (props) => {
       .then((triplist) => triplist.json())
       .then((triplist) => {
         // props.setTripInfo(triplist);
-        console.log(triplist);
         handleAllTrips(triplist);
         setIsLoaded(true);
       })
@@ -83,7 +82,7 @@ const MyTrips = (props) => {
           userInfo={props.userInfo}
           setTripInfo={props.setTripInfo}
         />
-        <div id='upcomingTrips'>
+        <div id='upcomingTrips' test-data="upcoming_trips">
           <Typography variant='h3' m={2} mb={1}>
             Upcoming Trips
           </Typography>
@@ -110,7 +109,7 @@ const MyTrips = (props) => {
             )}
           </Stack>
         </div>
-        <div id='pastTrips'>
+        <div id='pastTrips' test-data='past_trips'>
           <Stack>
             <Typography variant='h3' m={3} mb={1}>
               Past Trips

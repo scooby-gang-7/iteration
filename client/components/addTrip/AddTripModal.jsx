@@ -47,6 +47,7 @@ export default function AddTripModal(props) {
               <AddTrip
                 userInfo={props.userInfo}
                 setTripInfo={props.setTripInfo}
+                onClose={handleClose}
               />
             </Box>
           </Fade>

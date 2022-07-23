@@ -40,10 +40,12 @@ function AddTrip(props) {
     })
       .then((data) => data.json())
       .then((data) => {
-        console.log('in success state');
+        console.log('data', data);
         toast.success('Trip added successfully');
-        navigate('/mytrips', { replace: true });
+        //navigate('/mytrips', { replace: true });
         console.log(data);
+        props.onClose()
+        window.location.reload(false)
       })
       .catch((e) => {
         //pop-up error handling instance
