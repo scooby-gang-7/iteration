@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Chip, Divider, ListItem, Stack, Typography } from '@mui/material';
-import thumbsUp from '../assets/thumbsup.png';
-import thumbsDown from '../assets/thumbsdown.png';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const PlaceDetails = (props) => {
-  function handleClick(e) {
-    e.preventDefault();
-    console.log('e.target --> ', e.target);
+
+  //HANDLE CLICKING THUMBS UP/DOWN
+  function handleClick(vote) {
+    // e.preventDefault();
+    // console.log('e.target.id --> ', e.target.id);
+    console.log('vote', vote)
     const body = {
       place_id: props.place_id,
       up_vote: 0,
       down_vote: 0,
     };
 
-    e.target.id == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
+    vote == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
 
+    //UPDATING VOTES IN DB
     fetch('api/trips/vote', {
       method: 'POST',
       headers: {
@@ -82,21 +86,25 @@ const PlaceDetails = (props) => {
         <Stack direction='row' alignItems='center' spacing={2}>
           <Stack direction='row' spacing={2}>
             <Stack>
-              <img
-                onClick={handleClick}
+              <ThumbUpIcon
+                onClick={() => handleClick('upVote')}
                 id='upVote'
-                src={thumbsUp}
                 width='30px'
+                sx={{
+                  color: 'orange',
+                }}
               />
 
               <div>{props.up_vote}</div>
             </Stack>
             <Stack>
-              <img
+              <ThumbDownIcon
                 id='downVote'
-                src={thumbsDown}
-                onClick={handleClick}
+                onClick={()=>handleClick('downVote')}
                 width='30px'
+                sx={{
+                  color: 'orange',
+                }}
               />
               <div>{props.down_vote}</div>
             </Stack>

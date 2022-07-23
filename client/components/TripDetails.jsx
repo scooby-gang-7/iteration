@@ -6,7 +6,8 @@ import axios from 'axios';
 import AddBuddy from './AddBuddy.jsx';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
 import Map from './map/Map.jsx';
-import PlacesContainer from './PlacesContainer';
+import PlacesContainer from './places/PlacesContainer';
+import BannerImg from '../assets/plan.png';
 
 const TripDetail = (props) => {
   const [currentTripInfo, setCurrentTripInfo] = useState({});
@@ -89,6 +90,7 @@ const TripDetail = (props) => {
           alignItems: 'center',
         }}
       >
+        <img src={BannerImg} width='900px' max-height={300} />
         <Card
           elevation={2}
           sx={{

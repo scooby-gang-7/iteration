@@ -26,12 +26,13 @@ const PlacesContainer = (props) => {
         >
           <List>
             {Object.values(props.currentPlacesInfo)
-              .sort((a, b) => (a.name > b.name ? 1 : -1))
+              .sort((a, b) => (
+                a.up_vote - a.down_vote < b.up_vote - b.down_vote ? 1 
+                : -1))
               .map((place) => {
                 return (
-                  <>
+                  <div key={place.place_id}>
                     <PlaceDetails
-                      key={place.place_id}
                       place_id={place.place_id}
                       name={place.name}
                       address={place.address}
@@ -41,7 +42,7 @@ const PlacesContainer = (props) => {
                       setCurrentPlacesInfo={props.setCurrentPlacesInfo}
                     />
                     <Divider />
-                  </>
+                  </div>
                 );
               })}
           </List>

@@ -111,6 +111,23 @@ userController.verifyUser = (req, res, next) => {
     });
 };
 
+//delete user (testing purposes)
+userController.deleteUser = (req, res, next) => {
+  const { email } = req.body;
+  const values = [ email ]
+  const queryText = `DELETE FROM users
+  WHERE email LIKE '%@katrina.com'`
+  
+  db.query(queryText)
+    .then((data) => {
+        res.locals.data = data.rowCount
+        return next();
+    })
+    .catch((err) => {
+      return next({ log: err, message: { err: 'catch in deleteUser' } });
+    });
+};
+
 //Error Creator
 const createErr = (errInfo) => {
   const { method, type, err } = errInfo;

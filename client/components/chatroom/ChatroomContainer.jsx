@@ -48,7 +48,7 @@ function ChatroomContainer(props) {
         id='messagesContainer'
         styles={{
           '.MuiDrawer-root > .MuiPaper-root': {
-            height: `calc(75% - ${drawerBleeding}px)`,
+            height: `calc(90% - ${drawerBleeding}px)`,
             width: `calc(50% - ${drawerBleeding}px)`,
             overflow: 'visible',
             borderRadius: '8px',
@@ -59,7 +59,7 @@ function ChatroomContainer(props) {
       />
       <Box className='boxWButton' sx={{ textAlign: 'center', pt: 1 }}>
         <IconButton aria-label='Chat' onClick={toggleDrawer(true)}>
-          <ChatIcon sx={{ fontSize: 30, color: 'purple' }} /> Trip Chat
+          <ChatIcon sx={{ fontSize: 30, color: 'orange' }} /> Trip Chat
         </IconButton>
         {/* <Button onClick={toggleDrawer(true)}>Chat Room</Button> */}
       </Box>
@@ -82,8 +82,10 @@ function ChatroomContainer(props) {
             px: 3,
             pb: 2,
             height: '100%',
-            overflow: 'auto',
+            // overflow: 'auto',
             // width: '400px',
+            bgcolor: '#309FC0',
+            borderRadius: '4px',
           }}
         >
           <ChatRoom

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, Container, Grid, Stack, Typography } from '@mui/material';
 import AddTripModal from './addTrip/AddTripModal';
 import Trip from './Trip';
+import BannerImg from '../assets/lane.png'
 
 const MyTrips = (props) => {
   const [upcomingTrips, setUpcomingTrips] = useState([]);
@@ -64,6 +65,7 @@ const MyTrips = (props) => {
 
   if (isLoaded) {
     return (
+      
       <Container
         sx={{
           p: 4,
@@ -74,6 +76,9 @@ const MyTrips = (props) => {
           textAlign: 'center',
         }}
       >
+
+          <img src={BannerImg} width='900px' max-height={300}/>
+        
         <AddTripModal
           userInfo={props.userInfo}
           setTripInfo={props.setTripInfo}

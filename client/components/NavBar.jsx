@@ -1,5 +1,8 @@
+import { Typography } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
+import SignUpModal from './signUp/SignUpModal.jsx'
+
 
 const NavBar = ({ userInfo, setUserInfo }) => {
   const navigate = useNavigate();
@@ -31,29 +34,31 @@ const NavBar = ({ userInfo, setUserInfo }) => {
 
   return (
     <nav id='navBar'>
-      <h1>Travel Pal</h1>
-      <ul className='nav-links'>
-        {window.location.pathname === '/' ? (
-          <Link to='/signup'>
-            <li>Sign Up</li>
-          </Link>
-        ) : window.location.pathname === '/signup' ? (
-          <Link to='/'>
-            <li>Log In</li>
-          </Link>
-        ) : (
-          <>
-            <Link to='/mytrips'>
-              <li>My Trips</li>
-            </Link>
-            <li id='signout' onClick={handleSignOut}>
-              Signout
-            </li>
-          </>
-        )}
-      </ul>
-    </nav>
-  );
-};
 
-export default NavBar;
+        <h1>Travel Pal</h1>
+        <ul className='nav-links'>
+
+       
+       {window.location.pathname === '/' ?
+        <>
+        
+        </>
+        : window.location.pathname === '/signup' ?
+        <Link to='/'>
+          <li>Sign In</li>
+        </Link>
+        :<>
+       <Link to='/mytrips'>
+          <li>My Trips</li>
+        </Link>
+        <li id='signout' onClick={handleSignOut}>
+          Signout
+        </li>
+        </>
+}
+        </ul>
+        </nav>
+    );
+}
+
+export default NavBar; 
