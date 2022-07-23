@@ -71,8 +71,7 @@ const App = () => {
                   userInfo.user_id ? (
                     <Navigate to='/mytrips' />
                   ) : (
-                    // <Login setUserInfo={setUserInfo} userInfo={userInfo} />
-                    <BulletinBoard />
+                    <Login setUserInfo={setUserInfo} userInfo={userInfo} />
                   )
                 }
               />

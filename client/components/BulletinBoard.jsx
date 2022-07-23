@@ -173,14 +173,14 @@ const BulletinBoard = () => {
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: '2fr 3fr',
           textAlign: 'center',
         }}
       >
         <div>Key</div>
         <div>Value</div>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '2fr 3fr' }}>
         {Object.values(allInputs).map((obj) => {
           console.log(userId, occupiedFields[obj._id]);
           console.log(obj.value, obj._id);
