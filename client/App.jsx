@@ -12,6 +12,7 @@ import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom';
 import FourOFour from './components/404.jsx';
+import BulletinBoard from './components/BulletinBoard.jsx';
 
 const App = () => {
   const [userInfo, setUserInfo] = useState({ user_id: null });
