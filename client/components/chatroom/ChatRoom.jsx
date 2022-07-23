@@ -68,8 +68,15 @@ const ChatRoom = (props) => {
     };
   }, []);
 
+  // on connection, set listeners and join a room
+  useEffect(() => {
+    if (isConnected) {
+      // ask the server to put you in a room
+      curSocket.emit('join-room', props.tripId);
+    }
+  }, [isConnected]);
+
   if (isConnected) {
-    curSocket.emit('join-room', props.tripId);
     curSocket.on('receive-message', (msg) => {
       console.log(' youve received a message!');
       setMessageList([...messageList, msg]);
@@ -104,7 +111,6 @@ const ChatRoom = (props) => {
         margin: '20px',
       }}
     >
-    
       <Box
         id='messagesContainer'
         style={{
@@ -116,7 +122,7 @@ const ChatRoom = (props) => {
           width: '100%',
           overflow: 'auto',
           border: '1px solid lightgrey',
-          borderRadius:'4px',
+          borderRadius: '4px',
         }}
       >
         {messageList.length ? (
@@ -140,39 +146,39 @@ const ChatRoom = (props) => {
           '& .MuiTextField-root': { m: 1, width: '100%' },
           display: 'flex',
           flexDirection: 'column',
-          alignItems:'center',
+          alignItems: 'center',
           width: '100%',
         }}
         noValidate
         autoComplete='off'
       >
-          <TextField
-            id='outlined-multiline-static'
-            required
-            multiline
-            label='What do want to share?'
-            rows={2}
-            defaultValue="What's on your mind?"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === 'Enter') {
-                e.preventDefault();
-                sendMessage();
-              }
-            }}
-            style={{ width: '100%' }}
-          />
-          <Button
-            variant='contained'
-            sx={{width:'50%'}}
-            onClick={(e) => {
+        <TextField
+          id='outlined-multiline-static'
+          required
+          multiline
+          label='What do want to share?'
+          rows={2}
+          defaultValue="What's on your mind?"
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') {
               e.preventDefault();
               sendMessage();
-            }}
-          >
-            Send Message
-          </Button>
+            }
+          }}
+          style={{ width: '100%' }}
+        />
+        <Button
+          variant='contained'
+          sx={{ width: '50%' }}
+          onClick={(e) => {
+            e.preventDefault();
+            sendMessage();
+          }}
+        >
+          Send Message
+        </Button>
       </Box>
     </Card>
   );
