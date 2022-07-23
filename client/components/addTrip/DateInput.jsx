@@ -3,7 +3,7 @@ import {DatePicker} from '@mui/x-date-pickers';
 import React, { useState} from 'react';
 import InputLabel from '@mui/material/InputLabel';
 
-function DateInput () {
+function DateInput (props) {
     const [selectedDate, setSelectedDate] = useState('')
 
     return (
@@ -12,16 +12,14 @@ function DateInput () {
 
             <DatePicker                   
              
-             sx= {{border:'2px solid #000' }}
-            label= 'Start Date' 
-            value={selectedDate}
+            sx= {{border:'2px solid #808080' }}
+            value={selectedDate || null}
             renderInput={(params) => <TextField {...params} />}
-            
             onChange={(newValue) => {
                 setSelectedDate(newValue)
             
             }}
-          
+            label={props.label}
             
             />
         </Stack>

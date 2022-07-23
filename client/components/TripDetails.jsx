@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { borderRadius, Container } from '@mui/system';
-import { Card, Divider, Grid, Stack, Typography } from '@mui/material';
+import { Card, Divider, Grid, Stack, Typography, Button} from '@mui/material';
 import axios from 'axios';
 import AddBuddy from './AddBuddy.jsx';
 import ChatroomContainer from './chatroom/ChatroomContainer.jsx';
@@ -116,6 +116,15 @@ const TripDetail = (props) => {
             </Typography>
             <Typography textAlign='center' color="#154d60">
               {startDateDisplay} to {endDateDisplay}
+            </Typography>
+            <Typography textAlign='center' color="#ffffff">
+            <Button
+                sx={{ m: 1 }}
+                variant='contained'
+                type='submit'
+                className='button-block'
+                component={Link} to = {`/mytrips/bulletin`}
+              > Add Custom Details</Button>
             </Typography>
           </Stack>
           <Container

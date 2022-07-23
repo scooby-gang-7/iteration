@@ -4,17 +4,21 @@ import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 
 const PlaceDetails = (props) => {
-  function handleClick(e) {
-    e.preventDefault();
-    console.log('e.target --> ', e.target);
+
+  //HANDLE CLICKING THUMBS UP/DOWN
+  function handleClick(vote) {
+    // e.preventDefault();
+    // console.log('e.target.id --> ', e.target.id);
+    console.log('vote', vote)
     const body = {
       place_id: props.place_id,
       up_vote: 0,
       down_vote: 0,
     };
 
-    e.target.id == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
+    vote == 'upVote' ? (body.up_vote += 1) : (body.down_vote += 1);
 
+    //UPDATING VOTES IN DB
     fetch('api/trips/vote', {
       method: 'POST',
       headers: {
@@ -83,7 +87,7 @@ const PlaceDetails = (props) => {
           <Stack direction='row' spacing={2}>
             <Stack>
               <ThumbUpIcon
-                onClick={handleClick}
+                onClick={() => handleClick('upVote')}
                 id='upVote'
                 width='30px'
                 sx={{
@@ -96,7 +100,7 @@ const PlaceDetails = (props) => {
             <Stack>
               <ThumbDownIcon
                 id='downVote'
-                onClick={handleClick}
+                onClick={()=>handleClick('downVote')}
                 width='30px'
                 sx={{
                   color: '#CC731C',

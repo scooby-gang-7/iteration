@@ -12,6 +12,7 @@ import './stylesheets/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom';
 import FourOFour from './components/404.jsx';
+import Bulletin from './components/Bulletin.jsx'
 
 
 const App = () => {
@@ -92,6 +93,10 @@ const App = () => {
               <Route
                 path='/mytrips/:id'
                 element={<TripDetails userInfo={userInfo} />}
+              />
+              <Route 
+              path= '/mytrips/bulletin'
+              element={<Bulletin userinfo={userInfo}/>}
               />
               <Route path='*' element={<FourOFour />} />
             </Routes>

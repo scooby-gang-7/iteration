@@ -119,11 +119,42 @@ io.on('connection', (socket) => {
     }
   });
 
-  socket.on('join-room', (room) => {
+  socket.on('join-room', (room, type = 'chat') => {
     if (room) {
       console.log('joining room: ', room);
       socket.join(room);
+      if (type === 'bulletin') {
+        console.log('just joined bulletin!');
+        // emit occupy-check to room
+        socket.to(room).emit('occupy-check');
+      }
     }
+  });
+
+  // on send-update
+  socket.on('send-update', (room, updatedPair, callback) => {
+    console.log('receiving input update-------');
+    console.log(updatedPair);
+
+    // update DB with new value, return value when complete
+    // use upsert query to update else insert on collision -- not yet written
+    // const params = [Number(room), inputValue]; // {}{}{}uncomment me
+    const queryText = `
+    `;
+    // db.query(queryText, params).then((res) => { // {}{}{}uncomment me
+    // const returnedPair = res.rows[0]; // {}{}{}uncomment me
+    const returnedPair = updatedPair;
+    // update state client-side
+    callback(returnedPair);
+    // emit the update to all in room
+    socket.to(room).emit('receive-update', returnedPair);
+    // }); // {}{}{}uncomment me
+  });
+
+  socket.on('send-occupyChange', (room, affectedInput) => {
+    // console.log('receiving input occupyChange');
+    // emit the update to all in room
+    socket.to(room).emit('receive-occupyChange', affectedInput);
   });
 });
 

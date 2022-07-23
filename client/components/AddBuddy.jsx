@@ -8,6 +8,7 @@ import {
   Typography,
   Stack,
 } from '@mui/material';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const Addbuddy = (props) => {
   const { trip_id } = props;
@@ -63,11 +64,23 @@ const Addbuddy = (props) => {
   };
 
   const tripmembers = [];
-  trip_buddy.forEach((el) => {
-    tripmembers.push(
-      <Typography key={el.name_first}>{el.name_first} </Typography>
-    );
-  });
+  // sort array by name before forEach
+  trip_buddy
+    .sort((a, b) =>
+      a.name_first > b.name_first ? 1 : b.name_first > a.name_first ? -1 : 0
+    )
+    .forEach((el) => {
+      console.log(el);
+      tripmembers.push(
+        <div
+          key={el.name_first + el.name_last}
+          style={{ display: 'flex', margin: '15px 0px' }}
+        >
+          <AccountCircleIcon style={{ marginRight: '10px' }} />
+          {el.name_first}
+        </div>
+      );
+    });
 
   return (
     <Container
@@ -79,11 +92,16 @@ const Addbuddy = (props) => {
         alignItems: 'center',
       }}
     >
-      <Typography variant= "h3" fontWeight='bold' color="#154d60" sx={{ paddingBottom: '20px' }}>Trip Members</Typography>
-      <div>
-        <Stack direction='row' spacing={3} sx={{ paddingBottom: '20px' }}>
-          {tripmembers}
-        </Stack>
+      <Typography fontWeight='bold' color= '#154d60'>Trip Members</Typography>
+      <div
+        style={{
+          display: 'grid',
+          width: '100%',
+          gridTemplateColumns: '1fr 1fr 1fr 1fr',
+          textAlign: 'left',
+        }}
+      >
+        {tripmembers}
       </div>
       <form onSubmit={handleAddBuddy}>
         <FormControl
